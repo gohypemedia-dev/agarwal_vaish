@@ -81,10 +81,10 @@ export default function Preloader({
               ease: [0.76, 0, 0.24, 1], // Modern luxury curtain easing curve
             },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#E86F1D] text-white select-none pointer-events-auto overflow-hidden"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#FFAE08] text-white select-none pointer-events-auto overflow-hidden"
         >
           {/* Subtle Ambient Radial Glow */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,transparent_70%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] pointer-events-none" />
 
           {/* Center Brand Logo, Title & Counter Container */}
           <motion.div
@@ -152,12 +152,12 @@ export default function Preloader({
 
           {/* Bottom Luxury Footer */}
           <div className="absolute bottom-6 inset-x-0 text-center">
-            <span className="text-[11px] tracking-widest text-white/50 uppercase font-mono">
-              Loading Sacred Sanctuary
+            <span className="text-[11px] tracking-widest text-white/70 uppercase font-mono">
+              Aggarwal Vaish Samaj Haryana • Official Portal
             </span>
           </div>
 
-          {/* Secondary Trailing Curtain Accent Layer (Warm Cream / Deep Saffron depth) */}
+          {/* Secondary Trailing Curtain Accent Layer */}
           <motion.div
             initial={{ y: "0%" }}
             exit={{
@@ -168,7 +168,7 @@ export default function Preloader({
                 ease: [0.76, 0, 0.24, 1],
               },
             }}
-            className="absolute inset-0 bg-[#E86F1D] z-[-1] pointer-events-none"
+            className="absolute inset-0 bg-[#FFAE08] z-[-1] pointer-events-none"
           />
         </motion.div>
       )}

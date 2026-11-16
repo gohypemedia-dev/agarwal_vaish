@@ -31,7 +31,7 @@ export default function FloatingSideDock() {
         {/* 1. Document / Registration */}
         <Link
           href="#network"
-          className="group relative p-2.5 rounded-xl bg-[#FFAE08] text-white hover:bg-[#D45E10] transition-transform hover:scale-110 shadow-md flex items-center justify-center"
+          className="group relative p-2.5 rounded-xl bg-[#FFAE08] text-white hover:bg-[#E59C00] transition-transform hover:scale-110 shadow-md flex items-center justify-center"
           title={lang === "hi" ? "सदस्यता फॉर्म" : "Membership Registration"}
         >
           <FileText className="w-5 h-5" />
@@ -56,7 +56,7 @@ export default function FloatingSideDock() {
         {/* 3. Calendar / Events */}
         <Link
           href="/#events"
-          className="group relative p-2.5 rounded-xl bg-[#FFAE08] text-white hover:bg-[#D45E10] transition-transform hover:scale-110 shadow-md flex items-center justify-center"
+          className="group relative p-2.5 rounded-xl bg-[#FFAE08] text-white hover:bg-[#E59C00] transition-transform hover:scale-110 shadow-md flex items-center justify-center"
           title={lang === "hi" ? "आगामी कार्यक्रम" : "Upcoming Events"}
         >
           <Calendar className="w-5 h-5" />
@@ -98,7 +98,7 @@ export default function FloatingSideDock() {
         {showTop && (
           <button
             onClick={scrollToTop}
-            className="w-11 h-11 rounded-full bg-[#FFAE08] hover:bg-[#D45E10] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 active:scale-95 cursor-pointer"
+            className="w-11 h-11 rounded-full bg-[#FFAE08] hover:bg-[#E59C00] text-white flex items-center justify-center shadow-xl transition-all hover:scale-110 active:scale-95 cursor-pointer"
             aria-label="Scroll to top"
           >
             <ArrowUp className="w-5 h-5" />

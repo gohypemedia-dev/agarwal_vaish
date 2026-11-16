@@ -213,7 +213,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         <div className="flex flex-col items-center justify-center mb-10 sm:mb-12 text-center">
           <TextReveal
             as="h2"
-            className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#E86F1D] tracking-wider whitespace-nowrap px-2"
+            className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#FFAE08] tracking-wider whitespace-nowrap px-2"
             text={lang === "hi" ? "गैलरी" : "Gallery"}
           />
           <HeadingDivider className="mt-2.5" />
@@ -259,7 +259,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
                 className={`transition-all duration-300 rounded-full cursor-pointer ${
                   isActive
                     ? "w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#1E1612] scale-110 shadow-xs"
-                    : "w-2 h-2 sm:w-2.5 sm:h-2.5 bg-transparent border-[1.5px] border-[#8C6B3E]/50 hover:border-[#E86F1D] hover:scale-110"
+                    : "w-2 h-2 sm:w-2.5 sm:h-2.5 bg-transparent border-[1.5px] border-[#8C6B3E]/50 hover:border-[#FFAE08] hover:scale-110"
                 }`}
               />
             );
@@ -271,8 +271,8 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         {/* ==================================================================== */}
         <div className="text-center mt-7 sm:mt-8">
           <Link
-            href="/gallery"
-            className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            href="#gallery"
+            className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <span>{lang === "hi" ? "सभी देखें" : "View All"}</span>
           </Link>
