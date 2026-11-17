@@ -205,7 +205,7 @@ export default function CartDrawer() {
                   <ArrowLeft className="w-4 h-4" />
                 </button>
               )}
-              <ShoppingBag className="w-5 h-5 text-[#FFAE08]" />
+              <ShoppingBag className="w-5 h-5 text-[#7F160C]" />
               <h2 className="font-editorial text-lg sm:text-xl font-bold text-[#2B201A]">
                 {step === "CART"
                   ? hi ? "आपकी कार्ट" : "Your Shopping Cart"
@@ -281,7 +281,7 @@ export default function CartDrawer() {
                       setIsCartOpen(false);
                       setStep("CART");
                     }}
-                    className="w-full py-3 bg-[#FFAE08] hover:bg-[#E59C00] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2"
+                    className="w-full py-3 bg-[#7F160C] hover:bg-[#69120A] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2"
                   >
                     <Package className="w-4 h-4" />
                     <span>{hi ? "मेरे आर्डर्स देखें (View My Orders)" : "View My Orders & Account"}</span>
@@ -359,7 +359,7 @@ export default function CartDrawer() {
                       </p>
                     </div>
                     <div className="text-right">
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#FFAE08] text-white uppercase">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#7F160C] text-white uppercase">
                         Book Order
                       </span>
                     </div>
@@ -424,7 +424,7 @@ export default function CartDrawer() {
                   type="button"
                   onClick={() => executePlaceOrder("PREPAID")}
                   disabled={isPlacingOrder}
-                  className="w-full py-3.5 bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                  className="w-full py-3.5 bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                 >
                   {isPlacingOrder ? (
                     <>
@@ -445,7 +445,7 @@ export default function CartDrawer() {
                 <div className="p-3 bg-[#FBF2E7] rounded-xl border border-[#E7D8C8] text-xs space-y-1">
                   <div className="flex items-center justify-between font-bold text-[#2B201A]">
                     <span>{hi ? "लॉग-इन भक्त:" : "Signed in as:"}</span>
-                    <span className="text-[#FFAE08]">{user?.name}</span>
+                    <span className="text-[#7F160C]">{user?.name}</span>
                   </div>
                   <p className="text-[11px] text-[#2B201A]/70">{user?.email}</p>
                 </div>
@@ -468,18 +468,18 @@ export default function CartDrawer() {
                       onClick={() => setPaymentMethod("PREPAID")}
                       className={`p-3 rounded-xl border-2 text-left flex flex-col justify-between transition-all ${
                         paymentMethod === "PREPAID"
-                          ? "border-[#FFAE08] bg-[#FFF9F2] shadow-xs"
+                          ? "border-[#7F160C] bg-[#FFF9F2] shadow-xs"
                           : "border-[#E7D8C8] bg-white hover:bg-[#FBF2E7]"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-bold text-xs text-[#2B201A] flex items-center gap-1.5">
-                          <QrCode className="w-4 h-4 text-[#FFAE08]" />
+                          <QrCode className="w-4 h-4 text-[#7F160C]" />
                           <span>{hi ? "ऑनलाइन UPI QR" : "Prepaid UPI QR"}</span>
                         </span>
-                        <span className="w-3.5 h-3.5 rounded-full border-2 border-[#FFAE08] flex items-center justify-center p-0.5">
+                        <span className="w-3.5 h-3.5 rounded-full border-2 border-[#7F160C] flex items-center justify-center p-0.5">
                           {paymentMethod === "PREPAID" && (
-                            <span className="w-full h-full bg-[#FFAE08] rounded-full" />
+                            <span className="w-full h-full bg-[#7F160C] rounded-full" />
                           )}
                         </span>
                       </div>
@@ -494,7 +494,7 @@ export default function CartDrawer() {
                       onClick={() => setPaymentMethod("COD")}
                       className={`p-3 rounded-xl border-2 text-left flex flex-col justify-between transition-all ${
                         paymentMethod === "COD"
-                          ? "border-[#FFAE08] bg-[#FFF9F2] shadow-xs"
+                          ? "border-[#7F160C] bg-[#FFF9F2] shadow-xs"
                           : "border-[#E7D8C8] bg-white hover:bg-[#FBF2E7]"
                       }`}
                     >
@@ -503,9 +503,9 @@ export default function CartDrawer() {
                           <Banknote className="w-4 h-4 text-[#2F5A43]" />
                           <span>{hi ? "कैश ऑन डिलीवरी" : "Cash on Delivery"}</span>
                         </span>
-                        <span className="w-3.5 h-3.5 rounded-full border-2 border-[#FFAE08] flex items-center justify-center p-0.5">
+                        <span className="w-3.5 h-3.5 rounded-full border-2 border-[#7F160C] flex items-center justify-center p-0.5">
                           {paymentMethod === "COD" && (
-                            <span className="w-full h-full bg-[#FFAE08] rounded-full" />
+                            <span className="w-full h-full bg-[#7F160C] rounded-full" />
                           )}
                         </span>
                       </div>
@@ -535,7 +535,7 @@ export default function CartDrawer() {
                         value={shippingName}
                         onChange={(e) => setShippingName(e.target.value)}
                         placeholder="Full Name"
-                        className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                        className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                       />
                     </div>
                   </div>
@@ -553,7 +553,7 @@ export default function CartDrawer() {
                           value={shippingPhone}
                           onChange={(e) => setShippingPhone(e.target.value)}
                           placeholder="+91..."
-                          className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                          className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                         />
                       </div>
                     </div>
@@ -569,7 +569,7 @@ export default function CartDrawer() {
                           value={shippingEmail}
                           onChange={(e) => setShippingEmail(e.target.value)}
                           placeholder="Email"
-                          className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                          className="w-full pl-9 pr-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                         />
                       </div>
                     </div>
@@ -585,7 +585,7 @@ export default function CartDrawer() {
                       value={shippingAddress}
                       onChange={(e) => setShippingAddress(e.target.value)}
                       placeholder={hi ? "मकान नं, भवन, गली, मोहल्ला" : "Flat / House No., Landmark, Street"}
-                      className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                      className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                     />
                   </div>
 
@@ -600,7 +600,7 @@ export default function CartDrawer() {
                         value={shippingCity}
                         onChange={(e) => setShippingCity(e.target.value)}
                         placeholder="City"
-                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                       />
                     </div>
                     <div>
@@ -613,7 +613,7 @@ export default function CartDrawer() {
                         value={shippingState}
                         onChange={(e) => setShippingState(e.target.value)}
                         placeholder="State"
-                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                       />
                     </div>
                     <div>
@@ -626,7 +626,7 @@ export default function CartDrawer() {
                         value={shippingPincode}
                         onChange={(e) => setShippingPincode(e.target.value)}
                         placeholder="PIN"
-                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
+                        className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#7F160C]"
                       />
                     </div>
                   </div>
@@ -641,7 +641,7 @@ export default function CartDrawer() {
                     {cart.map((item) => (
                       <div key={item.id} className="flex justify-between items-center text-xs py-1 border-b border-[#E7D8C8]/50">
                         <span className="truncate max-w-[200px] text-[#2B201A]">
-                          {item.title} <strong className="text-[#FFAE08]">×{item.quantity}</strong>
+                          {item.title} <strong className="text-[#7F160C]">×{item.quantity}</strong>
                         </span>
                         <span className="font-bold text-[#2B201A]">₹{(item.price * item.quantity).toFixed(2)}</span>
                       </div>
@@ -664,7 +664,7 @@ export default function CartDrawer() {
                 <Link
                   href="/books"
                   onClick={() => setIsCartOpen(false)}
-                  className="inline-block mt-2 px-5 py-2 bg-[#FFAE08] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm"
+                  className="inline-block mt-2 px-5 py-2 bg-[#7F160C] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm"
                 >
                   {hi ? "पुस्तकें देखें" : "Explore Books"}
                 </Link>
@@ -682,20 +682,20 @@ export default function CartDrawer() {
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
                       <h4 className="font-bold text-sm text-[#2B201A] line-clamp-2">{item.title}</h4>
-                      <p className="text-sm font-semibold text-[#FFAE08] mt-1">₹{item.price.toFixed(2)} INR</p>
+                      <p className="text-sm font-semibold text-[#7F160C] mt-1">₹{item.price.toFixed(2)} INR</p>
                     </div>
                     <div className="flex items-center justify-between pt-2">
                       <div className="flex items-center border border-[#E7D8C8] bg-[#FFF9F2] rounded-lg">
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
-                          className="p-1 hover:text-[#FFAE08]"
+                          className="p-1 hover:text-[#7F160C]"
                         >
                           <Minus className="w-3.5 h-3.5" />
                         </button>
                         <span className="px-3 text-xs font-bold">{item.quantity}</span>
                         <button
                           onClick={() => updateQuantity(item.id, 1)}
-                          className="p-1 hover:text-[#FFAE08]"
+                          className="p-1 hover:text-[#7F160C]"
                         >
                           <Plus className="w-3.5 h-3.5" />
                         </button>
@@ -739,7 +739,7 @@ export default function CartDrawer() {
               )}
               <button
                 onClick={handleProceedToCheckout}
-                className="w-full py-3 bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all"
+                className="w-full py-3 bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all"
               >
                 {!user ? (
                   <>
@@ -760,7 +760,7 @@ export default function CartDrawer() {
             <div className="p-4 sm:p-5 bg-[#FBF2E7] border-t border-[#E7D8C8] space-y-3">
               <div className="flex justify-between items-center text-sm">
                 <span className="text-[#2B201A]/80">{hi ? "कुल देय राशि" : "Total Payable Amount"}</span>
-                <span className="font-bold text-lg text-[#FFAE08]">₹{cartTotal.toFixed(2)} INR</span>
+                <span className="font-bold text-lg text-[#7F160C]">₹{cartTotal.toFixed(2)} INR</span>
               </div>
               <button
                 type="submit"
@@ -768,7 +768,7 @@ export default function CartDrawer() {
                 disabled={isPlacingOrder}
                 className={`w-full py-3.5 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all disabled:opacity-50 ${
                   paymentMethod === "PREPAID"
-                    ? "bg-[#FFAE08] hover:bg-[#E59C00]"
+                    ? "bg-[#7F160C] hover:bg-[#69120A]"
                     : "bg-[#2F5A43] hover:bg-[#234533]"
                 }`}
               >
@@ -791,15 +791,15 @@ export default function CartDrawer() {
               </button>
               <p className="text-[11px] text-center text-[#2B201A]/60 leading-relaxed">
                 {hi ? "ऑर्डर देकर आप हमारी " : "By placing this order you agree to our "}
-                <Link href="/terms" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#FFAE08]">
+                <Link href="/terms" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#7F160C]">
                   {hi ? "सेवा की शर्तें" : "Terms"}
                 </Link>
                 {", "}
-                <Link href="/shipping-policy" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#FFAE08]">
+                <Link href="/shipping-policy" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#7F160C]">
                   {hi ? "शिपिंग नीति" : "Shipping"}
                 </Link>
                 {hi ? " एवं " : " and "}
-                <Link href="/refund-policy" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#FFAE08]">
+                <Link href="/refund-policy" onClick={() => setIsCartOpen(false)} className="underline hover:text-[#7F160C]">
                   {hi ? "रिफंड नीति" : "Refund Policy"}
                 </Link>
                 {hi ? " से सहमत हैं।" : "."}

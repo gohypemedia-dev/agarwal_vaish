@@ -35,7 +35,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
   const rows: [string, React.ReactNode][] = [
     ["Donation ID", <span key="id" className="font-mono">{donation.donationId}</span>],
     ["Donor", donation.donorName],
-    ["Email", <a key="e" href={`mailto:${donation.donorEmail}`} className="text-[#FFAE08] hover:underline break-all">{donation.donorEmail}</a>],
+    ["Email", <a key="e" href={`mailto:${donation.donorEmail}`} className="text-[#7F160C] hover:underline break-all">{donation.donorEmail}</a>],
     ["Mobile", donation.donorMobile ?? "—"],
     ["Amount", <span key="a" className="font-extrabold tabular-nums">{rupeesFromPaise(donation.amountPaise)}</span>],
     ["Type", category.kind === "membership" ? "Membership" : category.kind === "event" ? "Event registration" : "Donation"],
@@ -48,7 +48,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
     const isEvent = category.kind === "event";
     rows.push([
       isEvent ? "Entry pass" : "Certificate",
-      <a key="c" href={`/${isEvent ? "pass" : "certificate"}/${donation.donationId}?k=${certificateKey(donation)}`} target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-[#FFAE08] hover:underline">
+      <a key="c" href={`/${isEvent ? "pass" : "certificate"}/${donation.donationId}?k=${certificateKey(donation)}`} target="_blank" rel="noopener" className="inline-flex items-center gap-1 text-[#7F160C] hover:underline">
         View / download <ExternalLink className="w-3.5 h-3.5" />
       </a>,
     ]);
@@ -65,7 +65,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
   return (
     <div className="space-y-6">
       <AutoRefresh />
-      <Link href="/admin" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B201A]/70 hover:text-[#FFAE08]">
+      <Link href="/admin" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B201A]/70 hover:text-[#7F160C]">
         <ArrowLeft className="w-4 h-4" /> All donations
       </Link>
 
@@ -83,7 +83,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
               {sameUtr.map((d, i) => (
                 <span key={d.donationId}>
                   {i > 0 && ", "}
-                  <Link href={`/admin/donations/${d.donationId}`} className="font-mono text-[#FFAE08] hover:underline">{d.donationId}</Link> ({d.status.toLowerCase().replace("_", " ")})
+                  <Link href={`/admin/donations/${d.donationId}`} className="font-mono text-[#7F160C] hover:underline">{d.donationId}</Link> ({d.status.toLowerCase().replace("_", " ")})
                 </span>
               ))}
               {donation.utrOverride && " An admin allowed this duplicate. Check the bank statement carefully before verifying."}
@@ -146,7 +146,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={screenshotUrl} alt={`Payment screenshot for ${donation.donationId}`} className="w-full max-h-[480px] object-contain" />
               </a>
-              <a href={screenshotUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold text-[#FFAE08] hover:underline">
+              <a href={screenshotUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold text-[#7F160C] hover:underline">
                 View full size <ExternalLink className="w-4 h-4" />
               </a>
             </>

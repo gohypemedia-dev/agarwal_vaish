@@ -69,8 +69,8 @@ export default function HomePage() {
       endDate: "2026-10-11T17:00:00Z",
       timeText: "10:00 AM – 5:00 PM IST",
       location: "Bhiwani & District Centres across Haryana",
-      address: "Aggarwal Vaish Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
-      contactPhone: "+91 94160 55000",
+      address: "Aggarwal Vaish Vikas Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
+      contactPhone: "+91 98120 12345",
       isPublished: true,
     },
     {
@@ -85,8 +85,8 @@ export default function HomePage() {
       endDate: "2026-11-28T16:00:00Z",
       timeText: "9:30 AM – 4:30 PM IST",
       location: "Auditorium, Hisar / Gurugram",
-      address: "AVS Youth Convention Centre, Haryana",
-      contactPhone: "+91 94160 55000",
+      address: "AVVS Youth Convention Centre, Haryana",
+      contactPhone: "+91 98120 12345",
       isPublished: true,
     },
     {
@@ -101,8 +101,8 @@ export default function HomePage() {
       endDate: "2027-01-24T12:00:00Z",
       timeText: "10:30 AM – 3:30 PM IST",
       location: "State Central Hall, Bhiwani / Rohtak",
-      address: "Aggarwal Vaish Central Complex, Haryana",
-      contactPhone: "+91 94160 55000",
+      address: "Aggarwal Vaish Vikas Central Complex, Haryana",
+      contactPhone: "+91 98120 12345",
       isPublished: true,
     },
   ];
@@ -241,12 +241,12 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#1F1712] font-sans selection:bg-[#FFAE08] selection:text-white">
+    <div className="w-full bg-[#FFFDF9] text-[#1F1712] font-sans selection:bg-[#7F160C] selection:text-white">
       
       {/* ============================================================ */}
       {/* 1. TOP NEWS TICKER (EXACT REFERENCE SCREENSHOT 1)           */}
       {/* ============================================================ */}
-      <div className="w-full bg-[#FFAE08] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#E59C00]">
+      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
         <div className="flex animate-marquee whitespace-nowrap items-center">
           {[1, 2].map((set) => (
             <div
@@ -323,7 +323,7 @@ export default function HomePage() {
               aria-label={`Go to slide ${idx + 1}`}
               className={`transition-all duration-300 rounded-full cursor-pointer ${
                 idx === currentHeroSlide
-                  ? "w-8 sm:w-10 h-2.5 sm:h-3 bg-[#FFAE08] shadow-md"
+                  ? "w-8 sm:w-10 h-2.5 sm:h-3 bg-[#7F160C] shadow-md"
                   : "w-2.5 sm:w-3 h-2.5 sm:h-3 bg-white/70 hover:bg-white"
               }`}
             />
@@ -339,7 +339,7 @@ export default function HomePage() {
           
           {/* Centered Bordered Badge: [ OUR NETWORK ] */}
           <div className="flex justify-center mb-10 sm:mb-14">
-            <div className="inline-block px-7 py-2.5 rounded-lg border-2 border-[#FFAE08] text-[#FFAE08] font-black text-base sm:text-lg tracking-[0.2em] uppercase bg-white shadow-xs">
+            <div className="inline-block px-7 py-2.5 rounded-lg border-2 border-[#7F160C] text-[#7F160C] font-black text-base sm:text-lg tracking-[0.2em] uppercase bg-white shadow-xs">
               OUR NETWORK
             </div>
           </div>
@@ -348,7 +348,7 @@ export default function HomePage() {
             
             {/* Left Column: Official Haryana Map with AVS Emblem */}
             <div className="lg:col-span-7 flex justify-center items-center">
-              <div className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden shadow-xl bg-[#FFAE08]">
+              <div className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden shadow-xl bg-[#7F160C]">
                 <Image
                   src="/images/agarwal/haryana-map-avs.jpg"
                   alt="हरियाणा - अग्रवाल वैश्य विकास संगठन"
@@ -406,7 +406,7 @@ export default function HomePage() {
                 <div className="pt-0.5">
                   <Link
                     href="#network"
-                    className="inline-block text-[15px] font-semibold text-[#FFAE08] hover:text-[#E59C00] underline decoration-[#FFAE08] underline-offset-4 transition-colors"
+                    className="inline-block text-[15px] font-semibold text-[#7F160C] hover:text-[#69120A] underline decoration-[#7F160C] underline-offset-4 transition-colors"
                   >
                     View More
                   </Link>
@@ -429,10 +429,10 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
             <div className="py-1">
               <h2 className="font-sans text-[30px] sm:text-[36px] font-bold tracking-tight leading-tight">
-                <span className="relative inline-block text-[#1F1712] border-b-[3px] sm:border-b-4 border-[#FFAE08] pb-0.5 sm:pb-1 mr-2.5 sm:mr-3">
+                <span className="relative inline-block text-[#1F1712] border-b-[3px] sm:border-b-4 border-[#7F160C] pb-0.5 sm:pb-1 mr-2.5 sm:mr-3">
                   Panch
                 </span>
-                <span className="text-[#FFAE08]">
+                <span className="text-[#7F160C]">
                   Sankalp
                 </span>
               </h2>
@@ -446,14 +446,14 @@ export default function HomePage() {
               <button
                 onClick={scrollSankalpLeft}
                 aria-label="Previous Panch Sankalp"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FFAE08] hover:bg-[#E59C00] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
               </button>
               <button
                 onClick={scrollSankalpRight}
                 aria-label="Next Panch Sankalp"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#FFAE08] hover:bg-[#E59C00] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
+                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
               >
                 <ChevronRight className="w-5 h-5 stroke-[2.5]" />
               </button>
@@ -473,8 +473,8 @@ export default function HomePage() {
               >
                 {/* 100% Native Rendered Card Matching Exact Reference Formatting */}
                 <div className="h-full rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col aspect-square justify-between select-none">
-                  {/* Top Solid Brand Swatch Section (#FFAE08) */}
-                  <div className="relative bg-[#FFAE08] h-[48%] flex items-center justify-center p-6 text-center shadow-inner">
+                  {/* Top Solid Brand Swatch Section (#7F160C) */}
+                  <div className="relative bg-[#7F160C] h-[48%] flex items-center justify-center p-6 text-center shadow-inner">
                     <h3 className="font-sans font-black text-2xl sm:text-3xl lg:text-4xl text-white leading-tight drop-shadow-sm px-2">
                       {item.titleHi}
                     </h3>
@@ -501,9 +501,9 @@ export default function HomePage() {
 
                     {/* Exact Reference Underline: line • dot • line in Brand Swatch Color */}
                     <div className="flex items-center justify-center gap-1.5 my-2.5" aria-hidden="true">
-                      <span className="w-10 sm:w-12 h-[2px] bg-[#FFAE08] rounded-full" />
-                      <span className="w-2 h-2 rounded-full bg-[#FFAE08]" />
-                      <span className="w-10 sm:w-12 h-[2px] bg-[#FFAE08] rounded-full" />
+                      <span className="w-10 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                      <span className="w-2 h-2 rounded-full bg-[#7F160C]" />
+                      <span className="w-10 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
                     </div>
 
                     <p className="text-[16px] text-gray-700 leading-relaxed line-clamp-3 px-1">
@@ -519,7 +519,7 @@ export default function HomePage() {
           <div className="flex justify-center mt-8 sm:mt-12">
             <Link
               href="#sankalp"
-              className="inline-block px-8 py-2.5 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
+              className="inline-block px-8 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
             >
               View All
             </Link>
@@ -550,7 +550,7 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <h2 className="font-sans font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-[#FFAE08] tracking-tight">
+            <h2 className="font-sans font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-[#7F160C] tracking-tight">
               Upcoming Events
             </h2>
             <HeadingDivider className="mt-3" />
@@ -564,10 +564,10 @@ export default function HomePage() {
                     setSelectedEvent(event);
                     setEventModalOpen(true);
                   }}
-                  className="rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-[#FFAE08] shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full group"
+                  className="rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-[#7F160C] shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full group"
                 >
                   {/* Top Saffron Banner */}
-                  <div className="relative w-full h-[180px] bg-gradient-to-br from-[#FFAE08] to-[#E59C00] flex items-center justify-center p-6 text-center shadow-inner">
+                  <div className="relative w-full h-[180px] bg-gradient-to-br from-[#7F160C] to-[#69120A] flex items-center justify-center p-6 text-center shadow-inner">
                     <h3 className="font-sans font-black text-2xl sm:text-3xl text-white leading-tight drop-shadow-md px-2">
                       {event.titleHi || event.title}
                     </h3>
@@ -589,7 +589,7 @@ export default function HomePage() {
                   {/* Card Body */}
                   <div className="p-6 pt-3.5 flex-1 flex flex-col justify-between text-center space-y-3.5">
                     <div className="space-y-2.5">
-                      <h4 className="font-sans font-bold text-[20px] text-gray-900 group-hover:text-[#FFAE08] transition-colors leading-snug">
+                      <h4 className="font-sans font-bold text-[20px] text-gray-900 group-hover:text-[#7F160C] transition-colors leading-snug">
                         {event.title}
                       </h4>
                       <p className="text-[16px] text-gray-600 leading-relaxed line-clamp-3">
@@ -599,10 +599,10 @@ export default function HomePage() {
 
                     <div className="pt-3.5 border-t border-gray-200 flex items-center justify-between text-sm sm:text-base font-semibold gap-2">
                       <span className="flex items-center gap-1.5 truncate max-w-[62%] text-gray-700">
-                        <MapPin className="w-4 h-4 text-[#FFAE08] shrink-0" />
+                        <MapPin className="w-4 h-4 text-[#7F160C] shrink-0" />
                         <span className="truncate">{event.location}</span>
                       </span>
-                      <span className="text-[#FFAE08] font-bold text-sm sm:text-base shrink-0 tracking-wide">
+                      <span className="text-[#7F160C] font-bold text-sm sm:text-base shrink-0 tracking-wide">
                         {formatCardDate(event.startDate)}
                       </span>
                     </div>

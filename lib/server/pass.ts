@@ -24,7 +24,7 @@ const C = {
   green: hex("#14532D"),
   greenLight: hex("#2F5A43"),
   saffron: hex("#B4531A"),
-  saffronLight: hex("#FFAE08"),
+  saffronLight: hex("#7F160C"),
   ink: hex("#2B201A"),
   muted: hex("#6B5B4E"),
   white: hex("#FFFFFF"),

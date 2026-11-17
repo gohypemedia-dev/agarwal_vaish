@@ -251,8 +251,8 @@ export default function EventDetailsModal({
         {/* Top Header Bar (Fixed at top of modal) */}
         <div className="bg-white px-5 py-3.5 sm:px-6 sm:py-4 border-b border-[#F0E4D5] flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#FFF5EA] text-[#FFAE08] border border-[#FFAE08]/30 text-xs font-bold uppercase tracking-wider">
-              <Calendar className="w-3.5 h-3.5 text-[#FFAE08]" />
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-[#FFF5EA] text-[#7F160C] border border-[#7F160C]/30 text-xs font-bold uppercase tracking-wider">
+              <Calendar className="w-3.5 h-3.5 text-[#7F160C]" />
               <span>
                 {scheduleList.length > 1
                   ? `${scheduleList[0].dateStr} – ${scheduleList[scheduleList.length - 1].dateStr}`
@@ -266,7 +266,7 @@ export default function EventDetailsModal({
           <div className="flex items-center gap-1">
             <button
               onClick={handleShare}
-              className="text-[#5C4D43] hover:text-[#FFAE08] hover:bg-[#FFF5EA] rounded-full p-2 transition-colors cursor-pointer"
+              className="text-[#5C4D43] hover:text-[#7F160C] hover:bg-[#FFF5EA] rounded-full p-2 transition-colors cursor-pointer"
               title="Share Event"
               type="button"
             >
@@ -274,7 +274,7 @@ export default function EventDetailsModal({
             </button>
             <button
               onClick={onClose}
-              className="text-[#5C4D43] hover:text-[#FFAE08] hover:bg-[#FFF5EA] rounded-full p-2 transition-colors cursor-pointer"
+              className="text-[#5C4D43] hover:text-[#7F160C] hover:bg-[#FFF5EA] rounded-full p-2 transition-colors cursor-pointer"
               title="Close"
               type="button"
             >
@@ -287,7 +287,7 @@ export default function EventDetailsModal({
         <div
           ref={scrollContainerRef}
           tabIndex={0}
-          className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-5 sm:p-6 md:p-7 space-y-6 touch-pan-y outline-none select-text [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-[#FBF6EE] [&::-webkit-scrollbar-thumb]:bg-[#FFAE08]/50 hover:[&::-webkit-scrollbar-thumb]:bg-[#FFAE08] [&::-webkit-scrollbar-thumb]:rounded-full"
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-5 sm:p-6 md:p-7 space-y-6 touch-pan-y outline-none select-text [&::-webkit-scrollbar]:w-2.5 [&::-webkit-scrollbar-track]:bg-[#FBF6EE] [&::-webkit-scrollbar-thumb]:bg-[#7F160C]/50 hover:[&::-webkit-scrollbar-thumb]:bg-[#7F160C] [&::-webkit-scrollbar-thumb]:rounded-full"
           style={{
             WebkitOverflowScrolling: "touch",
             overscrollBehavior: "contain",
@@ -295,7 +295,7 @@ export default function EventDetailsModal({
         >
           {/* Title Area */}
           <div className="space-y-1.5 text-center sm:text-left">
-            <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#FFAE08] leading-tight">
+            <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#7F160C] leading-tight">
               {displayTitle}
             </h2>
             {secondaryTitle && (
@@ -313,8 +313,8 @@ export default function EventDetailsModal({
             {/* 1. Date & Timing Schedule */}
             <div className="p-4 sm:p-5">
               <div className="flex items-center gap-2 mb-3.5 pb-2.5 border-b border-[#F0E4D5]">
-                <div className="w-7 h-7 rounded-lg bg-[#FFAE08]/10 text-[#FFAE08] flex items-center justify-center shrink-0">
-                  <Clock className="w-4 h-4 text-[#FFAE08]" />
+                <div className="w-7 h-7 rounded-lg bg-[#7F160C]/10 text-[#7F160C] flex items-center justify-center shrink-0">
+                  <Clock className="w-4 h-4 text-[#7F160C]" />
                 </div>
                 <div>
                   <h3 className="font-sans font-bold text-sm sm:text-base text-[#1E1612]">
@@ -328,22 +328,22 @@ export default function EventDetailsModal({
                 {scheduleList.map((item, idx) => (
                   <div
                     key={idx}
-                    className="rounded-lg bg-white border border-[#EFE5D8] px-3.5 py-2.5 hover:border-[#FFAE08]/50 transition-colors shadow-2xs flex items-center justify-between gap-3"
+                    className="rounded-lg bg-white border border-[#EFE5D8] px-3.5 py-2.5 hover:border-[#7F160C]/50 transition-colors shadow-2xs flex items-center justify-between gap-3"
                   >
                     {/* Left: Date & Day Badge */}
                     <div className="flex items-center gap-2">
                       <span className="font-sans font-bold text-xs sm:text-sm text-[#1E1612]">
                         {item.dateStr}
                       </span>
-                      <span className="text-[11px] font-semibold text-[#8C6B3E] bg-[#FFF5EA] px-2 py-0.5 rounded-md border border-[#FFAE08]/15">
+                      <span className="text-[11px] font-semibold text-[#8C6B3E] bg-[#FFF5EA] px-2 py-0.5 rounded-md border border-[#7F160C]/15">
                         {item.dayName}
                       </span>
                     </div>
 
                     {/* Right: Exact Single Time Pill */}
                     <div className="shrink-0">
-                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FFF5EA] border border-[#FFAE08]/30 text-[#FFAE08] font-bold text-xs">
-                        <Clock className="w-3.5 h-3.5 text-[#FFAE08]" />
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#FFF5EA] border border-[#7F160C]/30 text-[#7F160C] font-bold text-xs">
+                        <Clock className="w-3.5 h-3.5 text-[#7F160C]" />
                         <span>{item.timeStr}</span>
                       </span>
                     </div>
@@ -354,8 +354,8 @@ export default function EventDetailsModal({
 
             {/* 2. Venue & Location */}
             <div className="p-4 sm:p-5 bg-[#FFF9F2]/50 flex items-start gap-3">
-              <div className="w-8 h-8 rounded-lg bg-[#FFAE08]/10 text-[#FFAE08] flex items-center justify-center shrink-0 mt-0.5">
-                <MapPin className="w-4 h-4 text-[#FFAE08]" />
+              <div className="w-8 h-8 rounded-lg bg-[#7F160C]/10 text-[#7F160C] flex items-center justify-center shrink-0 mt-0.5">
+                <MapPin className="w-4 h-4 text-[#7F160C]" />
               </div>
               <div className="text-xs sm:text-sm min-w-0 flex-1">
                 <p className="font-bold text-[#8C6B3E] uppercase text-[11px] tracking-wider">
@@ -370,7 +370,7 @@ export default function EventDetailsModal({
                     href={event.mapUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[#FFAE08] font-bold mt-2 hover:underline text-xs"
+                    className="inline-flex items-center gap-1 text-[#7F160C] font-bold mt-2 hover:underline text-xs"
                   >
                     <span>{lang === "hi" ? "गूगल मैप पर स्थान देखें" : "View on Google Maps"}</span>
                     <ExternalLink className="w-3 h-3" />
@@ -383,8 +383,8 @@ export default function EventDetailsModal({
             {event.contactPhone && (
               <div className="p-3.5 sm:p-4 bg-white/70 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-7 h-7 rounded-lg bg-[#FFAE08]/10 text-[#FFAE08] flex items-center justify-center shrink-0">
-                    <Phone className="w-3.5 h-3.5 text-[#FFAE08]" />
+                  <div className="w-7 h-7 rounded-lg bg-[#7F160C]/10 text-[#7F160C] flex items-center justify-center shrink-0">
+                    <Phone className="w-3.5 h-3.5 text-[#7F160C]" />
                   </div>
                   <div>
                     <p className="font-bold text-[#8C6B3E] uppercase text-[10px] tracking-wider">
@@ -395,7 +395,7 @@ export default function EventDetailsModal({
                 </div>
                 <a
                   href={`tel:${event.contactPhone.replace(/[^0-9+]/g, "")}`}
-                  className="px-3 py-1.5 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs transition-colors shrink-0"
+                  className="px-3 py-1.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs transition-colors shrink-0"
                 >
                   {lang === "hi" ? "कॉल करें" : "Call Now"}
                 </a>
@@ -458,7 +458,7 @@ export default function EventDetailsModal({
                     : undefined
                 );
               }}
-              className="flex-1 sm:flex-initial px-5 py-2 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer whitespace-nowrap active:scale-95"
+              className="flex-1 sm:flex-initial px-5 py-2 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs uppercase tracking-wider inline-flex items-center justify-center gap-1.5 shadow-md hover:shadow-lg transition-all cursor-pointer whitespace-nowrap active:scale-95"
             >
               <Heart className="w-3.5 h-3.5 fill-current shrink-0" />
               <span>{lang === "hi" ? "सहयोग / पंजीकरण करें" : "Register / Support Event"}</span>

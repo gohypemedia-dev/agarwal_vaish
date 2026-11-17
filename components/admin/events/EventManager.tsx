@@ -315,7 +315,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
             placeholder="Search events by title, location, or summary..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-[#FFF9F2] focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+            className="w-full pl-9 pr-4 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-[#FFF9F2] focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
           />
         </div>
 
@@ -350,12 +350,12 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
           {filteredEvents.map((event) => (
             <div
               key={event.id}
-              className="bg-white rounded-2xl border border-[#E7D8C8] shadow-xs flex flex-col justify-between overflow-hidden hover:border-[#FFAE08]/50 transition-colors"
+              className="bg-white rounded-2xl border border-[#E7D8C8] shadow-xs flex flex-col justify-between overflow-hidden hover:border-[#7F160C]/50 transition-colors"
             >
               <div className="p-5 space-y-3.5">
                 {/* Header row */}
                 <div className="flex items-center justify-between gap-2">
-                  <span className="inline-block px-2.5 py-1 bg-[#FFAE08] text-white text-xs font-bold rounded-md">
+                  <span className="inline-block px-2.5 py-1 bg-[#7F160C] text-white text-xs font-bold rounded-md">
                     {formatDateLabel(event.startDate)}
                   </span>
                   <button
@@ -473,7 +473,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                       if (formError) setFormError(null);
                     }}
                     placeholder="e.g. Shrimad Bhagwat Katha"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
 
@@ -486,7 +486,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     value={formData.titleHi}
                     onChange={(e) => setFormData({ ...formData, titleHi: e.target.value })}
                     placeholder="उदा. श्रीमद्भागवत कथा ज्ञान यज्ञ"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
               </div>
@@ -504,7 +504,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                       setFormData({ ...formData, startDate: e.target.value });
                       if (formError) setFormError(null);
                     }}
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
 
@@ -516,7 +516,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     type="date"
                     value={formData.endDate}
                     onChange={(e) => setFormData({ ...formData, endDate: e.target.value })}
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
               </div>
@@ -531,7 +531,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     value={formData.timeText}
                     onChange={(e) => setFormData({ ...formData, timeText: e.target.value })}
                     placeholder="e.g. 4:00 PM – 7:30 PM IST Daily"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
 
@@ -544,7 +544,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     value={formData.contactPhone}
                     onChange={(e) => setFormData({ ...formData, contactPhone: e.target.value })}
                     placeholder="+91 9910762692"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
               </div>
@@ -563,7 +563,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                       if (formError) setFormError(null);
                     }}
                     placeholder="e.g. Gurugram Ashram & Live Stream"
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
 
@@ -576,7 +576,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     value={formData.mapUrl}
                     onChange={(e) => setFormData({ ...formData, mapUrl: e.target.value })}
                     placeholder="https://maps.google.com/..."
-                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                   />
                 </div>
               </div>
@@ -590,7 +590,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                   value={formData.address}
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   placeholder="Street, City, State, Pincode"
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                 />
               </div>
 
@@ -607,7 +607,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                     if (formError) setFormError(null);
                   }}
                   placeholder="Short description displayed on the homepage event card..."
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                 />
               </div>
 
@@ -630,7 +630,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                         customAmounts: [499, 999, 1499, 2100, 5100, 11000],
                       })
                     }
-                    className="text-[11px] font-bold text-[#FFAE08] hover:underline cursor-pointer shrink-0"
+                    className="text-[11px] font-bold text-[#7F160C] hover:underline cursor-pointer shrink-0"
                   >
                     Reset Defaults
                   </button>
@@ -654,7 +654,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                           setFormData({ ...formData, customAmounts: next });
                         }}
                         placeholder={`e.g. ${[499, 999, 1499, 2100, 5100, 11000][idx]}`}
-                        className="w-full px-3 py-2 text-sm font-bold text-[#2B201A] rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                        className="w-full px-3 py-2 text-sm font-bold text-[#2B201A] rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                       />
                     </div>
                   ))}
@@ -668,7 +668,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                   {formData.customAmounts.map((amt, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-lg bg-[#FAF3EA] border border-[#E7D8C8] text-[#FFAE08] text-xs font-bold shadow-2xs"
+                      className="px-2.5 py-1 rounded-lg bg-[#FAF3EA] border border-[#E7D8C8] text-[#7F160C] text-xs font-bold shadow-2xs"
                     >
                       ₹{(amt || 0).toLocaleString("en-IN")}
                     </span>
@@ -685,7 +685,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Detailed schedule, discourse highlights, daily prasadam details..."
-                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#FFAE08]"
+                  className="w-full px-3 py-2 text-sm rounded-lg border border-[#E7D8C8] bg-white focus:outline-none focus:ring-2 focus:ring-[#7F160C]"
                 />
               </div>
 
@@ -695,7 +695,7 @@ export default function EventManager({ initialEvents }: EventManagerProps) {
                   id="isPublishedCheck"
                   checked={formData.isPublished}
                   onChange={(e) => setFormData({ ...formData, isPublished: e.target.checked })}
-                  className="w-4 h-4 rounded border-[#E7D8C8] text-[#FFAE08] focus:ring-[#FFAE08]"
+                  className="w-4 h-4 rounded border-[#E7D8C8] text-[#7F160C] focus:ring-[#7F160C]"
                 />
                 <label htmlFor="isPublishedCheck" className="text-xs font-bold text-[#2B201A] cursor-pointer">
                   Publish to website immediately (Uncheck to save as Draft)

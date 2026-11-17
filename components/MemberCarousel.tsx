@@ -54,7 +54,7 @@ export default function MemberCarousel() {
               className="pl-3 sm:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 xl:basis-1/6 min-w-0 shrink-0"
             >
               {/* White Member Card matching reference */}
-              <div className="h-full bg-white border border-[#E7D8C8]/60 hover:border-[#FFAE08] rounded-2xl p-2.5 sm:p-3 shadow-[0_4px_16px_-4px_rgba(43,32,26,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(255, 174, 8,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+              <div className="h-full bg-white border border-[#E7D8C8]/60 hover:border-[#7F160C] rounded-2xl p-2.5 sm:p-3 shadow-[0_4px_16px_-4px_rgba(43,32,26,0.06)] hover:shadow-[0_12px_28px_-6px_rgba(127,22,12,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
                 {/* Photo */}
                 <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden bg-[#FAF3EC]">
                   <Image
@@ -68,7 +68,7 @@ export default function MemberCarousel() {
 
                 {/* Name & Designation */}
                 <div className="pt-2.5 pb-0.5 w-full flex flex-col items-center justify-center min-h-[50px]">
-                  <h3 className="font-sans font-bold text-[11px] sm:text-xs md:text-[13px] text-[#1E1612] uppercase tracking-wide leading-tight line-clamp-1 group-hover:text-[#FFAE08] transition-colors">
+                  <h3 className="font-sans font-bold text-[11px] sm:text-xs md:text-[13px] text-[#1E1612] uppercase tracking-wide leading-tight line-clamp-1 group-hover:text-[#7F160C] transition-colors">
                     {member.name}
                   </h3>
                   <p className="font-sans text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-[#8C6B3E] uppercase tracking-wider mt-0.5 line-clamp-1 px-0.5 leading-snug">
@@ -93,8 +93,8 @@ export default function MemberCarousel() {
             aria-label={`Go to slide ${index + 1}`}
             className={`transition-all duration-300 rounded-full cursor-pointer ${
               index === selectedIndex % 6
-                ? "w-5 h-2 bg-[#FFAE08]"
-                : "w-2 h-2 bg-[#E7D8C8] hover:bg-[#FFAE08]/50"
+                ? "w-5 h-2 bg-[#7F160C]"
+                : "w-2 h-2 bg-[#E7D8C8] hover:bg-[#7F160C]/50"
             }`}
           />
         ))}

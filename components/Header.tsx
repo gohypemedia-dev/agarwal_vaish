@@ -136,10 +136,10 @@ export default function Header() {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="font-sans text-[13px] lg:text-[14px] xl:text-[16px] font-extrabold tracking-tight text-[#1E1612] group-hover:text-[#FFAE08] transition-colors uppercase leading-tight">
+                <span className="font-sans text-[13px] lg:text-[14px] xl:text-[16px] font-extrabold tracking-tight text-[#1E1612] group-hover:text-[#7F160C] transition-colors uppercase leading-tight">
                   AGGARWAL VAISH
                 </span>
-                <span className="text-[10px] lg:text-[10.5px] xl:text-[12px] font-extrabold tracking-wider text-[#FFAE08] uppercase leading-tight">
+                <span className="text-[10px] lg:text-[10.5px] xl:text-[12px] font-extrabold tracking-wider text-[#7F160C] uppercase leading-tight">
                   VIKAS SANGATHAN
                 </span>
               </div>
@@ -154,7 +154,7 @@ export default function Header() {
                 >
                   <Link
                     href={sec.href}
-                    className="navtext flex items-center px-2.5 xl:px-3.5 h-9 xl:h-10 rounded-md text-[12px] xl:text-[14px] font-semibold text-[#2B201A] hover:text-[#FFAE08] tracking-wider uppercase transition-colors whitespace-nowrap"
+                    className="navtext flex items-center px-2.5 xl:px-3.5 h-9 xl:h-10 rounded-md text-[12px] xl:text-[14px] font-semibold text-[#2B201A] hover:text-[#7F160C] tracking-wider uppercase transition-colors whitespace-nowrap"
                   >
                     <span>{sec.label}</span>
                   </Link>
@@ -167,7 +167,7 @@ export default function Header() {
                           <Link
                             key={i}
                             href={sub.href}
-                            className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-[#FFAE08] hover:bg-[#FFFDF5] transition-colors"
+                            className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-[#7F160C] hover:bg-[#FFFDF5] transition-colors"
                             onClick={() => setActiveDropdown(null)}
                           >
                             {sub.label}
@@ -185,7 +185,7 @@ export default function Header() {
             <div className="flex items-center gap-2 xl:gap-3 shrink-0">
               <Link
                 href="#network"
-                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg border border-[#FFAE08] text-[#FFAE08] hover:bg-[#FFAE08] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
+                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
               >
                 <Search className="w-3.5 h-3.5 xl:w-4 xl:h-4 stroke-[2.2]" />
                 <span className="hidden xl:inline">Search Members</span>
@@ -212,7 +212,7 @@ export default function Header() {
                 <span className="font-sans text-xs sm:text-sm font-extrabold tracking-tight text-[#1E1612] uppercase truncate leading-tight">
                   AGGARWAL VAISH
                 </span>
-                <span className="text-[9.5px] sm:text-[10.5px] font-extrabold tracking-wider text-[#FFAE08] uppercase truncate leading-tight">
+                <span className="text-[9.5px] sm:text-[10.5px] font-extrabold tracking-wider text-[#7F160C] uppercase truncate leading-tight">
                   VIKAS SANGATHAN
                 </span>
               </div>
@@ -222,7 +222,7 @@ export default function Header() {
             <div className="flex items-center gap-2 shrink-0">
               <Link
                 href="#network"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#FFAE08] text-[#FFAE08] hover:bg-[#FFAE08] hover:text-white transition-all text-xs font-semibold"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
                 aria-label="Search Members"
               >
                 <Search className="w-3.5 h-3.5" />
@@ -263,7 +263,7 @@ export default function Header() {
                       <span className="font-sans text-xs font-extrabold text-[#1F1712] uppercase leading-tight">
                         AGGARWAL VAISH
                       </span>
-                      <span className="text-[9.5px] font-bold text-[#FFAE08] uppercase leading-tight">
+                      <span className="text-[9.5px] font-bold text-[#7F160C] uppercase leading-tight">
                         VIKAS SANGATHAN
                       </span>
                     </div>
@@ -282,18 +282,18 @@ export default function Header() {
                       <Link
                         href={sec.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block font-bold text-sm text-[#1F1712] hover:text-[#FFAE08] py-1.5 uppercase"
+                        className="block font-bold text-sm text-[#1F1712] hover:text-[#7F160C] py-1.5 uppercase"
                       >
                         {sec.label}
                       </Link>
                       {/* Sub-items (commented out)
-                      <div className="pl-3 space-y-1 border-l-2 border-[#FFAE08]/30 mt-1">
+                      <div className="pl-3 space-y-1 border-l-2 border-[#7F160C]/30 mt-1">
                         {sec.subItems.map((sub, i) => (
                           <Link
                             key={i}
                             href={sub.href}
                             onClick={() => setMobileMenuOpen(false)}
-                            className="block text-xs text-gray-600 hover:text-[#FFAE08] py-1"
+                            className="block text-xs text-gray-600 hover:text-[#7F160C] py-1"
                           >
                             {sub.label}
                           </Link>
@@ -309,7 +309,7 @@ export default function Header() {
                 <Link
                   href="#network"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#FFAE08] text-white font-bold text-xs uppercase"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase"
                 >
                   <Search className="w-4 h-4" />
                   <span>{lang === "hi" ? "सदस्य खोजें" : "Search Members"}</span>

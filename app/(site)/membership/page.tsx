@@ -74,11 +74,11 @@ export default function MembershipPage() {
         "प्रत्यक्ष सेवा में सहभागिता के अवसर",
       ],
       highlight: false,
-      cardStyle: "bg-[#FFF9F2] border border-[#E7D8C8] shadow-warm-sm hover:border-[#FFAE08]/40 relative",
+      cardStyle: "bg-[#FFF9F2] border border-[#E7D8C8] shadow-warm-sm hover:border-[#7F160C]/40 relative",
       badgeText: null,
       badgeTextHi: null,
       badgeStyle: "",
-      priceColor: "text-[#FFAE08]",
+      priceColor: "text-[#7F160C]",
       checkColor: "text-[#2F5A43]",
       buttonStyle: "btn-outline w-full",
     },
@@ -125,7 +125,7 @@ export default function MembershipPage() {
       cardStyle: "bg-gradient-to-b from-[#FFFDF7] via-[#FFF9EA] to-[#FFF3D6] border-2 border-[#D4A359] shadow-warm-md hover:border-[#C68A2E] relative",
       badgeText: findPlan("gold")!.badge,
       badgeTextHi: "सर्वाधिक लोकप्रिय",
-      badgeStyle: "bg-gradient-to-r from-[#D48820] to-[#FFAE08] text-white shadow-warm-sm",
+      badgeStyle: "bg-gradient-to-r from-[#D48820] to-[#7F160C] text-white shadow-warm-sm",
       priceColor: "text-[#C67A18]",
       checkColor: "text-[#2F5A43]",
       buttonStyle: "btn-primary w-full",
@@ -240,7 +240,7 @@ export default function MembershipPage() {
             <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
               <a
                 href="#membership-plans"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#FFAE08] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
+                className="flex-1 py-2 px-3 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
               >
                 {lang === "hi" ? "योजनाएं देखें" : "View Plans"}
               </a>
@@ -251,7 +251,7 @@ export default function MembershipPage() {
                 }}
                 className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
               >
-                <Heart className="w-3 h-3 text-[#FFAE08] fill-current" />
+                <Heart className="w-3 h-3 text-[#7F160C] fill-current" />
                 <span>{lang === "hi" ? "जुड़ें" : "Join Now"}</span>
               </button>
             </div>
@@ -265,11 +265,11 @@ export default function MembershipPage() {
             <TextReveal as="h1" className="font-editorial text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2B201A] leading-[1.18] tracking-tight">
               {lang === "hi" ? (
                 <>
-                  एक बेहतर कल के लिए <span className="text-[#FFAE08]">साथ</span>
+                  एक बेहतर कल के लिए <span className="text-[#7F160C]">साथ</span>
                 </>
               ) : (
                 <>
-                  Together for a <span className="text-[#FFAE08]">Better Tomorrow</span>
+                  Together for a <span className="text-[#7F160C]">Better Tomorrow</span>
                 </>
               )}
             </TextReveal>
@@ -287,7 +287,7 @@ export default function MembershipPage() {
             <div className="pt-2 sm:pt-4">
               <a
                 href="#membership-plans"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
               >
                 <span>{lang === "hi" ? "सदस्यता योजनाएं देखें" : "Explore Membership Plans"}</span>
               </a>
@@ -303,7 +303,7 @@ export default function MembershipPage() {
             <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">
               {lang === "hi" ? "सदस्यता श्रेणी चुनें" : "CHOOSE YOUR MEMBERSHIP TIER"}
             </p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#FFAE08]">
+            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
               {lang === "hi" ? "हमारे सेवा परिवार से जुड़ें" : "Join Our Seva Circle"}
             </TextReveal>
             <HeadingDivider className="mt-2" />
@@ -377,7 +377,7 @@ export default function MembershipPage() {
               <span className="text-[#1F1712]">
                 {lang === "hi" ? "ट्रस्ट की सदस्यता " : "Why Join Our "}
               </span>
-              <span className="text-[#FFAE08]">
+              <span className="text-[#7F160C]">
                 {lang === "hi" ? "क्यों ग्रहण करें?" : "Seva Parivar?"}
               </span>
             </h2>
@@ -459,7 +459,7 @@ export default function MembershipPage() {
                   {/* Right Content */}
                   <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white">
                     <div>
-                      <span className="text-[11px] font-bold text-[#FFAE08] uppercase tracking-wider block">
+                      <span className="text-[11px] font-bold text-[#7F160C] uppercase tracking-wider block">
                         {card.category}
                       </span>
                       <h3 className="font-editorial font-bold text-lg sm:text-xl text-[#1F1712] leading-snug mt-1">
@@ -473,7 +473,7 @@ export default function MembershipPage() {
                       <div className="mt-3.5 pt-3 border-t border-[#F0E4D8] space-y-1.5 sm:space-y-2">
                         {card.points.map((pt, pIdx) => (
                           <div key={pIdx} className="flex items-center gap-2 text-xs text-[#2B201A]/85">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#FFAE08] shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#7F160C] shrink-0" />
                             <span className="leading-tight">{pt}</span>
                           </div>
                         ))}
@@ -483,7 +483,7 @@ export default function MembershipPage() {
                     <div className="mt-5 pt-2">
                       <button
                         onClick={() => openDonateModal(card.title, undefined, true)}
-                        className="inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#FFAE08] hover:bg-[#D45A0E] text-white font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all cursor-pointer"
+                        className="inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#7F160C] hover:bg-[#D45A0E] text-white font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all cursor-pointer"
                       >
                         <span>{card.btnText}</span>
                       </button>
@@ -504,7 +504,7 @@ export default function MembershipPage() {
             <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">
               {lang === "hi" ? "भक्त समुदाय" : "DEVOTEE COMMUNITY"}
             </p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#FFAE08]">
+            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
               {lang === "hi" ? "हमारे सक्रिय सदस्य" : "Our Active Members"}
             </TextReveal>
           </div>
@@ -522,7 +522,7 @@ export default function MembershipPage() {
           {/* Form Card (White Background) */}
           <div className="p-6 sm:p-10 space-y-8 bg-white border border-[#E7D8C8] rounded-[24px] shadow-sm">
             <div className="text-center space-y-2">
-              <h2 className="font-editorial text-3xl sm:text-4xl font-bold text-[#FFAE08]">
+              <h2 className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
                 {lang === "hi" ? "सदस्यता पंजीकरण" : "Membership Registration"}
               </h2>
               <HeadingDivider className="my-1.5" />
@@ -549,8 +549,8 @@ export default function MembershipPage() {
                         key={p.id}
                         className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors ${
                           selected
-                            ? "border-[#FFAE08] bg-[#FFF8F2] shadow-xs"
-                            : "border-[#E5E7EB] bg-white hover:border-[#FFAE08]/40"
+                            ? "border-[#7F160C] bg-[#FFF8F2] shadow-xs"
+                            : "border-[#E5E7EB] bg-white hover:border-[#7F160C]/40"
                         }`}
                       >
                         <span className="flex items-center gap-2.5">
@@ -560,11 +560,11 @@ export default function MembershipPage() {
                             value={p.id}
                             checked={selected}
                             onChange={() => setPlanId(p.id)}
-                            className="accent-[#FFAE08] w-4 h-4"
+                            className="accent-[#7F160C] w-4 h-4"
                           />
                           <span className="text-sm font-semibold text-[#1F1712]">{displayName}</span>
                         </span>
-                        <span className="text-sm font-bold text-[#FFAE08] tabular-nums">{formatINR(p.price)}</span>
+                        <span className="text-sm font-bold text-[#7F160C] tabular-nums">{formatINR(p.price)}</span>
                       </label>
                     );
                   })}
@@ -573,7 +573,7 @@ export default function MembershipPage() {
 
               {/* SECTION 1: PERSONAL DETAILS */}
               <div className="space-y-5 pt-4 border-t border-[#F3F4F6]">
-                <h3 className="font-editorial text-xl font-bold text-[#FFAE08]">
+                <h3 className="font-editorial text-xl font-bold text-[#7F160C]">
                   {lang === "hi" ? "व्यक्तिगत विवरण" : "Personal Details"}
                 </h3>
 
@@ -582,7 +582,7 @@ export default function MembershipPage() {
                   <label className="block text-xs font-bold text-[#1F1712] mb-1.5">
                     {lang === "hi" ? "फोटो" : "Photo"}
                   </label>
-                  <div className="border border-dashed border-[#FFAE08] rounded-md px-3 py-2 bg-white inline-flex items-center gap-2.5">
+                  <div className="border border-dashed border-[#7F160C] rounded-md px-3 py-2 bg-white inline-flex items-center gap-2.5">
                     <label className="inline-flex items-center px-3 py-1 rounded border border-[#D1D5DB] bg-[#F9FAFB] hover:bg-[#F3F4F6] text-xs font-semibold text-[#1F1712] cursor-pointer transition-colors">
                       <span>Choose File</span>
                       <input
@@ -622,7 +622,7 @@ export default function MembershipPage() {
                         }
                       }}
                       onBlur={() => handleBlur("fullName")}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                     {errors.fullName && (touched.fullName || errors.fullName) && (
                       <p className="mt-1 text-xs font-semibold text-red-600">{errors.fullName}</p>
@@ -640,7 +640,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "पिता / पति का नाम" : "S/o, W/o, D/o Name"}
                       value={formData.guardianName}
                       onChange={(e) => setFormData({ ...formData, guardianName: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -652,7 +652,7 @@ export default function MembershipPage() {
                       id="mem-gender"
                       value={formData.gender}
                       onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="">{lang === "hi" ? "--लिंग चुनें--" : "--Select Gender--"}</option>
                       <option value="Male">{lang === "hi" ? "पुरुष (Male)" : "Male"}</option>
@@ -675,7 +675,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "जाति" : "Caste"}
                       value={formData.caste}
                       onChange={(e) => setFormData({ ...formData, caste: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -690,7 +690,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "गोत्र" : "Gotra"}
                       value={formData.gotra}
                       onChange={(e) => setFormData({ ...formData, gotra: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -711,7 +711,7 @@ export default function MembershipPage() {
                         }
                       }}
                       onBlur={() => handleBlur("email")}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                     {errors.email && (touched.email || errors.email) && (
                       <p className="mt-1 text-xs font-semibold text-red-600">{errors.email}</p>
@@ -750,7 +750,7 @@ export default function MembershipPage() {
                           }
                         }}
                         onBlur={() => handleBlur("phone")}
-                        className="w-full h-11 !pl-16 pr-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] outline-none transition-all"
+                        className="w-full h-11 !pl-16 pr-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all"
                       />
                     </div>
                     {errors.phone && (touched.phone || errors.phone) && (
@@ -767,7 +767,7 @@ export default function MembershipPage() {
                       type="date"
                       value={formData.dob}
                       onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
                     />
                   </div>
 
@@ -778,7 +778,7 @@ export default function MembershipPage() {
 
               {/* SECTION 2: ADDRESS DETAILS */}
               <div className="space-y-5 pt-4 border-t border-[#F3F4F6]">
-                <h3 className="font-editorial text-xl font-bold text-[#FFAE08]">
+                <h3 className="font-editorial text-xl font-bold text-[#7F160C]">
                   {lang === "hi" ? "पते का विवरण" : "Address Details"}
                 </h3>
 
@@ -792,7 +792,7 @@ export default function MembershipPage() {
                       id="mem-state"
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="Haryana">Haryana (हरियाणा)</option>
                       <option value="Delhi">Delhi (दिल्ली)</option>
@@ -817,7 +817,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "--जिला चुनें--" : "--Select District--"}
                       value={formData.district}
                       onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -831,7 +831,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "वर्तमान पता" : "Current Address"}
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -849,7 +849,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "वार्ड नंबर" : "Ward Number"}
                       value={formData.wardNumber}
                       onChange={(e) => setFormData({ ...formData, wardNumber: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -865,7 +865,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "पिनकोड" : "Pincode"}
                       value={formData.pincode}
                       onChange={(e) => setFormData({ ...formData, pincode: e.target.value.replace(/\D/g, "").slice(0, 6) })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -883,7 +883,7 @@ export default function MembershipPage() {
                       id="mem-occupation"
                       value={formData.occupation}
                       onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="">{lang === "hi" ? "--व्यवसाय चुनें--" : "--Select Occupation--"}</option>
                       <option value="Business">{lang === "hi" ? "व्यवसाय (Business)" : "Business"}</option>
@@ -908,7 +908,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "विवरण दर्ज करें" : "Mention Details"}
                       value={formData.occupationDetails}
                       onChange={(e) => setFormData({ ...formData, occupationDetails: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#FFAE08] focus:ring-1 focus:ring-[#FFAE08] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -921,7 +921,7 @@ export default function MembershipPage() {
               <div id="payment-qr" className="pt-8 border-t border-[#F3F4F6] space-y-6">
                 {/* Header & Instructions */}
                 <div className="space-y-1.5 text-left">
-                  <h3 className="font-editorial text-2xl sm:text-3xl font-bold text-[#FFAE08]">
+                  <h3 className="font-editorial text-2xl sm:text-3xl font-bold text-[#7F160C]">
                     {lang === "hi" ? "सदस्यता भुगतान" : "Membership Payment"}
                   </h3>
                   <HeadingDivider align="left" className="!py-0.5" />
@@ -954,7 +954,7 @@ export default function MembershipPage() {
                       <button
                         type="button"
                         onClick={handleCopyUpi}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-[#FFAE08] hover:text-[#D45A0E] cursor-pointer shrink-0"
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#7F160C] hover:text-[#D45A0E] cursor-pointer shrink-0"
                       >
                         {copiedUpi ? (
                           <>
@@ -1022,7 +1022,7 @@ export default function MembershipPage() {
                     {/* Continue Button */}
                     <button
                       type="submit"
-                      className="w-full py-4 px-6 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer text-center"
+                      className="w-full py-4 px-6 rounded-xl bg-[#7F160C] hover:bg-[#D45A0E] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer text-center"
                     >
                       {lang === "hi" ? "भुगतान जारी रखें — " : "CONTINUE TO PAYMENT — "}
                       {formatINR((MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0]).price)}

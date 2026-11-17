@@ -115,7 +115,7 @@ export default function FounderPage() {
             <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
               <a
                 href="#founder-story"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#FFAE08] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
+                className="flex-1 py-2 px-3 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
               >
                 {lang === "hi" ? "जीवन यात्रा" : "Biography"}
               </a>
@@ -123,7 +123,7 @@ export default function FounderPage() {
                 onClick={() => openDonateModal()}
                 className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
               >
-                <Heart className="w-3 h-3 text-[#FFAE08] fill-current" />
+                <Heart className="w-3 h-3 text-[#7F160C] fill-current" />
                 <span>{lang === "hi" ? "सहयोग करें" : "Support"}</span>
               </button>
             </div>
@@ -138,12 +138,12 @@ export default function FounderPage() {
               {lang === "hi" ? (
                 <>
                   श्री अशोक बुवानीवाला <br />
-                  <span className="text-[#FFAE08]">संस्थापक अध्यक्ष</span>
+                  <span className="text-[#7F160C]">संस्थापक अध्यक्ष</span>
                 </>
               ) : (
                 <>
                   Founder President <br />
-                  <span className="text-[#FFAE08]">Shri Ashok Buwaniwala</span>
+                  <span className="text-[#7F160C]">Shri Ashok Buwaniwala</span>
                 </>
               )}
             </TextReveal>
@@ -161,7 +161,7 @@ export default function FounderPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 sm:pt-4">
               <a
                 href="#founder-story"
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
               >
                 <span>{lang === "hi" ? "जीवन यात्रा व दर्शन जानें" : "Read Life Journey & Philosophy"}</span>
               </a>
@@ -181,7 +181,7 @@ export default function FounderPage() {
       <SectionReveal className="py-16 sm:py-20 lg:py-24 bg-[#FBF6EE]" id="founder-story">
         <div className="page-container max-w-5xl lg:max-w-6xl space-y-8">
           <div className="text-center space-y-2">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#FFAE08]">
+            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#7F160C]">
               {lang === "hi" ? "अग्रवाल वैश्य समाज (AVS Haryana)" : "AGGARWAL VAISH SAMAJ HARYANA"}
             </TextReveal>
             <HeadingDivider className="my-1.5" />
@@ -266,7 +266,7 @@ export default function FounderPage() {
         <div className="page-container space-y-12">
           {/* Section Heading */}
           <div className="text-center space-y-2.5 max-w-2xl mx-auto">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#FFAE08]">
+            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#7F160C]">
               {lang === "hi" ? "समाज के प्रति हमारा संकल्प" : "OUR COMMITMENT TO SOCIETY"}
             </TextReveal>
             <HeadingDivider className="my-1.5" />
@@ -276,14 +276,14 @@ export default function FounderPage() {
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {commitmentAreas.map((area, idx) => (
               <StaggerItem key={idx}>
-                <div className="relative overflow-hidden bg-white hover:bg-gradient-to-br hover:from-white hover:to-[#FFF8F0] px-6 py-5 rounded-2xl border border-[#E7D8C8] hover:border-[#FFAE08] shadow-xs hover:shadow-[0_12px_28px_-6px_rgba(255, 174, 8,0.16)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-center min-h-[96px] group cursor-pointer before:absolute before:inset-0 before:-translate-x-full hover:before:translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent before:transition-transform before:duration-700">
+                <div className="relative overflow-hidden bg-white hover:bg-gradient-to-br hover:from-white hover:to-[#FFF8F0] px-6 py-5 rounded-2xl border border-[#E7D8C8] hover:border-[#7F160C] shadow-xs hover:shadow-[0_12px_28px_-6px_rgba(127,22,12,0.16)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-center min-h-[96px] group cursor-pointer before:absolute before:inset-0 before:-translate-x-full hover:before:translate-x-full before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent before:transition-transform before:duration-700">
                   {/* Animated Text Content */}
                   <div className="relative z-10 w-full">
-                    <span className="font-sans text-lg sm:text-[20px] font-bold text-[#1F1712] group-hover:text-[#FFAE08] group-hover:translate-x-1.5 transition-all duration-300 leading-snug inline-block tracking-tight">
+                    <span className="font-sans text-lg sm:text-[20px] font-bold text-[#1F1712] group-hover:text-[#7F160C] group-hover:translate-x-1.5 transition-all duration-300 leading-snug inline-block tracking-tight">
                       {lang === "hi" ? area.titleHi : area.title}
                     </span>
                     {/* Animated Saffron Sweep Underline */}
-                    <span className="block h-[2.5px] w-0 group-hover:w-20 bg-gradient-to-r from-[#FFAE08] to-[#F59E0B] rounded-full transition-all duration-400 mt-1.5" />
+                    <span className="block h-[2.5px] w-0 group-hover:w-20 bg-gradient-to-r from-[#7F160C] to-[#F59E0B] rounded-full transition-all duration-400 mt-1.5" />
                   </div>
                 </div>
               </StaggerItem>
@@ -337,16 +337,16 @@ export default function FounderPage() {
 
         {/* Enhanced High-Visibility Card Container */}
         <div className="relative z-10 page-container max-w-4xl px-4 sm:px-6 w-full">
-          <div className="bg-white/75 sm:bg-[#FFFDF9]/70 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-white/80 sm:border-[#FFAE08]/35 shadow-[0_20px_50px_rgba(0,0,0,0.22)] p-6 sm:p-10 md:p-12 text-center space-y-6">
+          <div className="bg-white/75 sm:bg-[#FFFDF9]/70 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-white/80 sm:border-[#7F160C]/35 shadow-[0_20px_50px_rgba(0,0,0,0.22)] p-6 sm:p-10 md:p-12 text-center space-y-6">
             <ParagraphReveal yOffset={15}>
               <p className="font-sans text-sm sm:text-base md:text-[17px] text-[#1F1712] font-medium leading-relaxed">
                 {lang === "hi" ? (
                   <>
-                    श्री अशोक बुवानीवाला जी समाज के प्रत्येक व्यक्ति को <span className="text-[#FFAE08] font-bold">एकता</span>, <span className="text-[#FFAE08] font-bold">परस्पर सहयोग</span>, सामाजिक समरसता और समाज निर्माण में सक्रिय भागीदारी निभाने की प्रेरणा देते हैं। उनका विश्वास है कि जब समाज का युवा शिक्षित, संस्कारित और आत्मनिर्भर होगा, तभी समग्र समाज का मान-सम्मान बढ़ेगा।
+                    श्री अशोक बुवानीवाला जी समाज के प्रत्येक व्यक्ति को <span className="text-[#7F160C] font-bold">एकता</span>, <span className="text-[#7F160C] font-bold">परस्पर सहयोग</span>, सामाजिक समरसता और समाज निर्माण में सक्रिय भागीदारी निभाने की प्रेरणा देते हैं। उनका विश्वास है कि जब समाज का युवा शिक्षित, संस्कारित और आत्मनिर्भर होगा, तभी समग्र समाज का मान-सम्मान बढ़ेगा।
                   </>
                 ) : (
                   <>
-                    Shri Ashok Buwaniwala inspires every community member to embrace <span className="text-[#FFAE08] font-bold">Unity</span>, <span className="text-[#FFAE08] font-bold">Mutual Solidarity</span>, social harmony, and active participation in community governance. He believes that an educated, ethical, and self-reliant youth is the cornerstone of societal pride.
+                    Shri Ashok Buwaniwala inspires every community member to embrace <span className="text-[#7F160C] font-bold">Unity</span>, <span className="text-[#7F160C] font-bold">Mutual Solidarity</span>, social harmony, and active participation in community governance. He believes that an educated, ethical, and self-reliant youth is the cornerstone of societal pride.
                   </>
                 )}
               </p>
@@ -354,9 +354,9 @@ export default function FounderPage() {
 
             {/* Sacred Divider */}
             <div className="flex items-center justify-center gap-4 my-2 select-none" aria-hidden="true">
-              <span className="h-px w-20 sm:w-32 bg-[#FFAE08]/40" />
-              <span className="font-editorial text-2xl sm:text-3xl text-[#FFAE08] font-bold leading-none">★</span>
-              <span className="h-px w-20 sm:w-32 bg-[#FFAE08]/40" />
+              <span className="h-px w-20 sm:w-32 bg-[#7F160C]/40" />
+              <span className="font-editorial text-2xl sm:text-3xl text-[#7F160C] font-bold leading-none">★</span>
+              <span className="h-px w-20 sm:w-32 bg-[#7F160C]/40" />
             </div>
 
             <ParagraphReveal yOffset={15}>
@@ -373,7 +373,7 @@ export default function FounderPage() {
       {/* 6. HER LIFE MESSAGE */}
       <SectionReveal className="py-16 sm:py-24 bg-[#FAF3EA] border-t border-[#E7D8C8]">
         <div className="page-container max-w-4xl text-center space-y-6">
-          <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#FFAE08]">
+          <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#7F160C]">
             {lang === "hi" ? "संस्थापक अध्यक्ष का संदेश" : "FOUNDER'S MESSAGE"}
           </p>
 
@@ -388,7 +388,7 @@ export default function FounderPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
             <button
               onClick={() => openDonateModal("AVS Haryana Seva")}
-              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               <Heart className="w-4 h-4 fill-current" />
               <span>{lang === "hi" ? "अग्रवाल वैश्य समाज में सहयोग करें" : "Support AVS Haryana"}</span>

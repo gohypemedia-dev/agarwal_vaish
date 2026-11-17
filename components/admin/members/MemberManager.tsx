@@ -449,7 +449,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
             <h1 className="font-editorial text-2xl sm:text-3xl font-bold text-[#2B201A]">
               Member Management
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#FFAE08]/10 text-[#FFAE08]">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#7F160C]/10 text-[#7F160C]">
               {members.length} Members
             </span>
           </div>
@@ -460,7 +460,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
 
         <button
           onClick={handleOpenAdd}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center shrink-0"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#7F160C] hover:bg-[#D45A0E] text-white font-bold text-xs uppercase tracking-wider shadow-sm transition-all cursor-pointer w-full sm:w-auto text-center shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>Add New Member</span>
@@ -516,7 +516,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by name, email, phone, city..."
-            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+            className="w-full pl-9 pr-3 py-2 text-xs sm:text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
           />
         </div>
 
@@ -590,15 +590,15 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       {/* Name & Role */}
                       <td className="py-3 px-4 sm:px-5">
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-[#FAF3EA] border border-[#E7D8C8] text-[#FFAE08] flex items-center justify-center font-bold text-xs uppercase shrink-0 group-hover:scale-105 transition-transform">
+                          <div className="w-8 h-8 rounded-full bg-[#FAF3EA] border border-[#E7D8C8] text-[#7F160C] flex items-center justify-center font-bold text-xs uppercase shrink-0 group-hover:scale-105 transition-transform">
                             {member.name.charAt(0)}
                           </div>
                           <div className="min-w-0">
                             <div className="flex items-center gap-1.5">
-                              <p className="font-bold text-[#2B201A] text-xs sm:text-sm truncate group-hover:text-[#FFAE08] transition-colors">
+                              <p className="font-bold text-[#2B201A] text-xs sm:text-sm truncate group-hover:text-[#7F160C] transition-colors">
                                 {member.name}
                               </p>
-                              <Eye className="w-3.5 h-3.5 text-[#FFAE08] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
+                              <Eye className="w-3.5 h-3.5 text-[#7F160C] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                             </div>
                             <p className="text-[11px] text-[#2B201A]/60 truncate">
                               {member.role || "Devotee Member"}
@@ -612,13 +612,13 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="space-y-0.5 text-xs max-w-[210px]">
                           {member.email && (
                             <div className="flex items-center gap-1.5 text-[#2B201A]/80 truncate">
-                              <Mail className="w-3 h-3 text-[#FFAE08] shrink-0" />
+                              <Mail className="w-3 h-3 text-[#7F160C] shrink-0" />
                               <span className="truncate">{member.email}</span>
                             </div>
                           )}
                           {member.phone && (
                             <div className="flex items-center gap-1.5 text-[#2B201A]/80 truncate">
-                              <Phone className="w-3 h-3 text-[#FFAE08] shrink-0" />
+                              <Phone className="w-3 h-3 text-[#7F160C] shrink-0" />
                               <span className="truncate">{member.phone}</span>
                             </div>
                           )}
@@ -633,7 +633,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="flex items-center gap-1 text-xs text-[#2B201A]/70 max-w-[130px] truncate">
                           {member.city || member.state ? (
                             <>
-                              <MapPin className="w-3 h-3 text-[#FFAE08] shrink-0" />
+                              <MapPin className="w-3 h-3 text-[#7F160C] shrink-0" />
                               <span className="truncate">
                                 {[member.city, member.state].filter(Boolean).join(", ")}
                               </span>
@@ -716,7 +716,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                               e.stopPropagation();
                               handleOpenDetails(member);
                             }}
-                            className="p-1.5 rounded-lg text-[#2B201A]/70 hover:text-[#FFAE08] hover:bg-[#FAF3EA] transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-[#2B201A]/70 hover:text-[#7F160C] hover:bg-[#FAF3EA] transition-colors cursor-pointer"
                             title="View member passes, donations & history"
                           >
                             <Eye className="w-4 h-4" />
@@ -729,7 +729,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                               e.stopPropagation();
                               handleOpenEdit(member);
                             }}
-                            className="p-1.5 rounded-lg text-[#2B201A]/60 hover:text-[#FFAE08] hover:bg-[#FAF3EA] transition-colors cursor-pointer"
+                            className="p-1.5 rounded-lg text-[#2B201A]/60 hover:text-[#7F160C] hover:bg-[#FAF3EA] transition-colors cursor-pointer"
                             title="Edit member details"
                           >
                             <Edit2 className="w-4 h-4" />
@@ -783,7 +783,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="e.g. Ramesh Chandra Sharma"
-                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                 />
               </div>
 
@@ -797,7 +797,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="email@example.com"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
                 <div>
@@ -809,7 +809,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                     placeholder="+91 9876543210"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
               </div>
@@ -824,7 +824,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     onChange={(e) =>
                       setFormData({ ...formData, tier: e.target.value as MembershipTier })
                     }
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   >
                     <option value="BASIC">Basic (₹1,100 / yr)</option>
                     <option value="SILVER">Silver (₹5,100 / yr)</option>
@@ -841,7 +841,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     value={formData.role}
                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
                     placeholder="e.g. Devotee Member"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
               </div>
@@ -854,7 +854,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
                     placeholder="e.g. Gurugram"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
                 <div>
@@ -866,7 +866,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     value={formData.state}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     placeholder="e.g. Haryana"
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
               </div>
@@ -882,7 +882,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider bg-[#FFAE08] hover:bg-[#D45A0E] text-white rounded-lg shadow-sm cursor-pointer flex items-center gap-1.5"
+                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider bg-[#7F160C] hover:bg-[#D45A0E] text-white rounded-lg shadow-sm cursor-pointer flex items-center gap-1.5"
                 >
                   {isSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Save Member</span>
@@ -917,7 +917,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                  className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                 />
               </div>
 
@@ -930,7 +930,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
                 <div>
@@ -941,7 +941,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     type="tel"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
               </div>
@@ -956,7 +956,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     onChange={(e) =>
                       setFormData({ ...formData, tier: e.target.value as MembershipTier })
                     }
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   >
                     <option value="BASIC">Basic (₹1,100 / yr)</option>
                     <option value="SILVER">Silver (₹5,100 / yr)</option>
@@ -976,7 +976,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         status: e.target.value as "ACTIVE" | "INACTIVE" | "EXPIRED",
                       })
                     }
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   >
                     <option value="ACTIVE">Active</option>
                     <option value="INACTIVE">Inactive</option>
@@ -994,7 +994,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     type="text"
                     value={formData.role}
                     onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
                 <div>
@@ -1003,7 +1003,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     type="text"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#FFAE08]"
+                    className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   />
                 </div>
               </div>
@@ -1019,7 +1019,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider bg-[#FFAE08] hover:bg-[#D45A0E] text-white rounded-lg shadow-sm cursor-pointer flex items-center gap-1.5"
+                  className="px-5 py-2 text-xs font-bold uppercase tracking-wider bg-[#7F160C] hover:bg-[#D45A0E] text-white rounded-lg shadow-sm cursor-pointer flex items-center gap-1.5"
                 >
                   {isSubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                   <span>Save Changes</span>
@@ -1037,7 +1037,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
             {/* Modal Header */}
             <div className="bg-[#FAF6F0] px-5 sm:px-6 py-4 border-b border-[#E7D8C8] flex items-center justify-between gap-3 shrink-0">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FAF3EA] to-[#F1E5D5] border border-[#E7D8C8] text-[#FFAE08] flex items-center justify-center font-bold text-lg uppercase shrink-0 shadow-2xs">
+                <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#FAF3EA] to-[#F1E5D5] border border-[#E7D8C8] text-[#7F160C] flex items-center justify-center font-bold text-lg uppercase shrink-0 shadow-2xs">
                   {viewingMember.name.charAt(0)}
                 </div>
                 <div className="min-w-0">
@@ -1075,21 +1075,21 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
               {/* Member Contact & Location Strip */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 bg-[#FAF6F0]/60 p-3.5 rounded-2xl border border-[#E7D8C8]">
                 <div className="flex items-center gap-2 min-w-0 text-xs text-[#2B201A]">
-                  <Mail className="w-4 h-4 text-[#FFAE08] shrink-0" />
+                  <Mail className="w-4 h-4 text-[#7F160C] shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase font-bold text-[#2B201A]/50">Email</p>
                     <p className="truncate font-medium">{viewingMember.email || "Not provided"}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 min-w-0 text-xs text-[#2B201A]">
-                  <Phone className="w-4 h-4 text-[#FFAE08] shrink-0" />
+                  <Phone className="w-4 h-4 text-[#7F160C] shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase font-bold text-[#2B201A]/50">Phone</p>
                     <p className="truncate font-medium">{viewingMember.phone || "Not provided"}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 min-w-0 text-xs text-[#2B201A]">
-                  <MapPin className="w-4 h-4 text-[#FFAE08] shrink-0" />
+                  <MapPin className="w-4 h-4 text-[#7F160C] shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase font-bold text-[#2B201A]/50">Location</p>
                     <p className="truncate font-medium">
@@ -1099,7 +1099,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                   </div>
                 </div>
                 <div className="flex items-center gap-2 min-w-0 text-xs text-[#2B201A]">
-                  <Calendar className="w-4 h-4 text-[#FFAE08] shrink-0" />
+                  <Calendar className="w-4 h-4 text-[#7F160C] shrink-0" />
                   <div className="min-w-0">
                     <p className="text-[10px] uppercase font-bold text-[#2B201A]/50">Joined On</p>
                     <p className="truncate font-medium">
@@ -1116,7 +1116,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
               {/* Stats Overview */}
               {loadingDetails ? (
                 <div className="py-12 flex flex-col items-center justify-center text-[#2B201A]/60 space-y-2">
-                  <Loader2 className="w-8 h-8 text-[#FFAE08] animate-spin" />
+                  <Loader2 className="w-8 h-8 text-[#7F160C] animate-spin" />
                   <p className="text-xs font-semibold">Loading member seva & event history...</p>
                 </div>
               ) : memberDetailsData ? (
@@ -1126,7 +1126,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       <p className="text-[10px] font-bold text-amber-900/70 uppercase">
                         Lifetime Seva Given
                       </p>
-                      <p className="text-lg sm:text-xl font-bold text-[#FFAE08]">
+                      <p className="text-lg sm:text-xl font-bold text-[#7F160C]">
                         ₹
                         {(
                           (memberDetailsData.stats.totalContributedPaise || 0) / 100
@@ -1175,7 +1175,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       onClick={() => setHistoryTab("all")}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
                         historyTab === "all"
-                          ? "bg-[#FFAE08] text-white shadow-2xs"
+                          ? "bg-[#7F160C] text-white shadow-2xs"
                           : "text-[#2B201A]/70 hover:bg-[#FAF6F0]"
                       }`}
                     >
@@ -1192,7 +1192,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       onClick={() => setHistoryTab("events")}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                         historyTab === "events"
-                          ? "bg-[#FFAE08] text-white shadow-2xs"
+                          ? "bg-[#7F160C] text-white shadow-2xs"
                           : "text-[#2B201A]/70 hover:bg-[#FAF6F0]"
                       }`}
                     >
@@ -1205,7 +1205,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       onClick={() => setHistoryTab("donations")}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                         historyTab === "donations"
-                          ? "bg-[#FFAE08] text-white shadow-2xs"
+                          ? "bg-[#7F160C] text-white shadow-2xs"
                           : "text-[#2B201A]/70 hover:bg-[#FAF6F0]"
                       }`}
                     >
@@ -1218,7 +1218,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       onClick={() => setHistoryTab("memberships")}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                         historyTab === "memberships"
-                          ? "bg-[#FFAE08] text-white shadow-2xs"
+                          ? "bg-[#7F160C] text-white shadow-2xs"
                           : "text-[#2B201A]/70 hover:bg-[#FAF6F0]"
                       }`}
                     >
@@ -1233,7 +1233,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                       onClick={() => setHistoryTab("orders")}
                       className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap flex items-center gap-1.5 ${
                         historyTab === "orders"
-                          ? "bg-[#FFAE08] text-white shadow-2xs"
+                          ? "bg-[#7F160C] text-white shadow-2xs"
                           : "text-[#2B201A]/70 hover:bg-[#FAF6F0]"
                       }`}
                     >
@@ -1250,7 +1250,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="space-y-2">
                           {historyTab === "all" && (
                             <h4 className="text-xs font-bold text-[#2B201A]/80 uppercase tracking-wider flex items-center gap-1.5">
-                              <Ticket className="w-3.5 h-3.5 text-[#FFAE08]" />
+                              <Ticket className="w-3.5 h-3.5 text-[#7F160C]" />
                               <span>Event Passes ({memberDetailsData.history.eventPasses.length})</span>
                             </h4>
                           )}
@@ -1258,7 +1258,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                             {memberDetailsData.history.eventPasses.map((pass) => (
                               <div
                                 key={pass.donationId}
-                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#FFAE08]/40 transition-colors"
+                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#7F160C]/40 transition-colors"
                               >
                                 <div className="space-y-1.5 min-w-0">
                                   <div className="flex items-center gap-2 flex-wrap">
@@ -1283,7 +1283,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
 
                                   <div className="flex items-center gap-3 text-xs text-[#2B201A]/70 flex-wrap">
                                     <div className="flex items-center gap-1">
-                                      <Calendar className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                      <Calendar className="w-3.5 h-3.5 text-[#7F160C]" />
                                       <span>
                                         {new Date(pass.event.startDate).toLocaleDateString("en-IN", {
                                           day: "numeric",
@@ -1293,13 +1293,13 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                       </span>
                                     </div>
                                     <div className="flex items-center gap-1">
-                                      <MapPin className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                      <MapPin className="w-3.5 h-3.5 text-[#7F160C]" />
                                       <span className="truncate max-w-[200px]">
                                         {pass.event.location}
                                       </span>
                                     </div>
                                     <span className="text-[#2B201A]/40">•</span>
-                                    <span className="font-bold text-[#FFAE08]">
+                                    <span className="font-bold text-[#7F160C]">
                                       ₹{(pass.amountPaise / 100).toLocaleString("en-IN")}
                                     </span>
                                     <span className="text-[#2B201A]/40">•</span>
@@ -1314,7 +1314,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     href={pass.passUrl}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="px-3 py-1.5 rounded-lg bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
+                                    className="px-3 py-1.5 rounded-lg bg-[#7F160C] hover:bg-[#D45A0E] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
                                     <Ticket className="w-3.5 h-3.5" />
                                     <span>View Pass</span>
@@ -1326,7 +1326,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     download
                                     className="px-3 py-1.5 rounded-lg bg-white border border-[#E7D8C8] hover:bg-[#FAF6F0] text-[#2B201A] text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
-                                    <Download className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                    <Download className="w-3.5 h-3.5 text-[#7F160C]" />
                                     <span>PDF</span>
                                   </a>
                                 </div>
@@ -1342,7 +1342,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="space-y-2">
                           {historyTab === "all" && (
                             <h4 className="text-xs font-bold text-[#2B201A]/80 uppercase tracking-wider flex items-center gap-1.5">
-                              <Award className="w-3.5 h-3.5 text-[#FFAE08]" />
+                              <Award className="w-3.5 h-3.5 text-[#7F160C]" />
                               <span>
                                 General Donations ({memberDetailsData.history.generalDonations.length})
                               </span>
@@ -1352,7 +1352,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                             {memberDetailsData.history.generalDonations.map((don) => (
                               <div
                                 key={don.donationId}
-                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#FFAE08]/40 transition-colors"
+                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#7F160C]/40 transition-colors"
                               >
                                 <div className="space-y-1 min-w-0">
                                   <div className="flex items-center gap-2 flex-wrap">
@@ -1370,7 +1370,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-3 text-xs text-[#2B201A]/70 flex-wrap">
-                                    <span className="font-bold text-[#FFAE08]">
+                                    <span className="font-bold text-[#7F160C]">
                                       ₹{(don.amountPaise / 100).toLocaleString("en-IN")}
                                     </span>
                                     <span className="text-[#2B201A]/40">•</span>
@@ -1401,7 +1401,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     rel="noreferrer"
                                     className="px-3 py-1.5 rounded-lg bg-white border border-[#E7D8C8] hover:bg-[#FAF6F0] text-[#2B201A] text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
-                                    <FileText className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                    <FileText className="w-3.5 h-3.5 text-[#7F160C]" />
                                     <span>Certificate</span>
                                   </a>
                                   <a
@@ -1411,7 +1411,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     download
                                     className="px-3 py-1.5 rounded-lg bg-white border border-[#E7D8C8] hover:bg-[#FAF6F0] text-[#2B201A] text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
-                                    <Download className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                    <Download className="w-3.5 h-3.5 text-[#7F160C]" />
                                     <span>PDF</span>
                                   </a>
                                 </div>
@@ -1427,7 +1427,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="space-y-2">
                           {historyTab === "all" && (
                             <h4 className="text-xs font-bold text-[#2B201A]/80 uppercase tracking-wider flex items-center gap-1.5">
-                              <Shield className="w-3.5 h-3.5 text-[#FFAE08]" />
+                              <Shield className="w-3.5 h-3.5 text-[#7F160C]" />
                               <span>
                                 Membership Subscriptions (
                                 {memberDetailsData.history.membershipDonations.length})
@@ -1438,7 +1438,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                             {memberDetailsData.history.membershipDonations.map((mDon) => (
                               <div
                                 key={mDon.donationId}
-                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#FFAE08]/40 transition-colors"
+                                className="bg-[#FAF6F0]/40 border border-[#E7D8C8] rounded-2xl p-4 flex flex-col md:flex-row md:items-center justify-between gap-3 hover:border-[#7F160C]/40 transition-colors"
                               >
                                 <div className="space-y-1 min-w-0">
                                   <div className="flex items-center gap-2 flex-wrap">
@@ -1456,7 +1456,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-3 text-xs text-[#2B201A]/70 flex-wrap">
-                                    <span className="font-bold text-[#FFAE08]">
+                                    <span className="font-bold text-[#7F160C]">
                                       ₹{(mDon.amountPaise / 100).toLocaleString("en-IN")}
                                     </span>
                                     <span className="text-[#2B201A]/40">•</span>
@@ -1485,7 +1485,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     href={mDon.passUrl}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="px-3 py-1.5 rounded-lg bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
+                                    className="px-3 py-1.5 rounded-lg bg-[#7F160C] hover:bg-[#D45A0E] text-white text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
                                     <Ticket className="w-3.5 h-3.5" />
                                     <span>Devotee Pass</span>
@@ -1496,7 +1496,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     rel="noreferrer"
                                     className="px-3 py-1.5 rounded-lg bg-white border border-[#E7D8C8] hover:bg-[#FAF6F0] text-[#2B201A] text-xs font-bold flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
-                                    <FileText className="w-3.5 h-3.5 text-[#FFAE08]" />
+                                    <FileText className="w-3.5 h-3.5 text-[#7F160C]" />
                                     <span>Certificate</span>
                                   </a>
                                 </div>
@@ -1512,7 +1512,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="space-y-2">
                           {historyTab === "all" && (
                             <h4 className="text-xs font-bold text-[#2B201A]/80 uppercase tracking-wider flex items-center gap-1.5">
-                              <Package className="w-3.5 h-3.5 text-[#FFAE08]" />
+                              <Package className="w-3.5 h-3.5 text-[#7F160C]" />
                               <span>Store Orders ({memberDetailsData.history.orders.length})</span>
                             </h4>
                           )}
@@ -1536,7 +1536,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                                     </span>
                                   </div>
                                   <div className="flex items-center gap-2">
-                                    <span className="text-xs font-bold text-[#FFAE08]">
+                                    <span className="text-xs font-bold text-[#7F160C]">
                                       ₹{ord.totalAmount.toLocaleString("en-IN")}
                                     </span>
                                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-stone-100 text-stone-700 border border-stone-200">
@@ -1594,7 +1594,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                 }}
                 className="px-3.5 py-1.5 rounded-xl border border-[#E7D8C8] bg-white hover:bg-[#FAF6F0] text-[#2B201A] text-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 shadow-2xs"
               >
-                <Edit2 className="w-3.5 h-3.5 text-[#FFAE08]" />
+                <Edit2 className="w-3.5 h-3.5 text-[#7F160C]" />
                 <span>Edit Member Details</span>
               </button>
 

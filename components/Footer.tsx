@@ -33,7 +33,7 @@ export default function Footer() {
                 <h3 className="font-sans text-lg xl:text-xl font-bold text-[#2B201A] leading-tight">
                   {lang === "hi" ? "अग्रवाल वैश्य" : "AGGARWAL VAISH"}
                 </h3>
-                <p className="text-[10.5px] xl:text-[11.5px] font-extrabold tracking-[0.14em] text-[#FFAE08] uppercase">
+                <p className="text-[10.5px] xl:text-[11.5px] font-extrabold tracking-[0.14em] text-[#7F160C] uppercase">
                   {lang === "hi" ? "विकास संगठन" : "VIKAS SANGATHAN"}
                 </p>
               </div>
@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="pt-2">
               <button
                 onClick={() => openDonateModal("General Donation")}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FFAE08] hover:bg-[#E59C00] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#7F160C] hover:bg-[#69120A] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm transition-all"
               >
                 <Heart className="w-4 h-4 fill-current text-white" />
                 <span>{lang === "hi" ? "सहयोग एवं दान" : "Support Our Cause"}</span>
@@ -56,37 +56,37 @@ export default function Footer() {
 
           {/* Column 1: Links */}
           <div className="space-y-3">
-            <h4 className="font-sans text-lg font-bold text-[#FFAE08] border-b border-[#E7D8C8] pb-1.5 inline-block">
+            <h4 className="font-sans text-lg font-bold text-[#7F160C] border-b border-[#E7D8C8] pb-1.5 inline-block">
               {lang === "hi" ? "त्वरित लिंक" : "Quick Links"}
             </h4>
             <ul className="space-y-2.5 text-sm font-semibold">
               <li>
-                <Link href="#" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "मुख्य पृष्ठ" : "Home"}
                 </Link>
               </li>
               <li>
-                <Link href="#network" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#network" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "हमारे बारे में" : "About Us"}
                 </Link>
               </li>
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "पंच संकल्प" : "Panch Sankalp"}
                 </Link>
               </li>
               <li>
-                <Link href="#network" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#network" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "सदस्यता" : "Membership"}
                 </Link>
               </li>
               <li>
-                <Link href="#gallery" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#gallery" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "गैलरी" : "Gallery & Moments"}
                 </Link>
               </li>
               <li>
-                <Link href="#network" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#network" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "संपर्क करें" : "Contact Us"}
                 </Link>
               </li>
@@ -95,32 +95,32 @@ export default function Footer() {
 
           {/* Column 2: Our Work */}
           <div className="space-y-3">
-            <h4 className="font-editorial text-lg font-bold text-[#FFAE08] border-b border-[#E7D8C8] pb-1.5 inline-block">
+            <h4 className="font-editorial text-lg font-bold text-[#7F160C] border-b border-[#E7D8C8] pb-1.5 inline-block">
               {lang === "hi" ? "पंच संकल्प" : "Panch Sankalp"}
             </h4>
             <ul className="space-y-2.5 text-sm font-semibold">
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "सामाजिक सहभागिता" : "Social Participation"}
                 </Link>
               </li>
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "महिला सशक्तिकरण" : "Women Empowerment"}
                 </Link>
               </li>
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "युवा नेतृत्व" : "Youth Leadership"}
                 </Link>
               </li>
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "राजनीतिक सहभागिता" : "Political Participation"}
                 </Link>
               </li>
               <li>
-                <Link href="#sankalp" className="hover:text-[#FFAE08] transition-colors">
+                <Link href="#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "संगठित समाज" : "Organized Community"}
                 </Link>
               </li>
@@ -129,26 +129,26 @@ export default function Footer() {
 
           {/* Column 3: Contact */}
           <div className="space-y-3">
-            <h4 className="font-editorial text-lg font-bold text-[#FFAE08] border-b border-[#E7D8C8] pb-1.5 inline-block">
+            <h4 className="font-editorial text-lg font-bold text-[#7F160C] border-b border-[#E7D8C8] pb-1.5 inline-block">
               {lang === "hi" ? "संपर्क विवरण" : "Contact Details"}
             </h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#B8893E] shrink-0 mt-0.5" />
                 <span className="text-[#2B201A]/85 leading-snug">
-                  Adarsh College Market, Bhiwani - Hansi Rd, Bhiwani, Haryana 127021, India
+                  Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#B8893E] shrink-0" />
-                <a href="tel:+919416055000" className="text-[#2B201A]/85 hover:text-[#FFAE08] font-semibold">
-                  +91 94160 55000
+                <a href="tel:+919812012345" className="text-[#2B201A]/85 hover:text-[#7F160C] font-semibold">
+                  +91 98120 12345
                 </a>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#B8893E] shrink-0" />
-                <a href="mailto:avshry@gmail.com" className="text-[#2B201A]/85 hover:text-[#FFAE08] font-semibold text-xs sm:text-sm whitespace-nowrap">
-                  avshry@gmail.com
+                <a href="mailto:info@aggarwalvaishvikas.org" className="text-[#2B201A]/85 hover:text-[#7F160C] font-semibold text-xs sm:text-sm whitespace-nowrap">
+                  info@aggarwalvaishvikas.org
                 </a>
               </li>
             </ul>
@@ -174,17 +174,17 @@ export default function Footer() {
                       : "शिपिंग नीति";
               return (
                 <React.Fragment key={p.href}>
-                  <Link href="#" className="hover:text-[#FFAE08] transition-colors">
+                  <Link href="#" className="hover:text-[#7F160C] transition-colors">
                     {lang === "hi" ? labelHi : p.label}
                   </Link>
                   <span>•</span>
                 </React.Fragment>
               );
             })}
-            <span>{lang === "hi" ? "पंजीकरण: AVS/HRY/2009" : "Reg. No: AVS/HRY/2009"}</span>
+            <span>{lang === "hi" ? "पंजीकरण: AVVS/HRY/2021/894" : "Reg. No: AVVS/HRY/2021/894"}</span>
             <button
               onClick={scrollToTop}
-              className="ml-1 p-2.5 bg-[#FFF9F2] hover:bg-[#FFAE08] hover:text-white rounded-xl border border-[#E7D8C8] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer"
+              className="ml-1 p-2.5 bg-[#FFF9F2] hover:bg-[#7F160C] hover:text-white rounded-xl border border-[#E7D8C8] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer"
               aria-label="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />

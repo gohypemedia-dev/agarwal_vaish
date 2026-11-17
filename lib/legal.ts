@@ -3,11 +3,11 @@
 
 export const LEGAL = {
   trustName: "Aggarwal Vaish Vikas Sangathan",
-  registration: "AVVS/HRY/2009",
-  address: "P6/10, 4th Floor, DLF Phase 2, Gurugram, Haryana 122008, India",
-  email: "avshry@gmail.com",
-  phone: "+91 88606 65000",
-  phoneHref: "tel:+918860665000",
+  registration: "AVVS/HRY/2021/894",
+  address: "Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India",
+  email: "info@aggarwalvaishvikas.org",
+  phone: "+91 98120 12345",
+  phoneHref: "tel:+919812012345",
   lastUpdated: "21 October 2026",
 
   // Required by the Consumer Protection (E-Commerce) Rules, 2020.

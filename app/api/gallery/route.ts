@@ -1,69 +1,15 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/server/prisma";
 import { galleryData } from "@/data/gallery";
 
 export const dynamic = "force-dynamic";
 
-// Disable edge cache for instant updates during review
 const CACHE_HEADERS = {
   "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
 };
 
 export async function GET() {
-  try {
-    const items = await prisma.galleryItem.findMany({
-      where: { isActive: true },
-      orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
-    });
-
-    if (items.length > 0) {
-      const legacyKeywords = [
-        "sadhvi",
-        "vrindavan",
-        "gurukul",
-        "katha",
-        "gopashtami",
-        "hero-split",
-        "design-",
-        "banner-square",
-        "hero-right",
-      ];
-      const valid = items.filter((item) => {
-        const text = `${item.title || ""} ${item.titleHi || ""} ${item.event || ""} ${item.src || ""}`.toLowerCase();
-        return !legacyKeywords.some((k) => text.includes(k));
-      });
-
-      if (valid.length > 0) {
-        const formatted = valid.map((item) => ({
-          id: item.id,
-          type: item.type === "PHOTO" ? "photo" : "video",
-          title: item.title,
-          titleHi: item.titleHi ?? undefined,
-          event: item.event ?? undefined,
-          eventHi: item.eventHi ?? undefined,
-          src: item.src,
-          thumbnail: item.thumbnail,
-          alt: item.alt,
-          videoProvider: (item.videoProvider as "youtube" | "vimeo" | "mp4" | null) ?? undefined,
-          focalPoint: item.focalPoint ?? undefined,
-          aspectRatio: item.aspectRatio ?? undefined,
-          displayOrder: item.displayOrder,
-          date: item.date ?? undefined,
-        }));
-        return NextResponse.json(formatted, {
-          headers: CACHE_HEADERS,
-        });
-      }
-    }
-
-    return NextResponse.json(galleryData, {
-      headers: CACHE_HEADERS,
-    });
-  } catch (error) {
-    console.error("Failed to load gallery items from database, returning code galleryData:", error);
-    return NextResponse.json(galleryData, {
-      status: 200,
-      headers: CACHE_HEADERS,
-    });
-  }
+  return NextResponse.json(galleryData, {
+    status: 200,
+    headers: CACHE_HEADERS,
+  });
 }

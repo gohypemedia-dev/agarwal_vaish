@@ -17,8 +17,8 @@ export default function TermsPage() {
         <>
           These terms apply when you use this website, create an account, donate, become a member or order books from{" "}
           {LEGAL.trustName} (Reg. No. {LEGAL.registration}), {LEGAL.address}. By using the website you agree to these
-          terms, our <Link href="/privacy-policy" className="text-[#FFAE08] underline">Privacy Policy</Link> and our{" "}
-          <Link href="/refund-policy" className="text-[#FFAE08] underline">Refund &amp; Cancellation Policy</Link>.
+          terms, our <Link href="/privacy-policy" className="text-[#7F160C] underline">Privacy Policy</Link> and our{" "}
+          <Link href="/refund-policy" className="text-[#7F160C] underline">Refund &amp; Cancellation Policy</Link>.
         </>
       }
     >

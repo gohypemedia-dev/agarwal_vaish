@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useEmblaCarousel from "embla-carousel-react";
+// import useEmblaCarousel from "embla-carousel-react";
 import { Play } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import { galleryData, GalleryItem } from "@/data/gallery";
@@ -56,7 +56,7 @@ function GalleryCarouselTile({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       aria-label={`${lang === "hi" ? "तस्वीर देखें" : "View photo"}: ${title}`}
-      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/40 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(255,174,8,0.25)] hover:border-[#FFAE08] transition-all duration-300 block cursor-pointer focus-visible:ring-2 focus-visible:ring-[#FFAE08] focus-visible:outline-none"
+      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/40 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(127,22,12,0.25)] hover:border-[#7F160C] transition-all duration-300 block cursor-pointer focus-visible:ring-2 focus-visible:ring-[#7F160C] focus-visible:outline-none"
     >
       {isVideo ? (
         <>
@@ -73,13 +73,13 @@ function GalleryCarouselTile({
           {/* Ambient overlay */}
           <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-300 pointer-events-none" />
 
-          {/* Centered Play Button (fades out when video plays on hover) */}
+          {/* Centered Play Button */}
           <div
             className={`absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-300 ${
               isPlaying ? "opacity-0 scale-75" : "opacity-100 scale-100"
             }`}
           >
-            <div className="w-12 h-12 rounded-full bg-[#FFAE08]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#FFAE08] transition-transform duration-300">
+            <div className="w-12 h-12 rounded-full bg-[#7F160C]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#7F160C] transition-transform duration-300">
               <Play className="w-5 h-5 fill-current ml-0.5" />
             </div>
           </div>
@@ -110,37 +110,27 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   );
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Fetch live gallery items with cache-busting and graphics-filter safeguard
+  // Fetch live gallery items
   useEffect(() => {
-    fetch("/api/gallery?v=avs-photos-v2")
+    fetch("/api/gallery?v=avs-photos-v3")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          const filtered = data.filter(
-            (item: GalleryItem) =>
-              !item.src.includes("design-") &&
-              !item.src.includes("banner-square") &&
-              !item.thumbnail.includes("design-")
-          );
-          if (filtered.length > 0) {
-            setItems(filtered);
-          }
+          setItems(data.slice(0, 4));
         }
       })
       .catch((err) => console.warn("Could not fetch live gallery items:", err));
   }, []);
 
-  // Curate 10 top-quality landscape photos and videos for the carousel
-  const carouselItems = useMemo(() => {
-    return [...items]
-      .sort((a, b) => a.displayOrder - b.displayOrder)
-      .slice(0, 10);
+  // Exactly 4 items for static showcase
+  const displayItems = useMemo(() => {
+    return [...items].slice(0, 4);
   }, [items]);
 
-  // Embla Carousel Setup (4 cards per view on desktop, matching reference design)
+  /* 
+  // Carousel and Autoplay commented out as requested
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -168,14 +158,14 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
-  // Autoplay slider every 3 SECONDS (3000ms) when not hovered
   useEffect(() => {
-    if (!emblaApi || isHovered) return;
+    if (!emblaApi) return;
     const interval = setInterval(() => {
       emblaApi.scrollNext();
     }, 3000);
     return () => clearInterval(interval);
-  }, [emblaApi, isHovered]);
+  }, [emblaApi]);
+  */
 
   // Open photo/video in full lightbox
   const handleOpenPhoto = (item: GalleryItem, e: React.MouseEvent<HTMLElement>) => {
@@ -190,97 +180,80 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   };
 
   const currentIndex = selectedItem
-    ? carouselItems.findIndex((i) => i.id === selectedItem.id)
+    ? displayItems.findIndex((i) => i.id === selectedItem.id)
     : -1;
 
   const handlePrevItem = () => {
-    if (carouselItems.length === 0) return;
-    const prevIdx = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
-    setSelectedItem(carouselItems[prevIdx]);
+    if (displayItems.length === 0) return;
+    const prevIdx = (currentIndex - 1 + displayItems.length) % displayItems.length;
+    setSelectedItem(displayItems[prevIdx]);
   };
 
   const handleNextItem = () => {
-    if (carouselItems.length === 0) return;
-    const nextIdx = (currentIndex + 1) % carouselItems.length;
-    setSelectedItem(carouselItems[nextIdx]);
+    if (displayItems.length === 0) return;
+    const nextIdx = (currentIndex + 1) % displayItems.length;
+    setSelectedItem(displayItems[nextIdx]);
   };
 
   return (
     <section
       id="gallery"
-      className="py-20 sm:py-24 lg:py-32 bg-[#FFFDF9] border-t border-[#E8DFD3] scroll-mt-20 relative overflow-hidden"
+      className="py-16 sm:py-20 lg:py-24 bg-[#FFFDF9] border-t border-[#E8DFD3] scroll-mt-20 relative overflow-hidden"
     >
-      <div
-        className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <div className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* ==================================================================== */}
         {/* SECTION HEADER: Gallery with line-dot-line divider                    */}
         {/* ==================================================================== */}
-        <div className="flex flex-col items-center justify-center mb-10 sm:mb-12 text-center">
+        <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 text-center">
           <TextReveal
             as="h2"
-            className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#FFAE08] tracking-wider whitespace-nowrap px-2"
+            className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#7F160C] tracking-wider whitespace-nowrap px-2"
             text={lang === "hi" ? "गैलरी" : "Gallery"}
           />
           <HeadingDivider className="mt-2.5" />
         </div>
 
         {/* ==================================================================== */}
-        {/* 4 LANDSCAPE PHOTOS PER VIEW CAROUSEL (Matching avsharyana.com)        */}
+        {/* 4 IMAGES STATIC GRID (Scroll & Carousel commented out)                */}
         {/* ==================================================================== */}
-        <div className="relative overflow-hidden" ref={emblaRef}>
-          <div className="flex -ml-3 sm:-ml-4 md:-ml-5 touch-pan-y">
-            {carouselItems.map((item) => {
-              const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {displayItems.map((item) => {
+            const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
 
-              return (
-                <div
-                  key={item.id}
-                  className="flex-[0_0_88%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-3 sm:pl-4 md:pl-5 min-w-0"
-                >
-                  <GalleryCarouselTile
-                    item={item}
-                    title={title}
-                    lang={lang}
-                    onOpen={(e) => handleOpenPhoto(item, e)}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ==================================================================== */}
-        {/* CAROUSEL PAGINATION DOTS: ○ ○ ○ ○ ○ ○ ● ○ ○ (Matching Picture 2)      */}
-        {/* ==================================================================== */}
-        <div className="flex items-center justify-center gap-2 mt-8 sm:mt-9">
-          {carouselItems.map((_, index) => {
-            const isActive = index === selectedIndex;
             return (
-              <button
-                key={index}
-                type="button"
-                onClick={() => scrollTo(index)}
-                aria-label={`Go to slide ${index + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  isActive
-                    ? "w-2.5 h-2.5 sm:w-3 sm:h-3 bg-[#1E1612] scale-110 shadow-xs"
-                    : "w-2 h-2 sm:w-2.5 sm:h-2.5 bg-transparent border-[1.5px] border-[#8C6B3E]/50 hover:border-[#FFAE08] hover:scale-110"
-                }`}
-              />
+              <div key={item.id} className="w-full">
+                <GalleryCarouselTile
+                  item={item}
+                  title={title}
+                  lang={lang}
+                  onOpen={(e) => handleOpenPhoto(item, e)}
+                />
+              </div>
             );
           })}
         </div>
 
         {/* ==================================================================== */}
-        {/* VIEW ALL BUTTON: [ View All ] (Matching Picture 2)                   */}
+        {/* CAROUSEL PAGINATION DOTS (Commented out)                              */}
         {/* ==================================================================== */}
-        <div className="text-center mt-7 sm:mt-8">
+        {/*
+        <div className="flex items-center justify-center gap-2 mt-8 sm:mt-9">
+          {displayItems.map((_, index) => (
+            <span
+              key={index}
+              className="w-2.5 h-2.5 rounded-full bg-[#1E1612]"
+            />
+          ))}
+        </div>
+        */}
+
+        {/* ==================================================================== */}
+        {/* VIEW ALL BUTTON                                                      */}
+        {/* ==================================================================== */}
+        <div className="text-center mt-8 sm:mt-10">
           <Link
             href="#gallery"
-            className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <span>{lang === "hi" ? "सभी देखें" : "View All"}</span>
           </Link>
@@ -291,7 +264,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
       <GalleryModal
         isOpen={isModalOpen}
         item={selectedItem}
-        items={carouselItems}
+        items={displayItems}
         currentIndex={currentIndex}
         onClose={handleCloseModal}
         onPrev={handlePrevItem}

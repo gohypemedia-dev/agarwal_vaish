@@ -97,7 +97,7 @@ export default function BooksPage() {
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                   priority
                 />
-                <div className="absolute top-4 left-4 bg-[#FFAE08] text-white text-xs font-bold px-3 py-1 rounded-full shadow-warm-sm z-10">
+                <div className="absolute top-4 left-4 bg-[#7F160C] text-white text-xs font-bold px-3 py-1 rounded-full shadow-warm-sm z-10">
                   {lang === "hi" ? "आधिकारिक प्रकाशन" : "OFFICIAL PUBLICATION"}
                 </div>
               </div>
@@ -109,7 +109,7 @@ export default function BooksPage() {
                 <p className="text-xs font-bold text-[#B8893E] uppercase tracking-widest">
                   {lang === "hi" ? "कृषि ज्ञान श्रृंखला" : "AGRICULTURAL KNOWLEDGE SERIES"}
                 </p>
-                <TextReveal as="h1" className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-bold text-[#FFAE08] leading-tight">
+                <TextReveal as="h1" className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-bold text-[#7F160C] leading-tight">
                   {lang === "hi" ? product.titleHi : product.title}
                 </TextReveal>
                 <p className="text-sm text-[#2B201A]/70 font-medium">
@@ -121,7 +121,7 @@ export default function BooksPage() {
 
               {/* Price */}
               <div className="py-3 border-y border-[#E7D8C8] flex flex-wrap items-baseline gap-3">
-                <span className="font-editorial text-4xl font-bold text-[#FFAE08]">
+                <span className="font-editorial text-4xl font-bold text-[#7F160C]">
                   ₹{product.price.toFixed(2)}
                 </span>
                 <span className="text-sm font-semibold text-[#2B201A]/60">INR</span>
@@ -145,14 +145,14 @@ export default function BooksPage() {
                   <div className="inline-flex items-center border border-[#E7D8C8] bg-[#FFF9F2] rounded-xl p-1 shadow-warm-sm">
                     <button
                       onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                      className="p-2 text-[#2B201A] hover:text-[#FFAE08] min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      className="p-2 text-[#2B201A] hover:text-[#7F160C] min-h-[44px] min-w-[44px] flex items-center justify-center"
                     >
                       <Minus className="w-4 h-4" />
                     </button>
                     <span className="px-4 text-sm font-bold">{quantity}</span>
                     <button
                       onClick={() => setQuantity((q) => q + 1)}
-                      className="p-2 text-[#2B201A] hover:text-[#FFAE08] min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      className="p-2 text-[#2B201A] hover:text-[#7F160C] min-h-[44px] min-w-[44px] flex items-center justify-center"
                     >
                       <Plus className="w-4 h-4" />
                     </button>
@@ -167,7 +167,7 @@ export default function BooksPage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <button
                   onClick={handleAddToCart}
-                  className="btn-outline w-full border-2 border-[#FFAE08] text-[#FFAE08]"
+                  className="btn-outline w-full border-2 border-[#7F160C] text-[#7F160C]"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>
@@ -202,10 +202,10 @@ export default function BooksPage() {
       <section className="section-py">
         <div className="page-container">
           <SectionReveal className="text-center max-w-2xl mx-auto section-header space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#FFAE08]">
+            <p className="text-xs font-bold uppercase tracking-widest text-[#7F160C]">
               {lang === "hi" ? "यह पुस्तक क्यों पढ़ें?" : "WHY READ THIS GUIDE?"}
             </p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#FFAE08]">
+            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
               {lang === "hi" ? "पुस्तक की मुख्य विशेषताएँ" : "Product Highlights & Value"}
             </TextReveal>
             <HeadingDivider className="my-1.5" />

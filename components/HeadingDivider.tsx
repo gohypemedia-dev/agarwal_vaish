@@ -18,9 +18,9 @@ export default function HeadingDivider({ align = "center", className = "" }: Hea
       className={`flex items-center ${justifyClass} gap-2.5 py-1.5 ${className}`}
       aria-hidden="true"
     >
-      <span className="w-10 sm:w-14 h-[2.5px] bg-[#FFAE08] rounded-full" />
-      <span className="w-2.5 h-2.5 rounded-full bg-[#FFAE08] shrink-0" />
-      <span className="w-10 sm:w-14 h-[2.5px] bg-[#FFAE08] rounded-full" />
+      <span className="w-10 sm:w-14 h-[2.5px] bg-[#7F160C] rounded-full" />
+      <span className="w-2.5 h-2.5 rounded-full bg-[#7F160C] shrink-0" />
+      <span className="w-10 sm:w-14 h-[2.5px] bg-[#7F160C] rounded-full" />
     </div>
   );
 }

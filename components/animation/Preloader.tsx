@@ -81,7 +81,7 @@ export default function Preloader({
               ease: [0.76, 0, 0.24, 1], // Modern luxury curtain easing curve
             },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#FFAE08] text-white select-none pointer-events-auto overflow-hidden"
+          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#7F160C] text-white select-none pointer-events-auto overflow-hidden"
         >
           {/* Subtle Ambient Radial Glow */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] pointer-events-none" />
@@ -168,7 +168,7 @@ export default function Preloader({
                 ease: [0.76, 0, 0.24, 1],
               },
             }}
-            className="absolute inset-0 bg-[#FFAE08] z-[-1] pointer-events-none"
+            className="absolute inset-0 bg-[#7F160C] z-[-1] pointer-events-none"
           />
         </motion.div>
       )}

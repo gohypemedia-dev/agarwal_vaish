@@ -15,8 +15,8 @@ const defaultAVSEvents = [
     endDate: "2026-10-11T17:00:00Z",
     timeText: "10:00 AM – 5:00 PM IST",
     location: "Bhiwani & District Centres across Haryana",
-    address: "Aggarwal Vaish Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
-    contactPhone: "+91 94160 55000",
+    address: "Aggarwal Vaish Vikas Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
+    contactPhone: "+91 98120 12345",
     isPublished: true,
   },
   {
@@ -31,8 +31,8 @@ const defaultAVSEvents = [
     endDate: "2026-11-28T16:00:00Z",
     timeText: "9:30 AM – 4:30 PM IST",
     location: "Auditorium, Hisar / Gurugram",
-    address: "AVS Youth Convention Centre, Haryana",
-    contactPhone: "+91 94160 55000",
+    address: "AVVS Youth Convention Centre, Haryana",
+    contactPhone: "+91 98120 12345",
     isPublished: true,
   },
   {
@@ -47,8 +47,8 @@ const defaultAVSEvents = [
     endDate: "2027-01-24T12:00:00Z",
     timeText: "10:30 AM – 3:30 PM IST",
     location: "State Central Hall, Bhiwani / Rohtak",
-    address: "Aggarwal Vaish Central Complex, Haryana",
-    contactPhone: "+91 94160 55000",
+    address: "Aggarwal Vaish Vikas Central Complex, Haryana",
+    contactPhone: "+91 98120 12345",
     isPublished: true,
   },
 ];

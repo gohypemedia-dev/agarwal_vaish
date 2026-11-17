@@ -16,10 +16,10 @@ import { env } from "./env";
 // email after a payment is approved, and downloadable from /certificate/[donationId].
 
 export const TRUST = {
-  name: "Aggarwal Vaish Samaj Haryana",
-  address: "P6/10, 4th Floor, DLF Phase 2, Gurugram, Haryana 122008, India",
-  phone: "+91 88606 65000",
-  email: "avshry@gmail.com",
+  name: "Aggarwal Vaish Vikas Sangathan",
+  address: "Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India",
+  phone: "+91 98120 12345",
+  email: "info@aggarwalvaishvikas.org",
 };
 
 // The public certificate link carries this key so certificates can't be looked up by guessing IDs.

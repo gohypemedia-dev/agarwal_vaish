@@ -111,7 +111,7 @@ function confirmationEmail(
 </td></tr>
 <tr><td style="padding:16px 20px">
   <div style="text-align:center;margin-bottom:12px">
-    <span style="display:inline-block;background:#FFAE08;color:#ffffff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:4px;text-transform:uppercase">${escapeHtml(event.title)}</span>
+    <span style="display:inline-block;background:#7F160C;color:#ffffff;font-size:11px;font-weight:bold;padding:3px 10px;border-radius:4px;text-transform:uppercase">${escapeHtml(event.title)}</span>
     <h2 style="margin:8px 0 2px;font-size:18px;color:#2B201A">${escapeHtml(d.donorName)}</h2>
     <p style="margin:0;font-size:11px;color:#2F5A43;font-weight:bold">PASS ID: PASS-${escapeHtml(d.donationId)} · STATUS: VERIFIED</p>
   </div>
@@ -143,7 +143,7 @@ ${rows.map(([k, v]) => `<tr><td style="padding:10px 14px;font-size:13px;color:#6
 </td></tr>
 <tr><td align="center" style="padding:20px 28px 4px">
 <p style="margin:0 0 14px;font-size:15px;line-height:1.6">${doc.attached ? `Your <strong>${copy.docName}</strong> is attached to this email as a PDF.` : `Your <strong>${copy.docName}</strong> is ready.`}</p>
-<a href="${escapeHtml(doc.url)}" style="display:inline-block;background:${event ? "#FFAE08" : "#2F5A43"};color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:11px 24px;border-radius:8px">${copy.button}</a>
+<a href="${escapeHtml(doc.url)}" style="display:inline-block;background:${event ? "#7F160C" : "#2F5A43"};color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:11px 24px;border-radius:8px">${copy.button}</a>
 </td></tr>
 <tr><td style="padding:16px 28px 28px">
 <p style="margin:0 0 12px;font-size:15px;line-height:1.6">We sincerely appreciate your support.</p>
@@ -385,7 +385,7 @@ export async function sendOrderRefundEmail(order: Order, stage: "initiated" | "c
 ${rows.map(([k, v]) => `<tr><td style="padding:10px 14px;font-size:13px;color:#6B5B4E">${k}</td><td style="padding:10px 14px;font-size:14px;font-weight:bold;text-align:right">${escapeHtml(v)}</td></tr>`).join("")}
 </table>
 </td></tr>
-<tr><td style="padding:16px 28px 28px"><a href="${accountUrl}" style="display:inline-block;background:#FFAE08;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:10px 18px;border-radius:8px">View my orders</a></td></tr>
+<tr><td style="padding:16px 28px 28px"><a href="${accountUrl}" style="display:inline-block;background:#7F160C;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:10px 18px;border-radius:8px">View my orders</a></td></tr>
 </table></td></tr></table></body></html>`;
 
   try {
