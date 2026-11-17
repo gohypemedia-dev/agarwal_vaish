@@ -136,20 +136,20 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#B8893E] shrink-0 mt-0.5" />
                 <span className="text-[#2B201A]/85 leading-snug">
-                  Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India
+                  {lang === "hi" ? "कार्यालय पता, हरियाणा, भारत" : "Office Address, Haryana, India"}
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#B8893E] shrink-0" />
-                <a href="tel:+919812012345" className="text-[#2B201A]/85 hover:text-[#7F160C] font-semibold">
-                  +91 98120 12345
-                </a>
+                <span className="text-[#2B201A]/85 font-semibold">
+                  +91 XXXXX XXXXX
+                </span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#B8893E] shrink-0" />
-                <a href="mailto:info@aggarwalvaishvikas.org" className="text-[#2B201A]/85 hover:text-[#7F160C] font-semibold text-xs sm:text-sm whitespace-nowrap">
-                  info@aggarwalvaishvikas.org
-                </a>
+                <span className="text-[#2B201A]/85 font-semibold text-xs sm:text-sm whitespace-nowrap">
+                  info@domain.com
+                </span>
               </li>
             </ul>
           </div>
@@ -181,7 +181,7 @@ export default function Footer() {
                 </React.Fragment>
               );
             })}
-            <span>{lang === "hi" ? "पंजीकरण: AVVS/HRY/2021/894" : "Reg. No: AVVS/HRY/2021/894"}</span>
+            <span>{lang === "hi" ? "पंजीकरण: [पंजीकरण संख्या]" : "Reg. No: [Registration Number]"}</span>
             <button
               onClick={scrollToTop}
               className="ml-1 p-2.5 bg-[#FFF9F2] hover:bg-[#7F160C] hover:text-white rounded-xl border border-[#E7D8C8] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer"

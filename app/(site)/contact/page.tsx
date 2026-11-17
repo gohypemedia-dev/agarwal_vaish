@@ -287,7 +287,7 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "केंद्रीय कार्यालय पता" : "Head Office Address"}</h4>
                       <p className="text-[#2B201A]/85 text-xs leading-relaxed mt-0.5">
-                        Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India
+                        {lang === "hi" ? "कार्यालय पता, हरियाणा, भारत" : "Office Address, Haryana, India"}
                       </p>
                     </div>
                   </li>
@@ -298,9 +298,9 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "फ़ोन / हेल्पलाइन" : "Phone / Helpline"}</h4>
-                      <a href="tel:+919812012345" className="text-xs text-[#7F160C] hover:underline font-semibold">
-                        +91 98120 12345
-                      </a>
+                      <span className="text-xs text-[#7F160C] font-semibold">
+                        +91 XXXXX XXXXX
+                      </span>
                     </div>
                   </li>
 
@@ -310,9 +310,9 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "ईमेल पता" : "Official Email"}</h4>
-                      <a href="mailto:info@aggarwalvaishvikas.org" className="text-xs text-[#7F160C] hover:underline font-semibold">
-                        info@aggarwalvaishvikas.org
-                      </a>
+                      <span className="text-xs text-[#7F160C] font-semibold">
+                        info@domain.com
+                      </span>
                     </div>
                   </li>
 
@@ -334,12 +334,12 @@ export default function ContactPage() {
               <div className="card-warm bg-[#FFF9F2] text-center space-y-3">
                 <MapPin className="w-8 h-8 text-[#B8893E] mx-auto animate-bounce" />
                 <h4 className="font-editorial text-xl font-bold text-[#2B201A]">
-                  {lang === "hi" ? "केंद्रीय कार्यालय, गुरुग्राम (हरियाणा)" : "Central Office, Gurugram (Haryana)"}
+                  {lang === "hi" ? "केंद्रीय कार्यालय (हरियाणा)" : "Central Office (Haryana)"}
                 </h4>
                 <p className="text-xs text-[#2B201A]/75 max-w-xs mx-auto">
                   {lang === "hi"
-                    ? "अग्रवाल वैश्य विकास भवन, अग्रसेन चौक के पास, सेक्टर 14, गुरुग्राम। समाज बंधुओं का सदैव हार्दिक स्वागत है।"
-                    : "Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram. Devoted members and patrons are always welcome."}
+                    ? "कार्यालय पता, हरियाणा। समाज बंधुओं का सदैव हार्दिक स्वागत है।"
+                    : "Office Address, Haryana, India. Devoted members and patrons are always welcome."}
                 </p>
               </div>
             </SectionReveal>

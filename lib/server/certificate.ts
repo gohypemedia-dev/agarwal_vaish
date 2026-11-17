@@ -17,9 +17,9 @@ import { env } from "./env";
 
 export const TRUST = {
   name: "Aggarwal Vaish Vikas Sangathan",
-  address: "Aggarwal Vaish Vikas Bhawan, Near Agrasen Chowk, Sector 14, Gurugram, Haryana 122001, India",
-  phone: "+91 98120 12345",
-  email: "info@aggarwalvaishvikas.org",
+  address: "Office Address, Haryana, India",
+  phone: "+91 XXXXX XXXXX",
+  email: "info@domain.com",
 };
 
 // The public certificate link carries this key so certificates can't be looked up by guessing IDs.

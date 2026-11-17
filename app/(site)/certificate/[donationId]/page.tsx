@@ -34,7 +34,7 @@ export default async function CertificatePage({
     return (
       <Notice icon={<FileX2 className="w-12 h-12 text-[#B3261E]" />} title="Certificate not found">
         This certificate link is not valid. Please open it again from your confirmation email, or contact the Trust at{" "}
-        <a href="mailto:info@aggarwalvaishvikas.org" className="font-semibold text-[#7F160C] hover:underline">info@aggarwalvaishvikas.org</a>.
+        <a href="mailto:info@domain.com" className="font-semibold text-[#7F160C] hover:underline">info@domain.com</a>.
       </Notice>
     );
   }
@@ -56,7 +56,7 @@ export default async function CertificatePage({
     return (
       <Notice icon={<FileX2 className="w-12 h-12 text-[#B3261E]" />} title="Certificate not found">
         This certificate link is not valid. Please open it again from your confirmation email, or contact the Trust at{" "}
-        <a href="mailto:info@aggarwalvaishvikas.org" className="font-semibold text-[#7F160C] hover:underline">info@aggarwalvaishvikas.org</a>.
+        <a href="mailto:info@domain.com" className="font-semibold text-[#7F160C] hover:underline">info@domain.com</a>.
       </Notice>
     );
   }
