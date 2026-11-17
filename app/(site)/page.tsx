@@ -34,6 +34,27 @@ import {
 export default function HomePage() {
   const { lang, openDonateModal } = useApp();
   const [selectedDistrict, setSelectedDistrict] = useState("All");
+  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+
+  const heroSlides = [
+    {
+      id: "hero-slide-1",
+      src: "/images/agarwal/hero-slide-1-hd.png",
+      alt: "अग्रवाल वैश्य विकास संगठन हरियाणा - वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।",
+    },
+    {
+      id: "hero-slide-2",
+      src: "/images/agarwal/hero-slide-2-hd.png",
+      alt: "संकल्प - अग्रवाल वैश्य विकास संगठन के पंच संकल्प",
+    },
+  ];
+
+  useEffect(() => {
+    const slideTimer = setInterval(() => {
+      setCurrentHeroSlide((prev) => (prev + 1) % 2);
+    }, 5000);
+    return () => clearInterval(slideTimer);
+  }, []);
 
   const defaultEvents: EventItem[] = [
     {
@@ -266,19 +287,64 @@ export default function HomePage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 2. HERO SECTION: OFFICIAL 100% FULL-WIDTH BANNER             */}
+      {/* 2. HERO SECTION: 100% FULL-WIDTH & 100VH 2-SLIDE CAROUSEL (HD)*/}
       {/* ============================================================ */}
-      <section className="relative w-full overflow-hidden border-b border-gray-200 select-none">
-        <div className="relative w-full">
-          <Image
-            src="/images/agarwal/hero-new-official.jpg"
-            alt="अग्रवाल वैश्य विकास संगठन हरियाणा - वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।"
-            width={1920}
-            height={1080}
-            priority
-            className="w-full h-auto block select-none"
-            sizes="100vw"
-          />
+      <section className="relative w-full h-[56.25vw] min-h-[260px] sm:h-[calc(100vh-116px)] lg:h-[calc(100vh-126px)] xl:h-[calc(100vh-134px)] max-h-[960px] overflow-hidden select-none group border-b border-gray-200 bg-white">
+        {heroSlides.map((slide, idx) => {
+          const isActive = idx === currentHeroSlide;
+          return (
+            <div
+              key={slide.id}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
+                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+              }`}
+            >
+              <Image
+                src={slide.src}
+                alt={slide.alt}
+                fill
+                priority={idx === 0}
+                unoptimized
+                className="object-cover object-center w-full h-full block select-none"
+                sizes="100vw"
+              />
+            </div>
+          );
+        })}
+
+        {/* Carousel Arrow Controls */}
+        <button
+          type="button"
+          onClick={() => setCurrentHeroSlide((prev) => (prev === 0 ? 1 : 0))}
+          aria-label="Previous Slide"
+          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all duration-300 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer"
+        >
+          <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
+        </button>
+        <button
+          type="button"
+          onClick={() => setCurrentHeroSlide((prev) => (prev === 0 ? 1 : 0))}
+          aria-label="Next Slide"
+          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all duration-300 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer"
+        >
+          <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
+        </button>
+
+        {/* Slide Indicator Dots */}
+        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 sm:gap-3 bg-black/25 backdrop-blur-xs px-4 py-1.5 sm:py-2 rounded-full">
+          {heroSlides.map((slide, idx) => (
+            <button
+              key={`dot-${slide.id}`}
+              type="button"
+              onClick={() => setCurrentHeroSlide(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              className={`transition-all duration-300 rounded-full cursor-pointer ${
+                idx === currentHeroSlide
+                  ? "w-8 sm:w-10 h-2.5 sm:h-3 bg-[#FFAE08] shadow-md"
+                  : "w-2.5 sm:w-3 h-2.5 sm:h-3 bg-white/70 hover:bg-white"
+              }`}
+            />
+          ))}
         </div>
       </section>
 
