@@ -436,12 +436,12 @@ export default function GalleryManager({
         <div
           className={`fixed top-5 right-5 z-[99999] flex items-center gap-2 px-4 py-3 rounded-xl shadow-lg border text-sm font-semibold transition-all animate-in fade-in slide-in-from-top-2 ${
             toast.type === "success"
-              ? "bg-[#2B201A] text-white border-[#E86F1D]"
+              ? "bg-[#2B201A] text-white border-[#FFAE08]"
               : "bg-red-600 text-white border-red-700"
           }`}
         >
           {toast.type === "success" ? (
-            <Check className="w-4 h-4 text-[#E86F1D]" />
+            <Check className="w-4 h-4 text-[#FFAE08]" />
           ) : (
             <AlertCircle className="w-4 h-4" />
           )}
@@ -479,7 +479,7 @@ export default function GalleryManager({
 
           <button
             onClick={handleOpenAdd}
-            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#E86F1D] hover:bg-[#D25E12] text-white rounded-xl text-xs sm:text-sm font-bold shadow-warm-sm hover:shadow-warm-md transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FFAE08] hover:bg-[#E59C00] text-white rounded-xl text-xs sm:text-sm font-bold shadow-warm-sm hover:shadow-warm-md transition-all cursor-pointer"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Media</span>
@@ -519,7 +519,7 @@ export default function GalleryManager({
                 : "text-[#2B201A]/70 hover:text-[#2B201A]"
             }`}
           >
-            <Film className="w-3.5 h-3.5 text-[#E86F1D]" />
+            <Film className="w-3.5 h-3.5 text-[#FFAE08]" />
             <span>Videos ({items.filter((i) => i.type === "VIDEO").length})</span>
           </button>
         </div>
@@ -531,7 +531,7 @@ export default function GalleryManager({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by title or category..."
-            className="w-full pl-9 pr-3 py-2 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
           />
         </div>
       </div>
@@ -573,7 +573,7 @@ export default function GalleryManager({
                     <div className="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-md bg-white/95 text-[#2B201A] text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-xs">
                       {isVideo ? (
                         <>
-                          <Film className="w-3 h-3 text-[#E86F1D]" />
+                          <Film className="w-3 h-3 text-[#FFAE08]" />
                           <span>Video</span>
                         </>
                       ) : (
@@ -634,7 +634,7 @@ export default function GalleryManager({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => handleOpenEdit(item)}
-                      className="px-2.5 py-1 rounded-lg border border-[#E7D8C8] text-xs font-semibold text-[#2B201A]/80 hover:text-[#E86F1D] hover:bg-white transition-colors flex items-center gap-1 cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg border border-[#E7D8C8] text-xs font-semibold text-[#2B201A]/80 hover:text-[#FFAE08] hover:bg-white transition-colors flex items-center gap-1 cursor-pointer"
                     >
                       <Edit2 className="w-3 h-3" />
                       <span>Edit</span>
@@ -709,7 +709,7 @@ export default function GalleryManager({
                         : "text-[#2B201A]/60 hover:text-[#2B201A]"
                     }`}
                   >
-                    <Film className="w-3.5 h-3.5 text-[#E86F1D]" />
+                    <Film className="w-3.5 h-3.5 text-[#FFAE08]" />
                     <span>Video</span>
                   </button>
                 </div>
@@ -730,7 +730,7 @@ export default function GalleryManager({
                         : "bg-white text-[#2B201A]/70 border-[#E7D8C8] hover:bg-[#FAF6F0]"
                     }`}
                   >
-                    <CloudUpload className="w-3.5 h-3.5 text-[#E86F1D]" />
+                    <CloudUpload className="w-3.5 h-3.5 text-[#FFAE08]" />
                     <span>Upload to Cloudflare R2</span>
                   </button>
 
@@ -834,7 +834,7 @@ export default function GalleryManager({
 
                         <label
                           htmlFor={formData.type === "PHOTO" ? "modal-upload-photo" : "modal-upload-video"}
-                          className="px-3.5 py-1.5 rounded-lg bg-[#E86F1D] hover:bg-[#D25E12] text-white text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
+                          className="px-3.5 py-1.5 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white text-xs font-bold flex items-center gap-1.5 transition-colors cursor-pointer shadow-xs"
                         >
                           <RefreshCw className="w-3.5 h-3.5" />
                           <span>Replace / Add New Upload</span>
@@ -845,22 +845,22 @@ export default function GalleryManager({
                     /* EMPTY DROPZONE: Add new upload */
                     <label
                       htmlFor={formData.type === "PHOTO" ? "modal-upload-photo" : "modal-upload-video"}
-                      className="border-2 border-dashed border-[#E7D8C8] hover:border-[#E86F1D] rounded-xl p-6 bg-white flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors"
+                      className="border-2 border-dashed border-[#E7D8C8] hover:border-[#FFAE08] rounded-xl p-6 bg-white flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors"
                     >
                       {isUploading ? (
                         <>
-                          <Loader2 className="w-7 h-7 text-[#E86F1D] animate-spin" />
+                          <Loader2 className="w-7 h-7 text-[#FFAE08] animate-spin" />
                           <span className="text-xs font-bold text-[#2B201A]">
                             Uploading to Cloudflare R2...
                           </span>
                         </>
                       ) : (
                         <>
-                          <div className="w-10 h-10 rounded-full bg-[#FAF6F0] border border-[#E7D8C8] flex items-center justify-center text-[#E86F1D]">
+                          <div className="w-10 h-10 rounded-full bg-[#FAF6F0] border border-[#E7D8C8] flex items-center justify-center text-[#FFAE08]">
                             <Upload className="w-5 h-5" />
                           </div>
                           <div className="text-center">
-                            <span className="text-xs font-bold text-[#E86F1D]">
+                            <span className="text-xs font-bold text-[#FFAE08]">
                               {formData.type === "PHOTO" ? "Click to choose Photo" : "Click to choose Video (MP4)"}
                             </span>
                             <p className="text-[11px] text-[#2B201A]/50 mt-0.5">
@@ -891,7 +891,7 @@ export default function GalleryManager({
                         ? "https://example.com/photo.jpg"
                         : "https://www.youtube.com/watch?v=... or https://vimeo.com/..."
                     }
-                    className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+                    className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
                   />
                   <p className="text-[11px] text-[#2B201A]/60">
                     Fetched directly from this link. No storage used on Cloudflare.
@@ -922,7 +922,7 @@ export default function GalleryManager({
                   value={formData.title}
                   onChange={(e) => setFormData((p) => ({ ...p, title: e.target.value }))}
                   placeholder="e.g. Divine Satsang & Katha"
-                  className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
                 />
               </div>
 
@@ -941,7 +941,7 @@ export default function GalleryManager({
                       eventHi: selected ? selected.hi : p.eventHi,
                     }));
                   }}
-                  className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+                  className="w-full px-3.5 py-2.5 text-xs bg-white rounded-xl border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
                 >
                   {CATEGORIES.map((cat) => (
                     <option key={cat.en} value={cat.en}>
@@ -956,7 +956,7 @@ export default function GalleryManager({
                 <button
                   type="button"
                   onClick={() => setShowMoreFields(!showMoreFields)}
-                  className="text-xs font-semibold text-[#E86F1D] hover:underline flex items-center gap-1 cursor-pointer"
+                  className="text-xs font-semibold text-[#FFAE08] hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <SlidersHorizontal className="w-3.5 h-3.5" />
                   <span>{showMoreFields ? "Hide extra details" : "Add Hindi title or change date / order"}</span>
@@ -973,7 +973,7 @@ export default function GalleryManager({
                         value={formData.titleHi}
                         onChange={(e) => setFormData((p) => ({ ...p, titleHi: e.target.value }))}
                         placeholder="उदा. श्रीमद्भागवत कथा ज्ञान यज्ञ"
-                        className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+                        className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
                       />
                     </div>
 
@@ -987,7 +987,7 @@ export default function GalleryManager({
                           value={formData.date}
                           onChange={(e) => setFormData((p) => ({ ...p, date: e.target.value }))}
                           placeholder="e.g. October 2026"
-                          className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none"
+                          className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none"
                         />
                       </div>
 
@@ -1000,7 +1000,7 @@ export default function GalleryManager({
                           min="1"
                           value={formData.displayOrder}
                           onChange={(e) => setFormData((p) => ({ ...p, displayOrder: Number(e.target.value) }))}
-                          className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#E86F1D] focus:outline-none font-mono"
+                          className="w-full px-3 py-2 text-xs bg-white rounded-lg border border-[#E7D8C8] focus:border-[#FFAE08] focus:outline-none font-mono"
                         />
                       </div>
                     </div>
@@ -1020,7 +1020,7 @@ export default function GalleryManager({
                 <button
                   type="submit"
                   disabled={isSubmitting || isUploading || isDeletingUpload}
-                  className="px-6 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D25E12] text-white text-xs font-bold shadow-warm-sm disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white text-xs font-bold shadow-warm-sm disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                 >
                   {isSubmitting && <Loader2 className="w-4 h-4 animate-spin" />}
                   <span>{editingItem ? "Save Changes" : "Add to Gallery"}</span>

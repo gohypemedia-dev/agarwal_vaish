@@ -22,8 +22,8 @@ export default function DonatePage() {
       titleHi: "सामान्य सेवा अंशदान",
       desc: "Support the Trust’s daily activities, social welfare initiatives, spiritual discourses, and emergency community development programs.",
       icon: Heart,
-      color: "text-[#E86F1D]",
-      bg: "bg-[#E86F1D]/10",
+      color: "text-[#FFAE08]",
+      bg: "bg-[#FFAE08]/10",
     },
     {
       id: "gita",
@@ -49,8 +49,8 @@ export default function DonatePage() {
       titleHi: "कन्या शिक्षा एवं स्वावलंबन",
       desc: "Help girls in underserved rural communities access quality education, books, digital learning tools, and opportunities for a self-reliant future.",
       icon: GraduationCap,
-      color: "text-[#E86F1D]",
-      bg: "bg-[#E86F1D]/10",
+      color: "text-[#FFAE08]",
+      bg: "bg-[#FFAE08]/10",
     },
     {
       id: "spirituality",
@@ -68,8 +68,8 @@ export default function DonatePage() {
       {/* HERO SECTION */}
       <section className="relative py-14 md:py-20 bg-[#FBF2E7] border-b border-[#E7D8C8]">
         <div className="page-container text-center space-y-4 max-w-4xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E86F1D]">SEVA & CHARITY</p>
-          <TextReveal as="h1" className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E86F1D]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#FFAE08]">SEVA & CHARITY</p>
+          <TextReveal as="h1" className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-bold text-[#FFAE08]">
             Be the Reason Someone Smiles
           </TextReveal>
           <ParagraphReveal className="text-base sm:text-lg text-[#2B201A]/85 leading-relaxed font-sans max-w-2xl mx-auto">
@@ -83,7 +83,7 @@ export default function DonatePage() {
         <div className="page-container">
           <SectionReveal className="text-center max-w-2xl mx-auto section-header space-y-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">CHOOSE A CAUSE</p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#E86F1D]">
+            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#FFAE08]">
               Direct Your Seva Contribution
             </TextReveal>
             <HeadingDivider className="mt-2" />
@@ -131,7 +131,7 @@ export default function DonatePage() {
               <span>OFFICIAL UPI QR CODE</span>
             </div>
 
-            <h2 className="font-editorial text-3xl font-bold text-[#E86F1D]">Scan & Support</h2>
+            <h2 className="font-editorial text-3xl font-bold text-[#FFAE08]">Scan & Support</h2>
             <HeadingDivider className="my-1.5" />
             <p className="text-sm text-[#2B201A]/85 max-w-lg mx-auto">
               Choose your amount and we will create a UPI QR code for exactly that amount. Pay with any UPI app (BHIM, Google Pay, PhonePe, Paytm), then share the UTR so we can verify your donation and email your confirmation.

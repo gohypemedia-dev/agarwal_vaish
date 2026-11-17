@@ -174,7 +174,7 @@ export default async function EventPassPage({
             <div className="p-6 sm:p-8 space-y-6">
               {/* Member Tier */}
               <div className="text-center space-y-1 pb-4 border-b border-[#E7D8C8]">
-                <span className="inline-block px-3.5 py-1.5 bg-[#E86F1D] text-white text-xs font-bold rounded-lg uppercase tracking-wider mb-1 shadow-xs">
+                <span className="inline-block px-3.5 py-1.5 bg-[#FFAE08] text-white text-xs font-bold rounded-lg uppercase tracking-wider mb-1 shadow-xs">
                   {plan.name}
                 </span>
                 <p className="text-sm font-semibold text-[#B8893E]">
@@ -243,7 +243,7 @@ export default async function EventPassPage({
 
                 <div className="space-y-1.5 p-3.5 bg-white rounded-xl border border-[#E7D8C8]">
                   <p className="font-bold text-[#6B5B4E] uppercase tracking-wider flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#E86F1D]" />
+                    <MapPin className="w-3.5 h-3.5 text-[#FFAE08]" />
                     <span>Ashram & Trust Central Office</span>
                   </p>
                   <p className="font-bold text-[#2B201A] text-xs mt-1">
@@ -365,7 +365,7 @@ export default async function EventPassPage({
           <div className="p-6 sm:p-8 space-y-6">
             {/* Event Title */}
             <div className="text-center space-y-1 pb-4 border-b border-[#E7D8C8]">
-              <span className="inline-block px-3 py-1 bg-[#E86F1D] text-white text-xs font-bold rounded-md uppercase tracking-wider mb-2">
+              <span className="inline-block px-3 py-1 bg-[#FFAE08] text-white text-xs font-bold rounded-md uppercase tracking-wider mb-2">
                 {eventName}
               </span>
               {event?.titleHi && (
@@ -412,7 +412,7 @@ export default async function EventPassPage({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div className="space-y-1 p-3.5 bg-white rounded-xl border border-[#E7D8C8]">
                 <p className="font-bold text-[#6B5B4E] uppercase tracking-wider flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5 text-[#E86F1D]" />
+                  <Calendar className="w-3.5 h-3.5 text-[#FFAE08]" />
                   <span>Date & Duration</span>
                 </p>
                 <p className="font-bold text-[#2B201A] text-sm mt-1">{eventDateStr}</p>
@@ -447,7 +447,7 @@ export default async function EventPassPage({
                 {event?.contactPhone && (
                   <li>
                     Helpline for travel and accommodation queries:{" "}
-                    <a href={`tel:${event.contactPhone}`} className="font-bold text-[#E86F1D] underline">
+                    <a href={`tel:${event.contactPhone}`} className="font-bold text-[#FFAE08] underline">
                       {event.contactPhone}
                     </a>
                   </li>

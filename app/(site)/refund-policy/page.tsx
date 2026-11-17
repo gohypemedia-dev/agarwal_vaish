@@ -17,7 +17,7 @@ export default function RefundPolicyPage() {
         <>
           This policy explains when you can cancel a book order, return a book, and get a refund, and how refunds for
           donations and memberships are handled. You can follow the status of every order and refund on your{" "}
-          <Link href="/account" className="text-[#E86F1D] underline">
+          <Link href="/account" className="text-[#FFAE08] underline">
             My Account
           </Link>{" "}
           page.

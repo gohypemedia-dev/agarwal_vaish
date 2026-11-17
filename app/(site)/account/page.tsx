@@ -250,8 +250,8 @@ export default function AccountPage() {
         };
       default:
         return {
-          badge: "bg-[#FAF3EA] text-[#E86F1D] border-[#E7D8C8]",
-          icon: "text-[#E86F1D]",
+          badge: "bg-[#FAF3EA] text-[#FFAE08] border-[#E7D8C8]",
+          icon: "text-[#FFAE08]",
         };
     }
   };
@@ -403,7 +403,7 @@ export default function AccountPage() {
   if (isLoadingUser) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center p-4 bg-[#FBF7F2]">
-        <Loader2 className="w-8 h-8 text-[#E86F1D] animate-spin mb-3" />
+        <Loader2 className="w-8 h-8 text-[#FFAE08] animate-spin mb-3" />
         <p className="text-sm font-semibold text-[#2B201A]/70">
           {hi ? "खाता लोड हो रहा है..." : "Loading devotee account..."}
         </p>
@@ -415,7 +415,7 @@ export default function AccountPage() {
     return (
       <div className="min-h-[75vh] flex items-center justify-center p-4 bg-[#FBF7F2]">
         <div className="max-w-md w-full bg-white p-8 sm:p-10 rounded-3xl border border-[#E7D8C8] shadow-warm-md text-center space-y-6">
-          <div className="w-16 h-16 rounded-2xl bg-[#FFF9F2] text-[#E86F1D] mx-auto flex items-center justify-center border border-[#E7D8C8]">
+          <div className="w-16 h-16 rounded-2xl bg-[#FFF9F2] text-[#FFAE08] mx-auto flex items-center justify-center border border-[#E7D8C8]">
             <User className="w-8 h-8" />
           </div>
           <div className="space-y-2">
@@ -462,7 +462,7 @@ export default function AccountPage() {
           {/* Mobile Devotee Info & Quick Logout Strip */}
           <div className="bg-white rounded-2xl border border-[#E7D8C8] p-3.5 shadow-warm-xs flex items-center justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F59E0B] via-[#E86F1D] to-[#B45309] text-white flex items-center justify-center font-bold text-base shadow-2xs shrink-0">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#F59E0B] via-[#FFAE08] to-[#B45309] text-white flex items-center justify-center font-bold text-base shadow-2xs shrink-0">
                 {user.name.charAt(0).toUpperCase()}
               </div>
               <div className="min-w-0">
@@ -499,7 +499,7 @@ export default function AccountPage() {
                 onClick={() => setActiveTab("profile")}
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   activeTab === "profile"
-                    ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                    ? "bg-[#FFAE08] text-white shadow-warm-xs"
                     : "text-[#2B201A] hover:bg-[#FAF3EA]"
                 }`}
               >
@@ -513,7 +513,7 @@ export default function AccountPage() {
                 onClick={() => setActiveTab("membership")}
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   activeTab === "membership"
-                    ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                    ? "bg-[#FFAE08] text-white shadow-warm-xs"
                     : "text-[#2B201A] hover:bg-[#FAF3EA]"
                 }`}
               >
@@ -538,7 +538,7 @@ export default function AccountPage() {
                 onClick={() => setActiveTab("events")}
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   activeTab === "events"
-                    ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                    ? "bg-[#FFAE08] text-white shadow-warm-xs"
                     : "text-[#2B201A] hover:bg-[#FAF3EA]"
                 }`}
               >
@@ -549,7 +549,7 @@ export default function AccountPage() {
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
                       activeTab === "events"
                         ? "bg-white/25 text-white"
-                        : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                        : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                     }`}
                   >
                     {userEvents.length}
@@ -563,7 +563,7 @@ export default function AccountPage() {
                 onClick={() => setActiveTab("orders")}
                 className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer shrink-0 ${
                   activeTab === "orders"
-                    ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                    ? "bg-[#FFAE08] text-white shadow-warm-xs"
                     : "text-[#2B201A] hover:bg-[#FAF3EA]"
                 }`}
               >
@@ -574,7 +574,7 @@ export default function AccountPage() {
                     className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${
                       activeTab === "orders"
                         ? "bg-white/25 text-white"
-                        : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                        : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                     }`}
                   >
                     {orders.length}
@@ -608,7 +608,7 @@ export default function AccountPage() {
                   <h2 className="font-editorial font-bold text-lg text-[#1E1612] truncate leading-tight">
                     Aggarwal Vaish Samaj
                   </h2>
-                  <p className="text-[11px] font-sans text-[#E86F1D] font-bold uppercase tracking-wider">
+                  <p className="text-[11px] font-sans text-[#FFAE08] font-bold uppercase tracking-wider">
                     Devotee Portal
                   </p>
                 </div>
@@ -622,7 +622,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("profile")}
                   className={`w-full flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer text-left ${
                     activeTab === "profile"
-                      ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                      ? "bg-[#FFAE08] text-white shadow-warm-xs"
                       : "text-[#2B201A] hover:bg-[#FAF3EA] border border-transparent hover:border-[#E7D8C8]"
                   }`}
                 >
@@ -631,7 +631,7 @@ export default function AccountPage() {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         activeTab === "profile"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       <User className="w-5 h-5" />
@@ -653,7 +653,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("membership")}
                   className={`w-full flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer text-left ${
                     activeTab === "membership"
-                      ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                      ? "bg-[#FFAE08] text-white shadow-warm-xs"
                       : "text-[#2B201A] hover:bg-[#FAF3EA] border border-transparent hover:border-[#E7D8C8]"
                   }`}
                 >
@@ -662,7 +662,7 @@ export default function AccountPage() {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         activeTab === "membership"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       <Award className="w-5 h-5" />
@@ -696,7 +696,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("events")}
                   className={`w-full flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer text-left ${
                     activeTab === "events"
-                      ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                      ? "bg-[#FFAE08] text-white shadow-warm-xs"
                       : "text-[#2B201A] hover:bg-[#FAF3EA] border border-transparent hover:border-[#E7D8C8]"
                   }`}
                 >
@@ -705,7 +705,7 @@ export default function AccountPage() {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         activeTab === "events"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       <Ticket className="w-5 h-5" />
@@ -719,7 +719,7 @@ export default function AccountPage() {
                       className={`text-xs font-bold px-2.5 py-0.5 rounded-full shrink-0 ml-2 ${
                         activeTab === "events"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       {userEvents.length}
@@ -739,7 +739,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("orders")}
                   className={`w-full flex items-center justify-between p-3 rounded-2xl transition-all cursor-pointer text-left ${
                     activeTab === "orders"
-                      ? "bg-[#E86F1D] text-white shadow-warm-xs"
+                      ? "bg-[#FFAE08] text-white shadow-warm-xs"
                       : "text-[#2B201A] hover:bg-[#FAF3EA] border border-transparent hover:border-[#E7D8C8]"
                   }`}
                 >
@@ -748,7 +748,7 @@ export default function AccountPage() {
                       className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${
                         activeTab === "orders"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       <Package className="w-5 h-5" />
@@ -762,7 +762,7 @@ export default function AccountPage() {
                       className={`text-xs font-bold px-2.5 py-0.5 rounded-full shrink-0 ml-2 ${
                         activeTab === "orders"
                           ? "bg-white/20 text-white"
-                          : "bg-[#FAF3EA] text-[#E86F1D] border border-[#E7D8C8]"
+                          : "bg-[#FAF3EA] text-[#FFAE08] border border-[#E7D8C8]"
                       }`}
                     >
                       {orders.length}
@@ -781,7 +781,7 @@ export default function AccountPage() {
               <div className="pt-2 border-t border-[#E7D8C8]/70">
                 <div className="bg-[#FAF6F0] p-3.5 rounded-2xl border border-[#E7D8C8] flex items-center justify-between gap-2.5">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-full bg-[#E86F1D] text-white flex items-center justify-center font-bold text-sm uppercase shrink-0 shadow-2xs">
+                    <div className="w-10 h-10 rounded-full bg-[#FFAE08] text-white flex items-center justify-center font-bold text-sm uppercase shrink-0 shadow-2xs">
                       {user.name.charAt(0)}
                     </div>
                     <div className="min-w-0">
@@ -828,7 +828,7 @@ export default function AccountPage() {
                 
                 {/* CARD 1: PROFILE HEADER CARD (Avatar, Name, Role, Location) */}
                 <div className="bg-white rounded-3xl border border-[#E7D8C8] p-5 sm:p-7 shadow-warm-xs flex flex-col sm:flex-row sm:items-center gap-5">
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#F59E0B] via-[#E86F1D] to-[#B45309] text-white flex items-center justify-center font-editorial font-bold text-3xl sm:text-4xl shadow-md border-4 border-white shrink-0">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-gradient-to-br from-[#F59E0B] via-[#FFAE08] to-[#B45309] text-white flex items-center justify-center font-editorial font-bold text-3xl sm:text-4xl shadow-md border-4 border-white shrink-0">
                     {user.name.charAt(0).toUpperCase()}
                   </div>
 
@@ -848,7 +848,7 @@ export default function AccountPage() {
                     </p>
 
                     <div className="flex items-center gap-1.5 text-xs text-[#2B201A]/70 pt-0.5">
-                      <MapPin className="w-3.5 h-3.5 text-[#E86F1D] shrink-0" />
+                      <MapPin className="w-3.5 h-3.5 text-[#FFAE08] shrink-0" />
                       <span className="truncate">{userLocation}</span>
                     </div>
                   </div>
@@ -870,7 +870,7 @@ export default function AccountPage() {
                       <button
                         type="button"
                         onClick={() => setIsEditingPersonal(true)}
-                        className="px-4 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                         <span>{hi ? "बदलें" : "Edit"}</span>
@@ -890,7 +890,7 @@ export default function AccountPage() {
                             required
                             value={editName}
                             onChange={(e) => setEditName(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                           />
                         </div>
 
@@ -902,7 +902,7 @@ export default function AccountPage() {
                             type="tel"
                             value={editPhone}
                             onChange={(e) => setEditPhone(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                           />
                         </div>
                       </div>
@@ -911,7 +911,7 @@ export default function AccountPage() {
                         <button
                           type="submit"
                           disabled={savingProfile}
-                          className="px-5 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
+                          className="px-5 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
                         >
                           {savingProfile && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                           <span>{hi ? "सहेजें" : "Save Changes"}</span>
@@ -977,7 +977,7 @@ export default function AccountPage() {
                         <p className="text-[11px] font-bold text-[#8C6B3E] uppercase tracking-wider">
                           {hi ? "उपयोगकर्ता श्रेणी" : "User Role"}
                         </p>
-                        <p className="font-bold text-[#E86F1D] text-xs sm:text-sm">
+                        <p className="font-bold text-[#FFAE08] text-xs sm:text-sm">
                           {userRole}
                         </p>
                       </div>
@@ -1001,7 +1001,7 @@ export default function AccountPage() {
                       <button
                         type="button"
                         onClick={() => setIsEditingAddress(true)}
-                        className="px-4 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
                       >
                         <Edit2 className="w-3.5 h-3.5" />
                         <span>{hi ? "बदलें" : "Edit"}</span>
@@ -1020,7 +1020,7 @@ export default function AccountPage() {
                           value={editAddress}
                           onChange={(e) => setEditAddress(e.target.value)}
                           placeholder="House / Flat No., Street, Landmark"
-                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                          className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                         />
                       </div>
 
@@ -1033,7 +1033,7 @@ export default function AccountPage() {
                             type="text"
                             value={editCity}
                             onChange={(e) => setEditCity(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                           />
                         </div>
 
@@ -1045,7 +1045,7 @@ export default function AccountPage() {
                             type="text"
                             value={editState}
                             onChange={(e) => setEditState(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                           />
                         </div>
 
@@ -1057,7 +1057,7 @@ export default function AccountPage() {
                             type="text"
                             value={editPincode}
                             onChange={(e) => setEditPincode(e.target.value)}
-                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#E86F1D]"
+                            className="w-full px-3.5 py-2.5 rounded-xl border border-[#E7D8C8] bg-[#FAF6F0] text-sm font-medium focus:outline-none focus:border-[#FFAE08]"
                           />
                         </div>
                       </div>
@@ -1066,7 +1066,7 @@ export default function AccountPage() {
                         <button
                           type="submit"
                           disabled={savingProfile}
-                          className="px-5 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
+                          className="px-5 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-sm cursor-pointer"
                         >
                           {savingProfile && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
                           <span>{hi ? "सहेजें" : "Save Address"}</span>
@@ -1220,7 +1220,7 @@ export default function AccountPage() {
                             target="_blank"
                             className="btn-outline py-3 px-5 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-2xs cursor-pointer"
                           >
-                            <QrCode className="w-4 h-4 text-[#E86F1D]" />
+                            <QrCode className="w-4 h-4 text-[#FFAE08]" />
                             <span>{hi ? "डिजिटल पास देखें" : "View Digital Pass"}</span>
                           </Link>
                         </div>
@@ -1252,7 +1252,7 @@ export default function AccountPage() {
                   </div>
                 ) : (
                   <div className="bg-white rounded-3xl border border-[#E7D8C8] p-8 sm:p-12 text-center space-y-5 shadow-warm-xs">
-                    <div className="w-16 h-16 rounded-2xl bg-[#FFF9F2] text-[#E86F1D] mx-auto flex items-center justify-center border border-[#E7D8C8]">
+                    <div className="w-16 h-16 rounded-2xl bg-[#FFF9F2] text-[#FFAE08] mx-auto flex items-center justify-center border border-[#E7D8C8]">
                       <Award className="w-8 h-8" />
                     </div>
                     <div className="space-y-2 max-w-md mx-auto">
@@ -1298,7 +1298,7 @@ export default function AccountPage() {
                         onClick={() => setEventsFilter(tab.key)}
                         className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
                           eventsFilter === tab.key
-                            ? "bg-[#E86F1D] text-white shadow-2xs"
+                            ? "bg-[#FFAE08] text-white shadow-2xs"
                             : "text-[#2B201A]/70 hover:bg-[#FAF3EA]"
                         }`}
                       >
@@ -1314,7 +1314,7 @@ export default function AccountPage() {
 
                 {loadingEvents ? (
                   <div className="py-16 text-center space-y-2">
-                    <Loader2 className="w-6 h-6 animate-spin text-[#E86F1D] mx-auto" />
+                    <Loader2 className="w-6 h-6 animate-spin text-[#FFAE08] mx-auto" />
                     <p className="text-xs text-[#2B201A]/60">
                       {hi ? "पास लोड हो रहे हैं..." : "Loading event passes..."}
                     </p>
@@ -1354,7 +1354,7 @@ export default function AccountPage() {
                       return (
                         <div
                           key={booking.donationId}
-                          className="bg-white rounded-3xl border border-[#E7D8C8] p-5 sm:p-6 shadow-warm-xs hover:border-[#E86F1D]/50 transition-all space-y-4"
+                          className="bg-white rounded-3xl border border-[#E7D8C8] p-5 sm:p-6 shadow-warm-xs hover:border-[#FFAE08]/50 transition-all space-y-4"
                         >
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-[#E7D8C8]/60">
                             <div className="flex items-center gap-2 flex-wrap">
@@ -1369,7 +1369,7 @@ export default function AccountPage() {
                               </span>
                             </div>
 
-                            <span className="text-sm font-bold text-[#E86F1D]">
+                            <span className="text-sm font-bold text-[#FFAE08]">
                               ₹{(booking.amountPaise / 100).toLocaleString("en-IN")} Seva
                             </span>
                           </div>
@@ -1386,11 +1386,11 @@ export default function AccountPage() {
                               )}
                               <div className="flex items-center gap-3 text-xs text-[#2B201A]/70 flex-wrap pt-1">
                                 <span className="flex items-center gap-1">
-                                  <Calendar className="w-3.5 h-3.5 text-[#E86F1D]" />
+                                  <Calendar className="w-3.5 h-3.5 text-[#FFAE08]" />
                                   <span>{formatEventDate(booking.event.startDate, booking.event.endDate)}</span>
                                 </span>
                                 <span className="flex items-center gap-1">
-                                  <MapPin className="w-3.5 h-3.5 text-[#E86F1D]" />
+                                  <MapPin className="w-3.5 h-3.5 text-[#FFAE08]" />
                                   <span className="truncate max-w-[200px]">{booking.event.location}</span>
                                 </span>
                               </div>
@@ -1402,7 +1402,7 @@ export default function AccountPage() {
                                   <Link
                                     href={passUrl}
                                     target="_blank"
-                                    className="px-3.5 py-2 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors"
+                                    className="px-3.5 py-2 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
                                     <QrCode className="w-3.5 h-3.5" />
                                     <span>{hi ? "पास देखें" : "View Pass"}</span>
@@ -1413,7 +1413,7 @@ export default function AccountPage() {
                                     download
                                     className="px-3 py-2 rounded-xl border border-[#E7D8C8] bg-white hover:bg-[#FAF6F0] text-[#1E1612] text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors"
                                   >
-                                    <Download className="w-3.5 h-3.5 text-[#E86F1D]" />
+                                    <Download className="w-3.5 h-3.5 text-[#FFAE08]" />
                                     <span>PDF</span>
                                   </a>
                                 </>
@@ -1450,7 +1450,7 @@ export default function AccountPage() {
               <div className="space-y-5">
                 {loadingOrders ? (
                   <div className="py-16 text-center space-y-2">
-                    <Loader2 className="w-6 h-6 animate-spin text-[#E86F1D] mx-auto" />
+                    <Loader2 className="w-6 h-6 animate-spin text-[#FFAE08] mx-auto" />
                     <p className="text-xs text-[#2B201A]/60">
                       {hi ? "आर्डर्स लोड हो रहे हैं..." : "Loading orders..."}
                     </p>
@@ -1492,7 +1492,7 @@ export default function AccountPage() {
                             </span>
                           </div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-sm font-bold text-[#E86F1D]">
+                            <span className="text-sm font-bold text-[#FFAE08]">
                               ₹{order.totalAmount.toLocaleString("en-IN")}
                             </span>
                             <span
@@ -1504,7 +1504,7 @@ export default function AccountPage() {
                               <button
                                 type="button"
                                 onClick={() => setTrackingOrder(order)}
-                                className="px-3 py-1 rounded-xl bg-[#FAF3EA] hover:bg-[#E86F1D] text-[#E86F1D] hover:text-white border border-[#E86F1D]/30 text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer shrink-0 ml-1"
+                                className="px-3 py-1 rounded-xl bg-[#FAF3EA] hover:bg-[#FFAE08] text-[#FFAE08] hover:text-white border border-[#FFAE08]/30 text-xs font-bold inline-flex items-center gap-1.5 transition-all shadow-2xs cursor-pointer shrink-0 ml-1"
                               >
                                 <Truck className="w-3.5 h-3.5" />
                                 <span>{hi ? "ट्रैक करें" : "Track"}</span>
@@ -1545,7 +1545,7 @@ export default function AccountPage() {
                                   <span className="font-mono text-xs sm:text-sm font-semibold text-[#1E1612]">
                                     {item.quantity} × ₹{item.price}
                                   </span>
-                                  <p className="text-xs font-bold text-[#E86F1D]">
+                                  <p className="text-xs font-bold text-[#FFAE08]">
                                     ₹{(item.quantity * item.price).toLocaleString("en-IN")}
                                   </p>
                                 </div>
@@ -1556,9 +1556,9 @@ export default function AccountPage() {
 
                         {/* Live Dispatch Tracking Status Banner (for undelivered active orders) */}
                         {order.status !== "DELIVERED" && order.status !== "CANCELLED" && (
-                          <div className="bg-[#FAF3EA]/80 rounded-2xl border border-[#E86F1D]/25 p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                          <div className="bg-[#FAF3EA]/80 rounded-2xl border border-[#FFAE08]/25 p-3 sm:p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
                             <div className="flex items-center gap-2.5 text-xs text-[#2B201A]">
-                              <div className="w-7 h-7 rounded-lg bg-[#E86F1D]/15 text-[#E86F1D] flex items-center justify-center shrink-0">
+                              <div className="w-7 h-7 rounded-lg bg-[#FFAE08]/15 text-[#FFAE08] flex items-center justify-center shrink-0">
                                 <Truck className="w-4 h-4" />
                               </div>
                               <div>
@@ -1575,7 +1575,7 @@ export default function AccountPage() {
                             <button
                               type="button"
                               onClick={() => setTrackingOrder(order)}
-                              className="px-3 py-1.5 rounded-xl bg-[#E86F1D] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer self-start sm:self-auto shrink-0"
+                              className="px-3 py-1.5 rounded-xl bg-[#FFAE08] hover:bg-[#D45A0E] text-white text-xs font-bold inline-flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer self-start sm:self-auto shrink-0"
                             >
                               <Truck className="w-3.5 h-3.5" />
                               <span>{hi ? "लाइव स्थिति ट्रैक करें" : "Track Order"}</span>
@@ -1585,7 +1585,7 @@ export default function AccountPage() {
 
                         {/* Shipping destination */}
                         <div className="pt-2 text-xs text-[#2B201A]/60 flex items-center gap-1.5 border-t border-[#E7D8C8]/50">
-                          <MapPin className="w-3.5 h-3.5 text-[#E86F1D] shrink-0" />
+                          <MapPin className="w-3.5 h-3.5 text-[#FFAE08] shrink-0" />
                           <span className="truncate">
                             Shipping to: {order.shippingAddress}, {order.shippingCity},{" "}
                             {order.shippingState} - {order.shippingPincode}
@@ -1617,7 +1617,7 @@ export default function AccountPage() {
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-[#E7D8C8]">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-xl bg-[#FAF3EA] text-[#E86F1D] flex items-center justify-center border border-[#E86F1D]/20">
+                  <span className="w-8 h-8 rounded-xl bg-[#FAF3EA] text-[#FFAE08] flex items-center justify-center border border-[#FFAE08]/20">
                     <Truck className="w-4 h-4" />
                   </span>
                   <h3 className="font-editorial text-xl font-bold text-[#1E1612]">
@@ -1639,7 +1639,7 @@ export default function AccountPage() {
             </div>
 
             {/* Courier & Docket info pill */}
-            <div className="bg-[#FAF3EA] rounded-2xl p-4 border border-[#E86F1D]/20 space-y-2">
+            <div className="bg-[#FAF3EA] rounded-2xl p-4 border border-[#FFAE08]/20 space-y-2">
               <div className="flex items-center justify-between gap-2 text-xs">
                 <span className="text-[#2B201A]/70 font-medium">
                   {hi ? "कूरियर / सेवा पार्टनर:" : "Courier / Delivery Partner:"}
@@ -1650,7 +1650,7 @@ export default function AccountPage() {
                 <span className="text-[#2B201A]/70 font-medium">
                   {hi ? "ट्रैकिंग डॉकेट संख्या:" : "Docket / AWB No:"}
                 </span>
-                <span className="font-mono font-bold text-[#E86F1D]">
+                <span className="font-mono font-bold text-[#FFAE08]">
                   NBV-TRK-{trackingOrder.orderNumber.replace(/[^a-zA-Z0-9]/g, "").slice(-8)}
                 </span>
               </div>
@@ -1681,7 +1681,7 @@ export default function AccountPage() {
                         item.done
                           ? "bg-[#2F5A43] text-white"
                           : item.active
-                          ? "bg-[#E86F1D] text-white animate-pulse"
+                          ? "bg-[#FFAE08] text-white animate-pulse"
                           : "bg-[#E7D8C8] text-[#2B201A]/50"
                       }`}
                     >
@@ -1707,7 +1707,7 @@ export default function AccountPage() {
             {/* Destination Address */}
             <div className="pt-3 border-t border-[#E7D8C8] text-xs text-[#2B201A]/80 space-y-1">
               <span className="font-bold text-[#1E1612] flex items-center gap-1.5">
-                <MapPin className="w-3.5 h-3.5 text-[#E86F1D]" />
+                <MapPin className="w-3.5 h-3.5 text-[#FFAE08]" />
                 <span>{hi ? "डिलीवरी गंतव्य (Shipping Address):" : "Delivery Destination:"}</span>
               </span>
               <p className="pl-5 text-[#2B201A]/70">

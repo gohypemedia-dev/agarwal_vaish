@@ -160,7 +160,7 @@ export default function InitiativesPage() {
             <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
               <a
                 href="#all-initiatives"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#E86F1D] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
+                className="flex-1 py-2 px-3 rounded-lg bg-[#FFAE08] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
               >
                 {lang === "hi" ? "सेवा कार्य" : "Initiatives"}
               </a>
@@ -168,7 +168,7 @@ export default function InitiativesPage() {
                 onClick={() => openDonateModal()}
                 className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
               >
-                <Heart className="w-3 h-3 text-[#E86F1D] fill-current" />
+                <Heart className="w-3 h-3 text-[#FFAE08] fill-current" />
                 <span>{lang === "hi" ? "सहयोग करें" : "Support"}</span>
               </button>
             </div>
@@ -183,12 +183,12 @@ export default function InitiativesPage() {
               {lang === "hi" ? (
                 <>
                   सेवा से जीवन <br />
-                  <span className="text-[#E86F1D]">सशक्तिकरण एवं परिवर्तन</span>
+                  <span className="text-[#FFAE08]">सशक्तिकरण एवं परिवर्तन</span>
                 </>
               ) : (
                 <>
                   Transforming Lives <br />
-                  <span className="text-[#E86F1D]">Through Service</span>
+                  <span className="text-[#FFAE08]">Through Service</span>
                 </>
               )}
             </TextReveal>
@@ -206,7 +206,7 @@ export default function InitiativesPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 sm:pt-4">
               <a
                 href="#all-initiatives"
-                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer group"
+                className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer group"
               >
                 <span>{lang === "hi" ? "सभी सेवा प्रकल्प देखें" : "Explore All Initiatives"}</span>
               </a>
@@ -246,7 +246,7 @@ export default function InitiativesPage() {
                   <div className="p-6 sm:p-8 flex flex-col flex-1 justify-between space-y-6">
                     <div className="space-y-4">
                       {/* Initiative Title */}
-                      <h2 className="font-sans text-sm min-[380px]:text-[15px] sm:text-lg md:text-xl lg:text-[16px] xl:text-[19px] 2xl:text-[22px] font-bold text-[#E86F1D] uppercase tracking-normal sm:tracking-wide whitespace-nowrap">
+                      <h2 className="font-sans text-sm min-[380px]:text-[15px] sm:text-lg md:text-xl lg:text-[16px] xl:text-[19px] 2xl:text-[22px] font-bold text-[#FFAE08] uppercase tracking-normal sm:tracking-wide whitespace-nowrap">
                         {lang === "hi" ? item.titleHi : item.title}
                       </h2>
                       <HeadingDivider align="left" className="!py-0" />
@@ -260,7 +260,7 @@ export default function InitiativesPage() {
                       <ul className="space-y-3 text-sm text-[#2B201A]/85 font-sans pt-1">
                         {(lang === "hi" && item.bulletsHi ? item.bulletsHi : item.bullets).map((bullet, i) => (
                           <li key={i} className="flex items-start gap-2.5">
-                            <span className="w-2 h-2 rounded-full bg-[#E86F1D] shrink-0 mt-1.5" aria-hidden="true" />
+                            <span className="w-2 h-2 rounded-full bg-[#FFAE08] shrink-0 mt-1.5" aria-hidden="true" />
                             <span>{bullet}</span>
                           </li>
                         ))}
@@ -314,11 +314,11 @@ export default function InitiativesPage() {
 
             {/* Top Eyebrow with side accent lines */}
             <div className="relative z-10 flex items-center justify-center gap-3 sm:gap-4">
-              <span className="w-8 sm:w-16 h-[1.5px] bg-[#E86F1D]/50 rounded-full" />
+              <span className="w-8 sm:w-16 h-[1.5px] bg-[#FFAE08]/50 rounded-full" />
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#2C1810]">
                 {lang === "hi" ? "पावन सेवा मिशन से जुड़ें" : "JOIN THE SEVA MISSION"}
               </p>
-              <span className="w-8 sm:w-16 h-[1.5px] bg-[#E86F1D]/50 rounded-full" />
+              <span className="w-8 sm:w-16 h-[1.5px] bg-[#FFAE08]/50 rounded-full" />
             </div>
 
             {/* Main Headline: Line 1 Dark Brown, Line 2 Signature Orange */}
@@ -326,12 +326,12 @@ export default function InitiativesPage() {
               {lang === "hi" ? (
                 <>
                   <span className="text-[#2B1810] block">हमारे साथ सेवा करें • प्रकल्प में सहयोग दें</span>
-                  <span className="text-[#E86F1D] block mt-1 sm:mt-2">करुणा को प्रत्यक्ष सेवा में बदलें</span>
+                  <span className="text-[#FFAE08] block mt-1 sm:mt-2">करुणा को प्रत्यक्ष सेवा में बदलें</span>
                 </>
               ) : (
                 <>
                   <span className="text-[#2B1810] block">Serve with us. Support an initiative.</span>
-                  <span className="text-[#E86F1D] block mt-1 sm:mt-2">Help turn compassion into action.</span>
+                  <span className="text-[#FFAE08] block mt-1 sm:mt-2">Help turn compassion into action.</span>
                 </>
               )}
             </TextReveal>
@@ -347,13 +347,13 @@ export default function InitiativesPage() {
             <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <Link
                 href="/membership"
-                className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 rounded-full border-2 border-[#E86F1D] bg-white hover:bg-[#FFF7ED] text-[#E86F1D] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 text-center"
+                className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 rounded-full border-2 border-[#FFAE08] bg-white hover:bg-[#FFF7ED] text-[#FFAE08] font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-xs hover:shadow-md active:scale-95 text-center"
               >
                 {lang === "hi" ? "सदस्यता ग्रहण करें" : "Become a Member"}
               </Link>
               <button
                 onClick={() => openDonateModal(lang === "hi" ? "सामान्य पुण्य दान" : "General Donation")}
-                className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 rounded-full bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto min-w-[200px] px-8 py-3.5 rounded-full bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Heart className="w-4 h-4 fill-current text-white" />
                 <span>{lang === "hi" ? "दान सहयोग करें" : "Donate Now"}</span>

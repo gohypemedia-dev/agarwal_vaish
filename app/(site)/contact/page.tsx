@@ -94,10 +94,10 @@ export default function ContactPage() {
       {/* HERO SECTION */}
       <section className="relative py-14 md:py-20 bg-[#FBF2E7] border-b border-[#E7D8C8]">
         <div className="page-container text-center space-y-4 max-w-4xl">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#E86F1D]">
+          <p className="text-xs font-bold uppercase tracking-widest text-[#FFAE08]">
             {lang === "hi" ? "संपर्क करें" : "REACH OUT TO US"}
           </p>
-          <TextReveal as="h1" className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-bold text-[#E86F1D]">
+          <TextReveal as="h1" className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-bold text-[#FFAE08]">
             {lang === "hi" ? "हमसे जुड़े रहें" : "Let’s Stay Connected"}
           </TextReveal>
           <ParagraphReveal className="text-base sm:text-lg text-[#2B201A]/85 leading-relaxed font-sans max-w-2xl mx-auto">
@@ -114,7 +114,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
             {/* Left Contact Form */}
             <SectionReveal as="div" yOffset={30} className="lg:col-span-7 card-warm p-8 sm:p-10 space-y-6">
-              <h2 className="font-editorial text-3xl font-bold text-[#E86F1D]">
+              <h2 className="font-editorial text-3xl font-bold text-[#FFAE08]">
                 {lang === "hi" ? "हमें संदेश भेजें" : "Send Us a Message"}
               </h2>
               <HeadingDivider align="left" className="!py-0" />
@@ -274,14 +274,14 @@ export default function ContactPage() {
             {/* Right Contact Info Details & Map Card */}
             <SectionReveal as="div" yOffset={30} delay={0.2} className="lg:col-span-5 space-y-6">
               <div className="card-warm space-y-6">
-                <h2 className="font-editorial text-2xl font-bold text-[#E86F1D]">
+                <h2 className="font-editorial text-2xl font-bold text-[#FFAE08]">
                   {lang === "hi" ? "कार्यालय संपर्क विवरण" : "AVS Haryana Contact Details"}
                 </h2>
                 <HeadingDivider align="left" className="!py-0" />
 
                 <ul className="space-y-4 text-sm">
                   <li className="flex items-start gap-4">
-                    <div className="p-3 bg-[#E86F1D]/10 text-[#E86F1D] rounded-xl shrink-0">
+                    <div className="p-3 bg-[#FFAE08]/10 text-[#FFAE08] rounded-xl shrink-0">
                       <MapPin className="w-5 h-5" />
                     </div>
                     <div>
@@ -298,7 +298,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "फ़ोन / हेल्पलाइन" : "Phone / Helpline"}</h4>
-                      <a href="tel:+919416055000" className="text-xs text-[#E86F1D] hover:underline font-semibold">
+                      <a href="tel:+919416055000" className="text-xs text-[#FFAE08] hover:underline font-semibold">
                         +91 94160 55000
                       </a>
                     </div>
@@ -310,14 +310,14 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "ईमेल पता" : "Official Email"}</h4>
-                      <a href="mailto:avshry@gmail.com" className="text-xs text-[#E86F1D] hover:underline font-semibold">
+                      <a href="mailto:avshry@gmail.com" className="text-xs text-[#FFAE08] hover:underline font-semibold">
                         avshry@gmail.com
                       </a>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-4">
-                    <div className="p-3 bg-[#E86F1D]/10 text-[#E86F1D] rounded-xl shrink-0">
+                    <div className="p-3 bg-[#FFAE08]/10 text-[#FFAE08] rounded-xl shrink-0">
                       <Clock className="w-5 h-5" />
                     </div>
                     <div>

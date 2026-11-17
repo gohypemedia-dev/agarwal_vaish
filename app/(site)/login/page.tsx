@@ -168,8 +168,8 @@ function LoginFormContent() {
                 onClick={() => setSacredImage("gurukul")}
                 className={`px-2.5 py-1 rounded-full font-bold transition-all ${
                   sacredImage === "gurukul"
-                    ? "bg-[#E86F1D] text-white shadow-sm"
-                    : "text-[#2B201A]/75 hover:text-[#E86F1D]"
+                    ? "bg-[#FFAE08] text-white shadow-sm"
+                    : "text-[#2B201A]/75 hover:text-[#FFAE08]"
                 }`}
                 title="वैदिक गुरुकुल (Vedic Gurukul)"
               >
@@ -180,8 +180,8 @@ function LoginFormContent() {
                 onClick={() => setSacredImage("vasudeva")}
                 className={`px-2.5 py-1 rounded-full font-bold transition-all ${
                   sacredImage === "vasudeva"
-                    ? "bg-[#E86F1D] text-white shadow-sm"
-                    : "text-[#2B201A]/75 hover:text-[#E86F1D]"
+                    ? "bg-[#FFAE08] text-white shadow-sm"
+                    : "text-[#2B201A]/75 hover:text-[#FFAE08]"
                 }`}
                 title="भगवान वासुदेव (Vishnu)"
               >
@@ -192,8 +192,8 @@ function LoginFormContent() {
                 onClick={() => setSacredImage("krishna")}
                 className={`px-2.5 py-1 rounded-full font-bold transition-all ${
                   sacredImage === "krishna"
-                    ? "bg-[#E86F1D] text-white shadow-sm"
-                    : "text-[#2B201A]/75 hover:text-[#E86F1D]"
+                    ? "bg-[#FFAE08] text-white shadow-sm"
+                    : "text-[#2B201A]/75 hover:text-[#FFAE08]"
                 }`}
                 title="श्री कृष्ण (Sri Krishna)"
               >
@@ -208,7 +208,7 @@ function LoginFormContent() {
           {/* Back to Home Link */}
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-xs text-[#2B201A]/60 hover:text-[#E86F1D] font-bold mb-4"
+            className="inline-flex items-center gap-1.5 text-xs text-[#2B201A]/60 hover:text-[#FFAE08] font-bold mb-4"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>{hi ? "मुख्य पृष्ठ पर लौटें" : "Back to Home"}</span>
@@ -219,7 +219,7 @@ function LoginFormContent() {
             <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#B8893E]">
               {hi ? "भक्त सेवा पोर्टल" : "DEVOTEE SECURE ACCESS"}
             </span>
-            <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#E86F1D] tracking-tight">
+            <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#FFAE08] tracking-tight">
               {tab === "login"
                 ? hi ? "भक्त लॉगिन (Sign In)" : "Devotee Sign In"
                 : hi ? "नया खाता बनाएं (Register)" : "Create Devotee Account"}
@@ -242,7 +242,7 @@ function LoginFormContent() {
               }}
               className={`flex-1 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
                 tab === "login"
-                  ? "bg-white text-[#E86F1D] shadow-xs"
+                  ? "bg-white text-[#FFAE08] shadow-xs"
                   : "text-[#2B201A]/70 hover:text-[#2B201A]"
               }`}
             >
@@ -257,7 +257,7 @@ function LoginFormContent() {
               }}
               className={`flex-1 py-2 sm:py-2.5 px-2 sm:px-3 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
                 tab === "register"
-                  ? "bg-white text-[#E86F1D] shadow-xs"
+                  ? "bg-white text-[#FFAE08] shadow-xs"
                   : "text-[#2B201A]/70 hover:text-[#2B201A]"
               }`}
             >
@@ -326,7 +326,7 @@ function LoginFormContent() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={hi ? "उदा. रमेश शर्मा" : "e.g. Ramesh Sharma"}
-                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#E86F1D]"
+                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#FFAE08]"
                     />
                   </div>
                 </div>
@@ -343,7 +343,7 @@ function LoginFormContent() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+91 98765 43210"
-                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#E86F1D]"
+                      className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#FFAE08]"
                     />
                   </div>
                 </div>
@@ -362,7 +362,7 @@ function LoginFormContent() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#E86F1D]"
+                  className="w-full pl-10 pr-3 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#FFAE08]"
                 />
               </div>
             </div>
@@ -380,7 +380,7 @@ function LoginFormContent() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder={hi ? "न्यूनतम 6 अक्षर" : "At least 6 characters"}
-                  className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#E86F1D]"
+                  className="w-full pl-10 pr-10 py-2.5 bg-white border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#FFAE08]"
                 />
                 <button
                   type="button"
@@ -404,7 +404,7 @@ function LoginFormContent() {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder={hi ? "मकान नं, गली / मोहल्ला" : "Flat / House No., Street, Colony"}
-                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#E86F1D]"
+                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
                   />
                 </div>
                 <div className="grid grid-cols-3 gap-2">
@@ -413,21 +413,21 @@ function LoginFormContent() {
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
                     placeholder={hi ? "शहर" : "City"}
-                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#E86F1D]"
+                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
                   />
                   <input
                     type="text"
                     value={state}
                     onChange={(e) => setState(e.target.value)}
                     placeholder={hi ? "राज्य" : "State"}
-                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#E86F1D]"
+                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
                   />
                   <input
                     type="text"
                     value={pincode}
                     onChange={(e) => setPincode(e.target.value)}
                     placeholder={hi ? "पिनकोड" : "PIN"}
-                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#E86F1D]"
+                    className="w-full px-3 py-2 bg-white border border-[#E7D8C8] rounded-xl text-xs focus:outline-hidden focus:border-[#FFAE08]"
                   />
                 </div>
               </div>
@@ -437,7 +437,7 @@ function LoginFormContent() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3.5 bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                className="w-full py-3.5 bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-md flex items-center justify-center gap-2 transition-all disabled:opacity-50"
               >
                 {loading ? (
                   <>
@@ -468,7 +468,7 @@ function LoginFormContent() {
                       setTab("register");
                       setError(null);
                     }}
-                    className="text-[#E86F1D] font-bold hover:underline"
+                    className="text-[#FFAE08] font-bold hover:underline"
                   >
                     {hi ? "यहाँ रजिस्टर करें" : "Create an account"}
                   </button>
@@ -482,7 +482,7 @@ function LoginFormContent() {
                       setTab("login");
                       setError(null);
                     }}
-                    className="text-[#E86F1D] font-bold hover:underline"
+                    className="text-[#FFAE08] font-bold hover:underline"
                   >
                     {hi ? "यहाँ लॉग इन करें" : "Sign In here"}
                   </button>
@@ -501,7 +501,7 @@ export default function LoginPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-[#FFF9F2] flex items-center justify-center">
-          <Loader2 className="w-8 h-8 animate-spin text-[#E86F1D]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#FFAE08]" />
         </div>
       }
     >

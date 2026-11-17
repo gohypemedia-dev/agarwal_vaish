@@ -143,7 +143,7 @@ export default function AboutPage() {
             <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
               <a
                 href="#about-story"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#E86F1D] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
+                className="flex-1 py-2 px-3 rounded-lg bg-[#FFAE08] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
               >
                 {lang === "hi" ? "ट्रस्ट परिचय" : "Our Story"}
               </a>
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 onClick={() => openDonateModal()}
                 className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
               >
-                <Heart className="w-3 h-3 text-[#E86F1D] fill-current" />
+                <Heart className="w-3 h-3 text-[#FFAE08] fill-current" />
                 <span>{lang === "hi" ? "सहयोग करें" : "Support"}</span>
               </button>
             </div>
@@ -167,13 +167,13 @@ export default function AboutPage() {
                 <>
                   ज्ञान में निष्ठा।
                   <br />
-                  <span className="text-[#E86F1D]">सेवा में समर्पण।</span>
+                  <span className="text-[#FFAE08]">सेवा में समर्पण।</span>
                 </>
               ) : (
                 <>
                   Rooted in Wisdom.
                   <br />
-                  <span className="text-[#E86F1D]">Driven by Service.</span>
+                  <span className="text-[#FFAE08]">Driven by Service.</span>
                 </>
               )}
             </TextReveal>
@@ -189,7 +189,7 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 sm:pt-4">
               <a
                 href="#about-story"
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
               >
                 <span>{lang === "hi" ? "हमारा परिचय एवं इतिहास" : "Our Story & Journey"}</span>
               </a>
@@ -210,7 +210,7 @@ export default function AboutPage() {
         <div className="page-container max-w-5xl lg:max-w-6xl space-y-12 sm:space-y-16">
           {/* ABOUT US BLOCK */}
           <div className="space-y-4 sm:space-y-5 text-center sm:text-left">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#E86F1D] leading-tight">
+            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#FFAE08] leading-tight">
               {lang === "hi"
                 ? "महाराजा अग्रसेन जी के आदर्शों पर आधारित संगठित समाज"
                 : "Rooted in the Ideals of Maharaja Agrasen, Dedicated to Community"}
@@ -245,7 +245,7 @@ export default function AboutPage() {
 
           {/* OUR MISSION BLOCK */}
           <div className="space-y-4 sm:space-y-5 text-center sm:text-left">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#E86F1D] leading-tight">
+            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#FFAE08] leading-tight">
               {lang === "hi"
                 ? "आंतरिक सामर्थ्य और व्यावहारिक अवसरों का संगम"
                 : "Real Empowerment When Inner Strength Meets Real Opportunity"}
@@ -314,7 +314,7 @@ export default function AboutPage() {
                     <>
                       <span className="relative inline-block pb-1">
                         हम
-                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#E86F1D] rounded-full" />
+                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#FFAE08] rounded-full" />
                       </span>{" "}
                       हृदय से शिक्षकों, विचारकों और कर्मठ समाजसेवियों का एक परिवार हैं —<br className="hidden md:inline" />
                       जो गाँव-गाँव, विद्यालय-विद्यालय और परिवार-परिवार जाकर सेवा कार्य कर रहे हैं।
@@ -323,7 +323,7 @@ export default function AboutPage() {
                     <>
                       <span className="relative inline-block pb-1">
                         We
-                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#E86F1D] rounded-full" />
+                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#FFAE08] rounded-full" />
                       </span>{" "}
                       are, at heart, a foundation of teachers, practitioners and community builders<br className="hidden md:inline" />
                       working village by village, school by school, and family by family.
@@ -343,15 +343,15 @@ export default function AboutPage() {
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold inline-flex items-baseline gap-2.5 sm:gap-3">
               <span className="relative inline-block text-[#1F1712] pb-2">
                 {lang === "hi" ? "मिशन" : "Mission"}
-                <span className="absolute left-0 bottom-0 w-full h-[2.5px] bg-[#E86F1D] rounded-full" />
+                <span className="absolute left-0 bottom-0 w-full h-[2.5px] bg-[#FFAE08] rounded-full" />
               </span>
-              <span className="text-[#E86F1D]">
+              <span className="text-[#FFAE08]">
                 {lang === "hi" ? "संकल्प" : "Statement"}
               </span>
             </h2>
           </div>
 
-          <TextReveal as="h3" className="font-editorial text-lg sm:text-xl md:text-2xl lg:text-[28px] xl:text-[30px] text-[#E86F1D] font-bold leading-relaxed max-w-4xl lg:max-w-5xl mx-auto">
+          <TextReveal as="h3" className="font-editorial text-lg sm:text-xl md:text-2xl lg:text-[28px] xl:text-[30px] text-[#FFAE08] font-bold leading-relaxed max-w-4xl lg:max-w-5xl mx-auto">
             {lang === "hi" ? (
               <>
                 “समाज को संगठित करना, युवा व महिला नेतृत्व को बढ़ावा देना<br className="hidden md:inline" />
@@ -372,7 +372,7 @@ export default function AboutPage() {
         <div className="page-container space-y-12">
           {/* Section Heading */}
           <div className="text-center space-y-2.5 max-w-2xl mx-auto">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#E86F1D]">
+            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#FFAE08]">
               {lang === "hi" ? "हम समर्पित हैं" : "WE ARE COMMITTED TO"}
             </TextReveal>
             <HeadingDivider className="my-1.5" />
@@ -392,7 +392,7 @@ export default function AboutPage() {
                     {/* Card Header & Content */}
                     <div className="p-6 sm:p-8 space-y-5">
                       {/* Card Title */}
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-[#E86F1D] uppercase tracking-wider">
+                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-[#FFAE08] uppercase tracking-wider">
                         {lang === "hi" ? card.titleHi : card.title}
                       </h3>
 
@@ -405,7 +405,7 @@ export default function AboutPage() {
                       <div className="pt-2 space-y-2 border-t border-[#F2E5D5]">
                         {card.points.map((pt, pIdx) => (
                           <div key={pIdx} className="flex items-start gap-2 text-xs sm:text-sm text-[#4E3E33]">
-                            <span className="w-2 h-2 rounded-full bg-[#E86F1D] shrink-0 mt-1.5" aria-hidden="true" />
+                            <span className="w-2 h-2 rounded-full bg-[#FFAE08] shrink-0 mt-1.5" aria-hidden="true" />
                             <span>{lang === "hi" ? pt.hi : pt.en}</span>
                           </div>
                         ))}
@@ -453,8 +453,8 @@ export default function AboutPage() {
 
         {/* Floating Card Container (Matching Reference Image 2) */}
         <div className="relative z-10 page-container max-w-4xl text-center px-4 sm:px-6 w-full pt-2 sm:pt-4">
-          <div className="bg-[#FFFDF9]/95 sm:bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#E86F1D]/35 shadow-[0_16px_40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 space-y-5">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#E86F1D]">
+          <div className="bg-[#FFFDF9]/95 sm:bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#FFAE08]/35 shadow-[0_16px_40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 space-y-5">
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#FFAE08]">
               {lang === "hi" ? "समग्र समाज उत्थान का संकल्प" : "WALKING TOGETHER FOR HUMANITY"}
             </p>
 
@@ -469,14 +469,14 @@ export default function AboutPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
               <button
                 onClick={() => openDonateModal("General Seva")}
-                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Heart className="w-4 h-4 fill-current text-white" />
                 <span>{lang === "hi" ? "सेवा में सहयोग करें" : "Support Our Seva"}</span>
               </button>
               <Link
                 href="/membership"
-                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#FFF9F2] hover:bg-white text-[#2B1810] font-bold text-xs sm:text-sm uppercase tracking-wider border border-[#E86F1D]/60 shadow-xs hover:shadow-sm active:scale-95 transition-all text-center"
+                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#FFF9F2] hover:bg-white text-[#2B1810] font-bold text-xs sm:text-sm uppercase tracking-wider border border-[#FFAE08]/60 shadow-xs hover:shadow-sm active:scale-95 transition-all text-center"
               >
                 <span>{lang === "hi" ? "ट्रस्ट के सदस्य बनें" : "Become a Member"}</span>
               </Link>

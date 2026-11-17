@@ -506,7 +506,7 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
         {/* Header */}
         <div className="bg-[#FBF2E7] px-4 py-3.5 sm:px-6 sm:py-4 border-b border-[#E7D8C8] flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 shrink-0 rounded-full bg-[#E86F1D]/10 flex items-center justify-center text-[#E86F1D]">
+            <div className="w-10 h-10 shrink-0 rounded-full bg-[#FFAE08]/10 flex items-center justify-center text-[#FFAE08]">
               <Heart className="w-5 h-5 fill-current" />
             </div>
             <div className="min-w-0">
@@ -525,7 +525,7 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
         {step !== "DONE" && (
           <ol className="flex gap-2 sm:gap-3 px-4 sm:px-6 pt-3.5 pb-1 text-[10px] sm:text-xs font-bold uppercase tracking-wider shrink-0 bg-[#FFF9F2] border-b border-[#E7D8C8]/40">
             {(hi ? ["विवरण", "भुगतान", "पुष्टि"] : ["Details", "Pay", "Confirmed"]).map((label, i) => (
-              <li key={label} className={`flex-1 border-t-2 pt-1.5 transition-colors whitespace-nowrap text-center sm:text-left ${i <= stepIndex ? "border-[#E86F1D] text-[#E86F1D]" : "border-[#E7D8C8] text-[#2B201A]/40"}`}>
+              <li key={label} className={`flex-1 border-t-2 pt-1.5 transition-colors whitespace-nowrap text-center sm:text-left ${i <= stepIndex ? "border-[#FFAE08] text-[#FFAE08]" : "border-[#E7D8C8] text-[#2B201A]/40"}`}>
                 {i + 1}. {label}
               </li>
             ))}
@@ -552,12 +552,12 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
                             aria-pressed={selected}
                             className={`p-3 sm:p-3.5 rounded-xl border text-left flex flex-col justify-between transition-all min-h-18 cursor-pointer ${
                               selected
-                                ? "bg-[#E86F1D] text-white border-[#E86F1D] shadow-warm-sm"
-                                : "bg-[#FBF2E7] border-[#E7D8C8] text-[#2B201A] hover:border-[#E86F1D] hover:bg-[#FFF9F2]"
+                                ? "bg-[#FFAE08] text-white border-[#FFAE08] shadow-warm-sm"
+                                : "bg-[#FBF2E7] border-[#E7D8C8] text-[#2B201A] hover:border-[#FFAE08] hover:bg-[#FFF9F2]"
                             }`}
                           >
                             <span className="text-xs font-bold leading-tight">{localizeProgramName(p.name, hi)}</span>
-                            <span className={`text-sm sm:text-base font-extrabold mt-1 ${selected ? "text-white" : "text-[#E86F1D]"}`}>
+                            <span className={`text-sm sm:text-base font-extrabold mt-1 ${selected ? "text-white" : "text-[#FFAE08]"}`}>
                               {formatINR(p.price)}
                             </span>
                           </button>
@@ -584,8 +584,8 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
                             }}
                             className={`py-2.5 px-3 rounded-xl border text-sm font-bold transition-all ${
                               selected
-                                ? "bg-[#E86F1D] text-white border-[#E86F1D] shadow-warm-sm"
-                                : "bg-[#FBF2E7] border-[#E7D8C8] text-[#2B201A] hover:border-[#E86F1D]"
+                                ? "bg-[#FFAE08] text-white border-[#FFAE08] shadow-warm-sm"
+                                : "bg-[#FBF2E7] border-[#E7D8C8] text-[#2B201A] hover:border-[#FFAE08]"
                             }`}
                           >
                             {formatINR(amt)}
@@ -736,7 +736,7 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
                   {resumed && (
                     <p className="text-xs text-[#2B201A]/70 bg-[#FBF2E7] border border-[#E7D8C8] rounded-xl p-2.5">
                       {hi ? "पहले शुरू किए गए दान को जारी रख रहे हैं।" : "Continuing the donation you started earlier."}{" "}
-                      <button type="button" onClick={resetAll} className="font-bold text-[#E86F1D] underline underline-offset-2">
+                      <button type="button" onClick={resetAll} className="font-bold text-[#FFAE08] underline underline-offset-2">
                         {hi ? "नया दान शुरू करें" : "Start a new donation"}
                       </button>
                     </p>

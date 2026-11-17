@@ -219,7 +219,7 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
           {/* Desktop Left Button */}
           <button
             onClick={scrollPrev}
-            className="hidden md:flex shrink-0 mr-2.5 lg:mr-3.5 w-11 h-11 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#E86F1D] text-[#2B201A] hover:text-white items-center justify-center shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+            className="hidden md:flex shrink-0 mr-2.5 lg:mr-3.5 w-11 h-11 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#FFAE08] text-[#2B201A] hover:text-white items-center justify-center shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5 stroke-[2]" />
@@ -234,15 +234,15 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
                   className="flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_25%] pl-4 sm:pl-5 min-w-0"
                 >
                   {/* Testimonial Card with authentic styling */}
-                  <div className="h-full bg-white rounded-2xl border border-[#E7D8C8] p-5 sm:p-6 shadow-[0_4px_16px_-2px_rgba(43,32,26,0.06)] hover:border-[#E86F1D] hover:shadow-warm-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                  <div className="h-full bg-white rounded-2xl border border-[#E7D8C8] p-5 sm:p-6 shadow-[0_4px_16px_-2px_rgba(43,32,26,0.06)] hover:border-[#FFAE08] hover:shadow-warm-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
                     <div className="flex flex-col h-full justify-between space-y-3.5">
                       {/* Devotee Info: Avatar + Name & Location */}
                       <div className="flex items-center gap-3">
-                        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#E86F1D] to-[#B8893E] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+                        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-[#FFAE08] to-[#B8893E] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
                           {item.initial}
                         </div>
                         <div className="min-w-0">
-                          <h3 className="font-editorial font-bold text-sm sm:text-base text-[#2B201A] group-hover:text-[#E86F1D] transition-colors truncate">
+                          <h3 className="font-editorial font-bold text-sm sm:text-base text-[#2B201A] group-hover:text-[#FFAE08] transition-colors truncate">
                             {lang === "hi" ? item.nameHi : item.name}
                           </h3>
                           <p className="text-[11px] sm:text-xs text-[#7A6B60] font-medium truncate">
@@ -256,7 +256,7 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
                         {[...Array(item.rating)].map((_, i) => (
                           <Star
                             key={i}
-                            className="w-3.5 h-3.5 fill-[#E86F1D] text-[#E86F1D]"
+                            className="w-3.5 h-3.5 fill-[#FFAE08] text-[#FFAE08]"
                           />
                         ))}
                       </div>
@@ -275,7 +275,7 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
           {/* Desktop Right Button */}
           <button
             onClick={scrollNext}
-            className="hidden md:flex shrink-0 ml-2.5 lg:ml-3.5 w-11 h-11 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#E86F1D] text-[#2B201A] hover:text-white items-center justify-center shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
+            className="hidden md:flex shrink-0 ml-2.5 lg:ml-3.5 w-11 h-11 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#FFAE08] text-[#2B201A] hover:text-white items-center justify-center shadow-md hover:shadow-lg transition-all active:scale-95 cursor-pointer"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5 stroke-[2]" />
@@ -287,7 +287,7 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
           {/* Mobile Prev Button */}
           <button
             onClick={scrollPrev}
-            className="md:hidden w-10 h-10 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#E86F1D] text-[#2B201A] hover:text-white flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
+            className="md:hidden w-10 h-10 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#FFAE08] text-[#2B201A] hover:text-white flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5 stroke-[2]" />
@@ -301,8 +301,8 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
                 onClick={() => scrollTo(idx)}
                 className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                   selectedIndex === idx
-                    ? "w-8 bg-[#E86F1D]"
-                    : "w-2.5 bg-[#E86F1D]/25 hover:bg-[#E86F1D]/50"
+                    ? "w-8 bg-[#FFAE08]"
+                    : "w-2.5 bg-[#FFAE08]/25 hover:bg-[#FFAE08]/50"
                 }`}
                 aria-label={`Go to slide ${idx + 1}`}
               />
@@ -312,7 +312,7 @@ export default function TestimonialsSection({ lang = "en" }: TestimonialsSection
           {/* Mobile Next Button */}
           <button
             onClick={scrollNext}
-            className="md:hidden w-10 h-10 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#E86F1D] text-[#2B201A] hover:text-white flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
+            className="md:hidden w-10 h-10 rounded-full border border-[#E7D8C8] bg-white hover:bg-[#FFAE08] text-[#2B201A] hover:text-white flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5 stroke-[2]" />

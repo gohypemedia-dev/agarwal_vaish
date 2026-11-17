@@ -66,7 +66,7 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
         }
       }}
       aria-label={`${lang === "hi" ? "देखें" : "View"}: ${title}`}
-      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/30 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(232,111,29,0.25)] hover:border-[#E86F1D] transition-all duration-300 block cursor-pointer select-none"
+      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/30 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(255, 174, 8,0.25)] hover:border-[#FFAE08] transition-all duration-300 block cursor-pointer select-none"
     >
       {/* Media: Video or Photo */}
       {isVideo ? (
@@ -88,7 +88,7 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
               isPlaying ? "opacity-0 scale-75" : "opacity-100 scale-100"
             }`}
           >
-            <div className="w-12 h-12 rounded-full bg-[#E86F1D]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#E86F1D] transition-transform duration-300">
+            <div className="w-12 h-12 rounded-full bg-[#FFAE08]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#FFAE08] transition-transform duration-300">
               <Play className="w-5 h-5 fill-current ml-0.5" />
             </div>
           </div>
@@ -280,7 +280,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
             <span className="text-[#1E1612]">
               {lang === "hi" ? "हमारी " : "Our "}
             </span>
-            <span className="text-[#E86F1D]">
+            <span className="text-[#FFAE08]">
               {lang === "hi" ? "गैलरी" : "Gallery"}
             </span>
           </h1>
@@ -305,7 +305,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                   setSelectedCategory(e.target.value);
                   setCurrentPage(1);
                 }}
-                className="w-full h-11 px-3.5 py-2 rounded-lg border border-[#E7D8C8] bg-white text-xs sm:text-sm font-medium text-[#1E1612] focus:border-[#E86F1D] focus:outline-none shadow-2xs cursor-pointer"
+                className="w-full h-11 px-3.5 py-2 rounded-lg border border-[#E7D8C8] bg-white text-xs sm:text-sm font-medium text-[#1E1612] focus:border-[#FFAE08] focus:outline-none shadow-2xs cursor-pointer"
               >
                 <option value="all">
                   {lang === "hi" ? "सभी श्रेणियां (All Categories)" : "Select Category / Title"}
@@ -321,7 +321,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
             <button
               type="button"
               onClick={() => setCurrentPage(1)}
-              className="h-11 px-6 rounded-lg bg-[#E86F1D] hover:bg-[#D25E12] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
+              className="h-11 px-6 rounded-lg bg-[#FFAE08] hover:bg-[#E59C00] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
             >
               <Search className="w-4 h-4" />
               <span>{lang === "hi" ? "खोजें" : "Search"}</span>
@@ -338,7 +338,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
               }}
               className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 activeMediaFilter === "all"
-                  ? "bg-[#E86F1D] text-white shadow-xs"
+                  ? "bg-[#FFAE08] text-white shadow-xs"
                   : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
               }`}
             >
@@ -352,7 +352,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
               }}
               className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeMediaFilter === "photos"
-                  ? "bg-[#E86F1D] text-white shadow-xs"
+                  ? "bg-[#FFAE08] text-white shadow-xs"
                   : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
               }`}
             >
@@ -367,7 +367,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
               }}
               className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeMediaFilter === "videos"
-                  ? "bg-[#E86F1D] text-white shadow-xs"
+                  ? "bg-[#FFAE08] text-white shadow-xs"
                   : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
               }`}
             >
@@ -401,7 +401,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                 setActiveMediaFilter("all");
                 setCurrentPage(1);
               }}
-              className="px-6 py-2 rounded-lg bg-[#E86F1D] text-white font-bold text-xs"
+              className="px-6 py-2 rounded-lg bg-[#FFAE08] text-white font-bold text-xs"
             >
               {lang === "hi" ? "सभी देखें" : "View All"}
             </button>
@@ -448,7 +448,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={safeCurrentPage === 1}
                 aria-label="Previous Page"
-                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#E86F1D] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
+                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#FFAE08] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -474,8 +474,8 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                     aria-current={isActive ? "page" : undefined}
                     className={`w-8 h-8 rounded-md font-bold text-xs flex items-center justify-center transition-all cursor-pointer ${
                       isActive
-                        ? "bg-[#E86F1D] text-white shadow-xs"
-                        : "bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#E86F1D]"
+                        ? "bg-[#FFAE08] text-white shadow-xs"
+                        : "bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#FFAE08]"
                     }`}
                   >
                     {p}
@@ -488,7 +488,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={safeCurrentPage === totalPages}
                 aria-label="Next Page"
-                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#E86F1D] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
+                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#FFAE08] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -502,7 +502,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
                   setPageSize(Number(e.target.value));
                   setCurrentPage(1);
                 }}
-                className="px-3 py-1.5 rounded-md border border-[#E7D8C8] bg-white text-xs font-semibold text-[#1E1612] focus:border-[#E86F1D] focus:outline-none cursor-pointer"
+                className="px-3 py-1.5 rounded-md border border-[#E7D8C8] bg-white text-xs font-semibold text-[#1E1612] focus:border-[#FFAE08] focus:outline-none cursor-pointer"
               >
                 <option value="12">12 / page</option>
                 <option value="16">16 / page</option>

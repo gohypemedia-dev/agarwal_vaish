@@ -23,7 +23,7 @@ export default function LegalPage({
             <ShieldCheck className="w-4 h-4 text-[#2F5A43]" />
             <span>Policies</span>
           </div>
-          <h1 className="font-editorial text-4xl sm:text-5xl font-bold text-[#E86F1D]">{title}</h1>
+          <h1 className="font-editorial text-4xl sm:text-5xl font-bold text-[#FFAE08]">{title}</h1>
           <HeadingDivider className="my-1.5" />
           <p className="text-xs text-[#2B201A]/60 font-semibold">
             Last updated: {LEGAL.lastUpdated} • {LEGAL.trustName}
@@ -42,7 +42,7 @@ export default function LegalPage({
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition-colors ${
                   p.href === current
                     ? "bg-[#2B201A] text-white border-[#2B201A]"
-                    : "bg-white text-[#2B201A]/75 border-[#E7D8C8] hover:border-[#E86F1D]/50"
+                    : "bg-white text-[#2B201A]/75 border-[#E7D8C8] hover:border-[#FFAE08]/50"
                 }`}
               >
                 {p.label}
@@ -67,7 +67,7 @@ export function Section({ n, title, children }: { n: number; title: string; chil
       <h2 className="font-editorial text-2xl font-bold text-[#2B201A] border-b border-[#E7D8C8] pb-2">
         {n}. {title}
       </h2>
-      <div className="space-y-3 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ul]:text-sm [&_a]:text-[#E86F1D] [&_a]:underline">
+      <div className="space-y-3 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:space-y-2 [&_ul]:text-sm [&_a]:text-[#FFAE08] [&_a]:underline">
         {children}
       </div>
     </div>
@@ -89,11 +89,11 @@ function ContactBox() {
         <p>{LEGAL.address}</p>
         <p>
           Email:{" "}
-          <a href={`mailto:${LEGAL.email}`} className="text-[#E86F1D] font-semibold hover:underline">
+          <a href={`mailto:${LEGAL.email}`} className="text-[#FFAE08] font-semibold hover:underline">
             {LEGAL.email}
           </a>{" "}
           • Phone:{" "}
-          <a href={LEGAL.phoneHref} className="text-[#E86F1D] font-semibold hover:underline">
+          <a href={LEGAL.phoneHref} className="text-[#FFAE08] font-semibold hover:underline">
             {LEGAL.phone}
           </a>
         </p>

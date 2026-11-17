@@ -34,7 +34,7 @@ export default async function CertificatePage({
     return (
       <Notice icon={<FileX2 className="w-12 h-12 text-[#B3261E]" />} title="Certificate not found">
         This certificate link is not valid. Please open it again from your confirmation email, or contact the Trust at{" "}
-        <a href="mailto:avshry@gmail.com" className="font-semibold text-[#E86F1D] hover:underline">avshry@gmail.com</a>.
+        <a href="mailto:avshry@gmail.com" className="font-semibold text-[#FFAE08] hover:underline">avshry@gmail.com</a>.
       </Notice>
     );
   }
@@ -56,7 +56,7 @@ export default async function CertificatePage({
     return (
       <Notice icon={<FileX2 className="w-12 h-12 text-[#B3261E]" />} title="Certificate not found">
         This certificate link is not valid. Please open it again from your confirmation email, or contact the Trust at{" "}
-        <a href="mailto:avshry@gmail.com" className="font-semibold text-[#E86F1D] hover:underline">avshry@gmail.com</a>.
+        <a href="mailto:avshry@gmail.com" className="font-semibold text-[#FFAE08] hover:underline">avshry@gmail.com</a>.
       </Notice>
     );
   }
