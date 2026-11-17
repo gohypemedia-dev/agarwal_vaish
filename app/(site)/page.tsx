@@ -52,7 +52,7 @@ export default function HomePage() {
   useEffect(() => {
     const slideTimer = setInterval(() => {
       setCurrentHeroSlide((prev) => (prev + 1) % 2);
-    }, 5000);
+    }, 4000);
     return () => clearInterval(slideTimer);
   }, []);
 
@@ -290,14 +290,15 @@ export default function HomePage() {
       {/* 2. HERO SECTION: 100% FULL-WIDTH 2-SLIDE CAROUSEL (UNCUT HD) */}
       {/* ============================================================ */}
       <section className="relative w-full aspect-[1672/941] overflow-hidden select-none group border-b border-gray-200 bg-white">
-        {heroSlides.map((slide, idx) => {
-          const isActive = idx === currentHeroSlide;
-          return (
+        {/* Horizontal sliding track */}
+        <div
+          className="flex w-full h-full transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentHeroSlide * 100}%)` }}
+        >
+          {heroSlides.map((slide, idx) => (
             <div
               key={slide.id}
-              className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-                isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-              }`}
+              className="w-full h-full shrink-0 relative"
             >
               <Image
                 src={slide.src}
@@ -309,8 +310,8 @@ export default function HomePage() {
                 sizes="100vw"
               />
             </div>
-          );
-        })}
+          ))}
+        </div>
 
         {/* Carousel Arrow Controls */}
         <button
