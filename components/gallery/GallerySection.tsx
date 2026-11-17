@@ -200,7 +200,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   return (
     <section
       id="gallery"
-      className="py-20 sm:py-24 lg:py-32 bg-[#FFF9F2] border-t border-[#E7D8C8] scroll-mt-20 relative overflow-hidden"
+      className="py-20 sm:py-24 lg:py-32 bg-[#FFFDF9] border-t border-[#E8DFD3] scroll-mt-20 relative overflow-hidden"
     >
       <div
         className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8"

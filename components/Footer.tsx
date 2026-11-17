@@ -15,7 +15,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#FBF2E7] border-t border-[#E7D8C8] text-[#2B201A] relative pt-16 pb-12">
+    <footer className="bg-[#FFF9F2] border-t border-[#E7D8C8] text-[#2B201A] relative pt-16 pb-12">
       <div className="page-container">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.3fr_0.9fr_1fr_1.3fr] gap-8 xl:gap-10 pb-12 border-b border-[#E7D8C8]">
           {/* Brand & About */}
@@ -30,10 +30,10 @@ export default function Footer() {
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <h3 className="font-editorial text-lg xl:text-xl font-bold text-[#2B201A] leading-tight">
+                <h3 className="font-sans text-lg xl:text-xl font-bold text-[#2B201A] leading-tight">
                   {lang === "hi" ? "अग्रवाल वैश्य" : "AGGARWAL VAISH"}
                 </h3>
-                <p className="text-[10.5px] xl:text-[11.5px] font-extrabold tracking-[0.14em] text-[#B8893E] uppercase">
+                <p className="text-[10.5px] xl:text-[11.5px] font-extrabold tracking-[0.14em] text-[#FFAE08] uppercase">
                   {lang === "hi" ? "समाज हरियाणा" : "SAMAJ HARYANA"}
                 </p>
               </div>
@@ -46,7 +46,7 @@ export default function Footer() {
             <div className="pt-2">
               <button
                 onClick={() => openDonateModal("General Donation")}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#E86F1D] hover:bg-[#D25E12] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#FFAE08] hover:bg-[#E59C00] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-warm-sm transition-all"
               >
                 <Heart className="w-4 h-4 fill-current text-white" />
                 <span>{lang === "hi" ? "सहयोग एवं दान" : "Support Our Cause"}</span>
@@ -56,7 +56,7 @@ export default function Footer() {
 
           {/* Column 1: Links */}
           <div className="space-y-3">
-            <h4 className="font-editorial text-lg font-bold text-[#FFAE08] border-b border-[#E7D8C8] pb-1.5 inline-block">
+            <h4 className="font-sans text-lg font-bold text-[#FFAE08] border-b border-[#E7D8C8] pb-1.5 inline-block">
               {lang === "hi" ? "त्वरित लिंक" : "Quick Links"}
             </h4>
             <ul className="space-y-2.5 text-sm font-semibold">
@@ -184,7 +184,7 @@ export default function Footer() {
             <span>{lang === "hi" ? "पंजीकरण: AVS/HRY/2009" : "Reg. No: AVS/HRY/2009"}</span>
             <button
               onClick={scrollToTop}
-              className="ml-1 p-2.5 bg-[#FFF9F2] hover:bg-[#E86F1D] hover:text-white rounded-xl border border-[#E7D8C8] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer"
+              className="ml-1 p-2.5 bg-[#FFF9F2] hover:bg-[#FFAE08] hover:text-white rounded-xl border border-[#E7D8C8] transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0 cursor-pointer"
               aria-label="Scroll to top"
             >
               <ArrowUp className="w-4 h-4" />

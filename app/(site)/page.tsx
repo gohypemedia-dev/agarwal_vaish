@@ -548,7 +548,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 5.5. PANCH SANKALP WIDE BANNER SECTION (CLIENT'S OFFICIAL)   */}
       {/* ============================================================ */}
-      <section className="w-full bg-white py-6 sm:py-10 border-b border-gray-200">
+      <section className="w-full bg-[#FFFDF9] py-6 sm:py-10 border-b border-[#E8DFD3]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative w-full aspect-[1024/332] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white">
             <Image
@@ -566,7 +566,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 6. UPCOMING EVENTS & SAMMELANS                               */}
       {/* ============================================================ */}
-      <section id="events" className="py-16 sm:py-20 lg:py-24 bg-white border-b border-gray-200">
+      <section id="events" className="py-16 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
