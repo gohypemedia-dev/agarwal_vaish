@@ -6,7 +6,6 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { Play } from "lucide-react";
 import { useApp } from "@/context/AppContext";
-import { cachedFetch } from "@/lib/client-cache";
 import { galleryData, GalleryItem } from "@/data/gallery";
 import GalleryModal from "./GalleryModal";
 import HeadingDivider from "@/components/HeadingDivider";
@@ -114,12 +113,21 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   const [isHovered, setIsHovered] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Fetch live Cloudflare R2 gallery items from database with client cache
+  // Fetch live gallery items with cache-busting and graphics-filter safeguard
   useEffect(() => {
-    cachedFetch<GalleryItem[]>("/api/gallery", { ttlMs: 5 * 60 * 1000 })
+    fetch("/api/gallery?v=avs-photos-v2")
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setItems(data);
+          const filtered = data.filter(
+            (item: GalleryItem) =>
+              !item.src.includes("design-") &&
+              !item.src.includes("banner-square") &&
+              !item.thumbnail.includes("design-")
+          );
+          if (filtered.length > 0) {
+            setItems(filtered);
+          }
         }
       })
       .catch((err) => console.warn("Could not fetch live gallery items:", err));

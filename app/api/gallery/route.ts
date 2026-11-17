@@ -4,9 +4,9 @@ import { galleryData } from "@/data/gallery";
 
 export const dynamic = "force-dynamic";
 
-// Edge cache for 2 minutes, stale-while-revalidate for 10 minutes
+// Disable edge cache for instant updates during review
 const CACHE_HEADERS = {
-  "Cache-Control": "public, s-maxage=120, stale-while-revalidate=600",
+  "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
 };
 
 export async function GET() {
@@ -17,7 +17,17 @@ export async function GET() {
     });
 
     if (items.length > 0) {
-      const legacyKeywords = ["sadhvi", "vrindavan", "gurukul", "katha", "gopashtami", "hero-split"];
+      const legacyKeywords = [
+        "sadhvi",
+        "vrindavan",
+        "gurukul",
+        "katha",
+        "gopashtami",
+        "hero-split",
+        "design-",
+        "banner-square",
+        "hero-right",
+      ];
       const valid = items.filter((item) => {
         const text = `${item.title || ""} ${item.titleHi || ""} ${item.event || ""} ${item.src || ""}`.toLowerCase();
         return !legacyKeywords.some((k) => text.includes(k));
@@ -50,7 +60,7 @@ export async function GET() {
       headers: CACHE_HEADERS,
     });
   } catch (error) {
-    console.error("Failed to load gallery items from database:", error);
+    console.error("Failed to load gallery items from database, returning code galleryData:", error);
     return NextResponse.json(galleryData, {
       status: 200,
       headers: CACHE_HEADERS,
