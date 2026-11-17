@@ -529,21 +529,18 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 5.5. PANCH SANKALP WIDE BANNER SECTION (CLIENT'S OFFICIAL)   */}
+      {/* 5.5. PANCH SANKALP WIDE BANNER (100% FULL-WIDTH END-TO-END)  */}
       {/* ============================================================ */}
-      <section className="w-full bg-[#FFFDF9] py-6 sm:py-10 border-b border-[#E8DFD3]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative w-full aspect-[1024/332] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white">
-            <Image
-              src="/images/agarwal/sankalp-wide-banner.jpg"
-              alt="अग्रवाल वैश्य विकास संगठन के पंच संकल्प"
-              fill
-              sizes="(max-width: 1400px) 100vw, 1400px"
-              className="object-cover object-center"
-              priority
-            />
-          </div>
-        </div>
+      <section className="relative w-full aspect-[1024/332] overflow-hidden select-none border-b border-[#E8DFD3] bg-white">
+        <Image
+          src="/images/agarwal/sankalp-wide-banner.jpg"
+          alt="अग्रवाल वैश्य विकास संगठन के पंच संकल्प"
+          fill
+          unoptimized
+          priority
+          sizes="100vw"
+          className="object-cover object-center w-full h-full block select-none"
+        />
       </section>
 
       {/* ============================================================ */}
