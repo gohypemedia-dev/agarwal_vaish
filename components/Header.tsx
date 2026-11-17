@@ -120,13 +120,13 @@ export default function Header() {
             : "bg-white border-b border-gray-200"
         }`}
       >
-        <div className="max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 box-border">
-          {/* DESKTOP HEADER BAR (>= 1024px) - EXACT REFERENCE FORMAT & CREDENTIALS */}
-          <div className="hidden lg:flex items-center justify-between h-[88px] xl:h-[96px] gap-3">
+        <div className="max-w-[1440px] w-full mx-auto px-3 sm:px-5 lg:px-4 xl:px-8 box-border">
+          {/* DESKTOP HEADER BAR (>= 1024px) - FULLY RESPONSIVE FOR ALL LAPTOPS */}
+          <div className="hidden lg:flex items-center justify-between h-[80px] xl:h-[92px] gap-2 xl:gap-4">
             
-            {/* 1. LEFT: Logo + AGGARWAL VAISH SAMAJ in Single Line */}
-            <Link href="/" className="flex items-center gap-3 shrink-0 group whitespace-nowrap">
-              <div className="relative w-12 h-12 xl:w-14 xl:h-14 rounded-full overflow-hidden shrink-0">
+            {/* 1. LEFT: Logo + AGGARWAL VAISH SAMAJ */}
+            <Link href="/" className="flex items-center gap-2 xl:gap-3 shrink-0 group whitespace-nowrap">
+              <div className="relative w-10 h-10 xl:w-13 xl:h-13 rounded-full overflow-hidden shrink-0">
                 <Image
                   src="/images/agarwal/logo.png"
                   alt="Aggarwal Vaish Samaj Logo"
@@ -135,13 +135,13 @@ export default function Header() {
                   priority
                 />
               </div>
-              <span className="font-serif text-[17px] xl:text-[20px] font-bold tracking-wider text-[oklch(0.279_0.041_260.031)] group-hover:text-[#FFAE08] transition-colors uppercase">
+              <span className="font-sans text-[14px] lg:text-[15px] xl:text-[18px] font-extrabold tracking-wide text-[#1E1612] group-hover:text-[#FFAE08] transition-colors uppercase">
                 AGGARWAL VAISH SAMAJ
               </span>
             </Link>
 
-            {/* 2. CENTER: Dropdown Navigation Menu matching credentials (Inter 13px/14px, font-semibold, color oklch) */}
-            <nav className="flex items-center justify-center gap-1 xl:gap-2 shrink-0">
+            {/* 2. CENTER: Dropdown Navigation Menu */}
+            <nav className="flex items-center justify-center gap-0.5 xl:gap-2 shrink-0">
               {navSections.map((sec) => (
                 <div
                   key={sec.id}
@@ -151,15 +151,15 @@ export default function Header() {
                 >
                   <Link
                     href={sec.href}
-                    className="navtext flex items-center gap-1.5 px-3 xl:px-3.5 h-10 rounded-md text-[13px] xl:text-[14px] font-semibold text-[oklch(0.279_0.041_260.031)] hover:text-[#FFAE08] tracking-wider uppercase transition-colors"
+                    className="navtext flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 h-9 xl:h-10 rounded-md text-[11.5px] lg:text-[12px] xl:text-[13.5px] font-semibold text-[#2B201A] hover:text-[#FFAE08] tracking-wider uppercase transition-colors whitespace-nowrap"
                   >
                     <span>{sec.label}</span>
-                    <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400 group-hover:text-[#FFAE08]" />
+                    <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400 group-hover:text-[#FFAE08]" />
                   </Link>
 
                   {/* Dropdown Menu */}
                   {activeDropdown === sec.id && (
-                    <div className="absolute left-0 top-full pt-1.5 w-64 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+                    <div className="absolute left-0 top-full pt-1.5 w-60 xl:w-64 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                       <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
                         {sec.subItems.map((sub, i) => (
                           <Link
@@ -178,14 +178,15 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* 3. RIGHT: Search Members Button (Exact Reference Pic) */}
-            <div className="flex items-center gap-3 shrink-0">
+            {/* 3. RIGHT: Search Members Button */}
+            <div className="flex items-center gap-2 xl:gap-3 shrink-0">
               <Link
                 href="#network"
-                className="flex items-center gap-2 h-10 px-4 xl:px-5 rounded-lg border border-[#FFAE08] text-[#FFAE08] hover:bg-[#FFAE08] hover:text-white transition-all text-[13px] xl:text-[14px] font-semibold tracking-wide shrink-0 shadow-xs"
+                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg border border-[#FFAE08] text-[#FFAE08] hover:bg-[#FFAE08] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
               >
-                <Search className="w-4 h-4 stroke-[2.2]" />
-                <span>Search Members</span>
+                <Search className="w-3.5 h-3.5 xl:w-4 xl:h-4 stroke-[2.2]" />
+                <span className="hidden xl:inline">Search Members</span>
+                <span className="xl:hidden">Search</span>
               </Link>
             </div>
 

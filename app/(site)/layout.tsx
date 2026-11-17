@@ -14,7 +14,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     <SmoothScrollProvider>
       <Preloader />
       <Header />
-      <main className="flex-1 w-full pt-[72px] sm:pt-[78px] lg:pt-[88px] xl:pt-[96px]">{children}</main>
+      <main className="flex-1 w-full pt-[72px] sm:pt-[78px] lg:pt-[80px] xl:pt-[92px]">{children}</main>
       <Footer />
       <FloatingSideDock />
       <CartDrawer />
