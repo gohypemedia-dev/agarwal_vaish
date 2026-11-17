@@ -313,24 +313,6 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Carousel Arrow Controls */}
-        <button
-          type="button"
-          onClick={() => setCurrentHeroSlide((prev) => (prev === 0 ? 1 : 0))}
-          aria-label="Previous Slide"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all duration-300 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer"
-        >
-          <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentHeroSlide((prev) => (prev === 0 ? 1 : 0))}
-          aria-label="Next Slide"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/30 hover:bg-black/60 text-white backdrop-blur-xs flex items-center justify-center transition-all duration-300 opacity-80 sm:opacity-0 sm:group-hover:opacity-100 shadow-lg cursor-pointer"
-        >
-          <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
-        </button>
-
         {/* Slide Indicator Dots */}
         <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 sm:gap-3 bg-black/25 backdrop-blur-xs px-4 py-1.5 sm:py-2 rounded-full">
           {heroSlides.map((slide, idx) => (
