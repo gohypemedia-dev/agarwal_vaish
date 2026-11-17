@@ -40,7 +40,7 @@ const schema = z
     RESEND_API_KEY: optional,
     EMAIL_FROM: optional,
     EMAIL_REPLY_TO: optional,
-    NGO_NAME: z.string().default("Aggarwal Vaish Samaj Haryana"),
+    NGO_NAME: z.string().default("Aggarwal Vaish Vikas Sangathan"),
     // Who gets the "donor says they paid, please approve" email (comma-separated).
     // Defaults to GMAIL_USER, the inbox of the UPI account owner.
     APPROVAL_EMAILS: z

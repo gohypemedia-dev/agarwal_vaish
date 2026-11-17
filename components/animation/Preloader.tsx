@@ -125,10 +125,10 @@ export default function Preloader({
               className="space-y-1 mb-4"
             >
               <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide drop-shadow-sm">
-                अग्रवाल वैश्य समाज हरियाणा
+                अग्रवाल वैश्य विकास संगठन
               </h1>
               <p className="text-xs sm:text-sm font-sans tracking-[0.22em] uppercase text-white/90 font-medium">
-                Aggarwal Vaish Samaj Haryana
+                Aggarwal Vaish Vikas Sangathan
               </p>
             </motion.div>
 
@@ -153,7 +153,7 @@ export default function Preloader({
           {/* Bottom Luxury Footer */}
           <div className="absolute bottom-6 inset-x-0 text-center">
             <span className="text-[11px] tracking-widest text-white/70 uppercase font-mono">
-              Aggarwal Vaish Samaj Haryana • Official Portal
+              Aggarwal Vaish Vikas Sangathan • Official Portal
             </span>
           </div>
 

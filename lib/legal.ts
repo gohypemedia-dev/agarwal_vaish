@@ -2,8 +2,8 @@
 // Have the Trust's CA / lawyer review the policy pages before relying on them.
 
 export const LEGAL = {
-  trustName: "Aggarwal Vaish Samaj Haryana",
-  registration: "Trust/2019/NBVT",
+  trustName: "Aggarwal Vaish Vikas Sangathan",
+  registration: "AVVS/HRY/2009",
   address: "P6/10, 4th Floor, DLF Phase 2, Gurugram, Haryana 122008, India",
   email: "avshry@gmail.com",
   phone: "+91 88606 65000",
@@ -12,7 +12,7 @@ export const LEGAL = {
 
   // Required by the Consumer Protection (E-Commerce) Rules, 2020.
   // TODO: replace with the name of the person the Trust appoints before going live.
-  grievanceOfficer: "Grievance Officer, Aggarwal Vaish Samaj Haryana",
+  grievanceOfficer: "Grievance Officer, Aggarwal Vaish Vikas Sangathan",
   grievanceAckHours: 48,
   grievanceResolveDays: 30,
 

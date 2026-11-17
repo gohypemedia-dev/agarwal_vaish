@@ -513,7 +513,7 @@ function localizeError(msg: string | undefined, isHi: boolean): string {
               <h3 id="donate-title" className="font-editorial text-lg sm:text-xl font-bold text-[#2B201A] truncate">
                 {localizeProgramName(session && step !== "SELECT" ? session.program : donateModal.program, hi)}
               </h3>
-              <p className="text-xs text-[#FFAE08] font-semibold">{hi ? "अग्रवाल वैश्य समाज हरियाणा" : "Aggarwal Vaish Samaj Haryana"}</p>
+              <p className="text-xs text-[#FFAE08] font-semibold">{hi ? "अग्रवाल वैश्य विकास संगठन" : "Aggarwal Vaish Vikas Sangathan"}</p>
             </div>
           </div>
           <button onClick={handleClose} aria-label={hi ? "बंद करें" : "Close"} className="p-2 text-[#2B201A]/60 hover:text-[#2B201A] rounded-xl hover:bg-[#FFF9F2] min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0">

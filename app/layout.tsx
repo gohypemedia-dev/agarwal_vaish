@@ -3,33 +3,33 @@ import "./globals.css";
 import { AppProvider } from "@/context/AppContext";
 
 export const metadata: Metadata = {
-  title: "Aggarwal Vaish Samaj Haryana | AVS Haryana | एकता, सेवा और स्वाभिमान",
+  title: "Aggarwal Vaish Vikas Sangathan | एकता, सेवा और स्वाभिमान",
   description:
-    "आधिकारिक पोर्टल - अग्रवाल वैश्य समाज (AVS Haryana)। पंच संकल्प: सामाजिक सहभागिता, महिला सशक्तिकरण, युवा नेतृत्व, राजनीतिक सहभागिता और संगठित समाज।",
+    "आधिकारिक पोर्टल - अग्रवाल वैश्य विकास संगठन हरियाणा। पंच संकल्प: राजनीतिक सशक्तिकरण, नारी स्वावलंबन एवं उद्यमिता, युवा नेतृत्व निर्माण, आर्थिक आत्मनिर्भरता और संगठित समाज।",
   keywords: [
-    "Aggarwal Vaish Samaj",
-    "AVS Haryana",
-    "Aggarwal Vaish Vikas Sangthan",
+    "Aggarwal Vaish Vikas Sangathan",
+    "अग्रवाल वैश्य विकास संगठन",
+    "AVVS Haryana",
     "Ashok Buwaniwala",
     "Maharaja Agrasen",
     "Panch Sankalp",
-    "Vaish Samaj Haryana",
+    "Vaish Vikas Sangathan",
     "Youth Wing",
     "Mahila Wing",
   ],
-  authors: [{ name: "Aggarwal Vaish Samaj Haryana" }],
+  authors: [{ name: "Aggarwal Vaish Vikas Sangathan" }],
   openGraph: {
-    title: "Aggarwal Vaish Samaj Haryana | AVS Haryana",
+    title: "Aggarwal Vaish Vikas Sangathan | एकता, सेवा और स्वाभिमान",
     description:
-      "अग्रवाल वैश्य समाज हरियाणा - संगठित समाज, सशक्त युवा, और सेवा के पंच संकल्प के साथ समाज का गौरव।",
+      "अग्रवाल वैश्य विकास संगठन हरियाणा - संगठित समाज, सशक्त युवा, और सेवा के पंच संकल्प के साथ समाज का गौरव।",
     url: "https://avsharyana.com",
-    siteName: "Aggarwal Vaish Samaj Haryana",
+    siteName: "Aggarwal Vaish Vikas Sangathan",
     images: [
       {
         url: "/images/agarwal/logo.png",
         width: 800,
         height: 800,
-        alt: "Aggarwal Vaish Samaj Haryana Logo",
+        alt: "Aggarwal Vaish Vikas Sangathan Logo",
       },
     ],
     locale: "en_IN",

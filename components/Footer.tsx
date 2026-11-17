@@ -34,14 +34,14 @@ export default function Footer() {
                   {lang === "hi" ? "अग्रवाल वैश्य" : "AGGARWAL VAISH"}
                 </h3>
                 <p className="text-[10.5px] xl:text-[11.5px] font-extrabold tracking-[0.14em] text-[#FFAE08] uppercase">
-                  {lang === "hi" ? "समाज हरियाणा" : "SAMAJ HARYANA"}
+                  {lang === "hi" ? "विकास संगठन" : "VIKAS SANGATHAN"}
                 </p>
               </div>
             </div>
             <p className="text-sm text-[#2B201A]/85 leading-relaxed">
               {lang === "hi"
-                ? "अग्रवाल वैश्य समाज (AVS Haryana) समाज को संगठित करने, महिला सशक्तिकरण, युवा नेतृत्व, सामाजिक सहभागिता और जनसेवा के पंच संकल्प के प्रति समर्पित एक अग्रणी सामाजिक संगठन है।"
-                : "Aggarwal Vaish Samaj (AVS Haryana) is a premier social and community organization dedicated to community unity, women empowerment, youth leadership, and public service under the sacred Panch Sankalp."}
+                ? "अग्रवाल वैश्य विकास संगठन समाज को संगठित करने, महिला सशक्तिकरण, युवा नेतृत्व, सामाजिक सहभागिता और जनसेवा के पंच संकल्प के प्रति समर्पित एक अग्रणी सामाजिक संगठन है।"
+                : "Aggarwal Vaish Vikas Sangathan is a premier social and community organization dedicated to community unity, women empowerment, youth leadership, and public service under the sacred Panch Sankalp."}
             </p>
             <div className="pt-2">
               <button
@@ -159,8 +159,8 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#2B201A]/75 font-medium text-center sm:text-left">
           <p>
             {lang === "hi"
-              ? `© ${new Date().getFullYear()} अग्रवाल वैश्य समाज (AVS Haryana)। सर्वाधिकार सुरक्षित।`
-              : `© ${new Date().getFullYear()} Aggarwal Vaish Samaj Haryana. All rights reserved.`}
+              ? `© ${new Date().getFullYear()} अग्रवाल वैश्य विकास संगठन। सर्वाधिकार सुरक्षित।`
+              : `© ${new Date().getFullYear()} Aggarwal Vaish Vikas Sangathan. All rights reserved.`}
           </p>
           <div className="flex flex-wrap items-center justify-center sm:justify-end gap-2.5 sm:gap-4">
             {POLICY_LINKS.map((p) => {

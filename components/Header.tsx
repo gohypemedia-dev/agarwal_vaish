@@ -124,20 +124,25 @@ export default function Header() {
           {/* DESKTOP HEADER BAR (>= 1024px) - FULLY RESPONSIVE FOR ALL LAPTOPS */}
           <div className="hidden lg:flex items-center justify-between h-[80px] xl:h-[92px] gap-2 xl:gap-4">
             
-            {/* 1. LEFT: Logo + AGGARWAL VAISH SAMAJ */}
+            {/* 1. LEFT: Logo + AGGARWAL VAISH VIKAS SANGATHAN */}
             <Link href="/" className="flex items-center gap-2 xl:gap-3 shrink-0 group whitespace-nowrap">
-              <div className="relative w-10 h-10 xl:w-13 xl:h-13 rounded-full overflow-hidden shrink-0">
+              <div className="relative w-10 h-10 xl:w-12 xl:h-12 rounded-full overflow-hidden shrink-0">
                 <Image
                   src="/images/agarwal/logo.png"
-                  alt="Aggarwal Vaish Samaj Logo"
+                  alt="Aggarwal Vaish Vikas Sangathan Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
-              <span className="font-sans text-[14px] lg:text-[15px] xl:text-[18px] font-extrabold tracking-wide text-[#1E1612] group-hover:text-[#FFAE08] transition-colors uppercase">
-                AGGARWAL VAISH SAMAJ
-              </span>
+              <div className="flex flex-col justify-center">
+                <span className="font-sans text-[13px] lg:text-[14px] xl:text-[16px] font-extrabold tracking-tight text-[#1E1612] group-hover:text-[#FFAE08] transition-colors uppercase leading-tight">
+                  AGGARWAL VAISH
+                </span>
+                <span className="text-[10px] lg:text-[10.5px] xl:text-[12px] font-extrabold tracking-wider text-[#FFAE08] uppercase leading-tight">
+                  VIKAS SANGATHAN
+                </span>
+              </div>
             </Link>
 
             {/* 2. CENTER: Navigation Menu (Dropdown temporarily commented out as requested) */}
@@ -194,18 +199,23 @@ export default function Header() {
           <div className="flex lg:hidden items-center justify-between h-[72px] sm:h-[78px]">
             {/* Mobile Logo */}
             <Link href="/" className="flex items-center gap-2.5 min-w-0">
-              <div className="relative w-11 h-11 rounded-full overflow-hidden shrink-0">
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shrink-0">
                 <Image
                   src="/images/agarwal/logo.png"
-                  alt="Aggarwal Vaish Samaj Logo"
+                  alt="Aggarwal Vaish Vikas Sangathan Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
-              <span className="font-serif text-sm sm:text-base font-bold tracking-tight text-[oklch(0.279_0.041_260.031)] uppercase truncate">
-                AGGARWAL VAISH SAMAJ
-              </span>
+              <div className="flex flex-col justify-center min-w-0">
+                <span className="font-sans text-xs sm:text-sm font-extrabold tracking-tight text-[#1E1612] uppercase truncate leading-tight">
+                  AGGARWAL VAISH
+                </span>
+                <span className="text-[9.5px] sm:text-[10.5px] font-extrabold tracking-wider text-[#FFAE08] uppercase truncate leading-tight">
+                  VIKAS SANGATHAN
+                </span>
+              </div>
             </Link>
 
             {/* Mobile Right Controls */}
@@ -244,14 +254,19 @@ export default function Header() {
                     <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0">
                       <Image
                         src="/images/agarwal/logo.png"
-                        alt="AVS Logo"
+                        alt="AVVS Logo"
                         fill
                         className="object-contain"
                       />
                     </div>
-                    <span className="font-serif text-xs font-bold text-[#1F1712] uppercase">
-                      AGGARWAL VAISH SAMAJ
-                    </span>
+                    <div className="flex flex-col justify-center">
+                      <span className="font-sans text-xs font-extrabold text-[#1F1712] uppercase leading-tight">
+                        AGGARWAL VAISH
+                      </span>
+                      <span className="text-[9.5px] font-bold text-[#FFAE08] uppercase leading-tight">
+                        VIKAS SANGATHAN
+                      </span>
+                    </div>
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
