@@ -237,7 +237,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
 
   const stats = [
     { label: "Total orders", value: orders.length, tone: "text-[#2B201A]" },
-    { label: "Needs approval", value: pendingApprovalsCount, tone: pendingApprovalsCount > 0 ? "text-[#E86F1D]" : "text-[#2B201A]" },
+    { label: "Needs approval", value: pendingApprovalsCount, tone: pendingApprovalsCount > 0 ? "text-[#FFAE08]" : "text-[#2B201A]" },
     { label: "Verified revenue", value: formatMoney(totalRevenue), tone: "text-[#2F5A43]" },
     refundDueCount > 0
       ? { label: "Refunds due", value: refundDueCount, tone: "text-red-700" }
@@ -248,7 +248,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
     <div className="space-y-5">
       {/* Title */}
       <div>
-        <h1 className="font-editorial text-2xl sm:text-3xl font-bold text-[#2B201A]">
+        <h1 className="font-sans text-2xl sm:text-3xl font-bold text-[#2B201A]">
           Publication &amp; Book Orders
         </h1>
         <p className="text-sm text-[#2B201A]/70 mt-1">
@@ -306,7 +306,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
                 setSearchQuery(e.target.value);
                 setPage(1);
               }}
-              className="w-full pl-9 pr-3 py-2 bg-[#FAF6F0] border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#E86F1D]"
+              className="w-full pl-9 pr-3 py-2 bg-[#FAF6F0] border border-[#E7D8C8] rounded-xl text-sm focus:outline-hidden focus:border-[#FFAE08]"
             />
           </div>
         </div>
@@ -314,7 +314,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
         {filteredOrders.length === 0 ? (
           <div className="p-12 text-center space-y-2">
             <Package className="w-10 h-10 text-[#B8893E] mx-auto opacity-60" />
-            <h3 className="font-editorial text-lg font-bold text-[#2B201A]">No orders found</h3>
+            <h3 className="font-sans text-lg font-bold text-[#2B201A]">No orders found</h3>
             <p className="text-sm text-[#2B201A]/60">
               {searchQuery ? "No orders matched your search." : "No orders match the selected filter."}
             </p>
@@ -437,7 +437,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
                           disabled={isUpdating}
                           onChange={(e) => handleUpdateOrderStatus(order, e.target.value as OrderStatus)}
                           aria-label={`Shipping status for ${order.orderNumber}`}
-                          className={`w-full px-2.5 py-1.5 border rounded-lg text-xs font-semibold focus:outline-hidden focus:border-[#E86F1D] disabled:opacity-50 ${STATUS_STYLES[order.status]}`}
+                          className={`w-full px-2.5 py-1.5 border rounded-lg text-xs font-semibold focus:outline-hidden focus:border-[#FFAE08] disabled:opacity-50 ${STATUS_STYLES[order.status]}`}
                         >
                           <option value="PLACED">Placed (स्वीकार किया गया)</option>
                           <option value="PROCESSING">Processing (पैकिंग जारी)</option>
@@ -477,7 +477,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
                                 onChange={(e) => setRefundRefs((r) => ({ ...r, [order.id]: e.target.value }))}
                                 placeholder="UPI reference / UTR (optional)"
                                 maxLength={100}
-                                className="flex-1 px-3 py-2 bg-white border border-red-200 rounded-lg text-sm focus:outline-hidden focus:border-[#E86F1D]"
+                                className="flex-1 px-3 py-2 bg-white border border-red-200 rounded-lg text-sm focus:outline-hidden focus:border-[#FFAE08]"
                               />
                               <button
                                 onClick={() => handleMarkRefunded(order.id)}
@@ -512,7 +512,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
                         )}
                         <div className="bg-[#FAF6F0] p-3 rounded-xl border border-[#E7D8C8]/60">
                           <p className="text-xs font-semibold text-[#2B201A]/60 mb-2 flex items-center gap-1">
-                            <Package className="w-3.5 h-3.5 text-[#E86F1D]" />
+                            <Package className="w-3.5 h-3.5 text-[#FFAE08]" />
                             Items ({order.items.length})
                           </p>
                           <ul className="space-y-1.5">
@@ -535,7 +535,7 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
 
                         <div className="bg-[#FAF6F0] p-3 rounded-xl border border-[#E7D8C8]/60 space-y-1.5">
                           <p className="text-xs font-semibold text-[#2B201A]/60 flex items-center gap-1">
-                            <MapPin className="w-3.5 h-3.5 text-[#E86F1D]" />
+                            <MapPin className="w-3.5 h-3.5 text-[#FFAE08]" />
                             Ship to
                           </p>
                           <p className="font-semibold text-[#2B201A] capitalize">{order.shippingName}</p>
@@ -543,11 +543,11 @@ export default function AdminOrdersManager({ initialOrders }: Props) {
                             {order.shippingAddress}, {order.shippingCity}, {order.shippingState} – {order.shippingPincode}
                           </p>
                           <div className="flex flex-wrap gap-x-4 gap-y-1 text-[#2B201A]/80 pt-1">
-                            <a href={`tel:${order.shippingPhone}`} className="flex items-center gap-1 hover:text-[#E86F1D]">
+                            <a href={`tel:${order.shippingPhone}`} className="flex items-center gap-1 hover:text-[#FFAE08]">
                               <Phone className="w-3.5 h-3.5 text-[#B8893E]" />
                               {order.shippingPhone}
                             </a>
-                            <a href={`mailto:${order.shippingEmail}`} className="flex items-center gap-1 hover:text-[#E86F1D]">
+                            <a href={`mailto:${order.shippingEmail}`} className="flex items-center gap-1 hover:text-[#FFAE08]">
                               <Mail className="w-3.5 h-3.5 text-[#B8893E]" />
                               {order.shippingEmail}
                             </a>

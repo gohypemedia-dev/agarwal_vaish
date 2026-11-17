@@ -14,15 +14,15 @@
   --color-green: var(--green);
   --color-border: var(--border);
 
-  --font-serif: 'Playfair', 'Playfair Display', Georgia, serif;
-  --font-sans: 'Playfair', 'Playfair Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-playfair: 'Playfair', 'Playfair Display', Georgia, serif, sans-serif;
-  --font-poppins: 'Playfair', 'Playfair Display', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-devanagari: 'Playfair', 'Playfair Display', sans-serif;
-  --font-editorial: 'Playfair', 'Playfair Display', Georgia, serif;
-  --font-cormorant: 'Playfair', 'Playfair Display', Georgia, serif;
-  --font-manrope: 'Playfair', 'Playfair Display', sans-serif;
-  --font-cursive: 'Playfair', 'Playfair Display', Georgia, serif;
+  --font-serif: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-playfair: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-poppins: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-devanagari: 'Mukta', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-editorial: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-cormorant: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-manrope: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-cursive: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -42,29 +42,29 @@
 :root {
   --background: #FFF9F2;
   --surface: #FBF2E7;
-  --saffron: #E86F1D;
-  --saffron-hover: #D25E12;
-  --gold: #B8893E;
+  --saffron: #FFAE08;
+  --saffron-hover: #E59C00;
+  --gold: #FFAE08;
   --green: #2F5A43;
   --green-hover: #234533;
   --text: #2B201A;
   --border: rgba(122, 82, 45, 0.14);
 
   --foreground: #2B201A;
-  --card: #FBF2E7;
+  --card: #FFFFFF;
   --card-foreground: #2B201A;
-  --popover: #FFF9F2;
+  --popover: #FFFFFF;
   --popover-foreground: #2B201A;
-  --primary: #E86F1D;
+  --primary: #FFAE08;
   --primary-foreground: #FFFFFF;
   --secondary: #2F5A43;
   --secondary-foreground: #FFFFFF;
   --muted: #F3E7D7;
   --muted-foreground: #6B5B52;
-  --accent: #B8893E;
+  --accent: #FFAE08;
   --accent-foreground: #FFFFFF;
   --destructive: #D32F2F;
-  --ring: #E86F1D;
+  --ring: #FFAE08;
   --radius: 1.125rem;
   /* 18px */
 }
@@ -84,7 +84,7 @@
     overflow-x: clip;
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Playfair', 'Playfair Display', Georgia, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -98,16 +98,16 @@
   h6,
   .font-editorial,
   .font-serif {
-    font-family: 'Playfair', 'Playfair Display', Georgia, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', 'Mukta', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     letter-spacing: -0.01em;
     line-height: 1.35;
   }
 
-  /* Global Hindi Typography & Uniform Playfair Styling */
+  /* Global Hindi Typography & Clean Sans Styling */
   html.lang-hi,
   .lang-hi,
   :lang(hi) {
-    font-family: 'Playfair', 'Playfair Display', Georgia, sans-serif;
+    font-family: 'Mukta', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 
   html.lang-hi h1,
@@ -124,7 +124,7 @@
   .lang-hi h5,
   .lang-hi h6,
   .lang-hi .font-editorial {
-    font-family: 'Playfair', 'Playfair Display', Georgia, sans-serif;
+    font-family: 'Mukta', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.35;
   }
 }
@@ -144,7 +144,7 @@
   /* Firefox & Standard CSS */
   * {
     scrollbar-width: thin;
-    scrollbar-color: #E86F1D #FAF3EA;
+    scrollbar-color: #FFAE08 #FAF3EA;
   }
 
   /* WebKit / Chromium / Edge / Safari */
@@ -159,18 +159,18 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #E86F1D 0%, #D48820 100%);
+    background: linear-gradient(180deg, #FFAE08 0%, #E59C00 100%);
     border-radius: 9999px;
     border: 2px solid #FAF3EA;
     transition: background 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #D45A0E 0%, #B87212 100%);
+    background: #E59C00;
   }
 
   ::-webkit-scrollbar-thumb:active {
-    background: #B8580A;
+    background: #CC8B00;
   }
 
   /* Remove default browser arrow buttons */
@@ -321,12 +321,12 @@
 
   .card-warm:hover {
     transform: translateY(-3px);
-    box-shadow: 0 16px 40px -10px rgba(43, 32, 26, 0.09), 0 8px 24px -4px rgba(232, 111, 29, 0.06);
-    border-color: rgba(232, 111, 29, 0.35);
+    box-shadow: 0 16px 40px -10px rgba(43, 32, 26, 0.09), 0 8px 24px -4px rgba(255, 174, 8, 0.12);
+    border-color: rgba(255, 174, 8, 0.45);
   }
 
   .card-warm-highlight {
-    border: 2px solid #E86F1D;
+    border: 2px solid #FFAE08;
     background-color: #FFF9F2;
   }
 
@@ -353,7 +353,7 @@
     gap: 8px;
     min-height: 48px;
     padding-inline: 24px;
-    background-color: #E86F1D;
+    background-color: #FFAE08;
     color: #FFFFFF;
     font-size: 0.875rem;
     font-weight: 700;
@@ -362,15 +362,15 @@
     border-radius: 12px;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 14px -2px rgba(232, 111, 29, 0.35);
+    box-shadow: 0 4px 14px -2px rgba(255, 174, 8, 0.35);
     transition: all 200ms ease;
     user-select: none;
   }
 
   .btn-primary:hover {
-    background-color: #D25E12;
+    background-color: #E59C00;
     transform: translateY(-1px);
-    box-shadow: 0 6px 20px -3px rgba(232, 111, 29, 0.45);
+    box-shadow: 0 6px 20px -3px rgba(255, 174, 8, 0.45);
   }
 
   .btn-primary:active {
@@ -423,14 +423,14 @@
 
   .btn-outline:hover {
     background-color: #FBF2E7;
-    border-color: #E86F1D;
-    color: #E86F1D;
+    border-color: #FFAE08;
+    color: #FFAE08;
   }
 
   .btn-primary:focus-visible,
   .btn-secondary:focus-visible,
   .btn-outline:focus-visible {
-    outline: 2px solid #E86F1D;
+    outline: 2px solid #FFAE08;
     outline-offset: 2px;
   }
 
@@ -459,8 +459,8 @@
 
   .input-warm:focus {
     outline: none;
-    border-color: #E86F1D;
-    box-shadow: 0 0 0 3px rgba(232, 111, 29, 0.15);
+    border-color: #FFAE08;
+    box-shadow: 0 0 0 3px rgba(255, 174, 8, 0.2);
   }
 
   textarea.input-warm {

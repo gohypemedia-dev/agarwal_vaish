@@ -124,7 +124,7 @@ export default function Preloader({
               transition={{ duration: 0.7, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-1 mb-4"
             >
-              <h1 className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide drop-shadow-sm">
+              <h1 className="font-sans text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-wide drop-shadow-sm">
                 अग्रवाल वैश्य समाज हरियाणा
               </h1>
               <p className="text-xs sm:text-sm font-sans tracking-[0.22em] uppercase text-white/90 font-medium">

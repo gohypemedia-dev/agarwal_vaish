@@ -445,7 +445,7 @@ export default function HomePage() {
           {/* Header Row: Title & Subtitle on Left, < > Arrow Buttons on Right (Exact Reference Pic 1) */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
             <div className="py-1">
-              <h2 className="font-serif text-[30px] sm:text-[36px] font-bold tracking-tight leading-tight">
+              <h2 className="font-sans text-[30px] sm:text-[36px] font-bold tracking-tight leading-tight">
                 <span className="relative inline-block text-[#1F1712] border-b-[3px] sm:border-b-4 border-[#FFAE08] pb-0.5 sm:pb-1 mr-2.5 sm:mr-3">
                   Panch
                 </span>
@@ -570,7 +570,7 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <h2 className="font-serif font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-[#FFAE08]">
+            <h2 className="font-sans font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-[#FFAE08] tracking-tight">
               Upcoming Events
             </h2>
             <HeadingDivider className="mt-3" />

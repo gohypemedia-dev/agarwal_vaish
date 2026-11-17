@@ -95,7 +95,7 @@ export default function AdminNav() {
             }`}
           >
             {isThisPending ? (
-              <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#E86F1D]" />
+              <Loader2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-spin text-[#FFAE08]" />
             ) : (
               <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             )}

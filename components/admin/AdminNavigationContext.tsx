@@ -130,7 +130,7 @@ function AdminTopProgressBar({ active }: { active: boolean }) {
       className="fixed top-0 left-0 right-0 z-50 h-1 bg-stone-200/40 pointer-events-none overflow-hidden"
     >
       <div
-        className="h-full bg-gradient-to-r from-[#E86F1D] via-[#F59E0B] to-[#E86F1D] shadow-[0_0_10px_rgba(232,111,29,0.7)] transition-all duration-300 ease-out"
+        className="h-full bg-gradient-to-r from-[#FFAE08] via-[#F59E0B] to-[#FFAE08] shadow-[0_0_10px_rgba(232,111,29,0.7)] transition-all duration-300 ease-out"
         style={{
           width: `${progress}%`,
           opacity: visible ? 1 : 0,

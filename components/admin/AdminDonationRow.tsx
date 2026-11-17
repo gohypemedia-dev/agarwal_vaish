@@ -54,7 +54,7 @@ export default function AdminDonationRow({ donation: d }: AdminDonationRowProps)
       onMouseEnter={handleMouseEnter}
       className={`border-b border-[#E7D8C8] last:border-0 transition-all duration-150 ${
         isUnverified
-          ? "cursor-pointer hover:bg-[#FDF3E7] hover:border-[#E86F1D]/40"
+          ? "cursor-pointer hover:bg-[#FDF3E7] hover:border-[#FFAE08]/40"
           : "hover:bg-[#FBF2E7]/60"
       }`}
       title={isUnverified ? "क्लिक करें: विवरण देखें एवं वेरिफाई/रिजेक्ट करें (Click to view details & verify/reject)" : undefined}
@@ -63,7 +63,7 @@ export default function AdminDonationRow({ donation: d }: AdminDonationRowProps)
         <Link
           href={`/admin/donations/${d.donationId}`}
           prefetch={true}
-          className="font-mono font-semibold text-[#E86F1D] hover:underline"
+          className="font-mono font-semibold text-[#FFAE08] hover:underline"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -80,7 +80,7 @@ export default function AdminDonationRow({ donation: d }: AdminDonationRowProps)
       <td className="px-4 py-3">
         {d.isEvent ? (
           <div className="flex items-center gap-1.5 mb-1">
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#E86F1D]/15 text-[#E86F1D] text-[10px] font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#FFAE08]/15 text-[#FFAE08] text-[10px] font-bold uppercase tracking-wider">
               <Ticket className="w-2.5 h-2.5" />
               <span>Event Pass</span>
             </span>
@@ -93,7 +93,7 @@ export default function AdminDonationRow({ donation: d }: AdminDonationRowProps)
             <Link
               href={`/admin/members?search=${encodeURIComponent(d.donorEmail)}`}
               onClick={(e) => e.stopPropagation()}
-              className="text-[10px] text-[#E86F1D] font-bold hover:underline inline-flex items-center gap-0.5"
+              className="text-[10px] text-[#FFAE08] font-bold hover:underline inline-flex items-center gap-0.5"
             >
               <span>Manage Tier</span>
               <ArrowRight className="w-2.5 h-2.5" />

@@ -57,7 +57,7 @@ function GalleryCarouselTile({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       aria-label={`${lang === "hi" ? "तस्वीर देखें" : "View photo"}: ${title}`}
-      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/40 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(232,111,29,0.25)] hover:border-[#E86F1D] transition-all duration-300 block cursor-pointer focus-visible:ring-2 focus-visible:ring-[#E86F1D] focus-visible:outline-none"
+      className="group relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E7D8C8]/40 border border-[#E7D8C8] shadow-[0_4px_16px_-4px_rgba(43,32,26,0.1)] hover:shadow-[0_12px_28px_-6px_rgba(255,174,8,0.25)] hover:border-[#FFAE08] transition-all duration-300 block cursor-pointer focus-visible:ring-2 focus-visible:ring-[#FFAE08] focus-visible:outline-none"
     >
       {isVideo ? (
         <>
@@ -80,7 +80,7 @@ function GalleryCarouselTile({
               isPlaying ? "opacity-0 scale-75" : "opacity-100 scale-100"
             }`}
           >
-            <div className="w-12 h-12 rounded-full bg-[#E86F1D]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#E86F1D] transition-transform duration-300">
+            <div className="w-12 h-12 rounded-full bg-[#FFAE08]/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:bg-[#FFAE08] transition-transform duration-300">
               <Play className="w-5 h-5 fill-current ml-0.5" />
             </div>
           </div>
@@ -213,7 +213,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         <div className="flex flex-col items-center justify-center mb-10 sm:mb-12 text-center">
           <TextReveal
             as="h2"
-            className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#FFAE08] tracking-wider whitespace-nowrap px-2"
+            className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#FFAE08] tracking-wider whitespace-nowrap px-2"
             text={lang === "hi" ? "गैलरी" : "Gallery"}
           />
           <HeadingDivider className="mt-2.5" />

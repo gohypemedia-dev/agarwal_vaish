@@ -63,7 +63,7 @@ export default function GalleryVideoCard({
         }
       }}
       aria-label={`${lang === "hi" ? "वीडियो चलाएं" : "Play video"}: ${title}`}
-      className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-black border border-[#E7D8C8]/70 shadow-warm-xs hover:shadow-warm-md hover:border-[#E86F1D] transition-all duration-300 group cursor-pointer select-none"
+      className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden bg-black border border-[#E7D8C8]/70 shadow-warm-xs hover:shadow-warm-md hover:border-[#FFAE08] transition-all duration-300 group cursor-pointer select-none"
     >
       {/* Video element covering 100% of card without letterbox */}
       <video
@@ -92,7 +92,7 @@ export default function GalleryVideoCard({
           isPlaying ? "opacity-0 scale-75" : "opacity-100 scale-100"
         }`}
       >
-        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 backdrop-blur-md border border-white/30 text-white flex items-center justify-center shadow-xl group-hover:bg-[#E86F1D] group-hover:border-[#E86F1D] transition-all">
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/65 backdrop-blur-md border border-white/30 text-white flex items-center justify-center shadow-xl group-hover:bg-[#FFAE08] group-hover:border-[#FFAE08] transition-all">
           <Play className="w-5 h-5 sm:w-6 sm:h-6 text-white ml-0.5 fill-current" />
         </div>
       </div>
@@ -100,16 +100,16 @@ export default function GalleryVideoCard({
       {/* Bottom Caption Overlay */}
       <div className="absolute bottom-0 inset-x-0 p-3.5 z-10 text-left text-white pointer-events-none space-y-0.5">
         {event && (
-          <p className="text-[10px] font-bold text-[#E86F1D] uppercase tracking-wider">
+          <p className="text-[10px] font-bold text-[#FFAE08] uppercase tracking-wider">
             {event}
           </p>
         )}
-        <h4 className="font-editorial text-xs sm:text-sm font-bold text-white line-clamp-2 drop-shadow-sm leading-snug">
+        <h4 className="font-sans text-xs sm:text-sm font-bold text-white line-clamp-2 drop-shadow-sm leading-snug">
           {title}
         </h4>
         <p className="text-[10px] text-white/80 flex items-center gap-1 font-medium">
           {isPlaying ? (
-            <span className="text-[#E86F1D] font-semibold">
+            <span className="text-[#FFAE08] font-semibold">
               {lang === "hi" ? "▶ चल रहा है • ऑडियो सहित देखने के लिए टैप करें" : "▶ Playing • Tap for full audio"}
             </span>
           ) : (

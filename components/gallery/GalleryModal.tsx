@@ -172,7 +172,7 @@ export default function GalleryModal({
         <div className="flex items-center gap-2.5">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/95 text-xs font-semibold tracking-wide">
             {item.type === "video" ? (
-              <Film className="w-3.5 h-3.5 text-[#E86F1D]" />
+              <Film className="w-3.5 h-3.5 text-[#FFAE08]" />
             ) : (
               <ImageIcon className="w-3.5 h-3.5 text-[#B8893E]" />
             )}
@@ -182,7 +182,7 @@ export default function GalleryModal({
           </span>
 
           {event && (
-            <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-[#E86F1D]/20 border border-[#E86F1D]/40 text-[#E86F1D] text-xs font-bold uppercase tracking-wider">
+            <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-[#FFAE08]/20 border border-[#FFAE08]/40 text-[#FFAE08] text-xs font-bold uppercase tracking-wider">
               {event}
             </span>
           )}
@@ -193,7 +193,7 @@ export default function GalleryModal({
           ref={closeButtonRef}
           onClick={onClose}
           aria-label={lang === "hi" ? "गैलरी बंद करें" : "Close gallery viewer"}
-          className="w-11 h-11 rounded-full bg-white/10 hover:bg-[#E86F1D] text-white flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#E86F1D] cursor-pointer shrink-0"
+          className="w-11 h-11 rounded-full bg-white/10 hover:bg-[#FFAE08] text-white flex items-center justify-center transition-all duration-200 border border-white/20 hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#FFAE08] cursor-pointer shrink-0"
         >
           <X className="w-6 h-6" />
         </button>
@@ -206,7 +206,7 @@ export default function GalleryModal({
           <button
             onClick={onPrev}
             aria-label={lang === "hi" ? "पिछला मीडिया" : "Previous media"}
-            className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#E86F1D] text-white flex items-center justify-center transition-all duration-200 border border-white/25 shadow-xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#E86F1D] cursor-pointer"
+            className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#FFAE08] text-white flex items-center justify-center transition-all duration-200 border border-white/25 shadow-xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#FFAE08] cursor-pointer"
           >
             <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
@@ -236,8 +236,8 @@ export default function GalleryModal({
                 /* Native MP4 Video Player */
                 videoError ? (
                   <div className="w-full aspect-video bg-[#2B201A] rounded-xl border border-white/20 p-6 flex flex-col items-center justify-center text-center text-white space-y-3">
-                    <AlertCircle className="w-10 h-10 text-[#E86F1D]" />
-                    <p className="font-editorial text-lg">
+                    <AlertCircle className="w-10 h-10 text-[#FFAE08]" />
+                    <p className="font-sans text-lg">
                       {lang === "hi"
                         ? "वीडियो लोड करने में समस्या हुई।"
                         : "Unable to play video directly."}
@@ -286,7 +286,7 @@ export default function GalleryModal({
           <button
             onClick={onNext}
             aria-label={lang === "hi" ? "अगला मीडिया" : "Next media"}
-            className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#E86F1D] text-white flex items-center justify-center transition-all duration-200 border border-white/25 shadow-xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#E86F1D] cursor-pointer"
+            className="absolute right-1 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-black/60 hover:bg-[#FFAE08] text-white flex items-center justify-center transition-all duration-200 border border-white/25 shadow-xl hover:scale-105 active:scale-95 focus-visible:ring-2 focus-visible:ring-[#FFAE08] cursor-pointer"
           >
             <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7" />
           </button>
@@ -298,12 +298,12 @@ export default function GalleryModal({
         <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-white text-center sm:text-left">
           <div className="space-y-0.5 min-w-0">
             {event && (
-              <p className="text-[11px] font-bold text-[#E86F1D] uppercase tracking-wider truncate">
+              <p className="text-[11px] font-bold text-[#FFAE08] uppercase tracking-wider truncate">
                 {event}
                 {item.date && <span className="text-white/60 font-normal"> • {item.date}</span>}
               </p>
             )}
-            <h3 className="font-editorial text-base sm:text-lg font-semibold text-white/95 leading-tight line-clamp-2">
+            <h3 className="font-sans text-base sm:text-lg font-semibold text-white/95 leading-tight line-clamp-2">
               {title}
             </h3>
           </div>
@@ -317,7 +317,7 @@ export default function GalleryModal({
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors shrink-0 min-h-[38px] border border-white/15"
             >
               <span>{lang === "hi" ? "मूल वीडियो" : "Watch Original"}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#E86F1D]" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#FFAE08]" />
             </a>
           )}
         </div>
