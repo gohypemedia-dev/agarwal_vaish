@@ -140,24 +140,21 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* 2. CENTER: Dropdown Navigation Menu */}
-            <nav className="flex items-center justify-center gap-0.5 xl:gap-2 shrink-0">
+            {/* 2. CENTER: Navigation Menu (Dropdown temporarily commented out as requested) */}
+            <nav className="flex items-center justify-center gap-1 xl:gap-2.5 shrink-0">
               {navSections.map((sec) => (
                 <div
                   key={sec.id}
                   className="relative group"
-                  onMouseEnter={() => setActiveDropdown(sec.id)}
-                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={sec.href}
-                    className="navtext flex items-center gap-1 xl:gap-1.5 px-2 xl:px-3 h-9 xl:h-10 rounded-md text-[11.5px] lg:text-[12px] xl:text-[13.5px] font-semibold text-[#2B201A] hover:text-[#FFAE08] tracking-wider uppercase transition-colors whitespace-nowrap"
+                    className="navtext flex items-center px-2.5 xl:px-3.5 h-9 xl:h-10 rounded-md text-[12px] xl:text-[14px] font-semibold text-[#2B201A] hover:text-[#FFAE08] tracking-wider uppercase transition-colors whitespace-nowrap"
                   >
                     <span>{sec.label}</span>
-                    <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400 group-hover:text-[#FFAE08]" />
                   </Link>
 
-                  {/* Dropdown Menu */}
+                  {/* Dropdown Menu (commented out)
                   {activeDropdown === sec.id && (
                     <div className="absolute left-0 top-full pt-1.5 w-60 xl:w-64 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
                       <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
@@ -174,6 +171,7 @@ export default function Header() {
                       </div>
                     </div>
                   )}
+                  */}
                 </div>
               ))}
             </nav>
@@ -273,6 +271,7 @@ export default function Header() {
                       >
                         {sec.label}
                       </Link>
+                      {/* Sub-items (commented out)
                       <div className="pl-3 space-y-1 border-l-2 border-[#FFAE08]/30 mt-1">
                         {sec.subItems.map((sub, i) => (
                           <Link
@@ -285,6 +284,7 @@ export default function Header() {
                           </Link>
                         ))}
                       </div>
+                      */}
                     </div>
                   ))}
                 </div>
