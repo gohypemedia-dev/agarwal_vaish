@@ -287,9 +287,9 @@ export default function HomePage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 2. HERO SECTION: 100% FULL-WIDTH & 100VH 2-SLIDE CAROUSEL (HD)*/}
+      {/* 2. HERO SECTION: 100% FULL-WIDTH 2-SLIDE CAROUSEL (UNCUT HD) */}
       {/* ============================================================ */}
-      <section className="relative w-full h-[56.25vw] min-h-[260px] sm:h-[calc(100vh-116px)] lg:h-[calc(100vh-126px)] xl:h-[calc(100vh-134px)] max-h-[960px] overflow-hidden select-none group border-b border-gray-200 bg-white">
+      <section className="relative w-full aspect-[1672/941] overflow-hidden select-none group border-b border-gray-200 bg-white">
         {heroSlides.map((slide, idx) => {
           const isActive = idx === currentHeroSlide;
           return (
