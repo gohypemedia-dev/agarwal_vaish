@@ -154,37 +154,6 @@ export default function HomePage() {
       ? 6103
       : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members || 265;
 
-  const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
-  const [isHeroHovered, setIsHeroHovered] = useState(false);
-
-  const heroSlides = [
-    {
-      id: "slide-1",
-      title: "अग्रवाल वैश्य विकास संगठन हरियाणा",
-      slogan: "वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।",
-      src: "/images/agarwal/hero-1.jpg",
-      alt: "अग्रवाल वैश्य विकास संगठन हरियाणा - वैश्य समाज का एक ही नारा राजनीति में हो प्रतिनिधित्व हमारा",
-      bgStyle: "linear-gradient(to right, #FFFFFF 50%, #ffc229 50%)",
-    },
-    {
-      id: "slide-2",
-      title: "संकल्प - अग्रवाल वैश्य विकास संगठन के पंच संकल्प",
-      slogan: "राजनीतिक सशक्तिकरण, नारी स्वावलंबन एवं उद्यमिता, युवा नेतृत्व निर्माण, आर्थिक आत्मनिर्भरता, संगठित समाज",
-      src: "/images/agarwal/hero-2.jpg",
-      alt: "संकल्प - अग्रवाल वैश्य विकास संगठन के पंच संकल्प",
-      bgStyle: "linear-gradient(to right, #ffb312 50%, #FFFFFF 50%)",
-    },
-  ];
-
-  // Auto-play hero slider every 3 SECONDS (as requested by user)
-  useEffect(() => {
-    if (isHeroHovered) return;
-    const timer = setInterval(() => {
-      setCurrentHeroSlide((prev) => (prev + 1) % 2);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [isHeroHovered]);
-
   const sankalpCarouselRef = useRef<HTMLDivElement>(null);
 
   const scrollSankalpLeft = () => {
@@ -297,56 +266,19 @@ export default function HomePage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 2. HERO SECTION: FULL WIDTH 2-SLIDE CAROUSEL (3-SEC AUTO-PLAY) */}
+      {/* 2. HERO SECTION: OFFICIAL 100% FULL-WIDTH BANNER             */}
       {/* ============================================================ */}
-      <section
-        className="relative w-full overflow-hidden border-b border-gray-200 select-none bg-white"
-        onMouseEnter={() => setIsHeroHovered(true)}
-        onMouseLeave={() => setIsHeroHovered(false)}
-      >
-        {/* Full-bleed Carousel Viewport: 100% width, responsive height */}
-        <div className="relative w-full h-[400px] xs:h-[460px] sm:h-[540px] md:h-[620px] lg:h-[700px] xl:h-[760px] 2xl:h-[820px] overflow-hidden">
-          {heroSlides.map((slide, index) => {
-            const isActive = index === currentHeroSlide;
-            return (
-              <div
-                key={slide.id}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
-                  isActive ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none"
-                }`}
-                style={{ background: slide.bgStyle }}
-                aria-hidden={!isActive}
-              >
-                {/* Full-bleed Centered Banner Image */}
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <Image
-                    src={slide.src}
-                    alt={slide.alt}
-                    fill
-                    priority={index === 0}
-                    sizes="100vw"
-                    className="object-contain object-center"
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Slide Indicator Dots */}
-        <div className="absolute bottom-4 sm:bottom-6 inset-x-0 z-20 flex items-center justify-center gap-2.5">
-          {heroSlides.map((_, idx) => (
-            <button
-              key={`hero-dot-${idx}`}
-              onClick={() => setCurrentHeroSlide(idx)}
-              aria-label={`Go to slide ${idx + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                currentHeroSlide === idx
-                  ? "w-9 sm:w-12 bg-[#FFAE08] shadow-md"
-                  : "w-2.5 sm:w-3 bg-gray-400/80 hover:bg-gray-600/90 shadow-xs"
-              }`}
-            />
-          ))}
+      <section className="relative w-full overflow-hidden border-b border-gray-200 select-none">
+        <div className="relative w-full">
+          <Image
+            src="/images/agarwal/hero-new-official.jpg"
+            alt="अग्रवाल वैश्य विकास संगठन हरियाणा - वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।"
+            width={1920}
+            height={1080}
+            priority
+            className="w-full h-auto block select-none"
+            sizes="100vw"
+          />
         </div>
       </section>
 
