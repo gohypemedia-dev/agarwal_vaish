@@ -436,7 +436,7 @@ export default function HomePage() {
                   Sankalp
                 </span>
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-2 max-w-2xl font-normal leading-relaxed">
+              <p className="text-sm sm:text-base text-gray-600 mt-2 font-normal leading-relaxed max-w-none md:whitespace-nowrap">
                 Five guiding commitments shaping a united, empowered and progressive Vaish community.
               </p>
             </div>
