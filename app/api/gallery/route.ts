@@ -17,25 +17,33 @@ export async function GET() {
     });
 
     if (items.length > 0) {
-      const formatted = items.map((item) => ({
-        id: item.id,
-        type: item.type === "PHOTO" ? "photo" : "video",
-        title: item.title,
-        titleHi: item.titleHi ?? undefined,
-        event: item.event ?? undefined,
-        eventHi: item.eventHi ?? undefined,
-        src: item.src,
-        thumbnail: item.thumbnail,
-        alt: item.alt,
-        videoProvider: (item.videoProvider as "youtube" | "vimeo" | "mp4" | null) ?? undefined,
-        focalPoint: item.focalPoint ?? undefined,
-        aspectRatio: item.aspectRatio ?? undefined,
-        displayOrder: item.displayOrder,
-        date: item.date ?? undefined,
-      }));
-      return NextResponse.json(formatted, {
-        headers: CACHE_HEADERS,
+      const legacyKeywords = ["sadhvi", "vrindavan", "gurukul", "katha", "gopashtami", "hero-split"];
+      const valid = items.filter((item) => {
+        const text = `${item.title || ""} ${item.titleHi || ""} ${item.event || ""} ${item.src || ""}`.toLowerCase();
+        return !legacyKeywords.some((k) => text.includes(k));
       });
+
+      if (valid.length > 0) {
+        const formatted = valid.map((item) => ({
+          id: item.id,
+          type: item.type === "PHOTO" ? "photo" : "video",
+          title: item.title,
+          titleHi: item.titleHi ?? undefined,
+          event: item.event ?? undefined,
+          eventHi: item.eventHi ?? undefined,
+          src: item.src,
+          thumbnail: item.thumbnail,
+          alt: item.alt,
+          videoProvider: (item.videoProvider as "youtube" | "vimeo" | "mp4" | null) ?? undefined,
+          focalPoint: item.focalPoint ?? undefined,
+          aspectRatio: item.aspectRatio ?? undefined,
+          displayOrder: item.displayOrder,
+          date: item.date ?? undefined,
+        }));
+        return NextResponse.json(formatted, {
+          headers: CACHE_HEADERS,
+        });
+      }
     }
 
     return NextResponse.json(galleryData, {
