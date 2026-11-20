@@ -3,487 +3,447 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Heart } from "lucide-react";
-import { useApp } from "@/context/AppContext";
-import {
-  TextReveal,
-  ParagraphReveal,
-  SectionReveal,
-  StaggerContainer,
-  StaggerItem,
-  ParallaxSection,
-  ParallaxImage,
-} from "@/components/animation";
-import HeadingDivider from "@/components/HeadingDivider";
-
 
 export default function AboutPage() {
-  const { lang, openDonateModal } = useApp();
+  // 8 Official Logo Meaning Elements from Client (No AI icons)
+  const logoElements = [
+    {
+      id: "logo-1",
+      number: "1.",
+      title: "उगता हुआ सूरज – नई शुरुआत एवं उज्ज्वल भविष्य",
+      desc: "लोगो के ऊपरी हिस्से में उगता हुआ स्वर्णिम सूर्य नई ऊर्जा, आशा, ज्ञान और सकारात्मक परिवर्तन का प्रतीक है। सूर्य की किरणें समाज के उज्ज्वल भविष्य, नई संभावनाओं और निरंतर प्रगति की दिशा को दर्शाती हैं।",
+    },
+    {
+      id: "logo-2",
+      number: "2.",
+      title: "अक्षर ‘A’ – अग्रवाल समाज की पहचान एवं अग्रणी नेतृत्व",
+      desc: "लोगो के केंद्र में बना विशाल अक्षर ‘A’ अग्रवाल समाज की पहचान और अग्रणी नेतृत्व का प्रतीक है। यह समाज को हर क्षेत्र में आगे बढ़ने, नई ऊंचाइयों को छूने और नेतृत्वकारी भूमिका निभाने की प्रेरणा देता है।",
+    },
+    {
+      id: "logo-3",
+      number: "3.",
+      title: "विकास की ओर बढ़ता ग्राफ – आर्थिक प्रगति एवं आत्मनिर्भरता",
+      desc: "लोगो में दर्शाया गया बढ़ता हुआ ग्राफ, स्तंभ और ऊपर की ओर जाती हुई तीर की आकृति आर्थिक उन्नति, व्यापारिक विकास, उद्यमिता और आत्मनिर्भरता का प्रतीक है। यह समाज को आर्थिक रूप से मजबूत बनाने और नए अवसरों का सृजन करने के संकल्प को दर्शाता है।",
+    },
+    {
+      id: "logo-4",
+      number: "4.",
+      title: "तीन मानव आकृतियां – एकता, युवा शक्ति एवं सामूहिक नेतृत्व",
+      desc: "लोगो के मध्य में हाथ उठाए हुए तीन मानव आकृतियां समाज के तीन महत्वपूर्ण स्तंभों – युवा, महिला और समाज की सामूहिक शक्ति – का प्रतिनिधित्व करती हैं। ये आकृतियां एकता, भाईचारे, समान भागीदारी, उत्साह और सामूहिक नेतृत्व का संदेश देती हैं।",
+    },
+    {
+      id: "logo-5",
+      number: "5.",
+      title: "दोनों ओर की सुनहरी एवं केसरिया लहरें – प्रगति एवं सहयोग",
+      desc: "लोगो में मानव आकृतियों के दोनों ओर बनी सुनहरी और केसरिया लहरें निरंतर विकास, ऊर्जा, सकारात्मक सोच और सहयोग की भावना को दर्शाती हैं। ये समाज के विभिन्न वर्गों को एक साथ आगे बढ़ाने के संगठन के प्रयासों का प्रतीक हैं।",
+    },
+    {
+      id: "logo-6",
+      number: "6.",
+      title: "हाथ मिलाते हुए दो हाथ – विश्वास, सहयोग एवं संगठनात्मक एकता",
+      desc: "लोगो के निचले मध्य भाग में दर्शाए गए हाथ मिलाने का प्रतीक आपसी विश्वास, भाईचारे, एकजुटता और सहयोग की भावना को दर्शाता है। यह संदेश देता है कि सामूहिक प्रयास और परस्पर सहयोग से ही बड़े लक्ष्य प्राप्त किए जा सकते हैं।",
+    },
+    {
+      id: "logo-7",
+      number: "7.",
+      title: "दोनों ओर की लाल आकृतियां – संरक्षण एवं सामूहिक शक्ति",
+      desc: "लोगो के निचले हिस्से में दोनों ओर बनी पंखनुमा एवं पत्तियों जैसी आकृतियां संगठन की संरक्षण भावना, सामाजिक सुरक्षा, सेवा, समर्पण और समाज को एक सूत्र में बांधकर रखने की प्रतिबद्धता का प्रतीक हैं।",
+    },
+    {
+      id: "logo-8",
+      number: "8.",
+      title: "स्वर्णिम एवं गहरा लाल रंग – गौरव, ऊर्जा एवं संकल्प",
+      desc: "लोगो में प्रयुक्त स्वर्णिम रंग समृद्धि, सफलता, गौरव और उज्ज्वल भविष्य को दर्शाता है, जबकि गहरा लाल रंग ऊर्जा, साहस, आत्मविश्वास, नेतृत्व और दृढ़ संकल्प का प्रतीक है।",
+    },
+  ];
 
-  const commitmentCards = [
+  // 5 Official Pledges (Rendered in Official 2nd Pic Card Style with AVS Emblem)
+  const fivePledges = [
     {
-      id: "social-participation",
-      title: "Social Participation",
-      titleHi: "सामाजिक सहभागिता",
-      badge: "PANCH SANKALP I",
-      badgeHi: "पंच संकल्प १",
-      desc: "Uniting families and fostering collective social responsibility, ensuring every section of the community actively participates in societal progress.",
-      descHi: "समाज के प्रत्येक वर्ग को संगठित करना, सामूहिक सामाजिक उत्तरदायित्व को बढ़ावा देना और आपसी सहयोग से समाज को सशक्त बनाना।",
-      image: "/images/agarwal/design-1.jpg",
-      points: [
-        { en: "Community cohesion & grassroots outreach", hi: "सामुदायिक एकजुटता एवं जमीनी स्तर पर संपर्क" },
-        { en: "Social welfare drives & public assistance", hi: "सामाजिक जनकल्याणकारी अभियान एवं सहायता" },
-        { en: "District-level coordination across Haryana", hi: "हरियाणा के सभी जिलों में समन्वित संगठनात्मक कार्य" },
-      ],
+      num: "01",
+      titleHi: "राजनीतिक सशक्तिकरण",
+      titleEn: "Political Empowerment",
+      desc: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
     },
     {
-      id: "womens-empowerment",
-      title: "Women’s Empowerment",
-      titleHi: "महिला सशक्तिकरण",
-      badge: "PANCH SANKALP II",
-      badgeHi: "पंच संकल्प २",
-      desc: "Equipping women with leadership roles, entrepreneurship avenues, and educational mentorship to ensure self-reliance and dignity.",
-      descHi: "मातृशक्ति को नेतृत्वकारी भूमिका, उद्यमशीलता के अवसर और शिक्षा संवर्धन प्रदान कर स्वावलंबी व आत्मनिर्भर बनाना।",
-      image: "/images/agarwal/design-2.jpg",
-      points: [
-        { en: "State Mahila Wing & local units", hi: "राज्यस्तरीय महिला इकाई एवं स्थानीय प्रकोष्ठ" },
-        { en: "Support for women entrepreneurs & artisans", hi: "महिला उद्यमियों व स्वरोजगार को प्रोत्साहन" },
-        { en: "Pratibha Samman & meritorious student felicitations", hi: "प्रतिभा सम्मान एवं मेधावी बालिकाओं का सम्मान" },
-      ],
+      num: "02",
+      titleHi: "नारी स्वावलंबन एवं उद्यमिता",
+      titleEn: "Women Empowerment & Entrepreneurship",
+      desc: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
     },
     {
-      id: "youth-leadership",
-      title: "Youth Leadership",
-      titleHi: "युवा नेतृत्व",
-      badge: "PANCH SANKALP III",
-      badgeHi: "पंच संकल्प ३",
-      desc: "Nurturing the younger generation with career guidance, business networking, and leadership forums to shape the future of society.",
-      descHi: "युवाओं को करियर मार्गदर्शन, व्यावसायिक नेटवर्क और नेतृत्व मंच प्रदान करना ताकि वे समाज व राष्ट्र निर्माण में अग्रणी भूमिका निभा सकें।",
-      image: "/images/agarwal/design-6.jpg",
-      points: [
-        { en: "Yuva Wing conventions & business conclaves", hi: "युवा प्रकोष्ठ महासम्मेलन एवं व्यापार कॉन्क्लेव" },
-        { en: "Entrepreneurship mentorship & startup guidance", hi: "स्टार्टअप मार्गदर्शन एवं उद्यमशीलता परामर्श" },
-        { en: "Social advocacy and youth mobilization", hi: "सामाजिक जागरूकता एवं युवा शक्ति का सदुपयोग" },
-      ],
+      num: "03",
+      titleHi: "युवा नेतृत्व निर्माण",
+      titleEn: "Youth Leadership Development",
+      desc: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
     },
     {
-      id: "political-participation",
-      title: "Political Participation",
-      titleHi: "राजनीतिक सहभागिता",
-      badge: "PANCH SANKALP IV",
-      badgeHi: "पंच संकल्प ४",
-      desc: "Enhancing democratic consciousness and representation for the Vaish community to ensure its legitimate voice in policy and public life.",
-      descHi: "लोकतांत्रिक प्रक्रियाओं में वैश्य समाज की सक्रिय सहभागिता सुनिश्चित करना तथा नीतिगत निर्णयों में समाज के प्रतिनिधित्व को सशक्त बनाना।",
-      image: "/images/agarwal/design-4.jpg",
-      points: [
-        { en: "Democratic awareness and voter mobilization", hi: "लोकतांत्रिक जागरूकता एवं मतदाता सहभागिता" },
-        { en: "Promoting community leadership in civic life", hi: "सार्वजनिक जीवन में समाज के योग्य नेतृत्व को प्रोत्साहन" },
-        { en: "Statewide seminars on public representation", hi: "सार्थक प्रतिनिधित्व पर राज्यस्तरीय विचार गोष्ठियाँ" },
-      ],
+      num: "04",
+      titleHi: "आर्थिक आत्मनिर्भरता",
+      titleEn: "Economic Self-Reliance",
+      desc: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
     },
     {
-      id: "organized-community",
-      title: "Organized Community",
+      num: "05",
       titleHi: "संगठित समाज",
-      badge: "PANCH SANKALP V",
-      badgeHi: "पंच संकल्प ५",
-      desc: "Building a unified and disciplined community network rooted in the timeless philosophy of Maharaja Agrasen: One Brick, One Coin.",
-      descHi: "महाराजा अग्रसेन जी के समाजवाद के अमर सिद्धांत 'एक ईंट, एक रुपया' के आधार पर संगठित, अनुशासित व समर्थ समाज का निर्माण।",
-      image: "/images/agarwal/design-3.jpg",
-      points: [
-        { en: "Maharaja Agrasen Jayanti celebrations across Haryana", hi: "हरियाणा भर में भव्य महाराजा अग्रसेन जयंती महोत्सव" },
-        { en: "Mutual assistance and economic solidarity", hi: "परस्पर सहयोग एवं आर्थिक संबल की परंपरा" },
-        { en: "Digital membership portal & district network", hi: "डिजिटल सदस्यता पोर्टल एवं जिलावार संपर्क सूत्र" },
-      ],
+      titleEn: "Organised Society",
+      desc: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
     },
   ];
 
   return (
-    <div className="w-full space-y-0 text-[#2B201A] font-sans">
-      {/* 1. HERO SECTION - RECREATED FROM REFERENCE (PANORAMIC ON DESKTOP, 100VH ON MOBILE & LAPTOP) */}
-      <section className="relative overflow-hidden bg-[#1F150E] md:bg-[#F7EDE1] border-b border-[#E7D8C8] min-h-[calc(100vh-68px)] sm:min-h-[calc(100vh-74px)] min-[1000px]:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-82px)] md:flex md:items-center">
-        {/* Desktop Panoramic Background Banner (hidden on mobile) */}
-        <ParallaxImage offset={45} className="hidden md:block absolute inset-0 z-0">
-          <Image
-            src="/images/about-hero-banner.png"
-            alt="Rooted in Wisdom. Driven by Service."
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-right lg:object-center"
-          />
-          {/* Clean feathered mask: completely masks baked-in text on the left while seamlessly revealing Lord Krishna on the right */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background:
-                "linear-gradient(to right, #F7EDE1 0%, #F7EDE1 52%, rgba(247,237,225,0.98) 55%, rgba(247,237,225,0.85) 59%, rgba(247,237,225,0.45) 64%, rgba(247,237,225,0.12) 68%, rgba(247,237,225,0) 72%)",
-            }}
-          />
-        </ParallaxImage>
+    <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
-        {/* MOBILE HERO (100VH Full Viewport Height with Bottom Overlay) */}
-        <div className="md:hidden relative z-1 w-full h-[calc(100vh-68px)] min-h-[540px] flex items-center justify-center overflow-hidden">
-          <ParallaxImage offset={30} className="absolute inset-0 w-full h-full">
-            <Image
-              src="/images/about-mobile-hero.png"
-              alt="Lord Krishna and Children - Rooted in Wisdom. Driven by Service."
-              fill
-              priority
-              sizes="100vw"
-              className="w-full h-full object-cover object-top block select-none pointer-events-none"
-            />
-          </ParallaxImage>
-
-          {/* Mobile Overlay Action Bar */}
-          <div className="absolute bottom-0 inset-x-0 z-20 w-full px-4 pt-16 pb-6 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex flex-col items-center gap-2 text-center pointer-events-auto">
-            <TextReveal as="h2" className="font-editorial text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
-              {lang === "hi" ? "ज्ञान में निष्ठा • सेवा में समर्पण" : "Rooted in Wisdom • Driven by Service"}
-            </TextReveal>
-            <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
-              <a
-                href="#about-story"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
-              >
-                {lang === "hi" ? "ट्रस्ट परिचय" : "Our Story"}
-              </a>
-              <button
-                onClick={() => openDonateModal()}
-                className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
-              >
-                <Heart className="w-3 h-3 text-[#7F160C] fill-current" />
-                <span>{lang === "hi" ? "सहयोग करें" : "Support"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Desktop Hero Content (hidden on mobile) */}
-        <div className="hidden md:block relative z-10 page-container py-8 sm:py-12 md:py-24 w-full">
-          <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl space-y-4 sm:space-y-5">
-            {/* Main Title matching reference */}
-            <TextReveal as="h1" className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1F1712] leading-[1.12] tracking-tight">
-              {lang === "hi" ? (
-                <>
-                  ज्ञान में निष्ठा।
-                  <br />
-                  <span className="text-[#7F160C]">सेवा में समर्पण।</span>
-                </>
-              ) : (
-                <>
-                  Rooted in Wisdom.
-                  <br />
-                  <span className="text-[#7F160C]">Driven by Service.</span>
-                </>
-              )}
-            </TextReveal>
-
-            {/* Subtitle matching exact reference text */}
-            <ParagraphReveal className="text-sm sm:text-base md:text-lg text-[#3E3129] leading-relaxed font-sans font-medium">
-              {lang === "hi"
-                ? "अग्रवाल वैश्य समाज (AVS Haryana) समाज को संगठित करने, महिला सशक्तिकरण, युवा नेतृत्व और जनसेवा के पंच संकल्प के प्रति समर्पित एक अग्रणी सामाजिक संगठन है।"
-                : "Aggarwal Vaish Samaj (AVS Haryana) is dedicated to uniting the community, empowering youth & women, and advancing public service under the sacred Panch Sankalp."}
-            </ParagraphReveal>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2 sm:pt-4">
-              <a
-                href="#about-story"
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
-              >
-                <span>{lang === "hi" ? "हमारा परिचय एवं इतिहास" : "Our Story & Journey"}</span>
-              </a>
-              <button
-                type="button"
-                onClick={() => openDonateModal()}
-                className="inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-white/80 hover:bg-white text-[#2B201A] font-bold text-xs sm:text-sm uppercase tracking-wider border border-[#E7D8C8] shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer"
-              >
-                <span>{lang === "hi" ? "समाज सेवा में सहयोग करें" : "Support Our Mission"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 2. AUTHENTIC NARRATIVE: "ABOUT US" & "OUR MISSION" */}
-      <SectionReveal className="py-16 sm:py-20 lg:py-24 bg-[#FBF6EE]" id="about-story">
-        <div className="page-container max-w-5xl lg:max-w-6xl space-y-12 sm:space-y-16">
-          {/* ABOUT US BLOCK */}
-          <div className="space-y-4 sm:space-y-5 text-center sm:text-left">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#7F160C] leading-tight">
-              {lang === "hi"
-                ? "महाराजा अग्रसेन जी के आदर्शों पर आधारित संगठित समाज"
-                : "Rooted in the Ideals of Maharaja Agrasen, Dedicated to Community"}
-            </TextReveal>
-            <HeadingDivider align="left" className="!py-0.5 max-sm:justify-center" />
-
-            <ParagraphReveal className="text-sm sm:text-base md:text-lg text-[#3E3129] leading-relaxed space-y-4 pt-1 font-normal">
-              <p>
-                {lang === "hi" ? (
-                  <>
-                    <strong>अग्रवाल वैश्य समाज (AVS Haryana)</strong> का गठन <strong>श्री अशोक बुवानीवाला जी</strong> के कुशल नेतृत्व में समाज के सभी वर्गों को एक सूत्र में पिरोने और उनके स्वाभिमान, सामाजिक प्रतिष्ठा व राजनीतिक सहभागिता को सुदृढ़ करने के उद्देश्य से किया गया था।
-                  </>
-                ) : (
-                  <>
-                    <strong>Aggarwal Vaish Samaj (AVS Haryana)</strong> was established under the visionary leadership of <strong>Shri Ashok Buwaniwala</strong> with a clear mandate: uniting every section of our community and strengthening socio-political representation and welfare.
-                  </>
-                )}
-              </p>
-              <p>
-                {lang === "hi" ? (
-                  <>
-                    संगठन महाराजा अग्रसेन जी के समाजवाद के पावन संदेश 'एक ईंट, एक रुपया' से प्रेरणा प्राप्त करता है। यह भावना हमारे <strong>पंच संकल्प</strong> का मूल आधार है: <strong>सामाजिक सहभागिता, महिला सशक्तिकरण, युवा नेतृत्व, राजनीतिक सहभागिता और संगठित समाज।</strong>
-                  </>
-                ) : (
-                  <>
-                    The organization draws its core inspiration from Maharaja Agrasen’s egalitarian principle of mutual help. This foundation powers our <strong>Panch Sankalp</strong>: <strong>Social Participation, Women Empowerment, Youth Leadership, Political Participation, and an Organized Community.</strong>
-                  </>
-                )}
-              </p>
-            </ParagraphReveal>
-          </div>
-
-          {/* OUR MISSION BLOCK */}
-          <div className="space-y-4 sm:space-y-5 text-center sm:text-left">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold text-[#7F160C] leading-tight">
-              {lang === "hi"
-                ? "आंतरिक सामर्थ्य और व्यावहारिक अवसरों का संगम"
-                : "Real Empowerment When Inner Strength Meets Real Opportunity"}
-            </TextReveal>
-            <HeadingDivider align="left" className="!py-0.5 max-sm:justify-center" />
-
-            <ParagraphReveal className="text-sm sm:text-base md:text-lg text-[#3E3129] leading-relaxed space-y-4 pt-1 font-normal">
-              <p>
-                {lang === "hi" ? (
-                  <>
-                    हमारी यात्रा एक केंद्रित उद्देश्य के साथ आरंभ हुई: विद्यालयों व सामुदायिक कार्यक्रमों के माध्यम से नन्हे बच्चों को श्रीमद्भगवद्गीता की शिक्षाओं से जोड़ना और आजीवन मानसिक शांति व एकाग्रता के साधन के रूप में ध्यान का परिचय देना।
-                  </>
-                ) : (
-                  <>
-                    We began with a focused mission: bringing the teachings of the Bhagavad Gita to young children through schools and community programs and introducing them to meditation as a tool for lifelong wellness and clarity of mind.
-                  </>
-                )}
-              </p>
-              <p>
-                {lang === "hi" ? (
-                  <>
-                    समय के साथ, हमारा सेवा कार्य उन समुदायों की व्यावहारिक आवश्यकताओं को पूरा करने के लिए विस्तारित हुआ जिनकी हम सेवा करते हैं। आज हम वित्तीय स्वतंत्रता प्राप्त करने वाली महिलाओं, नए कौशल व आत्मविश्वास विकसित करने वाले युवाओं, और आधुनिक कृषि ज्ञान के माध्यम से पैदावार बढ़ाने वाले गन्ना किसानों के साथ सीधे काम कर रहे हैं।
-                  </>
-                ) : (
-                  <>
-                    Over time, our work has grown to meet the practical needs of the communities we serve. Today, we work directly with women building financial independence, young people developing skills and confidence, and farmers, particularly sugarcane growers, improving yields through modern agricultural knowledge.
-                  </>
-                )}
-              </p>
-              <p className="p-4 sm:p-5 rounded-2xl bg-white border border-[#E7D8C8] shadow-xs italic text-[#2B201A] font-serif">
-                {lang === "hi" ? (
-                  <>
-                    “जो बच्चा ध्यान के माध्यम से स्थिरता सीखता है, वह जीवन के दबावों का सामना करने में सक्षम वयस्क बनता है। जो महिला कौशल और स्वावलंबन से सम्पन्न होती है, वह अपने पूरे परिवार की संबल बनती है। और जो किसान आधुनिक तकनीकों से सशक्त होता है, वह न केवल बेहतर फसल उगाता है बल्कि उसी भूमि पर अगली पीढ़ी के लिए उज्ज्वल भविष्य भी गढ़ता है।”
-                  </>
-                ) : (
-                  <>
-                    “What connects all of this is a single conviction: real empowerment happens when inner strength meets practical opportunity. A child who learns stillness through meditation grows into an adult equipped to handle life’s pressures. A woman equipped with financial and vocational skills becomes an anchor for her family. A farmer equipped with modern techniques builds not just a better harvest, but a better future for the next generation on that same land.”
-                  </>
-                )}
-              </p>
-            </ParagraphReveal>
-          </div>
-        </div>
-      </SectionReveal>
-
-      {/* 3. SACRED TEMPLE BRAND STATEMENT BANNER */}
-      <section className="py-8 sm:py-12 md:py-16 bg-[#FFFDF9]">
-        <div className="page-container">
-          <div className="relative rounded-2xl md:rounded-3xl overflow-hidden border border-[#E7D8C8] shadow-[0_8px_30px_rgb(0,0,0,0.06)] min-h-[220px] sm:min-h-[260px] md:min-h-[280px] lg:min-h-[300px] flex items-center">
-            {/* Background Temple Landscape (2nd image) */}
-            <Image
-              src="/images/about-temple-quote-bg.webp"
-              alt="Sacred Vedic Temple Skyline"
-              fill
-              sizes="(max-width: 768px) 100vw, 1200px"
-              className="object-cover object-right md:object-center"
-            />
-            {/* Soft gradient wash on left for contrast */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#FFF8F0]/75 via-[#FFF8F0]/35 to-transparent pointer-events-none" />
-
-            {/* Text on Left Side in 2 lines */}
-            <div className="relative z-10 w-full px-6 sm:px-10 md:px-12 lg:px-14 py-8 sm:py-12">
-              <ParagraphReveal yOffset={15} className="max-w-full md:max-w-[720px] lg:max-w-[820px] xl:max-w-[880px]">
-                <blockquote className="font-editorial text-base sm:text-lg md:text-[18px] lg:text-[20px] xl:text-[21px] text-[#2B201A] font-bold leading-relaxed tracking-tight">
-                  {lang === "hi" ? (
-                    <>
-                      <span className="relative inline-block pb-1">
-                        हम
-                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#7F160C] rounded-full" />
-                      </span>{" "}
-                      हृदय से शिक्षकों, विचारकों और कर्मठ समाजसेवियों का एक परिवार हैं —<br className="hidden md:inline" />
-                      जो गाँव-गाँव, विद्यालय-विद्यालय और परिवार-परिवार जाकर सेवा कार्य कर रहे हैं।
-                    </>
-                  ) : (
-                    <>
-                      <span className="relative inline-block pb-1">
-                        We
-                        <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-[#7F160C] rounded-full" />
-                      </span>{" "}
-                      are, at heart, a foundation of teachers, practitioners and community builders<br className="hidden md:inline" />
-                      working village by village, school by school, and family by family.
-                    </>
-                  )}
-                </blockquote>
-              </ParagraphReveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. MISSION STATEMENT (CLEAN & DIGNIFIED MINIMALIST PRESENTATION) */}
-      <SectionReveal className="py-14 sm:py-20 bg-[#FFFDF9] border-b border-[#E7D8C8]">
-        <div className="page-container max-w-5xl text-center space-y-6">
-          <div className="flex justify-center">
-            <h2 className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold inline-flex items-baseline gap-2.5 sm:gap-3">
-              <span className="relative inline-block text-[#1F1712] pb-2">
-                {lang === "hi" ? "मिशन" : "Mission"}
-                <span className="absolute left-0 bottom-0 w-full h-[2.5px] bg-[#7F160C] rounded-full" />
-              </span>
-              <span className="text-[#7F160C]">
-                {lang === "hi" ? "संकल्प" : "Statement"}
-              </span>
-            </h2>
-          </div>
-
-          <TextReveal as="h3" className="font-editorial text-lg sm:text-xl md:text-2xl lg:text-[28px] xl:text-[30px] text-[#7F160C] font-bold leading-relaxed max-w-4xl lg:max-w-5xl mx-auto">
-            {lang === "hi" ? (
-              <>
-                “समाज को संगठित करना, युवा व महिला नेतृत्व को बढ़ावा देना<br className="hidden md:inline" />
-                और पंच संकल्प के माध्यम से राष्ट्र व समाज का नव-निर्माण करना।”
-              </>
-            ) : (
-              <>
-                “To unite the community, champion youth and women leadership,<br className="hidden md:inline" />
-                and empower society through the vision of the Panch Sankalp.”
-              </>
-            )}
-          </TextReveal>
-        </div>
-      </SectionReveal>
-
-      {/* 5. WE ARE COMMITTED TO (4 PILLAR MODULES FAITHFULLY MATCHING ORIGINAL SITE) */}
-      <SectionReveal className="py-16 sm:py-20 lg:py-24 bg-[#FBF6EE]">
-        <div className="page-container space-y-12">
-          {/* Section Heading */}
-          <div className="text-center space-y-2.5 max-w-2xl mx-auto">
-            <TextReveal as="h2" className="font-editorial text-2xl sm:text-3xl md:text-4xl font-bold uppercase tracking-wider text-[#7F160C]">
-              {lang === "hi" ? "हम समर्पित हैं" : "WE ARE COMMITTED TO"}
-            </TextReveal>
-            <HeadingDivider className="my-1.5" />
-            <p className="text-sm sm:text-base text-[#3E3129]/80 font-medium">
-              {lang === "hi"
-                ? "हमारी संपूर्ण सेवा यात्रा चार मूलभूत स्तंभों पर आधारित है"
-                : "Our entire community service operates through four foundational pillars"}
-            </p>
-          </div>
-
-          {/* Cards Grid */}
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {commitmentCards.map((card) => {
-              return (
-                <StaggerItem key={card.id} className="h-full">
-                  <div className="bg-white rounded-3xl border border-[#E7D8C8] overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between h-full">
-                    {/* Card Header & Content */}
-                    <div className="p-6 sm:p-8 space-y-5">
-                      {/* Card Title */}
-                      <h3 className="font-sans text-xl sm:text-2xl font-bold text-[#7F160C] uppercase tracking-wider">
-                        {lang === "hi" ? card.titleHi : card.title}
-                      </h3>
-
-                      {/* Description Paragraph */}
-                      <p className="text-sm sm:text-base text-[#3E3129] leading-relaxed">
-                        {lang === "hi" ? card.descHi : card.desc}
-                      </p>
-
-                      {/* Specific Action Points */}
-                      <div className="pt-2 space-y-2 border-t border-[#F2E5D5]">
-                        {card.points.map((pt, pIdx) => (
-                          <div key={pIdx} className="flex items-start gap-2 text-xs sm:text-sm text-[#4E3E33]">
-                            <span className="w-2 h-2 rounded-full bg-[#7F160C] shrink-0 mt-1.5" aria-hidden="true" />
-                            <span>{lang === "hi" ? pt.hi : pt.en}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Card Real Photograph at bottom (Full-bleed flush to bottom/side borders) */}
-                    <div className="relative aspect-[16/9] w-full overflow-hidden mt-auto">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        fill sizes="100vw"
-                        className="object-cover transition-transform duration-500 hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-
-          <div className="text-center pt-2">
-            <Link
-              href="/initiatives"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#2B201A] hover:bg-[#3D2C24] text-white text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors shadow-sm"
+      {/* ============================================================ */}
+      {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
+      {/* ============================================================ */}
+      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
+        <div className="flex animate-marquee whitespace-nowrap items-center">
+          {[1, 2].map((set) => (
+            <div
+              key={`ticker-set-${set}`}
+              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
+              aria-hidden={set > 1 ? "true" : undefined}
             >
-              <span>{lang === "hi" ? "सभी सेवा प्रकल्प विस्तार से देखें" : "Explore All Trust Initiatives"}</span>
-            </Link>
-          </div>
-        </div>
-      </SectionReveal>
+              <div className="inline-flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
+                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
+                </span>
+                <span>संगठन • नेतृत्व • स्वावलंबन • विकास — एकता हमारी शक्ति, विकास हमारा संकल्प</span>
+              </div>
 
-      {/* 6. CLOSING GOLDEN WALK LANDSCAPE BANNER (MATCHING REFERENCE DESIGN) */}
-      <section className="relative overflow-hidden py-16 sm:py-24 md:py-28 border-t border-[#E7D8C8] flex flex-col justify-start items-center min-h-[540px] sm:min-h-[600px]">
-        {/* Landscape Banner Artwork (Golden Sunrise Rural Family) */}
-        <ParallaxImage offset={25} className="absolute inset-0 z-0">
-          <Image
-            src="/images/about-closing-walk.jpg"
-            alt="Rural family walking together into golden horizon"
-            fill
-            sizes="100vw"
-            className="object-cover object-bottom"
-          />
-        </ParallaxImage>
+              <div className="inline-flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
+                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
+                </span>
+                <span>1 नवंबर 2026 : ऐतिहासिक नगरी कैथल से अग्रवाल वैश्य विकास संगठन की स्थापना</span>
+              </div>
 
-        {/* Floating Card Container (Matching Reference Image 2) */}
-        <div className="relative z-10 page-container max-w-4xl text-center px-4 sm:px-6 w-full pt-2 sm:pt-4">
-          <div className="bg-[#FFFDF9]/95 sm:bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-[#7F160C]/35 shadow-[0_16px_40px_rgba(0,0,0,0.18)] p-6 sm:p-10 md:p-12 space-y-5">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.25em] text-[#7F160C]">
-              {lang === "hi" ? "समग्र समाज उत्थान का संकल्प" : "WALKING TOGETHER FOR HUMANITY"}
-            </p>
+              <div className="inline-flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
+                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
+                </span>
+                <span>संस्थापक अध्यक्ष श्री रामप्रताप गुप्ता के नेतृत्व में संगठित एवं सशक्त समाज</span>
+              </div>
 
-            <ParagraphReveal yOffset={20}>
-              <blockquote className="font-editorial text-base sm:text-xl md:text-2xl text-[#2B1810] font-semibold leading-relaxed">
-                {lang === "hi"
-                  ? "“इन निरंतर प्रयासों के माध्यम से, अग्रवाल वैश्य समाज (AVS Haryana) एक ऐसे समर्थ समाज के निर्माण के लिए समर्पित है जहाँ एकता, स्वाभिमान और सेवा साथ-साथ आगे बढ़ें — हर परिवार, हर युवा और हर बहन के जीवन को नई दिशा देते हुए।”"
-                  : "“Through these dedicated efforts, Aggarwal Vaish Samaj (AVS Haryana) strives to build a united society where solidarity, dignity, and public service walk hand in hand — uplifting every family, youth, and sister across Haryana.”"}
-              </blockquote>
-            </ParagraphReveal>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
-              <button
-                onClick={() => openDonateModal("General Seva")}
-                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Heart className="w-4 h-4 fill-current text-white" />
-                <span>{lang === "hi" ? "सेवा में सहयोग करें" : "Support Our Seva"}</span>
-              </button>
-              <Link
-                href="/membership"
-                className="w-full sm:w-auto px-7 sm:px-8 py-3.5 rounded-xl bg-[#FFF9F2] hover:bg-white text-[#2B1810] font-bold text-xs sm:text-sm uppercase tracking-wider border border-[#7F160C]/60 shadow-xs hover:shadow-sm active:scale-95 transition-all text-center"
-              >
-                <span>{lang === "hi" ? "ट्रस्ट के सदस्य बनें" : "Become a Member"}</span>
-              </Link>
+              <div className="inline-flex items-center gap-3">
+                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
+                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
+                </span>
+                <span>वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा</span>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* 2. HERO HEADER: OUR IDENTITY                                 */}
+      {/* ============================================================ */}
+      <section className="py-10 sm:py-14 bg-[#FFF9F2] border-b border-[#E8DFD3]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
+            हमारे बारे में (About Us)
+          </h1>
         </div>
       </section>
+
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 mt-8 sm:mt-12">
+
+        {/* ============================================================ */}
+        {/* 3. SECTION 1: हमारी स्थापना एवं परिचय (INTRODUCTION)          */}
+        {/* ============================================================ */}
+        <section id="intro" className="scroll-mt-24">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-6">
+
+            {/* Section Heading (No font size switcher, clean design) */}
+            <div className="border-b border-[#E8DFD3] pb-4">
+              <span className="text-xs sm:text-sm font-bold text-[#7F160C] tracking-wider uppercase block">
+                स्थापना • 1 नवंबर 2026 • कैथल (हरियाणा)
+              </span>
+              <h2 className="font-sans text-lg md:text-xl font-medium text-black mt-1">
+                हमारी स्थापना एवं परिचय
+              </h2>
+            </div>
+
+            {/* Sub-tagline */}
+            <p className="font-sans text-lg md:text-xl font-medium text-[#7F160C]">
+              “एकता हमारी शक्ति, विकास हमारा संकल्प।”
+            </p>
+
+            {/* Body Text (Exact DevTools Spec: text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90) */}
+            <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+              <p>
+                भारत के सामाजिक, आर्थिक, सांस्कृतिक एवं राष्ट्रीय विकास में अग्रवाल वैश्य समाज का सदैव महत्वपूर्ण योगदान रहा है। सेवा, सहयोग, उद्यमिता, परोपकार और राष्ट्र निर्माण की भावना वैश्य समाज की गौरवशाली पहचान रही है।
+              </p>
+
+              <div className="p-4 sm:p-5 rounded-xl bg-[#FFF9F2] border-l-4 border-[#7F160C]">
+                <p className="font-medium text-black">
+                  इसी गौरवशाली विरासत को आगे बढ़ाने, समाज को संगठित करने तथा बदलते सामाजिक, आर्थिक और राजनीतिक परिवेश में वैश्य समाज को एक नई दिशा एवं सशक्त पहचान दिलाने के उद्देश्य से <strong>अग्रवाल वैश्य विकास संगठन</strong> की स्थापना <strong>1 नवंबर 2026</strong> को ऐतिहासिक नगरी <strong>कैथल (हरियाणा)</strong> से संस्थापक <strong>श्री रामप्रताप गुप्ता</strong> द्वारा की गई।
+                </p>
+              </div>
+
+              <p>
+                संगठन की स्थापना का मूल विचार समाज को केवल एक समुदाय के रूप में नहीं, बल्कि एक संगठित, जागरूक, आत्मनिर्भर और नेतृत्व करने वाली शक्ति के रूप में विकसित करना है।
+              </p>
+
+              <p>
+                हमारा मानना है कि किसी भी समाज की वास्तविक उन्नति तभी संभव है, जब उसके युवा नेतृत्व की भूमिका निभाएं, महिलाएं आर्थिक एवं सामाजिक रूप से सशक्त बनें, समाज के प्रत्येक वर्ग को समान अवसर प्राप्त हों और सामूहिक शक्ति के माध्यम से विकास के नए आयाम स्थापित किए जाएं।
+              </p>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 4. SECTION 2: हमारा उद्देश्य एवं विजन (MISSION & VISION)       */}
+        {/* ============================================================ */}
+        <section id="mission-vision" className="scroll-mt-24">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
+
+            {/* Section Heading */}
+            <div>
+              <h2 className="font-sans text-lg md:text-xl font-medium text-black">
+                हमारा उद्देश्य एवं संकल्प (Our Mission & Vision)
+              </h2>
+            </div>
+
+            {/* Mission */}
+            <div className="space-y-3">
+              <h3 className="font-sans text-lg md:text-xl font-medium text-[#7F160C]">
+                हमारा उद्देश्य (Our Mission)
+              </h3>
+              <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+                <p>
+                  अग्रवाल वैश्य विकास संगठन का प्रमुख उद्देश्य हरियाणा सहित देशभर के अग्रवाल वैश्य समाज को एक मजबूत संगठनात्मक मंच प्रदान करना तथा सामाजिक, राजनीतिक, आर्थिक एवं शैक्षणिक क्षेत्र में उसकी सक्रिय भागीदारी सुनिश्चित करने की दिशा में कार्य करना है।
+                </p>
+                <p>
+                  हम समाज के युवाओं को नेतृत्व के लिए तैयार करने, महिलाओं को आत्मनिर्भर एवं उद्यमशील बनाने, प्रतिभाशाली विद्यार्थियों को प्रोत्साहित करने, सामाजिक सहयोग की भावना को मजबूत करने तथा समाज की सामूहिक शक्ति को सकारात्मक दिशा देने के लिए प्रतिबद्ध हैं।
+                </p>
+                <p>
+                  हमारा प्रयास है कि समाज का प्रत्येक व्यक्ति अपनी क्षमता को पहचाने, अपने अधिकारों एवं कर्तव्यों के प्रति जागरूक बने और समाज तथा राष्ट्र के विकास में सक्रिय योगदान दे।
+                </p>
+              </div>
+            </div>
+
+            {/* Vision */}
+            <div className="space-y-3 pt-4 border-t border-[#E8DFD3]">
+              <h3 className="font-sans text-lg md:text-xl font-medium text-[#7F160C]">
+                हमारा संकल्प (Our Vision)
+              </h3>
+              <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+                <p>
+                  हम एक ऐसे सशक्त, संगठित और आत्मनिर्भर वैश्य समाज की परिकल्पना करते हैं, जो अपनी गौरवशाली विरासत को संरक्षित रखते हुए आधुनिक भारत के निर्माण में अग्रणी भूमिका निभाए।
+                </p>
+                <p>
+                  हमारा लक्ष्य है कि समाज का प्रत्येक युवा नेतृत्वकर्ता बने, प्रत्येक महिला आत्मनिर्भर बने, प्रत्येक परिवार आर्थिक रूप से सशक्त बने और समाज का प्रत्येक व्यक्ति संगठन की सामूहिक शक्ति से जुड़कर प्रगति की नई ऊंचाइयों को प्राप्त करे।
+                </p>
+                <p className="font-medium text-[#7F160C] text-lg md:text-xl pt-1">
+                  हमारा विश्वास है – संगठित समाज ही सशक्त समाज है और सशक्त समाज ही विकसित राष्ट्र की आधारशिला है।
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 5. SECTION 3: हमारे पाँच प्रमुख संकल्प (OUR FIVE PLEDGES)      */}
+        {/* ============================================================ */}
+        <section id="pledges" className="scroll-mt-24 space-y-6">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-8">
+            <h2 className="font-sans text-lg md:text-xl font-medium text-black">
+              हमारे पाँच प्रमुख संकल्प (Our Five Pledges)
+            </h2>
+            <p className="text-sm font-medium text-black/70 mt-1 font-sans">
+              Five guiding commitments shaping a united, empowered and progressive Vaish community.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {fivePledges.map((pledge) => (
+              <div
+                key={pledge.num}
+                className="rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none"
+              >
+                {/* Top Solid Brand Swatch Section (#7F160C) */}
+                <div className="relative bg-[#7F160C] h-[130px] sm:h-[150px] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
+                  <h3 className="font-sans text-lg md:text-xl font-medium text-white leading-tight drop-shadow-sm px-2">
+                    {pledge.titleHi}
+                  </h3>
+                </div>
+
+                {/* Overlapping Round Logo Emblem */}
+                <div className="relative -mt-6 sm:-mt-7 z-10 flex justify-center">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-1 border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
+                    <Image
+                      src="/images/agarwal/logo.png"
+                      alt="AVS Logo"
+                      width={44}
+                      height={44}
+                      className="w-full h-full object-contain p-0.5"
+                    />
+                  </div>
+                </div>
+
+                {/* Bottom White Description Section */}
+                <div className="p-5 sm:p-6 pt-2 sm:pt-3 flex flex-col justify-start items-center text-center">
+                  <h4 className="font-sans font-medium text-base sm:text-lg text-black leading-tight">
+                    {pledge.titleEn}
+                  </h4>
+
+                  {/* Line-dot-line in Brand Swatch Color */}
+                  <div className="flex items-center justify-center gap-1.5 my-2.5 sm:my-3" aria-hidden="true">
+                    <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                    <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#7F160C]" />
+                    <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                  </div>
+
+                  <p className="text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 font-sans px-1 text-center">
+                    {pledge.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            {/* 6th Card: Slogan Banner Card in exact same size/proportions */}
+            <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#69120A] shadow-md bg-gradient-to-br from-[#7F160C] to-[#69120A] text-white flex flex-col justify-between p-6 sm:p-8 select-none text-center">
+              <div className="space-y-4 my-auto">
+                <span className="text-xs font-bold uppercase tracking-widest text-amber-200 block">
+                  हमारा मूल मंत्र
+                </span>
+                <h3 className="font-sans font-medium text-lg md:text-xl text-white leading-snug">
+                  संगठन से शक्ति, नेतृत्व से पहचान, स्वावलंबन से विकास।
+                </h3>
+                <div className="flex items-center justify-center gap-1.5 my-2" aria-hidden="true">
+                  <span className="w-8 h-[2px] bg-amber-300 rounded-full" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-300" />
+                  <span className="w-8 h-[2px] bg-amber-300 rounded-full" />
+                </div>
+                <p className="text-sm md:text-base font-medium leading-7 md:leading-8 text-amber-100/90 font-sans">
+                  आइए, मिलकर एक ऐसे समाज का निर्माण करें जिस पर आने वाली पीढ़ियां गर्व कर सकें।
+                </p>
+              </div>
+
+              <div className="pt-4 border-t border-white/20">
+                <Link
+                  href="/membership"
+                  className="inline-block px-5 py-2 rounded-lg bg-white text-[#7F160C] font-bold text-xs uppercase tracking-wider hover:bg-amber-50 transition-colors shadow-xs"
+                >
+                  संगठन से जुड़ें
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 6. SECTION 4: हमारे संगठन के लोगो का अर्थ (MEANING OF LOGO)    */}
+        {/* ============================================================ */}
+        <section id="logo-meaning" className="scroll-mt-24">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
+
+            <div className="border-b border-[#E8DFD3] pb-4">
+              <span className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider block">
+                OUR EMBLEM
+              </span>
+              <h2 className="font-sans text-lg md:text-xl font-medium text-black mt-1">
+                हमारे संगठन के लोगो का अर्थ (Meaning of Our Logo)
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+
+              {/* Logo Display */}
+              <div className="md:col-span-4 flex flex-col items-center justify-center p-4">
+                <div className="relative w-48 h-48 sm:w-56 sm:h-56">
+                  <Image
+                    src="/images/agarwal/logo.png"
+                    alt="AVVS Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
+                </div>
+                <p className="text-sm font-medium text-[#7F160C] text-center mt-3">
+                  अग्रवाल वैश्य विकास संगठन (आधिकारिक लोगो)
+                </p>
+              </div>
+
+              {/* Logo Lead description */}
+              <div className="md:col-span-8 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+                <p>
+                  अग्रवाल वैश्य विकास संगठन का लोगो केवल एक पहचान चिह्न नहीं, बल्कि संगठन की विचारधारा, उद्देश्य, एकता, नेतृत्व, आत्मनिर्भरता और विकास के संकल्प का प्रतीक है। लोगो में सम्मिलित प्रत्येक आकृति एक विशेष संदेश देती है।
+                </p>
+              </div>
+            </div>
+
+            {/* 8 Numbered Points (Clean typography, no AI icons) */}
+            <div className="space-y-4 pt-4 border-t border-[#E8DFD3]">
+              {logoElements.map((el) => (
+                <div key={el.id} className="space-y-1.5 border-b border-gray-100 pb-4 last:border-b-0">
+                  <h3 className="font-sans text-lg md:text-xl font-medium text-[#7F160C]">
+                    {el.number} {el.title}
+                  </h3>
+                  <p className="text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+                    {el.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Overall Meaning */}
+            <div className="pt-6 border-t border-[#E8DFD3] space-y-4">
+              <h3 className="font-sans text-lg md:text-xl font-medium text-black">
+                संपूर्ण लोगो का संदेश (Overall Meaning of the Logo)
+              </h3>
+
+              <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+                <p>
+                  अग्रवाल वैश्य विकास संगठन का संपूर्ण लोगो समाज की गौरवशाली पहचान, संगठनात्मक एकता, सशक्त नेतृत्व, आर्थिक आत्मनिर्भरता और सर्वांगीण विकास की सामूहिक परिकल्पना को प्रस्तुत करता है।
+                </p>
+
+                <p>
+                  इसमें उगता हुआ सूरज नए युग की शुरुआत का संदेश देता है, अक्षर ‘A’ अग्रवाल समाज की पहचान एवं नेतृत्व को दर्शाता है, विकास का ग्राफ आर्थिक उन्नति का प्रतीक है, तीन मानव आकृतियां सामूहिक शक्ति एवं सहभागिता को दर्शाती हैं और हाथ मिलाने का प्रतीक आपसी विश्वास एवं संगठन की मजबूती को प्रदर्शित करता है।
+                </p>
+
+                <p>
+                  लोगो का मूल संदेश है कि जब समाज संगठित होगा, युवा नेतृत्व करेंगे, महिलाएं आत्मनिर्भर बनेंगी और प्रत्येक व्यक्ति विकास की यात्रा में सहभागी बनेगा, तभी एक सशक्त एवं समृद्ध समाज का निर्माण संभव होगा।
+                </p>
+
+                <p>
+                  अग्रवाल वैश्य विकास संगठन का यह लोगो केवल एक प्रतीक नहीं, बल्कि एक विचार, एक पहचान और समाज के उज्ज्वल भविष्य का संकल्प है।
+                </p>
+
+                <p className="font-sans text-lg md:text-xl font-medium text-[#7F160C] pt-1">
+                  आइए, मिलकर एक नया इतिहास बनाएं! संगठन से शक्ति, नेतृत्व से पहचान और स्वावलंबन से विकास।
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ============================================================ */}
+        {/* 9. SECTION 7: पद यात्रा संदर्भ (PAD YATRA ANCHOR)               */}
+        {/* ============================================================ */}
+        <section id="pad-yatra" className="scroll-mt-24">
+          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-4">
+            <span className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider block">
+              OUTREACH & CAMPAIGNS
+            </span>
+            <h2 className="font-sans text-lg md:text-xl font-medium text-black">
+              पद यात्रा (Pad Yatra)
+            </h2>
+            <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
+              <p>
+                अग्रवाल वैश्य विकास संगठन समाज के प्रत्येक व्यक्ति तक पहुँचने के लिए पद यात्राओं एवं जनसंपर्क अभियानों को एक सशक्त माध्यम मानता है। राजघाट से अग्रोहा धाम तक की ऐतिहासिक पद यात्राओं एवं जिला-स्तरीय संपर्क यात्राओं के माध्यम से संगठन ने जन-जन को एकता, राजनीतिक चेतना और आपसी भाईचारे का संदेश दिया है।
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
     </div>
   );
 }

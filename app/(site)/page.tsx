@@ -35,16 +35,20 @@ export default function HomePage() {
   const { lang, openDonateModal } = useApp();
   const [selectedDistrict, setSelectedDistrict] = useState("All");
   const [currentHeroSlide, setCurrentHeroSlide] = useState(0);
+  const [heroTouchStart, setHeroTouchStart] = useState<number | null>(null);
+  const [heroTouchEnd, setHeroTouchEnd] = useState<number | null>(null);
 
   const heroSlides = [
     {
       id: "hero-slide-1",
       src: "/images/agarwal/hero-slide-1-hd.png",
+      srcMobile: "/images/agarwal/hero-slide-1-mobile.png",
       alt: "अग्रवाल वैश्य विकास संगठन हरियाणा - वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।",
     },
     {
       id: "hero-slide-2",
       src: "/images/agarwal/hero-slide-2-hd.png",
+      srcMobile: "/images/agarwal/hero-slide-2-mobile.png",
       alt: "संकल्प - अग्रवाल वैश्य विकास संगठन के पंच संकल्प",
     },
   ];
@@ -55,6 +59,25 @@ export default function HomePage() {
     }, 4000);
     return () => clearInterval(slideTimer);
   }, []);
+
+  const handleHeroTouchStart = (e: React.TouchEvent) => {
+    setHeroTouchStart(e.targetTouches[0].clientX);
+  };
+  const handleHeroTouchMove = (e: React.TouchEvent) => {
+    setHeroTouchEnd(e.targetTouches[0].clientX);
+  };
+  const handleHeroTouchEnd = () => {
+    if (!heroTouchStart || !heroTouchEnd) return;
+    const distance = heroTouchStart - heroTouchEnd;
+    if (distance > 45) {
+      setCurrentHeroSlide((prev) => (prev + 1) % heroSlides.length);
+    }
+    if (distance < -45) {
+      setCurrentHeroSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
+    }
+    setHeroTouchStart(null);
+    setHeroTouchEnd(null);
+  };
 
   const defaultEvents: EventItem[] = [
     {
@@ -70,7 +93,7 @@ export default function HomePage() {
       timeText: "9:30 AM – 4:30 PM IST",
       location: "Auditorium, Hisar / Gurugram",
       address: "AVVS Youth Convention Centre, Haryana",
-      contactPhone: "+91 XXXXX XXXXX",
+      contactPhone: "+91 90885 00061",
       isPublished: true,
     },
     {
@@ -86,7 +109,7 @@ export default function HomePage() {
       timeText: "10:00 AM – 5:00 PM IST",
       location: "Bhiwani & District Centres across Haryana",
       address: "Aggarwal Vaish Vikas Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
-      contactPhone: "+91 XXXXX XXXXX",
+      contactPhone: "+91 90885 00061",
       isPublished: true,
     },
     {
@@ -102,10 +125,14 @@ export default function HomePage() {
       timeText: "10:30 AM – 3:30 PM IST",
       location: "State Central Hall, Bhiwani / Rohtak",
       address: "Aggarwal Vaish Vikas Central Complex, Haryana",
-      contactPhone: "+91 XXXXX XXXXX",
+      contactPhone: "+91 90885 00061",
       isPublished: true,
     },
   ];
+
+  // Frontend visibility toggle: Currently hidden on frontend per request;
+  // Backend API (/api/events), Prisma database, and Admin Panel (/admin/events) remain fully intact for future events.
+  const SHOW_UPCOMING_EVENTS = false;
 
   const [events, setEvents] = useState<EventItem[]>(defaultEvents);
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
@@ -144,36 +171,22 @@ export default function HomePage() {
     }
   };
 
-  // Districts of Haryana for the Network section (Authentic realistic counts)
+  // Active Districts of Haryana for the Network section (Client Specified - Total: 2,800)
   const haryanaDistricts = [
-    { name: "Bhiwani", members: 847 },
-    { name: "Hisar", members: 629 },
-    { name: "Gurugram", members: 684 },
-    { name: "Faridabad", members: 593 },
-    { name: "Rohtak", members: 518 },
-    { name: "Panipat", members: 452 },
-    { name: "Karnal", members: 396 },
-    { name: "Sonipat", members: 381 },
-    { name: "Sirsa", members: 314 },
-    { name: "Ambala", members: 295 },
-    { name: "Jind", members: 273 },
-    { name: "Fatehabad", members: 241 },
-    { name: "Yamunanagar", members: 237 },
-    { name: "Rewari", members: 219 },
-    { name: "Kaithal", members: 194 },
-    { name: "Kurukshetra", members: 182 },
-    { name: "Mahendragarh", members: 175 },
-    { name: "Jhajjar", members: 163 },
-    { name: "Palwal", members: 151 },
-    { name: "Panchkula", members: 142 },
-    { name: "Charkhi Dadri", members: 136 },
-    { name: "Nuh", members: 88 },
+    { name: "Bhiwani", members: 520 },
+    { name: "Panipat", members: 460 },
+    { name: "Kaithal", members: 380 },
+    { name: "Karnal", members: 360 },
+    { name: "Kurukshetra", members: 330 },
+    { name: "Sirsa", members: 290 },
+    { name: "Panchkula", members: 240 },
+    { name: "Charkhi Dadri", members: 220 },
   ];
 
   const currentMembersCount =
     selectedDistrict === "All"
-      ? 6103
-      : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members || 265;
+      ? 2800
+      : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members || 220;
 
   const sankalpCarouselRef = useRef<HTMLDivElement>(null);
 
@@ -194,49 +207,36 @@ export default function HomePage() {
       id: "sankalp-1",
       titleHi: "राजनीतिक सशक्तिकरण",
       titleEn: "Political Empowerment",
-      desc: "To strengthen political representation and encourage active participation in decision making for the community.",
+      desc: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
+      descHi: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
     },
     {
       id: "sankalp-2",
       titleHi: "नारी स्वावलंबन एवं उद्यमिता",
       titleEn: "Women Empowerment & Entrepreneurship",
-      desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
+      desc: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
+      descHi: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
     },
     {
       id: "sankalp-3",
       titleHi: "युवा नेतृत्व निर्माण",
       titleEn: "Youth Leadership Development",
-      desc: "To empower young generations with leadership skills, confidence and opportunities to shape the future.",
+      desc: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
+      descHi: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
     },
     {
       id: "sankalp-4",
       titleHi: "आर्थिक आत्मनिर्भरता",
       titleEn: "Economic Self-Reliance",
-      desc: "To encourage entrepreneurship, business growth, employment and financial independence within the community.",
+      desc: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
+      descHi: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
     },
     {
       id: "sankalp-5",
       titleHi: "संगठित समाज",
-      titleEn: "Organized Community",
-      desc: "Building a united, strong, and organized community that works collectively towards shared goals and interests.",
-    },
-    {
-      id: "sankalp-6",
-      titleHi: "सामाजिक सहभागिता",
-      titleEn: "Social Participation",
-      desc: "Encouraging active involvement of every section of society in social initiatives and fostering collective responsibility.",
-    },
-    {
-      id: "sankalp-7",
-      titleHi: "मातृशक्ति का उत्थान",
-      titleEn: "Empowering Women",
-      desc: "Promoting the participation, leadership, and empowerment of women as an integral part of community development.",
-    },
-    {
-      id: "sankalp-8",
-      titleHi: "प्रतिभा सम्मान एवं शिक्षा",
-      titleEn: "Education & Pratibha Samman",
-      desc: "Honoring meritorious students with scholarships and recognition to build a brighter tomorrow.",
+      titleEn: "Organised Society",
+      desc: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
+      descHi: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
     },
   ];
 
@@ -289,7 +289,12 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 2. HERO SECTION: 100% FULL-WIDTH 2-SLIDE CAROUSEL (UNCUT HD) */}
       {/* ============================================================ */}
-      <section className="relative w-full aspect-[1672/941] overflow-hidden select-none group border-b border-gray-200 bg-white">
+      <section
+        onTouchStart={handleHeroTouchStart}
+        onTouchMove={handleHeroTouchMove}
+        onTouchEnd={handleHeroTouchEnd}
+        className="relative w-full aspect-square sm:aspect-[1672/941] overflow-hidden select-none group border-b-0 sm:border-b sm:border-gray-200 bg-white"
+      >
         {/* Horizontal sliding track */}
         <div
           className="flex w-full h-full transition-transform duration-700 ease-in-out"
@@ -298,15 +303,26 @@ export default function HomePage() {
           {heroSlides.map((slide, idx) => (
             <div
               key={slide.id}
-              className="w-full h-full shrink-0 relative"
+              className="w-full h-full shrink-0 relative bg-white"
             >
+              {/* Desktop / Tablet Image */}
               <Image
                 src={slide.src}
                 alt={slide.alt}
                 fill
                 priority={idx === 0}
                 unoptimized
-                className="object-cover object-center w-full h-full block select-none"
+                className="hidden sm:block object-cover object-center w-full h-full select-none"
+                sizes="100vw"
+              />
+              {/* Mobile Image (Tall Portrait Viewport) */}
+              <Image
+                src={slide.srcMobile || slide.src}
+                alt={slide.alt}
+                fill
+                priority={idx === 0}
+                unoptimized
+                className="block sm:hidden object-cover object-center w-full h-full select-none"
                 sizes="100vw"
               />
             </div>
@@ -314,7 +330,7 @@ export default function HomePage() {
         </div>
 
         {/* Slide Indicator Dots */}
-        <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2.5 sm:gap-3 bg-black/25 backdrop-blur-xs px-4 py-1.5 sm:py-2 rounded-full">
+        <div className="absolute bottom-2.5 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3 bg-black/25 backdrop-blur-xs px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
           {heroSlides.map((slide, idx) => (
             <button
               key={`dot-${slide.id}`}
@@ -323,8 +339,8 @@ export default function HomePage() {
               aria-label={`Go to slide ${idx + 1}`}
               className={`transition-all duration-300 rounded-full cursor-pointer ${
                 idx === currentHeroSlide
-                  ? "w-8 sm:w-10 h-2.5 sm:h-3 bg-[#7F160C] shadow-md"
-                  : "w-2.5 sm:w-3 h-2.5 sm:h-3 bg-white/70 hover:bg-white"
+                  ? "w-7 sm:w-10 h-2 sm:h-3 bg-[#7F160C] shadow-md"
+                  : "w-2 sm:w-3 h-2 sm:h-3 bg-white/70 hover:bg-white"
               }`}
             />
           ))}
@@ -334,12 +350,12 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 3. OUR NETWORK SECTION (EXACT REFERENCE SCREENSHOT 2)        */}
       {/* ============================================================ */}
-      <section id="network" className="py-14 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
+      <section id="network" className="pt-5 pb-12 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Centered Bordered Badge: [ OUR NETWORK ] */}
-          <div className="flex justify-center mb-10 sm:mb-14">
-            <div className="inline-block px-7 py-2.5 rounded-lg border-2 border-[#7F160C] text-[#7F160C] font-black text-base sm:text-lg tracking-[0.2em] uppercase bg-white shadow-xs">
+          <div className="flex justify-center mb-5 sm:mb-14">
+            <div className="inline-block px-5 py-2 sm:px-7 sm:py-2.5 rounded-lg border-2 border-[#7F160C] text-[#7F160C] font-black text-sm sm:text-lg tracking-[0.18em] sm:tracking-[0.2em] uppercase bg-white shadow-xs">
               OUR NETWORK
             </div>
           </div>
@@ -348,7 +364,7 @@ export default function HomePage() {
             
             {/* Left Column: Official Haryana Map with AVS Emblem */}
             <div className="lg:col-span-7 flex justify-center items-center">
-              <div className="relative w-full max-w-[480px] aspect-square rounded-3xl overflow-hidden shadow-xl bg-[#7F160C]">
+              <div className="relative w-full max-w-[340px] sm:max-w-[480px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-[#7F160C]">
                 <Image
                   src="/images/agarwal/haryana-map-avs.jpg"
                   alt="हरियाणा - अग्रवाल वैश्य विकास संगठन"
@@ -361,20 +377,20 @@ export default function HomePage() {
             </div>
 
             {/* Right Column: Floating White Card with District Selector (Exact Reference) */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-start">
-              <div className="w-full max-w-[420px] bg-white rounded-3xl border border-gray-100 shadow-xl p-6 sm:p-8 space-y-6">
+            <div className="lg:col-span-5 flex justify-center lg:justify-start w-full">
+              <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-xl p-5 sm:p-8 space-y-5 sm:space-y-6">
                 
-                {/* Top Row: Total Districts: 23 with underline */}
-                <div className="pb-4 border-b border-gray-200">
+                {/* Top Row: Total Districts: 8 with underline */}
+                <div className="pb-3.5 sm:pb-4 border-b border-gray-200">
                   <label htmlFor="district-select" className="sr-only">Select District</label>
                   <div className="relative">
                     <select
                       id="district-select"
                       value={selectedDistrict}
                       onChange={(e) => setSelectedDistrict(e.target.value)}
-                      className="w-full appearance-none bg-transparent pr-8 text-xl sm:text-[22px] font-bold text-gray-900 cursor-pointer focus:outline-none"
+                      className="w-full appearance-none bg-transparent pr-8 text-lg sm:text-[22px] font-bold text-gray-900 cursor-pointer focus:outline-none"
                     >
-                      <option value="All">Total Districts: 23</option>
+                      <option value="All">Total Districts: 8</option>
                       {haryanaDistricts.map((d) => (
                         <option key={d.name} value={d.name}>
                           {d.name} ({d.members.toLocaleString()} Members)
@@ -386,18 +402,18 @@ export default function HomePage() {
                 </div>
 
                 {/* Inner Bordered Card with Person Silhouette & Total Members */}
-                <div className="border border-gray-200/90 rounded-2xl p-5 sm:p-6 bg-white flex items-center gap-5">
+                <div className="border border-gray-200/90 rounded-xl sm:rounded-2xl p-4 sm:p-6 bg-white flex items-center gap-4 sm:gap-5">
                   <div className="text-black shrink-0">
-                    <svg className="w-9 h-9 fill-current" viewBox="0 0 24 24">
+                    <svg className="w-8 h-8 sm:w-9 sm:h-9 fill-current" viewBox="0 0 24 24">
                       <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z" />
                     </svg>
                   </div>
                   <div className="space-y-0.5">
-                    <p className="text-[15px] font-normal text-gray-500">
+                    <p className="text-sm sm:text-[15px] font-normal text-gray-500">
                       {selectedDistrict === "All" ? "Total Members" : `${selectedDistrict} Members`}
                     </p>
-                    <p className="font-sans font-bold text-[28px] sm:text-[32px] text-gray-900 leading-none tracking-tight">
-                      <CountUp start={100} end={currentMembersCount} duration={1000} />
+                    <p className="font-sans font-bold text-[26px] sm:text-[32px] text-gray-900 leading-none tracking-tight">
+                      <CountUp key={selectedDistrict} start={Math.min(50, Math.floor(currentMembersCount / 2))} end={currentMembersCount} duration={800} />
                     </p>
                   </div>
                 </div>
@@ -406,7 +422,7 @@ export default function HomePage() {
                 <div className="pt-0.5">
                   <Link
                     href="#network"
-                    className="inline-block text-[15px] font-semibold text-[#7F160C] hover:text-[#69120A] underline decoration-[#7F160C] underline-offset-4 transition-colors"
+                    className="inline-block text-sm sm:text-[15px] font-semibold text-[#7F160C] hover:text-[#69120A] underline decoration-[#7F160C] underline-offset-4 transition-colors"
                   >
                     View More
                   </Link>
@@ -422,40 +438,40 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 4. PANCH SANKALP SECTION (EXACT REFERENCE SCREENSHOT FORMAT) */}
       {/* ============================================================ */}
-      <section id="sankalp" className="py-14 sm:py-20 lg:py-24 bg-[#FFFDF9] border-b border-gray-200 overflow-hidden select-none">
+      <section id="sankalp" className="py-12 sm:py-20 lg:py-24 bg-[#FFFDF9] border-b border-gray-200 overflow-hidden select-none">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* Header Row: Title & Subtitle on Left, < > Arrow Buttons on Right (Exact Reference Pic 1) */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-12">
             <div className="py-1">
-              <h2 className="font-sans text-[30px] sm:text-[36px] font-bold tracking-tight leading-tight">
-                <span className="relative inline-block text-[#1F1712] border-b-[3px] sm:border-b-4 border-[#7F160C] pb-0.5 sm:pb-1 mr-2.5 sm:mr-3">
+              <h2 className="font-sans text-[26px] sm:text-[36px] font-bold tracking-tight leading-tight">
+                <span className="relative inline-block text-[#1F1712] border-b-[3px] sm:border-b-4 border-[#7F160C] pb-0.5 sm:pb-1 mr-2 sm:mr-3">
                   Panch
                 </span>
                 <span className="text-[#7F160C]">
                   Sankalp
                 </span>
               </h2>
-              <p className="text-sm sm:text-base text-gray-600 mt-2 font-normal leading-relaxed max-w-none md:whitespace-nowrap">
+              <p className="text-xs sm:text-base text-gray-600 mt-2 font-normal leading-relaxed">
                 Five guiding commitments shaping a united, empowered and progressive Vaish community.
               </p>
             </div>
 
-            {/* Circular Carousel Control Buttons (Exact Orange Circles with White Arrows) */}
-            <div className="flex items-center gap-3 shrink-0">
+            {/* Circular Carousel Control Buttons */}
+            <div className="flex items-center gap-2.5 sm:gap-3 shrink-0 self-end sm:self-auto">
               <button
                 onClick={scrollSankalpLeft}
                 aria-label="Previous Panch Sankalp"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
               >
-                <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
               </button>
               <button
                 onClick={scrollSankalpRight}
                 aria-label="Next Panch Sankalp"
-                className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
+                className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-md active:scale-95 transition-all cursor-pointer"
               >
-                <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
               </button>
             </div>
           </div>
@@ -463,26 +479,26 @@ export default function HomePage() {
           {/* Cards Track: Horizontal Smooth Scrollable Carousel with Hidden Scrollbar */}
           <div
             ref={sankalpCarouselRef}
-            className="flex gap-5 sm:gap-7 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+            className="flex gap-4 sm:gap-7 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory touch-pan-x"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
           >
             {sankalpItems.map((item) => (
               <div
                 key={item.id}
-                className="flex-[0_0_88%] sm:flex-[0_0_47%] lg:flex-[0_0_31%] xl:flex-[0_0_31.5%] snap-start shrink-0"
+                className="flex-[0_0_84%] sm:flex-[0_0_47%] lg:flex-[0_0_31%] xl:flex-[0_0_31.5%] snap-start shrink-0"
               >
                 {/* 100% Native Rendered Card Matching Exact Reference Formatting */}
-                <div className="h-full rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col aspect-square justify-between select-none">
+                <div className="h-full rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none min-h-[350px] sm:aspect-square">
                   {/* Top Solid Brand Swatch Section (#7F160C) */}
-                  <div className="relative bg-[#7F160C] h-[48%] flex items-center justify-center p-6 text-center shadow-inner">
-                    <h3 className="font-sans font-black text-2xl sm:text-3xl lg:text-4xl text-white leading-tight drop-shadow-sm px-2">
+                  <div className="relative bg-[#7F160C] h-[46%] min-h-[120px] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
+                    <h3 className="font-sans font-black text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-white leading-tight drop-shadow-sm px-2">
                       {item.titleHi}
                     </h3>
                   </div>
 
                   {/* Overlapping Round Logo Emblem */}
-                  <div className="relative -mt-7 z-10 flex justify-center">
-                    <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white p-1 border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
+                  <div className="relative -mt-6 sm:-mt-7 z-10 flex justify-center">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white p-1 border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
                       <Image
                         src="/images/agarwal/logo.png"
                         alt="AVS Logo"
@@ -494,19 +510,19 @@ export default function HomePage() {
                   </div>
 
                   {/* Bottom White Description Section */}
-                  <div className="h-[48%] p-5 sm:p-6 pt-1.5 flex flex-col justify-start items-center text-center">
-                    <h4 className="font-sans font-bold text-[20px] text-[#1F1712] leading-tight">
+                  <div className="h-[54%] p-4 sm:p-6 pt-1 sm:pt-1.5 flex flex-col justify-start items-center text-center">
+                    <h4 className="font-sans font-bold text-[17px] sm:text-[20px] text-[#1F1712] leading-tight">
                       {item.titleEn}
                     </h4>
 
                     {/* Exact Reference Underline: line • dot • line in Brand Swatch Color */}
-                    <div className="flex items-center justify-center gap-1.5 my-2.5" aria-hidden="true">
-                      <span className="w-10 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
-                      <span className="w-2 h-2 rounded-full bg-[#7F160C]" />
-                      <span className="w-10 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                    <div className="flex items-center justify-center gap-1.5 my-2 sm:my-2.5" aria-hidden="true">
+                      <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                      <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#7F160C]" />
+                      <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
                     </div>
 
-                    <p className="text-[16px] text-gray-700 leading-relaxed line-clamp-3 px-1">
+                    <p className="text-sm sm:text-[15px] text-[#000000] leading-relaxed line-clamp-4 px-1 font-sans">
                       {item.desc}
                     </p>
                   </div>
@@ -516,10 +532,10 @@ export default function HomePage() {
           </div>
 
           {/* Centered [ View All ] Button (Exact Reference Pic 1) */}
-          <div className="flex justify-center mt-8 sm:mt-12">
+          <div className="flex justify-center mt-6 sm:mt-12">
             <Link
               href="#sankalp"
-              className="inline-block px-8 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
+              className="inline-block px-7 sm:px-8 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
             >
               View All
             </Link>
@@ -531,7 +547,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 5.5. PANCH SANKALP WIDE BANNER (100% FULL-WIDTH END-TO-END)  */}
       {/* ============================================================ */}
-      <section className="relative w-full aspect-[1024/332] overflow-hidden select-none border-b border-[#E8DFD3] bg-white">
+      <section className="relative w-full aspect-[1024/332] min-h-[120px] sm:min-h-0 overflow-hidden select-none border-b border-[#E8DFD3] bg-white">
         <Image
           src="/images/agarwal/sankalp-wide-banner.jpg"
           alt="अग्रवाल वैश्य विकास संगठन के पंच संकल्प"
@@ -544,77 +560,80 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 6. UPCOMING EVENTS & SAMMELANS                               */}
+      {/* 6. UPCOMING EVENTS & SAMMELANS (Backend Ready for Future)    */}
       {/* ============================================================ */}
-      <section id="events" className="py-16 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
-            <h2 className="font-sans font-bold text-[32px] sm:text-[38px] lg:text-[42px] text-[#7F160C] tracking-tight">
-              Upcoming Events
-            </h2>
-            <HeadingDivider className="mt-3" />
-          </div>
+      {/* Hidden from frontend for now; backend API & admin panel remain fully intact to enable anytime */}
+      {SHOW_UPCOMING_EVENTS && events.length > 0 && (
+        <section id="events" className="py-12 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
+              <h2 className="font-sans font-bold text-[28px] sm:text-[38px] lg:text-[42px] text-[#7F160C] tracking-tight">
+                Upcoming Events
+              </h2>
+              <HeadingDivider className="mt-2.5 sm:mt-3" />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-            {events.slice(0, 3).map((event) => (
-              <div key={event.id} className="h-full">
-                <div
-                  onClick={() => {
-                    setSelectedEvent(event);
-                    setEventModalOpen(true);
-                  }}
-                  className="rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-[#7F160C] shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full group"
-                >
-                  {/* Top Saffron Banner */}
-                  <div className="relative w-full h-[180px] bg-gradient-to-br from-[#7F160C] to-[#69120A] flex items-center justify-center p-6 text-center shadow-inner">
-                    <h3 className="font-sans font-black text-2xl sm:text-3xl text-white leading-tight drop-shadow-md px-2">
-                      {event.titleHi || event.title}
-                    </h3>
-                  </div>
-
-                  {/* Overlapping AVS Emblem */}
-                  <div className="relative -mt-6 z-10 flex justify-center">
-                    <div className="w-12 h-12 rounded-full bg-white p-0.5 border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
-                      <Image
-                        src="/images/agarwal/logo.png"
-                        alt="AVS Logo"
-                        width={44}
-                        height={44}
-                        className="w-full h-full object-contain p-0.5"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Card Body */}
-                  <div className="p-6 pt-3.5 flex-1 flex flex-col justify-between text-center space-y-3.5">
-                    <div className="space-y-2.5">
-                      <h4 className="font-sans font-bold text-[20px] text-gray-900 group-hover:text-[#7F160C] transition-colors leading-snug">
-                        {event.title}
-                      </h4>
-                      <p className="text-[16px] text-gray-600 leading-relaxed line-clamp-3">
-                        {lang === "hi" && event.summaryHi ? event.summaryHi : event.summary}
-                      </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 items-stretch">
+              {events.slice(0, 3).map((event) => (
+                <div key={event.id} className="h-full">
+                  <div
+                    onClick={() => {
+                      setSelectedEvent(event);
+                      setEventModalOpen(true);
+                    }}
+                    className="rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-[#7F160C] shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between cursor-pointer h-full group"
+                  >
+                    {/* Top Saffron Banner */}
+                    <div className="relative w-full h-[150px] sm:h-[180px] bg-gradient-to-br from-[#7F160C] to-[#69120A] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
+                      <h3 className="font-sans font-black text-xl sm:text-2xl sm:text-3xl text-white leading-tight drop-shadow-md px-2">
+                        {event.titleHi || event.title}
+                      </h3>
                     </div>
 
-                    <div className="pt-3.5 border-t border-gray-200 flex items-center justify-between text-sm sm:text-base font-semibold gap-2">
-                      <span className="flex items-center gap-1.5 truncate max-w-[62%] text-gray-700">
-                        <MapPin className="w-4 h-4 text-[#7F160C] shrink-0" />
-                        <span className="truncate">{event.location}</span>
-                      </span>
-                      <span className="text-[#7F160C] font-bold text-sm sm:text-base shrink-0 tracking-wide">
-                        {formatCardDate(event.startDate)}
-                      </span>
+                    {/* Overlapping AVS Emblem */}
+                    <div className="relative -mt-6 z-10 flex justify-center">
+                      <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white p-0.5 border-2 border-white shadow-md flex items-center justify-center overflow-hidden">
+                        <Image
+                          src="/images/agarwal/logo.png"
+                          alt="AVS Logo"
+                          width={44}
+                          height={44}
+                          className="w-full h-full object-contain p-0.5"
+                        />
+                      </div>
                     </div>
-                  </div>
 
+                    {/* Card Body */}
+                    <div className="p-5 sm:p-6 pt-3 sm:pt-3.5 flex-1 flex flex-col justify-between text-center space-y-3 sm:space-y-3.5">
+                      <div className="space-y-2">
+                        <h4 className="font-sans font-bold text-[18px] sm:text-[20px] text-gray-900 group-hover:text-[#7F160C] transition-colors leading-snug">
+                          {event.title}
+                        </h4>
+                        <p className="text-sm sm:text-[16px] text-gray-600 leading-relaxed line-clamp-3">
+                          {lang === "hi" && event.summaryHi ? event.summaryHi : event.summary}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 sm:pt-3.5 border-t border-gray-200 flex items-center justify-between text-xs sm:text-sm font-semibold gap-2">
+                        <span className="flex items-center gap-1.5 truncate max-w-[62%] text-gray-700">
+                          <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#7F160C] shrink-0" />
+                          <span className="truncate">{event.location}</span>
+                        </span>
+                        <span className="text-[#7F160C] font-bold text-xs sm:text-sm shrink-0 tracking-wide">
+                          {formatCardDate(event.startDate)}
+                        </span>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
 
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 7. GALLERY SHOWCASE (AUTHENTIC DESIGNS & CAMPAIGNS)          */}
@@ -624,15 +643,17 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 8. EVENT MODAL                                               */}
       {/* ============================================================ */}
-      <EventDetailsModal
-        event={selectedEvent}
-        isOpen={eventModalOpen}
-        onClose={() => setEventModalOpen(false)}
-        onRegister={(title, customAmounts) =>
-          openDonateModal(title, undefined, false, undefined, customAmounts)
-        }
-        lang={lang}
-      />
+      {SHOW_UPCOMING_EVENTS && (
+        <EventDetailsModal
+          event={selectedEvent}
+          isOpen={eventModalOpen}
+          onClose={() => setEventModalOpen(false)}
+          onRegister={(title, customAmounts) =>
+            openDonateModal(title, undefined, false, undefined, customAmounts)
+          }
+          lang={lang}
+        />
+      )}
 
     </div>
   );

@@ -44,16 +44,7 @@ const nextConfig: NextConfig = {
     ],
   },
   async redirects() {
-    return [
-      { source: "/about", destination: "/#president", permanent: false },
-      { source: "/founder", destination: "/#president", permanent: false },
-      { source: "/initiatives", destination: "/#sankalp", permanent: false },
-      { source: "/membership", destination: "/#network", permanent: false },
-      { source: "/contact", destination: "/#president", permanent: false },
-      { source: "/gallery", destination: "/#gallery", permanent: false },
-      { source: "/login", destination: "/", permanent: false },
-      { source: "/account", destination: "/", permanent: false },
-    ];
+    return [];
   },
 };
 

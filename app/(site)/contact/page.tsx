@@ -275,7 +275,7 @@ export default function ContactPage() {
             <SectionReveal as="div" yOffset={30} delay={0.2} className="lg:col-span-5 space-y-6">
               <div className="card-warm space-y-6">
                 <h2 className="font-editorial text-2xl font-bold text-[#7F160C]">
-                  {lang === "hi" ? "कार्यालय संपर्क विवरण" : "AVS Haryana Contact Details"}
+                  {lang === "hi" ? "कार्यालय संपर्क विवरण" : "AVVS Haryana Contact Details"}
                 </h2>
                 <HeadingDivider align="left" className="!py-0" />
 
@@ -287,7 +287,9 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "केंद्रीय कार्यालय पता" : "Head Office Address"}</h4>
                       <p className="text-[#2B201A]/85 text-xs leading-relaxed mt-0.5">
-                        {lang === "hi" ? "कार्यालय पता, हरियाणा, भारत" : "Office Address, Haryana, India"}
+                        {lang === "hi"
+                          ? "150, सेक्टर 19 पार्ट–1, हुडा, कैथल–136027 (हरियाणा)"
+                          : "150, Sector 19 Part-1, HUDA, Kaithal - 136027 (Haryana)"}
                       </p>
                     </div>
                   </li>
@@ -298,9 +300,12 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "फ़ोन / हेल्पलाइन" : "Phone / Helpline"}</h4>
-                      <span className="text-xs text-[#7F160C] font-semibold">
-                        +91 XXXXX XXXXX
-                      </span>
+                      <a
+                        href="tel:+919088500061"
+                        className="text-xs text-[#7F160C] hover:underline font-bold"
+                      >
+                        +91 90885 00061
+                      </a>
                     </div>
                   </li>
 
@@ -310,9 +315,12 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h4 className="font-bold text-[#2B201A]">{lang === "hi" ? "ईमेल पता" : "Official Email"}</h4>
-                      <span className="text-xs text-[#7F160C] font-semibold">
-                        info@domain.com
-                      </span>
+                      <a
+                        href="mailto:aggarwalvaishvikassangthan@gmail.com"
+                        className="text-xs text-[#7F160C] hover:underline font-bold break-all"
+                      >
+                        aggarwalvaishvikassangthan@gmail.com
+                      </a>
                     </div>
                   </li>
 
@@ -328,19 +336,60 @@ export default function ContactPage() {
                     </div>
                   </li>
                 </ul>
+
+                {/* Social Connect: Facebook & Instagram */}
+                <div className="pt-4 border-t border-[#E7D8C8]">
+                  <h4 className="font-bold text-xs uppercase tracking-wider text-[#7F160C] mb-2.5">
+                    {lang === "hi" ? "सोशल मीडिया पर जुड़ें (@avvsharyana)" : "Connect On Social Media (@avvsharyana)"}
+                  </h4>
+                  <div className="grid grid-cols-2 gap-3">
+                    <a
+                      href="https://www.facebook.com/avvsharyana/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white transition-all text-xs font-bold border border-[#1877F2]/20"
+                    >
+                      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                      </svg>
+                      <span>Facebook</span>
+                    </a>
+
+                    <a
+                      href="https://www.instagram.com/avvsharyana/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#E4405F]/10 hover:bg-[#E4405F] text-[#E4405F] hover:text-white transition-all text-xs font-bold border border-[#E4405F]/20"
+                    >
+                      <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                      </svg>
+                      <span>Instagram</span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
-              {/* Interactive Location Placeholder Card */}
-              <div className="card-warm bg-[#FFF9F2] text-center space-y-3">
-                <MapPin className="w-8 h-8 text-[#B8893E] mx-auto animate-bounce" />
+              {/* Membership Form Download Card */}
+              <div className="card-warm bg-[#FFF9F2] text-center space-y-3 p-6 border-2 border-dashed border-[#7F160C]/30">
+                <MapPin className="w-8 h-8 text-[#7F160C] mx-auto animate-bounce" />
                 <h4 className="font-editorial text-xl font-bold text-[#2B201A]">
-                  {lang === "hi" ? "केंद्रीय कार्यालय (हरियाणा)" : "Central Office (Haryana)"}
+                  {lang === "hi" ? "केंद्रीय कार्यालय (कैथल, हरियाणा)" : "Central Office (Kaithal, Haryana)"}
                 </h4>
-                <p className="text-xs text-[#2B201A]/75 max-w-xs mx-auto">
+                <p className="text-xs text-[#2B201A]/85 max-w-sm mx-auto">
                   {lang === "hi"
-                    ? "कार्यालय पता, हरियाणा। समाज बंधुओं का सदैव हार्दिक स्वागत है।"
-                    : "Office Address, Haryana, India. Devoted members and patrons are always welcome."}
+                    ? "150, सेक्टर 19 पार्ट–1, हुडा, कैथल–136027 (हरियाणा)। समाज बंधुओं का सदैव हार्दिक स्वागत है।"
+                    : "150, Sector 19 Part-1, HUDA, Kaithal - 136027 (Haryana). All community members are cordially welcome."}
                 </p>
+                <div className="pt-2">
+                  <a
+                    href="/membership-form-avvs.pdf"
+                    download="MEMBERSHIP_FORM_AVVS.pdf"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  >
+                    <span>{lang === "hi" ? "ऑफिशियल सदस्यता फॉर्म डाउनलोड करें (PDF)" : "Download Official Membership Form (PDF)"}</span>
+                  </a>
+                </div>
               </div>
             </SectionReveal>
           </div>

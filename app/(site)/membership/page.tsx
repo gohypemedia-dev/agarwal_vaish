@@ -284,12 +284,19 @@ export default function MembershipPage() {
 
 
             {/* CTA Button */}
-            <div className="pt-2 sm:pt-4">
+            <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3">
               <a
                 href="#membership-plans"
                 className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
               >
                 <span>{lang === "hi" ? "सदस्यता योजनाएं देखें" : "Explore Membership Plans"}</span>
+              </a>
+              <a
+                href="/membership-form-avvs.pdf"
+                download="MEMBERSHIP_FORM_AVVS.pdf"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl bg-white hover:bg-amber-50 text-[#7F160C] border-2 border-[#7F160C] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
+              >
+                <span>{lang === "hi" ? "फॉर्म डाउनलोड करें (PDF)" : "Download Form (PDF)"}</span>
               </a>
             </div>
           </div>

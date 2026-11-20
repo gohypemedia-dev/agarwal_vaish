@@ -216,7 +216,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         {/* ==================================================================== */}
         {/* 4 IMAGES STATIC GRID (Scroll & Carousel commented out)                */}
         {/* ==================================================================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           {displayItems.map((item) => {
             const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
 

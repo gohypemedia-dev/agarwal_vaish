@@ -3,12 +3,19 @@
 
 export const LEGAL = {
   trustName: "Aggarwal Vaish Vikas Sangathan",
-  registration: "Reg. No: [Registration Number]",
-  address: "Office Address, Haryana, India",
-  email: "info@domain.com",
-  phone: "+91 XXXXX XXXXX",
-  phoneHref: "tel:+910000000000",
-  lastUpdated: "21 October 2026",
+  registration: "Regd. No. (रजि.)",
+  address: "150, Sector 19 Part-1, HUDA, Kaithal - 136027 (Haryana)",
+  addressHi: "150, सेक्टर 19 पार्ट–1, हुडा, कैथल–136027 (हरियाणा)",
+  email: "aggarwalvaishvikassangthan@gmail.com",
+  phone: "+91 90885 00061",
+  phoneRaw: "90885-00061",
+  phoneHref: "tel:+919088500061",
+  whatsappHref: "https://wa.me/919088500061",
+  instagramHandle: "avvsharyana",
+  instagramHref: "https://www.instagram.com/avvsharyana/",
+  facebookHandle: "avvsharyana",
+  facebookHref: "https://www.facebook.com/avvsharyana/",
+  lastUpdated: "20 November 2026",
 
   // Required by the Consumer Protection (E-Commerce) Rules, 2020.
   // TODO: replace with the name of the person the Trust appoints before going live.

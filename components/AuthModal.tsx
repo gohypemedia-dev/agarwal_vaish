@@ -91,53 +91,53 @@ export default function AuthModal() {
   const hi = lang === "hi";
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/45 backdrop-blur-sm flex items-center justify-center p-3.5 sm:p-5 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/45 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5 animate-in fade-in duration-200">
       <div
         className="relative w-full max-w-5xl grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-6 my-auto items-stretch py-3 sm:py-0"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* ================= LEFT CARD: VEDIC GURUKUL & SACRED VISUAL BRANDING ================= */}
-        <div className="relative md:col-span-6 bg-[#FCF9F2] rounded-3xl border-2 border-[#C9A24B] shadow-xl overflow-hidden pt-5 pb-4 px-4 sm:p-6 flex flex-col justify-between min-h-[380px] md:min-h-[580px]">
-          {/* AVS Haryana Visual */}
+        {/* ================= LEFT CARD: BRANDING (Hidden on mobile for sleek phone UI) ================= */}
+        <div className="hidden md:flex relative md:col-span-6 bg-[#FCF9F2] rounded-3xl border-2 border-[#7F160C]/20 shadow-xl overflow-hidden pt-5 pb-4 px-4 sm:p-6 flex-col justify-between min-h-[480px] md:min-h-[580px]">
+          {/* AVS Visual */}
           <Image
             src="/images/agarwal/banner-square.jpg"
-            alt="Aggarwal Vaish Samaj Haryana"
+            alt="Aggarwal Vaish Vikas Sangathan"
             fill
             priority
             unoptimized
             className="object-cover object-center"
           />
 
-          {/* Top Bar: Luminous White & Gold Trust Badge & Gurukul Badge */}
+          {/* Top Bar: White & Maroon Badge */}
           <div className="relative z-10 flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#B8893E]/50 shadow-md">
-              <div className="relative w-8 h-8 rounded-full border-2 border-[#B8893E] bg-white overflow-hidden shrink-0">
+            <div className="flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#7F160C]/30 shadow-md">
+              <div className="relative w-8 h-8 rounded-full border-2 border-[#7F160C] bg-white overflow-hidden shrink-0">
                 <Image
                   src="/images/agarwal/logo.png"
-                  alt="Aggarwal Vaish Samaj Haryana Logo"
+                  alt="Aggarwal Vaish Vikas Sangathan Logo"
                   fill
                   className="object-contain p-0.5"
                 />
               </div>
               <div className="flex flex-col shrink-0 min-w-0 pr-1">
-                <span className="font-editorial text-xs sm:text-sm font-bold tracking-tight text-[#2B201A] leading-tight whitespace-nowrap">
+                <span className="font-sans text-xs sm:text-sm font-bold tracking-tight text-[#2B201A] leading-tight whitespace-nowrap">
                   AGGARWAL VAISH
                 </span>
-                <span className="text-[7.5px] sm:text-[8px] font-semibold tracking-wider text-[#B8893E] uppercase whitespace-nowrap">
-                  SAMAJ HARYANA
+                <span className="text-[7.5px] sm:text-[8px] font-semibold tracking-wider text-[#7F160C] uppercase whitespace-nowrap">
+                  VIKAS SANGATHAN
                 </span>
               </div>
             </div>
 
-            {/* AVS Badge */}
-            <div className="flex items-center bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#C9A24B]/50 shadow-md text-[10px] sm:text-xs font-bold text-[#7F160C]">
-              AVS HARYANA
+            {/* AVVS Badge */}
+            <div className="flex items-center bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-[#7F160C]/30 shadow-md text-[10px] sm:text-xs font-bold text-[#7F160C]">
+              AVVS
             </div>
           </div>
         </div>
 
         {/* ================= RIGHT CARD: SIGN IN / REGISTER FORM ================= */}
-        <div className="relative md:col-span-6 bg-[#FFFDF8] rounded-3xl border-2 border-[#C9A24B] shadow-xl p-6 sm:p-8 flex flex-col justify-between">
+        <div className="relative w-full max-w-md mx-auto md:max-w-none md:col-span-6 bg-[#FFFDF8] rounded-3xl border-2 border-[#7F160C]/20 shadow-xl p-5 sm:p-8 flex flex-col justify-between">
           {/* Close Button */}
           <button
             onClick={closeAuthModal}
@@ -149,18 +149,18 @@ export default function AuthModal() {
 
           {/* Form Header */}
           <div className="space-y-1 mb-5 pr-8">
-            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#B8893E]">
-              {hi ? "भक्त सेवा पोर्टल" : "DEVOTEE SECURE ACCESS"}
+            <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#7F160C]">
+              {hi ? "सदस्य पोर्टल" : "MEMBER ACCESS"}
             </span>
-            <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#2B201A] tracking-tight">
+            <h2 className="font-sans text-2xl sm:text-3xl font-bold text-[#2B201A] tracking-tight">
               {tab === "login"
-                ? hi ? "भक्त लॉगिन (Sign In)" : "Devotee Sign In"
-                : hi ? "नया खाता बनाएं (Register)" : "Create Devotee Account"}
+                ? hi ? "सदस्य लॉगिन (Sign In)" : "Member Sign In"
+                : hi ? "नया सदस्य पंजीकरण" : "Create Member Account"}
             </h2>
             <p className="text-xs text-[#2B201A]/70">
               {tab === "login"
-                ? hi ? "अपनी पुस्तकों के ऑर्डर एवं पते देखने हेतु लॉगिन करें" : "Sign in to manage your orders & delivery details"
-                : hi ? "नया भक्त खाता जोड़ें (कुछ ही सेकंड्स में)" : "Register as a verified devotee in just a few seconds"}
+                ? hi ? "अपने खाते एवं विवरण देखने हेतु लॉगिन करें" : "Sign in to manage your account details"
+                : hi ? "नया सदस्य खाता जोड़ें (कुछ ही सेकंड्स में)" : "Register as a verified member in just a few seconds"}
             </p>
           </div>
 
@@ -203,7 +203,7 @@ export default function AuthModal() {
           <div className="mb-4 space-y-3">
             <a
               href={`/api/auth/google?returnUrl=${encodeURIComponent(typeof window !== "undefined" ? window.location.pathname + window.location.search : "/")}`}
-              className="w-full py-2.5 px-4 rounded-xl border border-[#E7D8C8] bg-white hover:bg-[#FBF2E7] text-[#2B201A] font-bold text-xs uppercase tracking-wider shadow-2xs flex items-center justify-center gap-2.5 transition-all hover:border-[#B8893E]"
+              className="w-full py-2.5 px-4 rounded-xl border border-[#E7D8C8] bg-white hover:bg-[#FBF2E7] text-[#2B201A] font-bold text-xs uppercase tracking-wider shadow-2xs flex items-center justify-center gap-2.5 transition-all hover:border-[#7F160C]"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -251,7 +251,7 @@ export default function AuthModal() {
                     {hi ? "पूरा नाम" : "Full Name"} *
                   </label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-[#B8893E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <User className="w-4 h-4 text-[#7F160C] absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="text"
                       required
@@ -268,7 +268,7 @@ export default function AuthModal() {
                     {hi ? "मोबाइल नंबर" : "Mobile Phone"} *
                   </label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 text-[#B8893E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                    <Phone className="w-4 h-4 text-[#7F160C] absolute left-3.5 top-1/2 -translate-y-1/2" />
                     <input
                       type="tel"
                       required
@@ -287,7 +287,7 @@ export default function AuthModal() {
                 {hi ? "ईमेल पता" : "Email Address"} *
               </label>
               <div className="relative">
-                <Mail className="w-4 h-4 text-[#B8893E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Mail className="w-4 h-4 text-[#7F160C] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type="email"
                   required
@@ -304,7 +304,7 @@ export default function AuthModal() {
                 {hi ? "पासवर्ड" : "Password"} *
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-[#B8893E] absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <Lock className="w-4 h-4 text-[#7F160C] absolute left-3.5 top-1/2 -translate-y-1/2" />
                 <input
                   type={showPassword ? "text" : "password"}
                   required
@@ -326,7 +326,7 @@ export default function AuthModal() {
 
             {tab === "register" && (
               <div className="pt-2 border-t border-[#E7D8C8] space-y-3">
-                <p className="text-xs font-bold uppercase tracking-wider text-[#B8893E] flex items-center gap-1.5">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#7F160C] flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5" />
                   <span>{hi ? "डिलीवरी पता (वैकल्पिक - बाद में भी भर सकते हैं)" : "Shipping Address (Optional)"}</span>
                 </p>

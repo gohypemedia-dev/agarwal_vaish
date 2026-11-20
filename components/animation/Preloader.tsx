@@ -76,12 +76,15 @@ export default function Preloader({
           initial={{ y: "0%" }}
           exit={{
             y: "-100%",
+            pointerEvents: "none",
             transition: {
               duration: 0.95,
               ease: [0.76, 0, 0.24, 1], // Modern luxury curtain easing curve
             },
           }}
-          className="fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#7F160C] text-white select-none pointer-events-auto overflow-hidden"
+          className={`fixed inset-0 z-[99999] flex flex-col items-center justify-center bg-[#7F160C] text-white select-none overflow-hidden ${
+            progress === 100 ? "pointer-events-none" : "pointer-events-auto"
+          }`}
         >
           {/* Subtle Ambient Radial Glow */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)] pointer-events-none" />

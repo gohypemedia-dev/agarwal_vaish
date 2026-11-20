@@ -4,13 +4,14 @@ import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { Search, Globe, Menu, X, ChevronDown, User, Heart } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { Search, Globe, Menu, X, ChevronDown, ChevronRight, User, Heart } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import { useSmoothScroll } from "@/components/animation/SmoothScrollProvider";
 
 export default function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const { lang, setLang, user, openAuthModal, openDonateModal } = useApp();
   const { lenis } = useSmoothScroll();
   const [scrolled, setScrolled] = useState(false);
@@ -21,6 +22,12 @@ export default function Header() {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  // Close menus on route change
+  useEffect(() => {
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,66 +54,77 @@ export default function Header() {
     };
   }, [lenis]);
 
-  // Navigation matching reference website (avsharyana.com) exactly - Anchored to Homepage Sections for First Draft
+  // Navigation matching reference website (avsharyana.com) exactly - with dedicated pages
   const navSections = [
     {
       id: "about",
-      label: "ABOUT",
-      href: "#network",
+      label: "About",
+      href: "/about",
       subItems: [
-        { label: "हमारे बारे में / About Us", href: "#network" },
-        { label: "संगठन परिचय (Organisation)", href: "#network" },
-        { label: "महाराजा अग्रसेन दर्शन", href: "#sankalp" },
+        { label: "About AVVS", href: "/about" },
+        { label: "About President", href: "/president" },
+        { label: "President Message", href: "/president-message" },
+        { label: "Mission & Vision", href: "/mission-and-vision" },
+        { label: "Ghatak", href: "/ghatak" },
+        { label: "Our Inspiration", href: "/inspirations" },
+        { label: "About Agroha Dham", href: "/agroha-dham" },
+        { label: "Pad Yatra", href: "/about#pad-yatra" },
       ],
     },
     {
       id: "organisation",
-      label: "ORGANISATION",
-      href: "#network",
+      label: "Organisation",
+      href: "/organisation/president-cell",
       subItems: [
-        { label: "प्रदेश कार्यकारिणी (State Executive)", href: "#network" },
-        { label: "युवा प्रकोष्ठ (Youth Wing)", href: "#network" },
-        { label: "महिला प्रकोष्ठ (Mahila Wing)", href: "#network" },
-        { label: "व्यापार प्रकोष्ठ (Vyapar Cell)", href: "#network" },
+        { label: "President Cell", href: "/organisation/president-cell" },
+        { label: "CWC", href: "/organisation/cwc" },
+        { label: "Patrons", href: "/organisation/patrons" },
+        { label: "Mahila Wing", href: "/organisation/mahila-wing" },
+        { label: "Youth Wing", href: "/organisation/youth-wing" },
+        { label: "District President", href: "/organisation/district-president" },
+        { label: "Frontal Organization", href: "/organisation/frontal-organization" },
       ],
     },
     {
       id: "media",
-      label: "MEDIA",
-      href: "#gallery",
+      label: "Media",
+      href: "/gallery",
       subItems: [
-        { label: "प्रेस विज्ञप्ति व समाचार", href: "#gallery" },
-        { label: "फोटो गैलरी (Photo Gallery)", href: "#gallery" },
-        { label: "वीडियो व भाषण (Speeches)", href: "#gallery" },
+        { label: "Photo Gallery", href: "/gallery" },
+        { label: "Video Gallery", href: "/gallery" },
+        { label: "Press Releases", href: "/gallery" },
+        { label: "News & Circulars", href: "/gallery" },
+        { label: "Blogs", href: "/gallery" },
+        { label: "Downloads", href: "/gallery" },
       ],
     },
     {
       id: "initiatives",
-      label: "INITIATIVES",
-      href: "#sankalp",
+      label: "Initiatives",
+      href: "/initiatives",
       subItems: [
-        { label: "पंच संकल्प (Panch Sankalp)", href: "#sankalp" },
-        { label: "सामाजिक सहभागिता", href: "#sankalp" },
-        { label: "महिला सशक्तिकरण", href: "#sankalp" },
-        { label: "युवा नेतृत्व", href: "#sankalp" },
+        { label: "Matrimonial", href: "/initiatives" },
+        { label: "Job", href: "/initiatives" },
+        { label: "Business Exchange", href: "/initiatives" },
+        { label: "Blood Donation", href: "/initiatives" },
       ],
     },
     {
       id: "join",
-      label: "JOIN NOW",
-      href: "#network",
+      label: "Join Now",
+      href: "/membership",
       subItems: [
-        { label: "ऑनलाइन सदस्यता फॉर्म", href: "#network" },
-        { label: "सहयोग एवं सहभागिता", href: "#network" },
+        { label: "Membership", href: "/membership" },
+        { label: "Business", href: "/membership" },
+        { label: "Donation", href: "/donate" },
       ],
     },
     {
       id: "network",
-      label: "NETWORK",
-      href: "#network",
+      label: "Network",
+      href: "/#network",
       subItems: [
-        { label: "हरियाणा जिला नेटवर्क (23)", href: "#network" },
-        { label: "कार्यालय संपर्क (Bhiwani HQ)", href: "#network" },
+        { label: "Haryana", href: "/#network" },
       ],
     },
   ];
@@ -145,38 +163,60 @@ export default function Header() {
               </div>
             </Link>
 
-            {/* 2. CENTER: Navigation Menu (Dropdown temporarily commented out as requested) */}
+            {/* 2. CENTER: Navigation Menu with Active Dropdowns */}
             <nav className="flex items-center justify-center gap-1 xl:gap-2.5 shrink-0">
               {navSections.map((sec) => (
                 <div
                   key={sec.id}
-                  className="relative group"
+                  className="relative group py-2"
+                  onMouseEnter={() => setActiveDropdown(sec.id)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
                   <Link
                     href={sec.href}
-                    className="navtext flex items-center px-2.5 xl:px-3.5 h-9 xl:h-10 rounded-md text-[12px] xl:text-[14px] font-semibold text-[#2B201A] hover:text-[#7F160C] tracking-wider uppercase transition-colors whitespace-nowrap"
+                    onClick={() => {
+                      if (sec.href === pathname || (sec.href === "/about" && pathname === "/about")) {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
+                      setActiveDropdown(activeDropdown === sec.id ? null : sec.id);
+                    }}
+                    className="navtext flex items-center gap-1 xl:gap-1.5 px-2.5 xl:px-3.5 h-9 xl:h-10 rounded-md text-[12px] xl:text-[14px] font-semibold text-[#2B201A] hover:text-[#7F160C] tracking-wider uppercase transition-colors whitespace-nowrap cursor-pointer"
                   >
                     <span>{sec.label}</span>
+                    {sec.subItems && sec.subItems.length > 0 && (
+                      <ChevronDown className="w-3 h-3 xl:w-3.5 xl:h-3.5 transition-transform duration-200 group-hover:rotate-180 text-gray-400 group-hover:text-[#7F160C]" />
+                    )}
                   </Link>
 
-                  {/* Dropdown Menu (commented out)
-                  {activeDropdown === sec.id && (
-                    <div className="absolute left-0 top-full pt-1.5 w-60 xl:w-64 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
-                      <div className="bg-white rounded-xl shadow-xl border border-gray-100 py-2">
+                  {/* Dropdown Menu - Styled with our fonts and brand colors matching reference website */}
+                  {sec.subItems && sec.subItems.length > 0 && (
+                    <div
+                      className={`absolute left-0 top-full pt-1.5 w-64 xl:w-72 z-50 transition-all duration-150 ${
+                        activeDropdown === sec.id
+                          ? "block opacity-100 pointer-events-auto"
+                          : "hidden group-hover:block opacity-100 pointer-events-auto"
+                      }`}
+                    >
+                      <div className="bg-white rounded-xl shadow-2xl border border-gray-100 py-1.5 ring-1 ring-black/5 divide-y divide-gray-100">
                         {sec.subItems.map((sub, i) => (
                           <Link
                             key={i}
                             href={sub.href}
-                            className="block px-4 py-2.5 text-xs font-semibold text-gray-700 hover:text-[#7F160C] hover:bg-[#FFFDF5] transition-colors"
-                            onClick={() => setActiveDropdown(null)}
+                            onClick={() => {
+                              if (sub.href === pathname || (sub.href.startsWith("/about") && pathname === "/about")) {
+                                window.scrollTo({ top: 0, behavior: "smooth" });
+                              }
+                              setActiveDropdown(null);
+                            }}
+                            className="group/item flex items-center justify-between px-4 py-2.5 text-xs xl:text-[13px] font-medium text-gray-800 hover:text-[#7F160C] hover:bg-[#FFFDF5] transition-colors cursor-pointer"
                           >
-                            {sub.label}
+                            <span>{sub.label}</span>
+                            <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover/item:text-[#7F160C] group-hover/item:translate-x-0.5 transition-all" />
                           </Link>
                         ))}
                       </div>
                     </div>
                   )}
-                  */}
                 </div>
               ))}
             </nav>
@@ -184,7 +224,8 @@ export default function Header() {
             {/* 3. RIGHT: Search Members Button */}
             <div className="flex items-center gap-2 xl:gap-3 shrink-0">
               <Link
-                href="#network"
+                href="/advance-search"
+                onClick={() => setActiveDropdown(null)}
                 className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
               >
                 <Search className="w-3.5 h-3.5 xl:w-4 xl:h-4 stroke-[2.2]" />
@@ -198,8 +239,8 @@ export default function Header() {
           {/* MOBILE / TABLET HEADER (< 1024px) */}
           <div className="flex lg:hidden items-center justify-between h-[72px] sm:h-[78px]">
             {/* Mobile Logo */}
-            <Link href="/" className="flex items-center gap-2.5 min-w-0">
-              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden shrink-0">
+            <Link href="/" className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+              <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-full overflow-hidden shrink-0">
                 <Image
                   src="/images/agarwal/logo.png"
                   alt="Aggarwal Vaish Vikas Sangathan Logo"
@@ -209,29 +250,29 @@ export default function Header() {
                 />
               </div>
               <div className="flex flex-col justify-center min-w-0">
-                <span className="font-sans text-xs sm:text-sm font-extrabold tracking-tight text-[#1E1612] uppercase truncate leading-tight">
+                <span className="font-sans text-[11.5px] sm:text-sm font-extrabold tracking-tight text-[#1E1612] uppercase truncate leading-tight">
                   AGGARWAL VAISH
                 </span>
-                <span className="text-[9.5px] sm:text-[10.5px] font-extrabold tracking-wider text-[#7F160C] uppercase truncate leading-tight">
+                <span className="text-[9px] sm:text-[10.5px] font-extrabold tracking-wider text-[#7F160C] uppercase truncate leading-tight">
                   VIKAS SANGATHAN
                 </span>
               </div>
             </Link>
 
             {/* Mobile Right Controls */}
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <Link
-                href="#network"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
+                href="/advance-search"
+                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
                 aria-label="Search Members"
               >
                 <Search className="w-3.5 h-3.5" />
-                <span className="hidden xs:inline">Search</span>
+                <span className="hidden sm:inline">Search</span>
               </Link>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-[#2B201A] rounded-md hover:bg-gray-100"
+                className="p-1.5 sm:p-2 text-[#2B201A] rounded-md hover:bg-gray-100 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
                 aria-label="Toggle Menu"
               >
                 {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -282,24 +323,25 @@ export default function Header() {
                       <Link
                         href={sec.href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="block font-bold text-sm text-[#1F1712] hover:text-[#7F160C] py-1.5 uppercase"
+                        className="block font-bold text-sm text-[#1F1712] hover:text-[#7F160C] py-1.5 uppercase cursor-pointer"
                       >
                         {sec.label}
                       </Link>
-                      {/* Sub-items (commented out)
-                      <div className="pl-3 space-y-1 border-l-2 border-[#7F160C]/30 mt-1">
-                        {sec.subItems.map((sub, i) => (
-                          <Link
-                            key={i}
-                            href={sub.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block text-xs text-gray-600 hover:text-[#7F160C] py-1"
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
-                      */}
+                      {sec.subItems && sec.subItems.length > 0 && (
+                        <div className="pl-3 space-y-1 border-l-2 border-[#7F160C]/30 mt-1 mb-2">
+                          {sec.subItems.map((sub, i) => (
+                            <Link
+                              key={i}
+                              href={sub.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className="flex items-center justify-between text-xs text-gray-700 hover:text-[#7F160C] py-1.5 pr-2 cursor-pointer"
+                            >
+                              <span>{sub.label}</span>
+                              <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+                            </Link>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
@@ -307,9 +349,9 @@ export default function Header() {
 
               <div className="pt-4 border-t border-gray-100">
                 <Link
-                  href="#network"
+                  href="/advance-search"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase"
+                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase cursor-pointer"
                 >
                   <Search className="w-4 h-4" />
                   <span>{lang === "hi" ? "सदस्य खोजें" : "Search Members"}</span>

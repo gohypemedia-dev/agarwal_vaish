@@ -56,24 +56,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     }
     rafId = requestAnimationFrame(raf);
 
-    // Global click handler for anchor links
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest("a");
-      if (!target) return;
-      const href = target.getAttribute("href");
-      if (href && href.startsWith("#") && href.length > 1) {
-        const element = document.querySelector(href);
-        if (element) {
-          e.preventDefault();
-          lenis.scrollTo(element as HTMLElement, { offset: -80, duration: 1.2 });
-        }
-      }
-    };
-    document.addEventListener("click", handleAnchorClick, { capture: true });
-
     return () => {
       cancelAnimationFrame(rafId);
-      document.removeEventListener("click", handleAnchorClick, { capture: true });
       lenis.destroy();
       lenisRef.current = null;
     };

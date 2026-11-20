@@ -16,7 +16,7 @@ const defaultAVSEvents = [
     timeText: "9:30 AM – 4:30 PM IST",
     location: "Auditorium, Hisar / Gurugram",
     address: "AVVS Youth Convention Centre, Haryana",
-    contactPhone: "+91 XXXXX XXXXX",
+    contactPhone: "+91 90885 00061",
     isPublished: true,
   },
   {
@@ -32,7 +32,7 @@ const defaultAVSEvents = [
     timeText: "10:00 AM – 5:00 PM IST",
     location: "Bhiwani & District Centres across Haryana",
     address: "Aggarwal Vaish Vikas Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
-    contactPhone: "+91 XXXXX XXXXX",
+    contactPhone: "+91 90885 00061",
     isPublished: true,
   },
   {
@@ -48,7 +48,7 @@ const defaultAVSEvents = [
     timeText: "10:30 AM – 3:30 PM IST",
     location: "State Central Hall, Bhiwani / Rohtak",
     address: "Aggarwal Vaish Vikas Central Complex, Haryana",
-    contactPhone: "+91 XXXXX XXXXX",
+    contactPhone: "+91 90885 00061",
     isPublished: true,
   },
 ];
