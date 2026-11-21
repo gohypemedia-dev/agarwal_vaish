@@ -171,71 +171,153 @@ export default function HomePage() {
     }
   };
 
-  // Active Districts of Haryana for the Network section (Client Specified - Total: 2,800)
+  // Active Districts of Haryana for the Network section (Total: 2,853 across 23 Districts)
   const haryanaDistricts = [
+    { name: "Ambala", members: 4 },
     { name: "Bhiwani", members: 520 },
-    { name: "Panipat", members: 460 },
+    { name: "Chandigarh", members: 4 },
+    { name: "Charkhi Dadri", members: 220 },
+    { name: "Faridabad", members: 4 },
+    { name: "Fatehabad", members: 3 },
+    { name: "Gurugram", members: 4 },
+    { name: "Hisar", members: 4 },
+    { name: "Jhajjar", members: 3 },
+    { name: "Jind", members: 4 },
     { name: "Kaithal", members: 380 },
     { name: "Karnal", members: 360 },
     { name: "Kurukshetra", members: 330 },
-    { name: "Sirsa", members: 290 },
+    { name: "Mahendragarh", members: 3 },
+    { name: "Nuh", members: 3 },
+    { name: "Palwal", members: 3 },
     { name: "Panchkula", members: 240 },
-    { name: "Charkhi Dadri", members: 220 },
+    { name: "Panipat", members: 460 },
+    { name: "Rewari", members: 4 },
+    { name: "Rohtak", members: 4 },
+    { name: "Sirsa", members: 290 },
+    { name: "Sonipat", members: 4 },
+    { name: "Yamunanagar", members: 4 },
   ];
+
+  const totalMembersCount = haryanaDistricts.reduce((sum, d) => sum + d.members, 0);
 
   const currentMembersCount =
     selectedDistrict === "All"
-      ? 2800
-      : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members || 220;
+      ? totalMembersCount
+      : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members ?? 4;
 
   const sankalpCarouselRef = useRef<HTMLDivElement>(null);
 
   const scrollSankalpLeft = () => {
     if (sankalpCarouselRef.current) {
-      sankalpCarouselRef.current.scrollBy({ left: -380, behavior: "smooth" });
+      const step = sankalpCarouselRef.current.clientWidth;
+      sankalpCarouselRef.current.scrollBy({ left: -step, behavior: "smooth" });
     }
   };
 
   const scrollSankalpRight = () => {
     if (sankalpCarouselRef.current) {
-      sankalpCarouselRef.current.scrollBy({ left: 380, behavior: "smooth" });
+      const step = sankalpCarouselRef.current.clientWidth;
+      const maxScroll = sankalpCarouselRef.current.scrollWidth - sankalpCarouselRef.current.clientWidth;
+      if (sankalpCarouselRef.current.scrollLeft >= maxScroll - 15) {
+        sankalpCarouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        sankalpCarouselRef.current.scrollBy({ left: step, behavior: "smooth" });
+      }
     }
   };
+
+  // 1-Second Auto-Scroll for Panch Sankalp Carousel (Looping smoothly, pauses on interaction)
+  useEffect(() => {
+    const el = sankalpCarouselRef.current;
+    if (!el) return;
+
+    let isInteracting = false;
+    let resumeTimeout: NodeJS.Timeout;
+
+    const pauseInteraction = () => {
+      isInteracting = true;
+      clearTimeout(resumeTimeout);
+    };
+
+    const resumeInteraction = () => {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isInteracting = false;
+      }, 2000);
+    };
+
+    el.addEventListener("touchstart", pauseInteraction, { passive: true });
+    el.addEventListener("touchend", resumeInteraction, { passive: true });
+    el.addEventListener("mouseenter", pauseInteraction);
+    el.addEventListener("mouseleave", resumeInteraction);
+
+    const autoScrollTimer = setInterval(() => {
+      if (isInteracting || !sankalpCarouselRef.current) return;
+      const carousel = sankalpCarouselRef.current;
+      const step = carousel.clientWidth;
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+      if (carousel.scrollLeft >= maxScroll - 15) {
+        carousel.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        carousel.scrollBy({ left: step, behavior: "smooth" });
+      }
+    }, 1500);
+
+    return () => {
+      clearInterval(autoScrollTimer);
+      clearTimeout(resumeTimeout);
+      el.removeEventListener("touchstart", pauseInteraction);
+      el.removeEventListener("touchend", resumeInteraction);
+      el.removeEventListener("mouseenter", pauseInteraction);
+      el.removeEventListener("mouseleave", resumeInteraction);
+    };
+  }, []);
 
   const sankalpItems = [
     {
       id: "sankalp-1",
+      titleHiLine1: "राजनीतिक",
+      titleHiLine2: "सशक्तिकरण",
       titleHi: "राजनीतिक सशक्तिकरण",
       titleEn: "Political Empowerment",
-      desc: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
+      desc: "To strengthen political representation and encourage active participation in decision-making for the community.",
       descHi: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
     },
     {
       id: "sankalp-2",
+      titleHiLine1: "नारी",
+      titleHiLine2: "स्वावलंबन",
       titleHi: "नारी स्वावलंबन एवं उद्यमिता",
       titleEn: "Women Empowerment & Entrepreneurship",
-      desc: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
+      desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
       descHi: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
     },
     {
       id: "sankalp-3",
+      titleHiLine1: "युवा नेतृत्व",
+      titleHiLine2: "निर्माण",
       titleHi: "युवा नेतृत्व निर्माण",
       titleEn: "Youth Leadership Development",
-      desc: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
+      desc: "To empower young generations with leadership skills, confidence and opportunities to shape the future.",
       descHi: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
     },
     {
       id: "sankalp-4",
+      titleHiLine1: "आर्थिक",
+      titleHiLine2: "आत्मनिर्भरता",
       titleHi: "आर्थिक आत्मनिर्भरता",
       titleEn: "Economic Self-Reliance",
-      desc: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
+      desc: "To encourage entrepreneurship, business growth, employment and financial independence within the community.",
       descHi: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
     },
     {
       id: "sankalp-5",
+      titleHiLine1: "संगठित",
+      titleHiLine2: "समाज",
       titleHi: "संगठित समाज",
       titleEn: "Organised Society",
-      desc: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
+      desc: "To unite the community through mutual cooperation, collective strength and a shared vision for progress.",
       descHi: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
     },
   ];
@@ -380,7 +462,7 @@ export default function HomePage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-start w-full">
               <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-xl p-5 sm:p-8 space-y-5 sm:space-y-6">
                 
-                {/* Top Row: Total Districts: 8 with underline */}
+                {/* Top Row: Total Districts: 23 with underline */}
                 <div className="pb-3.5 sm:pb-4 border-b border-gray-200">
                   <label htmlFor="district-select" className="sr-only">Select District</label>
                   <div className="relative">
@@ -390,7 +472,7 @@ export default function HomePage() {
                       onChange={(e) => setSelectedDistrict(e.target.value)}
                       className="w-full appearance-none bg-transparent pr-8 text-lg sm:text-[22px] font-bold text-gray-900 cursor-pointer focus:outline-none"
                     >
-                      <option value="All">Total Districts: 8</option>
+                      <option value="All">Total Districts: 23</option>
                       {haryanaDistricts.map((d) => (
                         <option key={d.name} value={d.name}>
                           {d.name} ({d.members.toLocaleString()} Members)
@@ -413,7 +495,7 @@ export default function HomePage() {
                       {selectedDistrict === "All" ? "Total Members" : `${selectedDistrict} Members`}
                     </p>
                     <p className="font-sans font-bold text-[26px] sm:text-[32px] text-gray-900 leading-none tracking-tight">
-                      <CountUp key={selectedDistrict} start={Math.min(50, Math.floor(currentMembersCount / 2))} end={currentMembersCount} duration={800} />
+                      <CountUp key={selectedDistrict} start={currentMembersCount > 10 ? Math.min(50, Math.floor(currentMembersCount / 2)) : 0} end={currentMembersCount} duration={800} />
                     </p>
                   </div>
                 </div>
@@ -485,14 +567,15 @@ export default function HomePage() {
             {sankalpItems.map((item) => (
               <div
                 key={item.id}
-                className="flex-[0_0_84%] sm:flex-[0_0_47%] lg:flex-[0_0_31%] xl:flex-[0_0_31.5%] snap-start shrink-0"
+                className="flex-[0_0_100%] sm:flex-[0_0_47%] lg:flex-[0_0_31%] xl:flex-[0_0_31.5%] snap-center shrink-0"
               >
                 {/* 100% Native Rendered Card Matching Exact Reference Formatting */}
-                <div className="h-full rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none min-h-[350px] sm:aspect-square">
+                <div className="h-full rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none min-h-[440px] sm:min-h-[480px]">
                   {/* Top Solid Brand Swatch Section (#7F160C) */}
-                  <div className="relative bg-[#7F160C] h-[46%] min-h-[120px] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
-                    <h3 className="font-sans font-black text-xl sm:text-2xl lg:text-3xl xl:text-4xl text-white leading-tight drop-shadow-sm px-2">
-                      {item.titleHi}
+                  <div className="relative bg-[#7F160C] h-56 sm:h-64 md:h-72 min-h-[220px] sm:min-h-[250px] flex items-center justify-center p-3 sm:p-6 text-center shadow-inner overflow-hidden">
+                    <h3 className="font-sans font-black text-[38px] xs:text-[44px] sm:text-[48px] md:text-[52px] text-white leading-[1.12] sm:leading-[1.1] drop-shadow-md px-1 sm:px-3 tracking-normal text-center flex flex-col items-center justify-center">
+                      <span className="block">{item.titleHiLine1}</span>
+                      <span className="block mt-1 sm:mt-1.5">{item.titleHiLine2}</span>
                     </h3>
                   </div>
 
@@ -510,19 +593,19 @@ export default function HomePage() {
                   </div>
 
                   {/* Bottom White Description Section */}
-                  <div className="h-[54%] p-4 sm:p-6 pt-1 sm:pt-1.5 flex flex-col justify-start items-center text-center">
-                    <h4 className="font-sans font-bold text-[17px] sm:text-[20px] text-[#1F1712] leading-tight">
+                  <div className="flex-1 p-4 sm:p-6 pt-2 sm:pt-2 flex flex-col justify-start items-center text-center">
+                    <h4 className="font-sans font-bold text-[17px] sm:text-[19px] text-[#1F1712] leading-tight">
                       {item.titleEn}
                     </h4>
 
                     {/* Exact Reference Underline: line • dot • line in Brand Swatch Color */}
-                    <div className="flex items-center justify-center gap-1.5 my-2 sm:my-2.5" aria-hidden="true">
-                      <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
-                      <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#7F160C]" />
-                      <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
+                    <div className="flex items-center justify-center gap-1.5 my-2.5 sm:my-3" aria-hidden="true">
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#7F160C] rounded-full" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#7F160C]" />
+                      <span className="w-8 sm:w-10 h-[2px] bg-[#7F160C] rounded-full" />
                     </div>
 
-                    <p className="text-sm sm:text-[15px] text-[#000000] leading-relaxed line-clamp-4 px-1 font-sans">
+                    <p className="text-[13px] sm:text-sm text-gray-600 leading-relaxed font-normal px-1 sm:px-2 line-clamp-4">
                       {item.desc}
                     </p>
                   </div>
