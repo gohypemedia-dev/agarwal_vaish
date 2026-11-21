@@ -154,7 +154,7 @@ export default function HomePage() {
           }
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const formatCardDate = (dateVal: string | Date) => {
@@ -171,7 +171,7 @@ export default function HomePage() {
     }
   };
 
-  // Active Districts of Haryana for the Network section (Total: 2,853 across 23 Districts)
+  // Active Districts of Haryana for the Network section (Total: 2,800 Members across 23 Districts)
   const haryanaDistricts = [
     { name: "Ambala", members: 4 },
     { name: "Bhiwani", members: 520 },
@@ -198,11 +198,11 @@ export default function HomePage() {
     { name: "Yamunanagar", members: 4 },
   ];
 
-  const totalMembersCount = haryanaDistricts.reduce((sum, d) => sum + d.members, 0);
+  const totalMembersCount = 2800;
 
   const currentMembersCount =
     selectedDistrict === "All"
-      ? totalMembersCount
+      ? 2800
       : haryanaDistricts.find((d) => d.name === selectedDistrict)?.members ?? 4;
 
   const sankalpCarouselRef = useRef<HTMLDivElement>(null);
@@ -324,7 +324,7 @@ export default function HomePage() {
 
   return (
     <div className="w-full bg-[#FFFDF9] text-[#1F1712] font-sans selection:bg-[#7F160C] selection:text-white">
-      
+
       {/* ============================================================ */}
       {/* 1. TOP NEWS TICKER (EXACT REFERENCE SCREENSHOT 1)           */}
       {/* ============================================================ */}
@@ -419,11 +419,10 @@ export default function HomePage() {
               type="button"
               onClick={() => setCurrentHeroSlide(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`transition-all duration-300 rounded-full cursor-pointer ${
-                idx === currentHeroSlide
+              className={`transition-all duration-300 rounded-full cursor-pointer ${idx === currentHeroSlide
                   ? "w-7 sm:w-10 h-2 sm:h-3 bg-[#7F160C] shadow-md"
                   : "w-2 sm:w-3 h-2 sm:h-3 bg-white/70 hover:bg-white"
-              }`}
+                }`}
             />
           ))}
         </div>
@@ -434,7 +433,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section id="network" className="pt-5 pb-12 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Centered Bordered Badge: [ OUR NETWORK ] */}
           <div className="flex justify-center mb-5 sm:mb-14">
             <div className="inline-block px-5 py-2 sm:px-7 sm:py-2.5 rounded-lg border-2 border-[#7F160C] text-[#7F160C] font-black text-sm sm:text-lg tracking-[0.18em] sm:tracking-[0.2em] uppercase bg-white shadow-xs">
@@ -443,7 +442,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
+
             {/* Left Column: Official Haryana Map with AVS Emblem */}
             <div className="lg:col-span-7 flex justify-center items-center">
               <div className="relative w-full max-w-[340px] sm:max-w-[480px] aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl bg-[#7F160C]">
@@ -461,7 +460,7 @@ export default function HomePage() {
             {/* Right Column: Floating White Card with District Selector (Exact Reference) */}
             <div className="lg:col-span-5 flex justify-center lg:justify-start w-full">
               <div className="w-full max-w-[420px] bg-white rounded-2xl sm:rounded-3xl border border-gray-100 shadow-xl p-5 sm:p-8 space-y-5 sm:space-y-6">
-                
+
                 {/* Top Row: Total Districts: 23 with underline */}
                 <div className="pb-3.5 sm:pb-4 border-b border-gray-200">
                   <label htmlFor="district-select" className="sr-only">Select District</label>
@@ -522,7 +521,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       <section id="sankalp" className="py-12 sm:py-20 lg:py-24 bg-[#FFFDF9] border-b border-gray-200 overflow-hidden select-none">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           {/* Header Row: Title & Subtitle on Left, < > Arrow Buttons on Right (Exact Reference Pic 1) */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-12">
             <div className="py-1">
@@ -649,7 +648,7 @@ export default function HomePage() {
       {SHOW_UPCOMING_EVENTS && events.length > 0 && (
         <section id="events" className="py-12 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-            
+
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
               <h2 className="font-sans font-bold text-[28px] sm:text-[38px] lg:text-[42px] text-[#7F160C] tracking-tight">
                 Upcoming Events
