@@ -59,100 +59,94 @@ export default function MembershipPage() {
 
   const tiers = [
     {
-      name: "Basic Membership",
-      nameHi: "बेसिक सदस्यता",
-      price: 1100,
-      period: findPlan("basic")!.period,
-      periodHi: "प्रति वर्ष",
-      desc: findPlan("basic")!.description,
-      descHi: "सेवा और आध्यात्मिक ज्ञान की पावन यात्रा शुरू करने वाले भक्तों के लिए आदर्श।",
-      features: findPlan("basic")!.benefits,
+      id: "active",
+      name: "Active Member",
+      nameHi: "सक्रिय सदस्य",
+      price: 100,
+      period: "lifetime",
+      periodHi: "आजीवन",
+      desc: "For every Vaish brother and sister committed to grassroots community empowerment.",
+      descHi: "वैश्य समाज के प्रत्येक जागरूक बंधु व भगिनी के लिए, जो समाज के उत्थान में सक्रिय भूमिका निभाना चाहते हैं।",
+      features: [
+        "Official Member Digital ID & Certificate",
+        "Direct participation in community conventions & drives",
+        "Invitation to District & State Level Sammelans",
+        "Active involvement in Panch Sankalp initiatives",
+      ],
       featuresHi: [
-        "वार्षिक ट्रस्ट सदस्यता प्रमाणपत्र",
-        "मासिक आध्यात्मिक समाचार पत्र एवं ई-पुस्तकें",
-        "वार्षिक आध्यात्मिक सम्मेलन में आमंत्रण",
-        "प्रत्यक्ष सेवा में सहभागिता के अवसर",
+        "आधिकारिक डिजिटल सदस्यता पहचान पत्र व प्रमाणपत्र",
+        "संगठन के सामाजिक व जनसेवा अभियानों में सीधी सहभागिता",
+        "ज़िला एवं राज्यस्तरीय सम्मेलनों में विशेष आमंत्रण",
+        "पंच संकल्प के सामाजिक प्रकल्पों में सक्रिय योगदान",
       ],
       highlight: false,
-      cardStyle: "bg-[#FFF9F2] border border-[#E7D8C8] shadow-warm-sm hover:border-[#7F160C]/40 relative",
+      cardStyle: "bg-[#FFF9F2] border-2 border-[#E7D8C8] shadow-sm hover:border-[#7F160C]/50 relative",
       badgeText: null,
       badgeTextHi: null,
       badgeStyle: "",
       priceColor: "text-[#7F160C]",
-      checkColor: "text-[#2F5A43]",
-      buttonStyle: "btn-outline w-full",
+      checkColor: "text-[#7F160C]",
+      buttonStyle: "btn-outline w-full hover:bg-[#7F160C] hover:text-white transition-colors",
     },
     {
-      name: "Silver Membership",
-      nameHi: "रजत (सिल्वर) सदस्यता",
-      price: 5100,
-      period: findPlan("silver")!.period,
-      periodHi: "प्रति वर्ष",
-      desc: findPlan("silver")!.description,
-      descHi: "शिक्षा और स्वास्थ्य शिविरों को प्रायोजित करने के इच्छुक समर्पित भक्तों के लिए।",
-      features: findPlan("silver")!.benefits,
-      featuresHi: [
-        "साधारण सदस्यता के सभी लाभ",
-        "१ गुरुकुल विद्यार्थी की शिक्षा का संपूर्ण प्रायोजन",
-        "आश्रम से विशेष प्रसाद एवं आशीर्वाद पत्र",
-        "भागवत कथा आयोजनों में प्राथमिकता सीटिंग",
+      id: "co_patron",
+      name: "Co-Patron Member",
+      nameHi: "सह-संरक्षक सदस्य",
+      price: 21000,
+      period: "lifetime",
+      periodHi: "आजीवन",
+      desc: "For respected business leaders and mentors supporting district operations and youth growth.",
+      descHi: "समाज के प्रतिष्ठित उद्यमियों, व्यापारियों व मार्गदर्शकों हेतु जो ज़िला स्तर पर संगठन को सशक्त बनाते हैं।",
+      features: [
+        "All Active Membership privileges included",
+        "Felicitation & stage honor at State Sammelans",
+        "Nomination to District & State Advisory Council",
+        "Special Co-Patron Scroll & Commemorative Plaque",
       ],
-      highlight: false,
-      cardStyle: "bg-gradient-to-b from-[#FAFBFD] to-[#EEF1F6] border-2 border-[#C0C7D2] shadow-warm-sm hover:border-[#9AA5B5] relative",
-      badgeText: findPlan("silver")!.badge,
-      badgeTextHi: "सिल्वर श्रेणी",
-      badgeStyle: "bg-[#E2E6ED] text-[#4A5568] border border-[#CBD2DC]",
-      priceColor: "text-[#3B4656]",
-      checkColor: "text-[#4A5E6D]",
-      buttonStyle: "w-full min-h-[48px] px-6 bg-[#E2E6ED] hover:bg-[#D4DAE4] text-[#2D3748] font-bold text-xs uppercase tracking-wider rounded-xl border border-[#CBD2DC] transition-all shadow-sm hover:shadow flex items-center justify-center cursor-pointer",
-    },
-    {
-      name: "Gold Membership",
-      nameHi: "स्वर्ण (गोल्ड) सदस्यता",
-      price: 11000,
-      period: findPlan("gold")!.period,
-      periodHi: "प्रति वर्ष",
-      desc: findPlan("gold")!.description,
-      descHi: "महिला कौशल कार्यशालाओं और किसान मार्गदर्शन को सशक्त बनाने हेतु।",
-      features: findPlan("gold")!.benefits,
       featuresHi: [
-        "रजत सदस्यता के सभी लाभ",
-        "महिला कौशल प्रशिक्षण किट का प्रायोजन",
-        "ट्रस्ट सदस्य नामावली में विशेष सम्मान",
-        "ट्रस्ट बोर्ड से प्रत्यक्ष सेवा प्रगति अपडेट",
+        "सक्रिय सदस्यता के सभी विशेषाधिकार सम्मिलित",
+        "राज्यस्तरीय सम्मेलनों में मंच पर विशिष्ट सम्मान व सत्कार",
+        "ज़िला व राज्य सलाहकार समिति में मनोनयन का अवसर",
+        "विशिष्ट सह-संरक्षक प्रशस्ति पत्र व स्मृति चिन्ह",
       ],
       highlight: true,
-      cardStyle: "bg-gradient-to-b from-[#FFFDF7] via-[#FFF9EA] to-[#FFF3D6] border-2 border-[#D4A359] shadow-warm-md hover:border-[#C68A2E] relative",
-      badgeText: findPlan("gold")!.badge,
+      cardStyle: "bg-gradient-to-b from-[#FFFDF7] via-[#FFF9EA] to-[#FFF3D6] border-2 border-[#D4A359] shadow-md hover:border-[#7F160C] relative",
+      badgeText: "MOST POPULAR",
       badgeTextHi: "सर्वाधिक लोकप्रिय",
-      badgeStyle: "bg-gradient-to-r from-[#D48820] to-[#7F160C] text-white shadow-warm-sm",
-      priceColor: "text-[#C67A18]",
-      checkColor: "text-[#2F5A43]",
-      buttonStyle: "btn-primary w-full",
+      badgeStyle: "bg-gradient-to-r from-[#D48820] to-[#7F160C] text-white shadow-sm",
+      priceColor: "text-[#7F160C]",
+      checkColor: "text-[#7F160C]",
+      buttonStyle: "btn-primary w-full bg-[#7F160C] hover:bg-[#69120A] text-white",
     },
     {
-      name: "Platinum Membership",
-      nameHi: "प्लेटिनम सदस्यता",
-      price: 51000,
-      period: findPlan("platinum")!.period,
-      periodHi: "आजीवन / संरक्षक",
-      desc: findPlan("platinum")!.description,
-      descHi: "ट्रस्ट के वृहद स्वास्थ्य शिविरों व आधारभूत सेवा प्रकल्पों के लिए संरक्षक स्तर।",
-      features: findPlan("platinum")!.benefits,
+      id: "patron",
+      name: "Patron Member",
+      nameHi: "संरक्षक सदस्य",
+      price: 100000,
+      period: "lifetime",
+      periodHi: "आजीवन",
+      desc: "Highest leadership patron supporting state-level infrastructure, institutions and community welfare.",
+      descHi: "संगठन का सर्वोच्च संरक्षक स्तर, जो राज्यस्तरीय प्रकल्पों, भवनों व समाज के दूरगामी विकास को नई दिशा देते हैं।",
+      features: [
+        "Lifetime Chief Patron status & highest VIP protocol",
+        "Permanent membership in State Core Policy & Executive Board",
+        "Prominent permanent inscription at state headquarters",
+        "Grand memento, framed royal scroll & lifetime citation",
+      ],
       featuresHi: [
-        "आजीवन ट्रस्टी सम्मान एवं सुसज्जित प्रशस्ति पत्र",
-        "ग्रामीण स्वास्थ्य शिविर का संपूर्ण प्रायोजन",
-        "मंच पर विशिष्ट सम्मान एवं वीआईपी स्थान",
-        "आश्रम परिसर में स्थायी नाम पट्टिका",
+        "आजीवन मुख्य संरक्षक दर्जा एवं सर्वोच्च वीआईपी सत्कार",
+        "राज्यस्तरीय उच्च कोर समिति व नीति निर्माण में स्थायी स्थान",
+        "राज्य मुख्यालय व केंद्रीय कार्यालय में स्थायी नाम पट्टिका",
+        "भव्य स्मृति चिन्ह, फ्रेमयुक्त मानपत्र व आजीवन सम्मान",
       ],
       highlight: false,
-      cardStyle: "bg-gradient-to-b from-[#F9FAFC] via-[#F2F4F8] to-[#E5E9F0] border-2 border-[#A3AFBF] shadow-warm-sm hover:border-[#8291A5] relative",
-      badgeText: findPlan("platinum")!.badge,
+      cardStyle: "bg-gradient-to-b from-[#FDF8F5] to-[#F5ECE5] border-2 border-[#7F160C]/30 shadow-md hover:border-[#7F160C] relative",
+      badgeText: "PATRON TIER",
       badgeTextHi: "संरक्षक श्रेणी",
-      badgeStyle: "bg-[#2B3545] text-white shadow-sm",
-      priceColor: "text-[#242C37]",
-      checkColor: "text-[#3B4856]",
-      buttonStyle: "w-full min-h-[48px] px-6 bg-[#2B3545] hover:bg-[#1E2633] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-warm-sm hover:shadow flex items-center justify-center cursor-pointer",
+      badgeStyle: "bg-[#7F160C] text-white shadow-sm",
+      priceColor: "text-[#7F160C]",
+      checkColor: "text-[#7F160C]",
+      buttonStyle: "w-full min-h-[48px] px-6 bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-sm transition-all flex items-center justify-center cursor-pointer",
     },
   ];
 
@@ -311,12 +305,12 @@ export default function MembershipPage() {
               {lang === "hi" ? "सदस्यता श्रेणी चुनें" : "CHOOSE YOUR MEMBERSHIP TIER"}
             </p>
             <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
-              {lang === "hi" ? "हमारे सेवा परिवार से जुड़ें" : "Join Our Seva Circle"}
+              {lang === "hi" ? "अग्रवाल वैश्य विकास संगठन से जुड़ें" : "Join Aggarwal Vaish Vikas Sangathan"}
             </TextReveal>
             <HeadingDivider className="mt-2" />
           </div>
 
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
             {tiers.map((tier) => (
               <StaggerItem key={tier.name} className="h-full">
                 <div
@@ -382,10 +376,10 @@ export default function MembershipPage() {
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
             <h2 className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
               <span className="text-[#1F1712]">
-                {lang === "hi" ? "ट्रस्ट की सदस्यता " : "Why Join Our "}
+                {lang === "hi" ? "संगठन की सदस्यता " : "Why Join Our "}
               </span>
               <span className="text-[#7F160C]">
-                {lang === "hi" ? "क्यों ग्रहण करें?" : "Seva Parivar?"}
+                {lang === "hi" ? "क्यों ग्रहण करें?" : "Organization?"}
               </span>
             </h2>
           </div>
@@ -394,58 +388,58 @@ export default function MembershipPage() {
           <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-stretch">
             {[
               {
-                category: lang === "hi" ? "ज्ञान" : "GNANA",
-                image: "/images/gurukul-real.webp",
-                title: lang === "hi" ? "आध्यात्मिक ज्ञान एवं सत्संग" : "Spiritual Enlightenment",
+                category: lang === "hi" ? "एकता" : "UNITY",
+                image: "/images/agarwal/design-1.jpg",
+                title: lang === "hi" ? "संगठित एवं सशक्त समाज" : "United & Organized Community",
                 desc: lang === "hi"
-                  ? "पूज्य संतों के सान्निध्य में नियमित श्रीमद्भगवद्गीता स्वाध्याय, वैदिक अनुष्ठान और ऑनलाइन सत्संग से जुड़ें।"
-                  : "Deepen your inner journey through live spiritual discourses, Vedic wisdom sessions, and divine satsangs.",
+                  ? "हरियाणा के सभी ज़िलों में वैश्य समाज को एक मंच पर जोड़कर सामूहिक शक्ति, बंधुत्व और आपसी सहयोग को सुदृढ़ करना।"
+                  : "Uniting every section of the Vaish community across all districts of Haryana on a single collective platform.",
                 points: [
-                  lang === "hi" ? "मासिक विशेष ऑनलाइन सत्संग" : "Monthly Live Satsangs",
-                  lang === "hi" ? "दैनिक वैदिक विचार एवं प्रेरणा" : "Daily Spiritual Guidance",
-                  lang === "hi" ? "वार्षिक मंदिर पूजा संकल्प" : "Personal Puja Sankalp",
+                  lang === "hi" ? "राज्यव्यापी ज़िला संगठन नेटवर्क" : "Statewide District Organization Network",
+                  lang === "hi" ? "पारस्परिक व्यापारिक एवं सामाजिक सहयोग" : "Mutual Business & Social Cooperation",
+                  lang === "hi" ? "वार्षिक राज्य महासम्मेलन में सहभागिता" : "Annual State Convention Participation",
                 ],
-                btnText: lang === "hi" ? "सत्संग से जुड़ें" : "EXPLORE SATSANG",
+                btnText: lang === "hi" ? "संगठन से जुड़ें" : "JOIN COMMUNITY",
               },
               {
-                category: lang === "hi" ? "सेवा" : "SEVA",
-                image: "/images/card-seva-real.webp",
-                title: lang === "hi" ? "प्रत्यक्ष जनसेवा व अन्नक्षेत्र" : "Hands-On Ground Seva",
+                category: lang === "hi" ? "स्वावलंबन" : "WOMEN",
+                image: "/images/agarwal/design-2.jpg",
+                title: lang === "hi" ? "नारी स्वावलंबन एवं उद्यमिता" : "Women Empowerment & Enterprise",
                 desc: lang === "hi"
-                  ? "दैनिक अन्नक्षेत्र भंडारा, निःशुल्क गौशाला सेवा और जरूरतमंद बच्चों की शिक्षा में प्रत्यक्ष भागीदारी निभाएं।"
-                  : "Directly participate in daily Annakshetra community kitchens, Desi Gaushala care, and rural child schooling.",
+                  ? "मातृशक्ति को आत्मनिर्भर बनाने के लिए कौशल विकास, स्वरोजगार संसाधन, और बालिका शिक्षा को प्रत्यक्ष प्रोत्साहन।"
+                  : "Empowering women with entrepreneurship avenues, vocational skill development, and girls education initiatives.",
                 points: [
-                  lang === "hi" ? "दैनिक अन्नक्षेत्र भंडारा सेवा" : "Daily Bhandara Seva",
-                  lang === "hi" ? "देसी गोवंश संरक्षण व चारा" : "Desi Cow & Gaushala Care",
-                  lang === "hi" ? "निःशुल्क स्वास्थ्य व राहत शिविर" : "Free Health & Relief Camps",
+                  lang === "hi" ? "महिला स्वरोजगार प्रोत्साहन प्रकोष्ठ" : "Women Self-Employment Guidance Cell",
+                  lang === "hi" ? "प्रतिभाशाली बेटियों का सम्मान" : "Talented Daughters Pratibha Samman",
+                  lang === "hi" ? "व्यापारिक नेटवर्किंग व कौशल मंच" : "Business Networking & Skill Forum",
                 ],
-                btnText: lang === "hi" ? "सेवा से जुड़ें" : "JOIN SEVA",
+                btnText: lang === "hi" ? "स्वावलंबन से जुड़ें" : "EXPLORE INITIATIVE",
               },
               {
-                category: lang === "hi" ? "संग" : "SANGHA",
-                image: "/images/card-join-real.webp",
-                title: lang === "hi" ? "25,000+ पावन भक्त संग" : "Devotee Sangha & Yatras",
+                category: lang === "hi" ? "युवा" : "YOUTH",
+                image: "/images/agarwal/design-6.jpg",
+                title: lang === "hi" ? "युवा नेतृत्व एवं करियर मार्गदर्शन" : "Youth Leadership & Mentorship",
                 desc: lang === "hi"
-                  ? "देश भर के समर्पित सनातन भक्तों के विशाल परिवार का हिस्सा बनें और विशेष तीर्थ यात्राओं में साथ चलें।"
-                  : "Connect with a compassionate national fraternity of 25,000+ devotees and join guided spiritual yatras.",
+                  ? "युवाओं में व्यापार, नवाचार, सिविल सेवा और सामाजिक नेतृत्व की भावना को विकसित करने हेतु समर्पित मंच।"
+                  : "Equipping young leaders with business incubation, professional networking, and governance mentorship.",
                 points: [
-                  lang === "hi" ? "देशव्यापी भक्त नेटवर्क" : "Pan-India Member Network",
-                  lang === "hi" ? "वार्षिक तीर्थ यात्रा में प्राथमिकता" : "Priority Teerth Yatra Access",
-                  lang === "hi" ? "ट्रस्ट धर्मशालाओं में सत्कार" : "Trust Dharamshala Hospitality",
+                  lang === "hi" ? "वैश्य युवा लीडरशिप कॉन्क्लेव" : "Vaish Yuva Leadership Conclave",
+                  lang === "hi" ? "स्टार्टअप्स व करियर परामर्श सत्र" : "Startups & Career Advisory Sessions",
+                  lang === "hi" ? "राष्ट्र निर्माण व सामाजिक सहभागिता" : "Nation Building & Social Action",
                 ],
-                btnText: lang === "hi" ? "परिवार से जुड़ें" : "JOIN SANGHA",
+                btnText: lang === "hi" ? "युवा प्रकोष्ठ से जुड़ें" : "JOIN YOUTH WING",
               },
               {
-                category: lang === "hi" ? "ट्रस्ट" : "TRUST",
-                image: "/images/founder.jpg",
-                title: lang === "hi" ? "पारदर्शिता, प्रमाणपत्र व 80G" : "Purity, Certificate & 80G",
+                category: lang === "hi" ? "संकल्प" : "SANKALP",
+                image: "/images/agarwal/design-4.jpg",
+                title: lang === "hi" ? "पंच संकल्प व जनसेवा मिशन" : "Panch Sankalp & Public Service",
                 desc: lang === "hi"
-                  ? "प्रत्येक दान का 100% सदुपयोग। आधिकारिक सदस्यता प्रमाणपत्र, मंदिर का पावन प्रसाद और 80G रसीद प्राप्त करें।"
-                  : "100% fiscal integrity. Receive your framed Member Certificate, blessed temple prasad, and 80G tax receipt.",
+                  ? "राजनीतिक जागरूकता, आर्थिक आत्मनिर्भरता और सामाजिक सहभागिता के पंच संकल्प को हर घर तक पहुँचाना।"
+                  : "Advancing community rights, public representation, and socioeconomic self-reliance through Panch Sankalp.",
                 points: [
-                  lang === "hi" ? "100% आयकर छूट (धारा 80G)" : "100% Tax Exemption (80G)",
-                  lang === "hi" ? "आधिकारिक सदस्यता प्रमाणपत्र" : "Official Member Certificate",
-                  lang === "hi" ? "मंदिर का पावन प्रसाद" : "Blessed Temple Prasad Delivery",
+                  lang === "hi" ? "पंच संकल्प अभियान में प्रत्यक्ष भूमिका" : "Direct Role in Panch Sankalp Mission",
+                  lang === "hi" ? "आधिकारिक सदस्यता डिजिटल पहचान पत्र" : "Official Digital Membership ID",
+                  lang === "hi" ? "पारदर्शी समाज सेवा व जन-हितैषी प्रकल्प" : "Transparent Community Welfare Projects",
                 ],
                 btnText: lang === "hi" ? "सदस्यता लें" : "BECOME A MEMBER",
               },
@@ -818,14 +812,22 @@ export default function MembershipPage() {
                     <label htmlFor="mem-district" className="block text-xs font-bold text-[#1F1712] mb-1.5">
                       {lang === "hi" ? "जिला" : "District"} <span className="text-red-500">*</span>
                     </label>
-                    <input
+                    <select
                       id="mem-district"
-                      type="text"
-                      placeholder={lang === "hi" ? "--जिला चुनें--" : "--Select District--"}
                       value={formData.district}
                       onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
-                    />
+                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                    >
+                      <option value="">{lang === "hi" ? "--जिला चुनें--" : "--Select District--"}</option>
+                      {[
+                        "Ambala", "Bhiwani", "Chandigarh", "Charkhi Dadri", "Faridabad", "Fatehabad",
+                        "Gurugram", "Hisar", "Jhajjar", "Jind", "Kaithal", "Karnal", "Kurukshetra",
+                        "Mahendragarh", "Nuh", "Palwal", "Panchkula", "Panipat", "Rewari", "Rohtak",
+                        "Sirsa", "Sonipat", "Yamunanagar", "Other"
+                      ].map((dist) => (
+                        <option key={dist} value={dist}>{dist}</option>
+                      ))}
+                    </select>
                   </div>
 
                   <div>
@@ -1003,8 +1005,8 @@ export default function MembershipPage() {
                       <li className="font-medium">
                         <span>
                           {lang === "hi"
-                            ? "भुगतान का स्क्रीनशॉट ट्रस्ट कार्यालय को व्हाट्सएप पर भेजें: +91 9910762692 / +91 88606 65000"
-                            : "Share the screenshot over WhatsApp with Trust Office Incharge at +91 9910762692 or +91 88606 65000."}
+                            ? "भुगतान का स्क्रीनशॉट संगठन कार्यालय को व्हाट्सएप पर भेजें: +91 90885 00061"
+                            : "Share the screenshot over WhatsApp with Organization Office at +91 90885 00061."}
                         </span>
                       </li>
                       <li className="font-medium">
@@ -1016,13 +1018,13 @@ export default function MembershipPage() {
                       </li>
                     </ol>
 
-                    {/* Trust Confirmation Notice Box */}
+                    {/* Organization Confirmation Notice Box */}
                     <div className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 py-3 text-xs sm:text-sm text-[#374151] flex items-center gap-2.5">
                       <ShieldCheck className="w-5 h-5 text-[#2F5A43] shrink-0" />
                       <span>
                         {lang === "hi"
-                          ? "इसके बाद, आप ट्रस्ट के खाते में UPI द्वारा भुगतान करेंगे। ट्रस्ट द्वारा पुष्टि होने पर, सदस्यता पुष्टि और प्रमाणपत्र आपको ईमेल कर दिया जाएगा।"
-                          : "Next, you'll pay by UPI to the Trust's account. Once the Trust confirms your payment, your membership confirmation and certificate are emailed to you."}
+                          ? "इसके बाद, आप संगठन के खाते में UPI द्वारा भुगतान करेंगे। संगठन द्वारा पुष्टि होने पर, सदस्यता पुष्टि और प्रमाणपत्र आपको ईमेल/व्हाट्सएप कर दिया जाएगा।"
+                          : "Next, you'll pay by UPI to the Organization's account. Once confirmed, your membership confirmation and certificate are issued to you."}
                       </span>
                     </div>
 

@@ -8,51 +8,54 @@ export const PRESET_AMOUNTS = [499, 999, 1499, 2100, 5100, 11000];
 // and `color` on the certificate.
 export const MEMBERSHIP_PLANS = [
   {
-    id: "basic", name: "Basic Membership", price: 1100, title: "Basic Member", term: "year", color: "#B4531A",
-    period: "per year",
-    description: "Ideal for devotees starting their journey of seva and spiritual learning.",
-    badge: "BASIC TIER",
+    id: "active",
+    name: "Active Member",
+    price: 100,
+    title: "Active Member",
+    term: "lifetime",
+    color: "#7F160C",
+    period: "lifetime",
+    description: "Ideal for community members wishing to actively participate in public initiatives and social welfare.",
+    badge: "ACTIVE MEMBER",
     benefits: [
-      "Annual Trust Membership Certificate",
-      "Monthly Spiritual Newsletter & E-books",
-      "Invitation to Annual Spiritual Gathering",
-      "Direct Seva Participation Opportunities",
+      "Official Member Digital ID & Certificate",
+      "Direct Participation in Community Conventions",
+      "Invitation to District & State Level Sammelans",
+      "Active Role in Panch Sankalp Initiatives",
     ],
   },
   {
-    id: "silver", name: "Silver Membership", price: 5100, title: "Silver Member", term: "year", color: "#5F6B7D",
-    period: "per year",
-    description: "For dedicated supporters wishing to sponsor education and health camps.",
-    badge: "SILVER TIER",
+    id: "co_patron",
+    name: "Co-Patron Member",
+    price: 21000,
+    title: "Co-Patron Member",
+    term: "lifetime",
+    color: "#B4531A",
+    period: "lifetime",
+    description: "For leaders and business mentors dedicated to guiding district initiatives and youth programs.",
+    badge: "CO-PATRON TIER",
     benefits: [
-      "All Basic Membership Benefits",
-      "Sponsorship of 1 Gurukul Student Education",
-      "Special Prasad & Blessing Card from Ashram",
-      "Priority Seat Booking at Bhagwat Katha Events",
+      "All Active Membership Privileges",
+      "Felicitation & Stage Honor at State Sammelans",
+      "Nomination to District & State Advisory Committees",
+      "Special Co-Patron Scroll & Commemorative Plaque",
     ],
   },
   {
-    id: "gold", name: "Gold Membership", price: 11000, title: "Gold Member", term: "year", color: "#A8721C",
-    period: "per year",
-    description: "Empowering women skill workshops and farmer advisory guidance.",
-    badge: "MOST POPULAR TIER",
-    benefits: [
-      "All Silver Membership Benefits",
-      "Sponsorship of Women Skill Training Kit",
-      "Special Recognition on Trust Member Roll",
-      "Direct Advisory Updates from Trust Board",
-    ],
-  },
-  {
-    id: "platinum", name: "Platinum Membership", price: 51000, title: "Platinum Patron", term: "lifetime", color: "#2B3545",
-    period: "lifetime / patron",
-    description: "Patron level partnership supporting major infrastructure & medical camps.",
+    id: "patron",
+    name: "Patron Member",
+    price: 100000,
+    title: "Patron Member",
+    term: "lifetime",
+    color: "#7F160C",
+    period: "lifetime",
+    description: "Highest patron honor for esteemed benefactors supporting statewide social and community infrastructure.",
     badge: "PATRON TIER",
     benefits: [
-      "Lifetime Trustee Honor & Framed Scroll",
-      "Full Sponsorship of Rural Health Camp",
-      "VIP Seating & Stage Felicitation",
-      "Permanent Inscription at Ashram Wall",
+      "Lifetime Chief Patron Honor & VIP Protocol",
+      "Participation in State Core Policy & Executive Board",
+      "Prominent Recognition at State Headquarters & Events",
+      "Exclusive Memento, Framed Scroll & Lifetime Citation",
     ],
   },
 ] as const;
@@ -72,7 +75,7 @@ export function planForProgram(program: string | null | undefined): MembershipPl
       (p) =>
         p.name.toLowerCase() === norm ||
         p.id === norm ||
-        (p.id === "basic" && (norm === "membership" || norm.includes("basic")))
+        (p.id === "active" && (norm === "membership" || norm.includes("active") || norm.includes("basic")))
     ) ?? MEMBERSHIP_PLANS[0]
   );
 }
