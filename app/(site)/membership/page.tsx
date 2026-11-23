@@ -2,19 +2,10 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Shield, Heart, Users, BookOpen, Check, ShieldCheck, ArrowRight, HandHeart, Award, CheckCircle2, Scroll, Copy, CheckCheck, QrCode } from "lucide-react";
+import { Copy, CheckCheck } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 import { useApp } from "@/context/AppContext";
-import MemberCarousel from "@/components/MemberCarousel";
-import { MEMBERSHIP_PLANS, findPlan, formatINR } from "@/lib/donation-config";
-import {
-  TextReveal,
-  ParagraphReveal,
-  SectionReveal,
-  StaggerContainer,
-  StaggerItem,
-  ParallaxSection,
-  ParallaxImage,
-} from "@/components/animation";
+import { MEMBERSHIP_PLANS, formatINR } from "@/lib/donation-config";
 import HeadingDivider from "@/components/HeadingDivider";
 import {
   sanitizeEmail,
@@ -27,7 +18,8 @@ import {
 
 export default function MembershipPage() {
   const { lang, openDonateModal } = useApp();
-  const [planId, setPlanId] = useState<string>(MEMBERSHIP_PLANS[0].id);
+  const [planId, setPlanId] = useState<string>("patron");
+  const [consent, setConsent] = useState(true);
   const [formData, setFormData] = useState({
     fullName: "",
     guardianName: "",
@@ -49,7 +41,7 @@ export default function MembershipPage() {
   const [copiedUpi, setCopiedUpi] = useState(false);
 
   const handleCopyUpi = () => {
-    navigator.clipboard.writeText("yespay.smessi49188@yesbankltd");
+    navigator.clipboard.writeText("aggarwalvaishvikassangathan@idbi");
     setCopiedUpi(true);
     setTimeout(() => setCopiedUpi(false), 2000);
   };
@@ -198,393 +190,36 @@ export default function MembershipPage() {
   };
 
   return (
-    <div className="w-full space-y-0">
-      {/* HERO SECTION - RECREATED FROM REFERENCE (PANORAMIC ON DESKTOP, 100VH ON MOBILE & LAPTOP) */}
-      <section className="relative overflow-hidden bg-[#1F150E] md:bg-[#F6EDE2] border-b border-[#E7D8C8] min-h-[calc(100vh-68px)] sm:min-h-[calc(100vh-74px)] min-[1000px]:min-h-[calc(100vh-76px)] xl:min-h-[calc(100vh-82px)] md:flex md:items-center">
-        {/* Desktop Panoramic Background Banner (hidden on mobile) */}
-        <ParallaxImage offset={45} className="hidden md:block absolute inset-0 z-0">
-          <Image
-            src="/images/membership-hero-banner.png"
-            alt="Together for a Better Tomorrow"
-            fill sizes="100vw"
-            priority
-            className="object-cover object-center"
-          />
-          {/* Clean Gradient on Desktop: leaves joined hands & temple completely crisp and clear on right */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#F6EDE2] via-[#F6EDE2] via-[35%] to-transparent to-[48%] pointer-events-none" />
-        </ParallaxImage>
-
-        {/* MOBILE HERO (100VH Full Viewport Height with Bottom Overlay) */}
-        <div className="md:hidden relative z-1 w-full h-[calc(100vh-68px)] min-h-[540px] flex items-center justify-center overflow-hidden">
-          <ParallaxImage offset={30} className="absolute inset-0 w-full h-full">
-            <Image
-              src="/images/membership-mobile-hero.png"
-              alt="Together for a Better Tomorrow - Aggarwal Vaish Samaj Haryana"
-              fill sizes="100vw"
-              priority
-              className="w-full h-full object-cover object-top block select-none pointer-events-none"
-            />
-          </ParallaxImage>
-
-          {/* Mobile Overlay Action Bar (Clean gradient at bottom of mobile banner) */}
-          <div className="absolute bottom-0 inset-x-0 z-20 w-full px-4 pt-16 pb-6 bg-gradient-to-t from-black/95 via-black/70 to-transparent flex flex-col items-center gap-2 text-center pointer-events-auto">
-            <TextReveal as="h2" className="font-editorial text-sm sm:text-base font-extrabold text-white tracking-wide leading-tight drop-shadow-md">
-              {lang === "hi" ? "एक बेहतर कल के लिए साथ" : "Together for a Better Tomorrow"}
-            </TextReveal>
-            <div className="flex items-center justify-center gap-2.5 w-full max-w-xs pt-1">
-              <a
-                href="#membership-plans"
-                className="flex-1 py-2 px-3 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase tracking-wider text-center shadow-md active:scale-95 transition-transform"
-              >
-                {lang === "hi" ? "योजनाएं देखें" : "View Plans"}
-              </a>
-              <button
-                onClick={() => {
-                  const el = document.getElementById("membership-plans");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="flex-1 py-2 px-3 rounded-lg bg-white text-[#2B201A] font-bold text-xs uppercase tracking-wider text-center shadow-md flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-transform"
-              >
-                <Heart className="w-3 h-3 text-[#7F160C] fill-current" />
-                <span>{lang === "hi" ? "जुड़ें" : "Join Now"}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Desktop Hero Content (hidden on mobile) */}
-        <div className="hidden md:block relative z-10 page-container py-8 sm:py-12 md:py-24 w-full">
-          <div className="max-w-xl lg:max-w-2xl xl:max-w-3xl space-y-4 sm:space-y-5">
-            {/* Main Title */}
-            <TextReveal as="h1" className="font-editorial text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[#2B201A] leading-[1.18] tracking-tight">
-              {lang === "hi" ? (
-                <>
-                  एक बेहतर कल के लिए <span className="text-[#7F160C]">साथ</span>
-                </>
-              ) : (
-                <>
-                  Together for a <span className="text-[#7F160C]">Better Tomorrow</span>
-                </>
-              )}
-            </TextReveal>
-
-            {/* Description matching exact reference text */}
-            <ParagraphReveal className="text-sm sm:text-base md:text-[15px] text-[#4A3B32] leading-relaxed font-sans font-medium">
-              {lang === "hi"
-                ? "आइए, एक ऐसे परिवार का हिस्सा बनें जो सेवा, संस्कृति और समाज के सशक्तिकरण में विश्वास रखता है। साथ मिलकर हम एक ऐसे भविष्य का निर्माण कर सकते हैं जहाँ शिक्षा, स्वास्थ्य, गौ सेवा, पर्यावरण संरक्षण और आध्यात्मिक चेतना से सभी का समग्र कल्याण और उत्थान हो सके।"
-                : "Come, be a part of a family that believes in service, culture, and the empowerment of society. Together, we can create a future where education, health, cow protection, environmental conservation, and spiritual awareness bring holistic well-being and enlightened prosperity for all."}
-            </ParagraphReveal>
-
-
-
-            {/* CTA Button */}
-            <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-3">
-              <a
-                href="#membership-plans"
-                className="w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-7 py-3.5 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm uppercase tracking-wider shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
-              >
-                <span>{lang === "hi" ? "सदस्यता योजनाएं देखें" : "Explore Membership Plans"}</span>
-              </a>
-              <a
-                href="/membership-form-avvs.pdf"
-                download="MEMBERSHIP_FORM_AVVS.pdf"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3.5 rounded-xl bg-white hover:bg-amber-50 text-[#7F160C] border-2 border-[#7F160C] font-bold text-xs sm:text-sm uppercase tracking-wider shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
-              >
-                <span>{lang === "hi" ? "फॉर्म डाउनलोड करें (PDF)" : "Download Form (PDF)"}</span>
-              </a>
-            </div>
-          </div>
+    <div className="w-full bg-[#FAF7F2] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
+      {/* 1. TOP PAGE HEADER */}
+      <section className="pt-8 sm:pt-12 pb-2 bg-[#FAF7F2]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
+            Membership Registration
+          </h1>
+          <HeadingDivider className="mt-2.5" />
         </div>
       </section>
 
-      {/* MEMBERSHIP TIERS (4 PRICING CARDS - RESPONSIVE 4-col -> 2-col -> 1-col) */}
-      <SectionReveal className="section-py" id="membership-plans">
-        <div className="page-container">
-          <div className="text-center max-w-2xl mx-auto section-header space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">
-              {lang === "hi" ? "सदस्यता श्रेणी चुनें" : "CHOOSE YOUR MEMBERSHIP TIER"}
-            </p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
-              {lang === "hi" ? "अग्रवाल वैश्य विकास संगठन से जुड़ें" : "Join Aggarwal Vaish Vikas Sangathan"}
-            </TextReveal>
-            <HeadingDivider className="mt-2" />
-          </div>
-
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
-            {tiers.map((tier) => (
-              <StaggerItem key={tier.name} className="h-full">
-                <div
-                  className={`rounded-[18px] p-6 flex flex-col justify-between transition-all duration-300 h-full ${tier.cardStyle}`}
-                >
-                  {tier.badgeText && (
-                    <div className={`absolute -top-3.5 left-1/2 -translate-x-1/2 px-3.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full z-10 whitespace-nowrap ${tier.badgeStyle}`}>
-                      {lang === "hi" && tier.badgeTextHi ? tier.badgeTextHi : tier.badgeText}
-                    </div>
-                  )}
-
-                  <div className="card-body space-y-4">
-                    <div>
-                      <h3 className="font-editorial text-2xl font-bold text-[#2B201A]">
-                        {lang === "hi" ? tier.nameHi : tier.name}
-                      </h3>
-                      <p className="text-xs text-[#2B201A]/75 mt-1 leading-relaxed">
-                        {lang === "hi" && tier.descHi ? tier.descHi : tier.desc}
-                      </p>
-                    </div>
-
-                    <div className="py-3 border-y border-[#2B201A]/10">
-                      <span className={`font-sans text-3xl font-bold tracking-tight ${tier.priceColor}`}>
-                        ₹{tier.price.toLocaleString("en-IN")}
-                      </span>
-                      <span className="text-xs text-[#2B201A]/60 ml-1.5 font-semibold">
-                        INR / {lang === "hi" && tier.periodHi ? tier.periodHi : tier.period}
-                      </span>
-                    </div>
-
-                    <ul className="space-y-2.5 text-xs text-[#2B201A]/85 font-sans pt-1">
-                      {(lang === "hi" && tier.featuresHi ? tier.featuresHi : tier.features).map((feat, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <Check className={`w-4 h-4 shrink-0 mt-0.5 ${tier.checkColor}`} />
-                          <span>{feat}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="card-action">
-                    <button
-                      onClick={() => openDonateModal(lang === "hi" ? tier.nameHi : tier.name, tier.price, true)}
-                      className={tier.buttonStyle}
-                    >
-                      {lang === "hi" ? `सदस्यता लें — ₹${tier.price.toLocaleString("en-IN")}` : `Join Now — ₹${tier.price.toLocaleString("en-IN")}`}
-                    </button>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </SectionReveal>
-
-      {/* WHY BECOME A MEMBER (HUMAN-CRAFTED AUTHENTIC DEVOTIONAL DESIGN) */}
-      <SectionReveal className="section-py bg-gradient-to-b from-[#FAF3EA] via-[#F7EDE0] to-[#FAF3EA] border-t border-[#E7D8C8] relative">
-        {/* Subtle decorative background glow */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_0%,rgba(212,163,89,0.08),transparent_60%)]" />
-
-        <div className="page-container relative z-10">
-          {/* Section Header */}
-          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
-            <h2 className="font-editorial text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-              <span className="text-[#1F1712]">
-                {lang === "hi" ? "संगठन की सदस्यता " : "Why Join Our "}
-              </span>
-              <span className="text-[#7F160C]">
-                {lang === "hi" ? "क्यों ग्रहण करें?" : "Organization?"}
-              </span>
-            </h2>
-          </div>
-
-          {/* 4 ACTION & PURPOSE CARDS (CLEAN HORIZONTAL SPLIT MATCHING INITIATIVES STYLE) */}
-          <StaggerContainer className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 items-stretch">
-            {[
-              {
-                category: lang === "hi" ? "एकता" : "UNITY",
-                image: "/images/agarwal/design-1.jpg",
-                title: lang === "hi" ? "संगठित एवं सशक्त समाज" : "United & Organized Community",
-                desc: lang === "hi"
-                  ? "हरियाणा के सभी ज़िलों में वैश्य समाज को एक मंच पर जोड़कर सामूहिक शक्ति, बंधुत्व और आपसी सहयोग को सुदृढ़ करना।"
-                  : "Uniting every section of the Vaish community across all districts of Haryana on a single collective platform.",
-                points: [
-                  lang === "hi" ? "राज्यव्यापी ज़िला संगठन नेटवर्क" : "Statewide District Organization Network",
-                  lang === "hi" ? "पारस्परिक व्यापारिक एवं सामाजिक सहयोग" : "Mutual Business & Social Cooperation",
-                  lang === "hi" ? "वार्षिक राज्य महासम्मेलन में सहभागिता" : "Annual State Convention Participation",
-                ],
-                btnText: lang === "hi" ? "संगठन से जुड़ें" : "JOIN COMMUNITY",
-              },
-              {
-                category: lang === "hi" ? "स्वावलंबन" : "WOMEN",
-                image: "/images/agarwal/design-2.jpg",
-                title: lang === "hi" ? "नारी स्वावलंबन एवं उद्यमिता" : "Women Empowerment & Enterprise",
-                desc: lang === "hi"
-                  ? "मातृशक्ति को आत्मनिर्भर बनाने के लिए कौशल विकास, स्वरोजगार संसाधन, और बालिका शिक्षा को प्रत्यक्ष प्रोत्साहन।"
-                  : "Empowering women with entrepreneurship avenues, vocational skill development, and girls education initiatives.",
-                points: [
-                  lang === "hi" ? "महिला स्वरोजगार प्रोत्साहन प्रकोष्ठ" : "Women Self-Employment Guidance Cell",
-                  lang === "hi" ? "प्रतिभाशाली बेटियों का सम्मान" : "Talented Daughters Pratibha Samman",
-                  lang === "hi" ? "व्यापारिक नेटवर्किंग व कौशल मंच" : "Business Networking & Skill Forum",
-                ],
-                btnText: lang === "hi" ? "स्वावलंबन से जुड़ें" : "EXPLORE INITIATIVE",
-              },
-              {
-                category: lang === "hi" ? "युवा" : "YOUTH",
-                image: "/images/agarwal/design-6.jpg",
-                title: lang === "hi" ? "युवा नेतृत्व एवं करियर मार्गदर्शन" : "Youth Leadership & Mentorship",
-                desc: lang === "hi"
-                  ? "युवाओं में व्यापार, नवाचार, सिविल सेवा और सामाजिक नेतृत्व की भावना को विकसित करने हेतु समर्पित मंच।"
-                  : "Equipping young leaders with business incubation, professional networking, and governance mentorship.",
-                points: [
-                  lang === "hi" ? "वैश्य युवा लीडरशिप कॉन्क्लेव" : "Vaish Yuva Leadership Conclave",
-                  lang === "hi" ? "स्टार्टअप्स व करियर परामर्श सत्र" : "Startups & Career Advisory Sessions",
-                  lang === "hi" ? "राष्ट्र निर्माण व सामाजिक सहभागिता" : "Nation Building & Social Action",
-                ],
-                btnText: lang === "hi" ? "युवा प्रकोष्ठ से जुड़ें" : "JOIN YOUTH WING",
-              },
-              {
-                category: lang === "hi" ? "संकल्प" : "SANKALP",
-                image: "/images/agarwal/design-4.jpg",
-                title: lang === "hi" ? "पंच संकल्प व जनसेवा मिशन" : "Panch Sankalp & Public Service",
-                desc: lang === "hi"
-                  ? "राजनीतिक जागरूकता, आर्थिक आत्मनिर्भरता और सामाजिक सहभागिता के पंच संकल्प को हर घर तक पहुँचाना।"
-                  : "Advancing community rights, public representation, and socioeconomic self-reliance through Panch Sankalp.",
-                points: [
-                  lang === "hi" ? "पंच संकल्प अभियान में प्रत्यक्ष भूमिका" : "Direct Role in Panch Sankalp Mission",
-                  lang === "hi" ? "आधिकारिक सदस्यता डिजिटल पहचान पत्र" : "Official Digital Membership ID",
-                  lang === "hi" ? "पारदर्शी समाज सेवा व जन-हितैषी प्रकल्प" : "Transparent Community Welfare Projects",
-                ],
-                btnText: lang === "hi" ? "सदस्यता लें" : "BECOME A MEMBER",
-              },
-            ].map((card, idx) => (
-              <StaggerItem key={idx} className="h-full">
-                <div className="bg-white rounded-[20px] sm:rounded-[24px] border border-[#E7D8C8] overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 flex flex-col sm:flex-row h-full group">
-                  {/* Left Image */}
-                  <div className="relative w-full sm:w-[38%] md:w-[40%] shrink-0 min-h-[200px] sm:min-h-[230px] overflow-hidden bg-[#FAF3EC]">
-                    <Image
-                      src={card.image}
-                      alt={card.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-
-                  {/* Right Content */}
-                  <div className="p-5 sm:p-6 flex flex-col justify-between flex-1 bg-white">
-                    <div>
-                      <span className="text-[11px] font-bold text-[#7F160C] uppercase tracking-wider block">
-                        {card.category}
-                      </span>
-                      <h3 className="font-editorial font-bold text-lg sm:text-xl text-[#1F1712] leading-snug mt-1">
-                        {card.title}
-                      </h3>
-                      <p className="text-xs sm:text-[13px] text-[#5C6B73] leading-relaxed mt-2 line-clamp-3">
-                        {card.desc}
-                      </p>
-
-                      {/* Benefits / Points */}
-                      <div className="mt-3.5 pt-3 border-t border-[#F0E4D8] space-y-1.5 sm:space-y-2">
-                        {card.points.map((pt, pIdx) => (
-                          <div key={pIdx} className="flex items-center gap-2 text-xs text-[#2B201A]/85">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#7F160C] shrink-0" />
-                            <span className="leading-tight">{pt}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-5 pt-2">
-                      <button
-                        onClick={() => openDonateModal(card.title, undefined, true)}
-                        className="inline-flex items-center justify-center px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-[#7F160C] hover:bg-[#D45A0E] text-white font-bold text-xs uppercase tracking-wider shadow-sm hover:shadow-md transition-all cursor-pointer"
-                      >
-                        <span>{card.btnText}</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-
-        </div>
-      </SectionReveal>
-
-      {/* DEVOTEE COMMUNITY / OUR ACTIVE MEMBERS TICKER (END TO END AUTO SCROLL) */}
-      <SectionReveal className="py-16 sm:py-20 lg:py-24 overflow-hidden">
-        <div className="page-container mb-6 sm:mb-8">
-          <div className="text-center max-w-2xl mx-auto section-header space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">
-              {lang === "hi" ? "भक्त समुदाय" : "DEVOTEE COMMUNITY"}
-            </p>
-            <TextReveal as="h2" className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
-              {lang === "hi" ? "हमारे सक्रिय सदस्य" : "Our Active Members"}
-            </TextReveal>
-          </div>
-        </div>
-
-        {/* Full width edge-to-edge auto scroll strip */}
-        <div className="w-full">
-          <MemberCarousel />
-        </div>
-      </SectionReveal>
-
-      {/* MEMBERSHIP REGISTRATION FORM */}
-      <section className="section-py bg-[#FBF2E7]/60 border-t border-[#E7D8C8]">
-        <div className="page-container max-w-4xl space-y-8">
+      {/* 2. MEMBERSHIP REGISTRATION FORM */}
+      <section className="pt-2 sm:pt-4 pb-12 sm:pb-16 bg-[#FAF7F2]">
+        <div className="page-container max-w-4xl">
           {/* Form Card (White Background) */}
-          <div className="p-6 sm:p-10 space-y-8 bg-white border border-[#E7D8C8] rounded-[24px] shadow-sm">
-            <div className="text-center space-y-2">
-              <h2 className="font-editorial text-3xl sm:text-4xl font-bold text-[#7F160C]">
-                {lang === "hi" ? "सदस्यता पंजीकरण" : "Membership Registration"}
-              </h2>
-              <HeadingDivider className="my-1.5" />
-              <p className="text-sm text-[#4B5563]">
-                {lang === "hi"
-                  ? "अपनी सदस्यता योजना चुनें और सदस्यता पूर्ण करने के लिए अपना विवरण साझा करें।"
-                  : "Choose your plan and share your details to complete your membership."}
-              </p>
-            </div>
-
+          <div className="p-6 sm:p-10 bg-white border border-[#E8DFD3] rounded-[24px] shadow-sm">
             <form onSubmit={handleFormSubmit} noValidate className="space-y-8">
-              {/* Membership Plan Selection */}
-              <fieldset>
-                <legend className="block text-xs font-bold uppercase tracking-wider text-[#1F1712] mb-2.5">
-                  {lang === "hi" ? "सदस्यता योजना चुनें *" : "Membership Plan *"}
-                </legend>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {MEMBERSHIP_PLANS.map((p) => {
-                    const selected = planId === p.id;
-                    const tierMatch = tiers.find((t) => t.price === p.price);
-                    const displayName = lang === "hi" && tierMatch?.nameHi ? tierMatch.nameHi : p.name;
-                    return (
-                      <label
-                        key={p.id}
-                        className={`flex items-center justify-between gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-colors ${
-                          selected
-                            ? "border-[#7F160C] bg-[#FFF8F2] shadow-xs"
-                            : "border-[#E5E7EB] bg-white hover:border-[#7F160C]/40"
-                        }`}
-                      >
-                        <span className="flex items-center gap-2.5">
-                          <input
-                            type="radio"
-                            name="mem-plan"
-                            value={p.id}
-                            checked={selected}
-                            onChange={() => setPlanId(p.id)}
-                            className="accent-[#7F160C] w-4 h-4"
-                          />
-                          <span className="text-sm font-semibold text-[#1F1712]">{displayName}</span>
-                        </span>
-                        <span className="text-sm font-bold text-[#7F160C] tabular-nums">{formatINR(p.price)}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </fieldset>
-
               {/* SECTION 1: PERSONAL DETAILS */}
-              <div className="space-y-5 pt-4 border-t border-[#F3F4F6]">
-                <h3 className="font-editorial text-xl font-bold text-[#7F160C]">
+              <div className="space-y-6">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#7F160C]">
                   {lang === "hi" ? "व्यक्तिगत विवरण" : "Personal Details"}
                 </h3>
 
                 {/* Photo Upload */}
                 <div>
-                  <label className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                  <label className="block text-[16px] font-bold text-[#1F1712] mb-2">
                     {lang === "hi" ? "फोटो" : "Photo"}
                   </label>
-                  <div className="border border-dashed border-[#7F160C] rounded-md px-3 py-2 bg-white inline-flex items-center gap-2.5">
-                    <label className="inline-flex items-center px-3 py-1 rounded border border-[#D1D5DB] bg-[#F9FAFB] hover:bg-[#F3F4F6] text-xs font-semibold text-[#1F1712] cursor-pointer transition-colors">
+                  <div className="border border-dashed border-[#7F160C] rounded-lg px-3.5 py-2.5 bg-white inline-flex items-center gap-3">
+                    <label className="inline-flex items-center px-4 py-2 rounded border border-[#D1D5DB] bg-[#F9FAFB] hover:bg-[#F3F4F6] text-[16px] font-semibold text-[#1F1712] cursor-pointer transition-colors">
                       <span>Choose File</span>
                       <input
                         type="file"
@@ -597,7 +232,7 @@ export default function MembershipPage() {
                         }}
                       />
                     </label>
-                    <span className="text-xs text-[#6B7280]">
+                    <span className="text-[16px] text-[#6B7280]">
                       {formData.photoName || "No file chosen"}
                     </span>
                   </div>
@@ -606,7 +241,7 @@ export default function MembershipPage() {
                 {/* Row 1: Full Name, S/o W/o D/o, Gender (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-fullname" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-fullname" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "पूरा नाम" : "Full Name"} <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -623,7 +258,7 @@ export default function MembershipPage() {
                         }
                       }}
                       onBlur={() => handleBlur("fullName")}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                     {errors.fullName && (touched.fullName || errors.fullName) && (
                       <p className="mt-1 text-xs font-semibold text-red-600">{errors.fullName}</p>
@@ -631,7 +266,7 @@ export default function MembershipPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="mem-guardian" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-guardian" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "पिता / पति का नाम" : "S/o, W/o, D/o"}
                     </label>
                     <input
@@ -641,19 +276,19 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "पिता / पति का नाम" : "S/o, W/o, D/o Name"}
                       value={formData.guardianName}
                       onChange={(e) => setFormData({ ...formData, guardianName: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mem-gender" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-gender" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "लिंग" : "Gender"} <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="mem-gender"
                       value={formData.gender}
                       onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="">{lang === "hi" ? "--लिंग चुनें--" : "--Select Gender--"}</option>
                       <option value="Male">{lang === "hi" ? "पुरुष (Male)" : "Male"}</option>
@@ -666,7 +301,7 @@ export default function MembershipPage() {
                 {/* Row 2: Caste, Gotra, Email (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-caste" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-caste" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "जाति" : "Caste"}
                     </label>
                     <input
@@ -676,12 +311,12 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "जाति" : "Caste"}
                       value={formData.caste}
                       onChange={(e) => setFormData({ ...formData, caste: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mem-gotra" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-gotra" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "गोत्र" : "Gotra"}
                     </label>
                     <input
@@ -691,12 +326,12 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "गोत्र" : "Gotra"}
                       value={formData.gotra}
                       onChange={(e) => setFormData({ ...formData, gotra: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mem-email" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-email" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "ईमेल" : "Email"}
                     </label>
                     <input
@@ -712,7 +347,7 @@ export default function MembershipPage() {
                         }
                       }}
                       onBlur={() => handleBlur("email")}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                     {errors.email && (touched.email || errors.email) && (
                       <p className="mt-1 text-xs font-semibold text-red-600">{errors.email}</p>
@@ -723,11 +358,11 @@ export default function MembershipPage() {
                 {/* Row 3: Phone Number, Date of Birth, Empty Col (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-phone" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-phone" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "मोबाइल नंबर" : "Phone Number"} <span className="text-red-500">*</span>
                     </label>
                     <div className="relative flex items-center">
-                      <span className="absolute left-3 text-xs text-[#4B5563] font-medium select-none flex items-center gap-1.5">
+                      <span className="absolute left-3.5 text-[16px] text-[#4B5563] font-medium select-none flex items-center gap-1.5">
                         <span>🇮🇳</span>
                         <span>+91</span>
                       </span>
@@ -751,7 +386,7 @@ export default function MembershipPage() {
                           }
                         }}
                         onBlur={() => handleBlur("phone")}
-                        className="w-full h-11 !pl-16 pr-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all"
+                        className="w-full h-12 !pl-20 pr-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all"
                       />
                     </div>
                     {errors.phone && (touched.phone || errors.phone) && (
@@ -760,7 +395,7 @@ export default function MembershipPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="mem-dob" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-dob" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "जन्म तिथि" : "Date of Birth"}
                     </label>
                     <input
@@ -768,7 +403,7 @@ export default function MembershipPage() {
                       type="date"
                       value={formData.dob}
                       onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all cursor-pointer"
                     />
                   </div>
 
@@ -778,22 +413,22 @@ export default function MembershipPage() {
               </div>
 
               {/* SECTION 2: ADDRESS DETAILS */}
-              <div className="space-y-5 pt-4 border-t border-[#F3F4F6]">
-                <h3 className="font-editorial text-xl font-bold text-[#7F160C]">
+              <div className="space-y-6 pt-6 border-t border-[#F3F4F6]">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#7F160C]">
                   {lang === "hi" ? "पते का विवरण" : "Address Details"}
                 </h3>
 
                 {/* Row 1: State, District, Address (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-state" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-state" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "राज्य" : "State"} <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="mem-state"
                       value={formData.state}
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="Haryana">Haryana (हरियाणा)</option>
                       <option value="Delhi">Delhi (दिल्ली)</option>
@@ -809,14 +444,14 @@ export default function MembershipPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="mem-district" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-district" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "जिला" : "District"} <span className="text-red-500">*</span>
                     </label>
                     <select
                       id="mem-district"
                       value={formData.district}
                       onChange={(e) => setFormData({ ...formData, district: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="">{lang === "hi" ? "--जिला चुनें--" : "--Select District--"}</option>
                       {[
@@ -831,7 +466,7 @@ export default function MembershipPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="mem-address" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-address" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "वर्तमान पता" : "Address"} <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -840,7 +475,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "वर्तमान पता" : "Current Address"}
                       value={formData.address}
                       onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -848,7 +483,7 @@ export default function MembershipPage() {
                 {/* Row 2: Ward Number, Pincode, Empty Col (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-ward" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-ward" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "वार्ड नंबर" : "Ward Number"}
                     </label>
                     <input
@@ -858,12 +493,12 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "वार्ड नंबर" : "Ward Number"}
                       value={formData.wardNumber}
                       onChange={(e) => setFormData({ ...formData, wardNumber: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="mem-pincode" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-pincode" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "पिनकोड" : "Pincode"}
                     </label>
                     <input
@@ -874,7 +509,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "पिनकोड" : "Pincode"}
                       value={formData.pincode}
                       onChange={(e) => setFormData({ ...formData, pincode: e.target.value.replace(/\D/g, "").slice(0, 6) })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -885,14 +520,14 @@ export default function MembershipPage() {
                 {/* Row 3: Occupation, Occupation Details, Empty Col (3 Equal Columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
                   <div>
-                    <label htmlFor="mem-occupation" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-occupation" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "व्यवसाय" : "Occupation"}
                     </label>
                     <select
                       id="mem-occupation"
                       value={formData.occupation}
                       onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] outline-none transition-all cursor-pointer"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] outline-none transition-all cursor-pointer"
                     >
                       <option value="">{lang === "hi" ? "--व्यवसाय चुनें--" : "--Select Occupation--"}</option>
                       <option value="Business">{lang === "hi" ? "व्यवसाय (Business)" : "Business"}</option>
@@ -908,7 +543,7 @@ export default function MembershipPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="mem-occ-details" className="block text-xs font-bold text-[#1F1712] mb-1.5">
+                    <label htmlFor="mem-occ-details" className="block text-[16px] font-bold text-[#1F1712] mb-2">
                       {lang === "hi" ? "व्यवसाय का विवरण" : "Occupation Details"}
                     </label>
                     <input
@@ -917,7 +552,7 @@ export default function MembershipPage() {
                       placeholder={lang === "hi" ? "विवरण दर्ज करें" : "Mention Details"}
                       value={formData.occupationDetails}
                       onChange={(e) => setFormData({ ...formData, occupationDetails: e.target.value })}
-                      className="w-full h-11 px-3.5 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-sm text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
+                      className="w-full h-12 px-4 bg-white border border-[#D1D5DB] focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] rounded-lg text-[16px] text-[#1F1712] placeholder:text-[#9CA3AF] outline-none transition-all"
                     />
                   </div>
 
@@ -926,116 +561,203 @@ export default function MembershipPage() {
                 </div>
               </div>
 
-              {/* SECTION 3: MEMBERSHIP PAYMENT & QR CODE */}
-              <div id="payment-qr" className="pt-8 border-t border-[#F3F4F6] space-y-6">
+              {/* SECTION 3: MEMBERSHIP PAYMENT & QR CODE (SPECIAL HIGHLIGHTED CARD MATCHING REF PIC 2) */}
+              <div id="payment-qr" className="mt-8 p-5 sm:p-7 lg:p-8 bg-[#FFF9F2] border border-[#E8DFD3] rounded-2xl shadow-xs space-y-4">
                 {/* Header & Instructions */}
-                <div className="space-y-1.5 text-left">
-                  <h3 className="font-editorial text-2xl sm:text-3xl font-bold text-[#7F160C]">
+                <div>
+                  <h3 className="font-bold text-xl sm:text-2xl text-[#0A2540]">
                     {lang === "hi" ? "सदस्यता भुगतान" : "Membership Payment"}
                   </h3>
-                  <HeadingDivider align="left" className="!py-0.5" />
-                  <p className="text-xs sm:text-sm text-[#4B5563] pt-0.5">
+                  <p className="text-[16px] text-[#4B5563] mt-1">
                     {lang === "hi"
                       ? "कृपया नीचे दिए गए QR कोड को स्कैन करके अपना सदस्यता सहयोग पूरा करें।"
                       : "Please complete your membership payment by scanning the QR code below."}
                   </p>
                 </div>
 
-                {/* 2-Column Side-by-Side: QR on Left, Details & Instructions on Right */}
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start pt-2">
-                  {/* LEFT COLUMN: QR Code Stand & UPI Copy Badge */}
-                  <div className="md:col-span-5 flex flex-col items-center text-center space-y-3.5">
-                    <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-sm bg-white">
-                      <Image
-                        src="/images/trust-payment-qr.png"
-                        alt="Aggarwal Vaish Samaj Trust UPI QR Code"
-                        fill sizes="100vw"
-                        priority
-                        className="object-contain"
-                      />
-                    </div>
+                {/* 4 Steps */}
+                <ol className="text-[16px] text-[#374151] space-y-2.5 leading-relaxed pt-1">
+                  <li>
+                    1. {lang === "hi"
+                      ? "अपने पसंदीदा UPI ऐप (GPay, PhonePe, Paytm, BHIM) से QR कोड स्कैन करें।"
+                      : "Scan the QR code using your preferred UPI app."}
+                  </li>
+                  <li>
+                    2. {lang === "hi"
+                      ? `लागू सदस्यता राशि का भुगतान करें: ${formatINR(
+                          (MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0]).price
+                        )}`
+                      : "Check the available membership plans below and pay the applicable amount."}
+                  </li>
+                  <li>
+                    3. {lang === "hi"
+                      ? "भुगतान का स्क्रीनशॉट संगठन कार्यालय को व्हाट्सएप पर भेजें: +91 90885 00061"
+                      : "Share the screenshot over WhatsApp with Organization Office at +91 90885 00061."}
+                  </li>
+                  <li>
+                    4. {lang === "hi"
+                      ? "हमारी टीम भुगतान का सत्यापन करके आपके खाते की सदस्यता सक्रिय करेगी और प्रमाणपत्र जारी करेगी।"
+                      : "Our team will verify the payment and activate the appropriate membership for your account."}
+                  </li>
+                </ol>
 
-                    {/* UPI ID Badge & Copy Button */}
-                    <div className="w-full max-w-[280px] sm:max-w-[320px] flex items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
-                      <span className="text-xs font-mono font-bold text-[#1F1712] truncate">
-                        yespay.smessi49188@yesbankltd
-                      </span>
-                      <button
-                        type="button"
-                        onClick={handleCopyUpi}
-                        className="inline-flex items-center gap-1 text-xs font-bold text-[#7F160C] hover:text-[#D45A0E] cursor-pointer shrink-0"
-                      >
-                        {copiedUpi ? (
-                          <>
-                            <CheckCheck className="w-3.5 h-3.5 text-emerald-600" />
-                            <span className="text-emerald-600 font-bold">{lang === "hi" ? "कॉपी हुआ!" : "Copied!"}</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-3.5 h-3.5" />
-                            <span>{lang === "hi" ? "कॉपी" : "Copy"}</span>
-                          </>
-                        )}
-                      </button>
+                {/* 2-COLUMN DESKTOP (WINDOW) & 1-COLUMN MOBILE LAYOUT (EXACT REPLICA OF REFERENCE PIC 1) */}
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8 items-start pt-4">
+                  {/* LEFT COLUMN: QR Standee Card */}
+                  <div className="md:col-span-5 flex justify-center md:justify-start">
+                    <div className="w-full max-w-[320px] bg-white rounded-2xl border-2 border-[#E5E7EB] shadow-md overflow-hidden select-none">
+                      {/* Green Top Bar */}
+                      <div className="bg-[#007A5E] text-white py-2 px-4 flex items-center justify-center gap-2">
+                        <span className="text-[10px] tracking-wider uppercase text-white/80">Powered by</span>
+                        <span className="text-xs font-black tracking-wider uppercase bg-[#E31E24] text-white px-2 py-0.5 rounded text-[11px]">
+                          IDBI BANK
+                        </span>
+                      </div>
+
+                      {/* Organization Name Strip */}
+                      <div className="bg-[#D7EAD8] py-2 px-3 text-center border-b border-[#B8D7BB]">
+                        <span className="font-extrabold text-xs sm:text-[13px] text-[#0E4A35] tracking-wider uppercase block leading-tight">
+                          AGGARWAL VAISH VIKAS SANGATHAN
+                        </span>
+                      </div>
+
+                      {/* Card Body */}
+                      <div className="p-4 sm:p-5 flex flex-col items-center text-center bg-white">
+                        <span className="text-xs font-black tracking-widest text-[#111827] uppercase mb-2">
+                          SCAN & PAY
+                        </span>
+
+                        {/* Live SVG QR Code with Organization Logo in Center */}
+                        <div className="p-2.5 bg-white rounded-xl border border-gray-200 shadow-2xs relative">
+                          <QRCodeSVG
+                            value="upi://pay?pa=aggarwalvaishvikassangathan@idbi&pn=AGGARWAL%20VAISH%20VIKAS%20SANGATHAN&cu=INR"
+                            size={185}
+                            level="H"
+                            imageSettings={{
+                              src: "/images/agarwal/logo.png",
+                              height: 36,
+                              width: 36,
+                              excavate: true,
+                            }}
+                          />
+                        </div>
+
+                        {/* UPI ID */}
+                        <div className="mt-3 flex items-center justify-center gap-1.5 text-xs text-[#7F160C] font-bold">
+                          <span>UPI ID:</span>
+                          <span className="font-mono text-[#7F160C] select-all">aggarwalvaishvikassangathan@idbi</span>
+                          <button
+                            type="button"
+                            onClick={handleCopyUpi}
+                            className="ml-1 text-[#007A5E] hover:text-[#0B6E4F] cursor-pointer"
+                            title="Copy UPI ID"
+                          >
+                            {copiedUpi ? (
+                              <CheckCheck className="w-3.5 h-3.5 text-emerald-600 inline" />
+                            ) : (
+                              <Copy className="w-3.5 h-3.5 inline" />
+                            )}
+                          </button>
+                        </div>
+
+                        {/* BHIM UPI Badge */}
+                        <div className="mt-3 pt-2.5 border-t border-gray-100 w-full flex items-center justify-center gap-3">
+                          <div className="flex items-center gap-1 font-black italic text-xs tracking-wider text-[#002D62]">
+                            <span>BHIM</span>
+                            <span className="text-[#00A859]">▶</span>
+                            <span>UPI</span>
+                          </div>
+                        </div>
+
+                        {/* Payment App Badges */}
+                        <div className="mt-2 flex items-center justify-center gap-3">
+                          <div className="flex items-center gap-1 bg-[#F8FAFC] border border-gray-200 px-2 py-0.5 rounded text-[11px] font-bold text-gray-700">
+                            <span className="text-blue-500 font-extrabold">G</span>
+                            <span className="text-red-500 font-extrabold">P</span>
+                            <span className="text-amber-500 font-extrabold">a</span>
+                            <span className="text-green-500 font-extrabold">y</span>
+                          </div>
+                          <div className="bg-[#002E6E] text-white px-2 py-0.5 rounded text-[11px] font-extrabold">
+                            <span>Pay</span><span className="text-[#00BAF2]">tm</span>
+                          </div>
+                          <div className="bg-[#5F259F] text-white px-2 py-0.5 rounded text-[11px] font-extrabold">
+                            पे PhonePe
+                          </div>
+                        </div>
+
+                        {/* Bilingual Footer */}
+                        <div className="mt-2.5 pt-2 border-t border-gray-100 text-[10px] text-gray-500 font-medium leading-tight">
+                          <p>सभी UPI Apps से भुगतान स्वीकार किया जाता है ।</p>
+                          <p className="text-[9px] text-gray-400 mt-0.5">Payment Accepted from all UPI Apps</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
-                  {/* RIGHT COLUMN: 4-Step Instructions, Trust Notice & Continue CTA */}
-                  <div className="md:col-span-7 flex flex-col space-y-4">
-                    {/* 4-Step Instructions List */}
-                    <ol className="text-xs sm:text-sm text-[#374151] space-y-3 list-decimal list-inside bg-[#F9FAFB] border border-[#E5E7EB] rounded-2xl p-5 sm:p-6 leading-relaxed">
-                      <li className="font-medium">
-                        <span>
-                          {lang === "hi"
-                            ? "अपने पसंदीदा UPI ऐप (GPay, PhonePe, Paytm, BHIM) से QR कोड स्कैन करें।"
-                            : "Scan the QR code using your preferred UPI app."}
-                        </span>
-                      </li>
-                      <li className="font-medium">
-                        <span>
-                          {lang === "hi"
-                            ? `लागू सदस्यता राशि का भुगतान करें: ${formatINR(
-                                (MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0]).price
-                              )}`
-                            : `Pay the applicable membership amount: ${formatINR(
-                                (MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0]).price
-                              )}`}
-                        </span>
-                      </li>
-                      <li className="font-medium">
-                        <span>
-                          {lang === "hi"
-                            ? "भुगतान का स्क्रीनशॉट संगठन कार्यालय को व्हाट्सएप पर भेजें: +91 90885 00061"
-                            : "Share the screenshot over WhatsApp with Organization Office at +91 90885 00061."}
-                        </span>
-                      </li>
-                      <li className="font-medium">
-                        <span>
-                          {lang === "hi"
-                            ? "हमारी टीम भुगतान का सत्यापन करके आपके खाते की सदस्यता सक्रिय करेगी और प्रमाणपत्र जारी करेगी।"
-                            : "Our team will verify the payment and activate the appropriate membership for your account."}
-                        </span>
-                      </li>
-                    </ol>
+                  {/* RIGHT COLUMN: Available Memberships (White Cards) + Consent + Submit Button */}
+                  <div className="md:col-span-7 flex flex-col justify-start">
+                    <h4 className="font-bold text-lg sm:text-xl text-[#1E293B] mb-3">
+                      {lang === "hi" ? "उपलब्ध सदस्यता योजनाएं" : "Available Memberships"}
+                    </h4>
 
-                    {/* Organization Confirmation Notice Box */}
-                    <div className="rounded-xl border border-[#E5E7EB] bg-[#F9FAFB] px-4 py-3 text-xs sm:text-sm text-[#374151] flex items-center gap-2.5">
-                      <ShieldCheck className="w-5 h-5 text-[#2F5A43] shrink-0" />
-                      <span>
-                        {lang === "hi"
-                          ? "इसके बाद, आप संगठन के खाते में UPI द्वारा भुगतान करेंगे। संगठन द्वारा पुष्टि होने पर, सदस्यता पुष्टि और प्रमाणपत्र आपको ईमेल/व्हाट्सएप कर दिया जाएगा।"
-                          : "Next, you'll pay by UPI to the Organization's account. Once confirmed, your membership confirmation and certificate are issued to you."}
-                      </span>
+                    <div className="space-y-3">
+                      {[
+                        { id: "patron", name: "Patron Member", nameHi: "संरक्षक सदस्य", price: 100000, period: "Lifetime", periodHi: "आजीवन", priceDisplay: "₹100000" },
+                        { id: "co_patron", name: "Co Patron Member", nameHi: "सह-संरक्षक सदस्य", price: 21000, period: "Lifetime", periodHi: "आजीवन", priceDisplay: "₹21000" },
+                        { id: "active", name: "Active Member", nameHi: "सक्रिय सदस्य", price: 100, period: "Lifetime", periodHi: "आजीवन", priceDisplay: "₹100" },
+                      ].map((m) => {
+                        const isSelected = planId === m.id;
+                        return (
+                          <div
+                            key={m.id}
+                            onClick={() => setPlanId(m.id)}
+                            className={`flex items-center justify-between px-5 py-4 rounded-xl cursor-pointer transition-all border ${
+                              isSelected
+                                ? "bg-white border-2 border-[#7F160C] shadow-sm ring-2 ring-[#7F160C]/15"
+                                : "bg-white border border-[#E5E7EB] hover:border-gray-300 shadow-2xs"
+                            }`}
+                          >
+                            <div>
+                              <p className="font-bold text-base sm:text-lg text-[#1E293B]">
+                                {lang === "hi" ? m.nameHi : m.name}
+                              </p>
+                              <p className="text-xs sm:text-sm text-[#6B7280] font-medium mt-0.5">
+                                {lang === "hi" ? m.periodHi : m.period}
+                              </p>
+                            </div>
+                            <span className="font-bold text-lg sm:text-xl text-[#7F160C] tabular-nums">
+                              {m.priceDisplay}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </div>
 
-                    {/* Continue Button */}
-                    <button
-                      type="submit"
-                      className="w-full py-4 px-6 rounded-xl bg-[#7F160C] hover:bg-[#D45A0E] text-white font-bold text-sm sm:text-base uppercase tracking-wider shadow-md hover:shadow-lg transition-all cursor-pointer text-center"
-                    >
-                      {lang === "hi" ? "भुगतान जारी रखें — " : "CONTINUE TO PAYMENT — "}
-                      {formatINR((MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0]).price)}
-                    </button>
+                    {/* Consent Checkbox (Exact replica of reference format) */}
+                    <label className="flex items-start gap-2.5 mt-5 cursor-pointer text-xs sm:text-[13px] text-[#374151] leading-relaxed select-none">
+                      <input
+                        type="checkbox"
+                        required
+                        checked={consent}
+                        onChange={(e) => setConsent(e.target.checked)}
+                        className="mt-1 accent-[#2563EB] w-4 h-4 rounded cursor-pointer shrink-0"
+                      />
+                      <span>
+                        {lang === "hi"
+                          ? "यह फॉर्म सबमिट करके, मैं अग्रवाल वैश्य विकास संगठन के रिकॉर्ड हेतु अपने नाम और विवरण का उपयोग करने की सहमति देता/देती हूँ। मैंने संस्था के सभी नियम एवं शर्तें पढ़ और समझ ली हैं।"
+                          : "By submitting this form, I consent to the President of Aggarwal Vaish Vikas Sangathan for using my name and details for records of Aggarwal Vaish Vikas Sangathan. I have read and understood all the terms and conditions of the foundation."}
+                      </span>
+                    </label>
+
+                    {/* Submit Button (Exact replica of reference format: Left-aligned, compact) */}
+                    <div className="mt-4 flex justify-start">
+                      <button
+                        type="submit"
+                        className="w-auto min-w-[150px] sm:min-w-[170px] py-2.5 px-8 sm:px-10 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm sm:text-base tracking-wide shadow-xs transition-colors cursor-pointer text-center"
+                      >
+                        {lang === "hi" ? "सबमिट करें" : "Submit"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -17,6 +17,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -26,6 +27,7 @@ export default function Header() {
   // Close menus on route change
   useEffect(() => {
     setActiveDropdown(null);
+    setOpenMobileDropdown(null);
     setMobileMenuOpen(false);
   }, [pathname]);
 
@@ -281,60 +283,90 @@ export default function Header() {
           </div>
         </div>
 
-        {/* MOBILE SLIDE-OVER DRAWER */}
+        {/* MOBILE SLIDE-OVER DRAWER (EXACT REPLICA OF REFERENCE SITE) */}
         {mounted && mobileMenuOpen && createPortal(
           <div className="lg:hidden fixed inset-0 z-[9999]">
             <div
               onClick={() => setMobileMenuOpen(false)}
               className="absolute inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
             />
-            <div className="absolute top-0 right-0 bottom-0 w-[85%] max-w-[320px] bg-white shadow-2xl flex flex-col justify-between p-5 border-l border-gray-200 z-10 overflow-y-auto">
-              <div>
-                <div className="flex items-center justify-between pb-4 border-b border-gray-100 mb-4">
-                  <div className="flex items-center gap-2">
-                    <div className="relative w-9 h-9 rounded-full overflow-hidden shrink-0">
-                      <Image
-                        src="/images/agarwal/logo.png"
-                        alt="AVVS Logo"
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <span className="font-sans text-xs font-extrabold text-[#1F1712] uppercase leading-tight">
-                        AGGARWAL VAISH
-                      </span>
-                      <span className="text-[9.5px] font-bold text-[#7F160C] uppercase leading-tight">
-                        VIKAS SANGATHAN
-                      </span>
-                    </div>
+            <div className="absolute top-0 right-0 bottom-0 w-[82%] max-w-[320px] bg-[#FAF7F2] shadow-2xl flex flex-col justify-start p-5 border-l border-[#E8DFD3] z-10 overflow-y-auto">
+              {/* Drawer Top Bar */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-[#E8DFD3]/80 mb-2">
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2.5"
+                >
+                  <div className="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-gray-100 shadow-2xs">
+                    <Image
+                      src="/images/agarwal/logo.png"
+                      alt="AVVS Logo"
+                      fill
+                      className="object-contain"
+                    />
                   </div>
-                  <button
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="p-1.5 text-gray-500 hover:text-black"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
+                  <div className="flex flex-col">
+                    <span className="font-serif font-bold text-xs tracking-wider text-[#1E293B] uppercase leading-tight">
+                      AGGARWAL VAISH
+                    </span>
+                    <span className="text-[9.5px] font-bold text-[#7F160C] uppercase tracking-wider leading-tight">
+                      VIKAS SANGATHAN
+                    </span>
+                  </div>
+                </Link>
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-1 text-gray-800 hover:text-black cursor-pointer"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5 stroke-[2.2]" />
+                </button>
+              </div>
 
-                <div className="space-y-1">
-                  {navSections.map((sec) => (
-                    <div key={sec.id} className="py-1">
-                      <Link
-                        href={sec.href}
-                        onClick={() => setMobileMenuOpen(false)}
-                        className="block font-bold text-sm text-[#1F1712] hover:text-[#7F160C] py-1.5 uppercase cursor-pointer"
+              {/* Drawer Navigation List matching reference website */}
+              <nav className="flex-1 py-1 space-y-0.5 overflow-y-auto">
+                {/* 1. HOME */}
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  HOME
+                </Link>
+
+                {/* 2-7. ACCORDION DROPDOWN SECTIONS (ABOUT, ORGANISATION, MEDIA, INITIATIVES, JOIN NOW, NETWORK) */}
+                {navSections.map((sec) => {
+                  const isOpen = openMobileDropdown === sec.id;
+                  return (
+                    <div key={sec.id} className="py-0.5">
+                      <button
+                        type="button"
+                        onClick={() => setOpenMobileDropdown(isOpen ? null : sec.id)}
+                        className="flex items-center justify-between w-full py-2 text-left text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
                       >
-                        {sec.label}
-                      </Link>
-                      {sec.subItems && sec.subItems.length > 0 && (
-                        <div className="pl-3 space-y-1 border-l-2 border-[#7F160C]/30 mt-1 mb-2">
+                        <span>{sec.label}</span>
+                        <ChevronDown
+                          className={`w-4 h-4 text-gray-700 transition-transform duration-200 ${
+                            isOpen ? "rotate-180 text-[#7F160C]" : ""
+                          }`}
+                        />
+                      </button>
+
+                      {/* Accordion Subitems */}
+                      {isOpen && sec.subItems && (
+                        <div className="pl-3.5 pr-1 py-1 mb-1.5 space-y-1 border-l-2 border-[#7F160C]/30 ml-1.5 animate-in fade-in slide-in-from-top-1 duration-150">
                           {sec.subItems.map((sub, i) => (
                             <Link
                               key={i}
                               href={sub.href}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className="flex items-center justify-between text-xs text-gray-700 hover:text-[#7F160C] py-1.5 pr-2 cursor-pointer"
+                              onClick={() => {
+                                if (sub.href === pathname || (sub.href.startsWith("/about") && pathname === "/about")) {
+                                  window.scrollTo({ top: 0, behavior: "smooth" });
+                                }
+                                setMobileMenuOpen(false);
+                              }}
+                              className="flex items-center justify-between py-1.5 text-xs font-semibold text-gray-700 hover:text-[#7F160C] transition-colors cursor-pointer"
                             >
                               <span>{sub.label}</span>
                               <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
@@ -343,20 +375,58 @@ export default function Header() {
                         </div>
                       )}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  );
+                })}
 
-              <div className="pt-4 border-t border-gray-100">
+                {/* 8. SEARCH MEMBERS */}
                 <Link
                   href="/advance-search"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg bg-[#7F160C] text-white font-bold text-xs uppercase cursor-pointer"
+                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
                 >
-                  <Search className="w-4 h-4" />
-                  <span>{lang === "hi" ? "सदस्य खोजें" : "Search Members"}</span>
+                  SEARCH MEMBERS
                 </Link>
-              </div>
+
+                {/* 9. VAISH EXPRESS */}
+                <Link
+                  href="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  VAISH EXPRESS
+                </Link>
+
+                {/* 10. DONATE NOW */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    if (openDonateModal) openDonateModal();
+                    else router.push("/donate");
+                  }}
+                  className="block w-full text-left py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  DONATE NOW
+                </button>
+
+                {/* 11. CIRCULARS */}
+                <Link
+                  href="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  CIRCULARS
+                </Link>
+
+                {/* 12. PRESS RELEASE */}
+                <Link
+                  href="/gallery"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  PRESS RELEASE
+                </Link>
+              </nav>
             </div>
           </div>,
           document.body
