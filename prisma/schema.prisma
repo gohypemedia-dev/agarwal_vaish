@@ -258,6 +258,7 @@ model User {
   updatedAt        DateTime      @updatedAt
   sessions         UserSession[]
   orders           Order[]
+  UserActivity     UserActivity[]
 
   @@index([email])
 }
@@ -332,4 +333,55 @@ model Member {
   updatedAt        DateTime  @updatedAt
 
   @@index([tier, status])
+}
+
+// Official Membership Registrations from /membership form
+model MembershipRegistration {
+  id                String   @id @default(cuid())
+  registrationNo    String   @unique
+  fullName          String
+  guardianName      String?
+  gender            String
+  caste             String?
+  gotra             String?
+  email             String?
+  phone             String
+  dob               String?
+  state             String
+  district          String
+  address           String
+  wardNumber        String?
+  pincode           String?
+  occupation        String?
+  occupationDetails String?
+  photoUrl          String?
+  planId            String   // patron | co_patron | active
+  planName          String   // Patron Member | Co Patron Member | Active Member
+  amount            Int      // 100000 | 21000 | 100
+  status            String   @default("PENDING_VERIFICATION") // PENDING_PAYMENT | PENDING_VERIFICATION | VERIFIED | REJECTED
+  utr               String?
+  notes             String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@index([planId, status])
+  @@index([phone])
+}
+
+model UserActivity {
+  id        String           @id @default(cuid())
+  userId    String
+  type      UserActivityType
+  provider  String?
+  createdAt DateTime         @default(now())
+  User      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+enum UserActivityType {
+  REGISTER
+  LOGIN
+  LOGOUT
+  PROFILE_UPDATED
 }

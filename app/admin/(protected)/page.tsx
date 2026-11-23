@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Prisma, type DonationStatus } from "@prisma/client";
 import { Users, ArrowRight } from "lucide-react";
 import { requireAdminPage } from "@/lib/server/auth";
@@ -55,6 +56,9 @@ export default async function AdminDashboard({
 }) {
   await requireAdminPage();
   const sp = await searchParams;
+  if (!sp.type && !sp.status && !sp.q) {
+    redirect("/admin/members");
+  }
   const status = STATUSES.includes(sp.status as DonationStatus) ? (sp.status as DonationStatus) : undefined;
   const type = TYPES.find((t) => t.value === sp.type)?.value;
   const q = sp.q?.trim() || undefined;

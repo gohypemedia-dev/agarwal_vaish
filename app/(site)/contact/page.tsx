@@ -344,7 +344,7 @@ export default function ContactPage() {
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
                     <a
-                      href="https://www.facebook.com/avvsharyana/"
+                      href="https://www.facebook.com/profile.php?id=61596429263536"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-xl bg-[#1877F2]/10 hover:bg-[#1877F2] text-[#1877F2] hover:text-white transition-all text-xs font-bold border border-[#1877F2]/20"

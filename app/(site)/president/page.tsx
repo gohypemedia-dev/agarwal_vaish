@@ -7,7 +7,7 @@ import HeadingDivider from "@/components/HeadingDivider";
 
 export default function PresidentPage() {
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
+    <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
       {/* ============================================================ */}
       {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
@@ -53,13 +53,25 @@ export default function PresidentPage() {
       </div>
 
       {/* ============================================================ */}
-      {/* 2. MAIN PRESIDENT CONTENT CONTAINER (EXACT PIC 1 FORMAT)      */}
+      {/* 2. PAGE HEADER: ABOUT PRESIDENT (OUR BRAND COLOR #7F160C)    */}
       {/* ============================================================ */}
-      <section className="py-8 sm:py-14">
+      <section className="pt-10 sm:pt-14 pb-2 sm:pb-4 bg-[#FFF9F2]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
+            About President
+          </h1>
+          <HeadingDivider className="mt-3.5" />
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 3. MAIN PRESIDENT CONTENT CONTAINER (NO BORDER RADIUS)        */}
+      {/* ============================================================ */}
+      <section className="py-4 sm:py-8 bg-[#FFF9F2]">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-8">
           
-          {/* Top Leader Card (Exact Pic 1 Layout) */}
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] shadow-xs overflow-hidden">
+          {/* Top Leader Card (rounded-none, clean neutral border) */}
+          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-12 items-stretch">
               {/* Left Photo filling full height */}
               <div className="md:col-span-5 relative min-h-[360px] sm:min-h-[420px] md:min-h-full w-full bg-[#1F150E]">
@@ -75,34 +87,34 @@ export default function PresidentPage() {
               {/* Right Content */}
               <div className="md:col-span-7 p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
                 <div>
-                  <h1 className="font-serif text-3xl sm:text-4xl lg:text-[42px] text-[#1F150E] leading-tight font-medium">
+                  <h2 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#1F150E] leading-tight">
                     Our<br />
                     Founder President
-                  </h1>
+                  </h2>
 
                   <p className="mt-4 sm:mt-5 text-sm sm:text-base text-gray-700 leading-relaxed font-sans">
                     Born on <strong>1st November 1966</strong> in Kaithal, Haryana, Ram Pratap Gupta is a distinguished social worker, senior political leader, entrepreneur and visionary who has dedicated nearly three decades of his life to social service and community development. A leader known for his simplicity, accessibility and commitment, he believes in creating change through action rather than words.
                   </p>
                 </div>
 
-                {/* Overlapping Floating Badge at Bottom-Right */}
+                {/* Overlapping Floating Badge at Bottom-Right (rounded-none, clean neutral border) */}
                 <div className="mt-6 sm:mt-8 pt-4">
-                  <div className="bg-white rounded-lg sm:rounded-xl p-5 sm:p-6 shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-[#E8DFD3] inline-block w-full max-w-sm">
-                    <h2 className="font-sans font-bold text-lg sm:text-xl text-black tracking-wide uppercase">
+                  <div className="bg-white rounded-none p-5 sm:p-6 shadow-[0_4px_25px_rgba(0,0,0,0.06)] border border-[#E8DFD3] inline-block w-full max-w-sm">
+                    <h3 className="font-sans font-bold text-lg sm:text-xl text-black tracking-wide uppercase">
                       RAM PRATAP GUPTA
-                    </h2>
-                    <p className="text-xs sm:text-sm font-bold text-[#C27838] uppercase tracking-wider mt-0.5">
+                    </h3>
+                    <p className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider mt-0.5">
                       FOUNDER PRESIDENT
                     </p>
-                    <div className="w-16 h-[2px] bg-[#C27838] mt-2 rounded-full" />
+                    <div className="w-16 h-[2px] bg-[#7F160C] mt-2 rounded-full" />
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Lower Biography Section (Exact Pic 1 Layout) */}
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-6">
+          {/* Lower Biography Section (rounded-none, clean neutral border) */}
+          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-6">
             
             {/* Top Quote Header */}
             <h3 className="font-sans text-lg md:text-xl font-medium text-black">

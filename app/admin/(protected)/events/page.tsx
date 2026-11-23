@@ -5,7 +5,7 @@ import EventManager, { AdminEventItem } from "@/components/admin/events/EventMan
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Events Management | AVS Haryana Admin",
+  title: "Events Management | AVVS Haryana Admin",
 };
 
 export default async function AdminEventsPage() {

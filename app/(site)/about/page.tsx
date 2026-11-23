@@ -1,10 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import HeadingDivider from "@/components/HeadingDivider";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function AboutPage() {
+  const pledgesRef = useRef<HTMLDivElement>(null);
+  const scrollPledges = (direction: "left" | "right") => {
+    if (pledgesRef.current) {
+      const step = pledgesRef.current.clientWidth * 0.85;
+      pledgesRef.current.scrollBy({
+        left: direction === "left" ? -step : step,
+        behavior: "smooth",
+      });
+    }
+  };
+
   // 8 Official Logo Meaning Elements from Client (No AI icons)
   const logoElements = [
     {
@@ -63,36 +76,36 @@ export default function AboutPage() {
       num: "01",
       titleHi: "राजनीतिक सशक्तिकरण",
       titleEn: "Political Empowerment",
-      desc: "वैश्य समाज को राजनीतिक रूप से जागरूक करना तथा लोकतांत्रिक व्यवस्था में उसकी सक्रिय भागीदारी और उचित प्रतिनिधित्व के लिए प्रयास करना।",
+      desc: "To strengthen political representation and encourage active participation in decision-making for the community.",
     },
     {
       num: "02",
       titleHi: "नारी स्वावलंबन एवं उद्यमिता",
       titleEn: "Women Empowerment & Entrepreneurship",
-      desc: "महिलाओं को शिक्षा, कौशल विकास, रोजगार और उद्यमिता के अवसर प्रदान कर आत्मनिर्भर एवं सशक्त बनाना।",
+      desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
     },
     {
       num: "03",
       titleHi: "युवा नेतृत्व निर्माण",
       titleEn: "Youth Leadership Development",
-      desc: "युवाओं में नेतृत्व क्षमता, सामाजिक जिम्मेदारी, संगठनात्मक कौशल और राष्ट्र निर्माण की भावना विकसित करना।",
+      desc: "To empower young generations with leadership skills, confidence and opportunities to shape the future.",
     },
     {
       num: "04",
       titleHi: "आर्थिक आत्मनिर्भरता",
       titleEn: "Economic Self-Reliance",
-      desc: "व्यापार, स्वरोजगार, उद्यमिता, कौशल विकास एवं आपसी सहयोग के माध्यम से समाज की आर्थिक मजबूती को बढ़ावा देना।",
+      desc: "To encourage entrepreneurship, business growth, employment and financial independence within the community.",
     },
     {
       num: "05",
       titleHi: "संगठित समाज",
       titleEn: "Organised Society",
-      desc: "समाज के सभी वर्गों को एक मंच पर जोड़कर एकता, भाईचारे, सहयोग और सामूहिक विकास की भावना को मजबूत करना।",
+      desc: "To unite the community through mutual cooperation, collective strength and a shared vision for progress.",
     },
   ];
 
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
+    <div className="w-full bg-[#FFF9F2] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
       {/* ============================================================ */}
       {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
@@ -140,21 +153,22 @@ export default function AboutPage() {
       {/* ============================================================ */}
       {/* 2. HERO HEADER: OUR IDENTITY                                 */}
       {/* ============================================================ */}
-      <section className="py-10 sm:py-14 bg-[#FFF9F2] border-b border-[#E8DFD3]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="pt-10 sm:pt-14 pb-2 sm:pb-3 bg-[#FFF9F2]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
           <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
-            हमारे बारे में (About Us)
+            About Us
           </h1>
+          <HeadingDivider className="mt-3.5" />
         </div>
       </section>
 
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 mt-8 sm:mt-12">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12 sm:space-y-16 mt-3 sm:mt-6">
 
         {/* ============================================================ */}
         {/* 3. SECTION 1: हमारी स्थापना एवं परिचय (INTRODUCTION)          */}
         {/* ============================================================ */}
         <section id="intro" className="scroll-mt-24">
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-6">
+          <div className="bg-white rounded-none border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-6">
 
             {/* Section Heading (No font size switcher, clean design) */}
             <div className="border-b border-[#E8DFD3] pb-4">
@@ -177,7 +191,7 @@ export default function AboutPage() {
                 भारत के सामाजिक, आर्थिक, सांस्कृतिक एवं राष्ट्रीय विकास में अग्रवाल वैश्य समाज का सदैव महत्वपूर्ण योगदान रहा है। सेवा, सहयोग, उद्यमिता, परोपकार और राष्ट्र निर्माण की भावना वैश्य समाज की गौरवशाली पहचान रही है।
               </p>
 
-              <div className="p-4 sm:p-5 rounded-xl bg-[#FFF9F2] border-l-4 border-[#7F160C]">
+              <div className="p-4 sm:p-5 rounded-none bg-[#FFF9F2] border-l-4 border-[#7F160C]">
                 <p className="font-medium text-black">
                   इसी गौरवशाली विरासत को आगे बढ़ाने, समाज को संगठित करने तथा बदलते सामाजिक, आर्थिक और राजनीतिक परिवेश में वैश्य समाज को एक नई दिशा एवं सशक्त पहचान दिलाने के उद्देश्य से <strong>अग्रवाल वैश्य विकास संगठन</strong> की स्थापना <strong>1 नवंबर 2026</strong> को ऐतिहासिक नगरी <strong>कैथल (हरियाणा)</strong> से संस्थापक <strong>श्री रामप्रताप गुप्ता</strong> द्वारा की गई।
                 </p>
@@ -199,7 +213,7 @@ export default function AboutPage() {
         {/* 4. SECTION 2: हमारा उद्देश्य एवं विजन (MISSION & VISION)       */}
         {/* ============================================================ */}
         <section id="mission-vision" className="scroll-mt-24">
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
+          <div className="bg-white rounded-none border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
 
             {/* Section Heading */}
             <div>
@@ -248,23 +262,56 @@ export default function AboutPage() {
         </section>
 
         {/* ============================================================ */}
-        {/* 5. SECTION 3: हमारे पाँच प्रमुख संकल्प (OUR FIVE PLEDGES)      */}
+        {/* 5. SECTION 3: PANCH SANKALP (EXACT PIC 2 REFERENCE FORMAT)    */}
         {/* ============================================================ */}
-        <section id="pledges" className="scroll-mt-24 space-y-6">
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-8">
-            <h2 className="font-sans text-lg md:text-xl font-medium text-black">
-              हमारे पाँच प्रमुख संकल्प (Our Five Pledges)
-            </h2>
-            <p className="text-sm font-medium text-black/70 mt-1 font-sans">
-              Five guiding commitments shaping a united, empowered and progressive Vaish community.
-            </p>
+        <section id="pledges" className="scroll-mt-24 space-y-6 sm:space-y-8">
+          {/* Header: Title on Left, Guiding Subtitle (Exact Pic 2 Layout), Mobile Carousel Arrows */}
+          <div className="flex items-end justify-between gap-4">
+            <div className="text-left space-y-2">
+              <h2 className="font-sans font-bold text-2xl sm:text-3xl lg:text-[34px] tracking-tight leading-tight">
+                <span className="text-[#000000] border-b-2 border-[#7F160C] pb-1 mr-2">Panch</span>
+                <span className="text-[#7F160C]">Sankalp</span>
+              </h2>
+              <p className="font-sans text-sm sm:text-[15px] font-medium text-gray-600">
+                Five guiding commitments shaping a united, empowered and progressive Vaish community.
+              </p>
+            </div>
+
+            {/* Mobile Carousel Controls (< >) */}
+            <div className="flex md:hidden items-center gap-2 shrink-0 pb-1">
+              <button
+                type="button"
+                onClick={() => scrollPledges("left")}
+                aria-label="Previous Sankalp"
+                className="w-8 h-8 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-xs active:scale-95 transition-all cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollPledges("right")}
+                aria-label="Next Sankalp"
+                className="w-8 h-8 rounded-full bg-[#7F160C] hover:bg-[#69120A] text-white flex items-center justify-center shadow-xs active:scale-95 transition-all cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+              </button>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Cards Track: Mobile Horizontal Carousel / Desktop 3-col Grid */}
+          <div
+            ref={pledgesRef}
+            className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scrollbar-none"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              WebkitOverflowScrolling: "touch",
+            }}
+          >
             {fivePledges.map((pledge) => (
               <div
                 key={pledge.num}
-                className="rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none"
+                className="w-[85vw] max-w-[320px] md:w-auto md:max-w-none shrink-0 snap-center rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none"
               >
                 {/* Top Solid Brand Swatch Section (#7F160C) */}
                 <div className="relative bg-[#7F160C] h-[130px] sm:h-[150px] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
@@ -299,7 +346,7 @@ export default function AboutPage() {
                     <span className="w-8 sm:w-12 h-[2px] bg-[#7F160C] rounded-full" />
                   </div>
 
-                  <p className="text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 font-sans px-1 text-center">
+                  <p className="text-[13px] sm:text-sm text-gray-600 leading-relaxed font-normal px-1 text-center font-sans">
                     {pledge.desc}
                   </p>
                 </div>
@@ -307,7 +354,7 @@ export default function AboutPage() {
             ))}
 
             {/* 6th Card: Slogan Banner Card in exact same size/proportions */}
-            <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#69120A] shadow-md bg-gradient-to-br from-[#7F160C] to-[#69120A] text-white flex flex-col justify-between p-6 sm:p-8 select-none text-center">
+            <div className="w-[85vw] max-w-[320px] md:w-auto md:max-w-none shrink-0 snap-center rounded-2xl sm:rounded-3xl overflow-hidden border border-[#69120A] shadow-md bg-gradient-to-br from-[#7F160C] to-[#69120A] text-white flex flex-col justify-between p-6 sm:p-8 select-none text-center">
               <div className="space-y-4 my-auto">
                 <span className="text-xs font-bold uppercase tracking-widest text-amber-200 block">
                   हमारा मूल मंत्र
@@ -341,7 +388,7 @@ export default function AboutPage() {
         {/* 6. SECTION 4: हमारे संगठन के लोगो का अर्थ (MEANING OF LOGO)    */}
         {/* ============================================================ */}
         <section id="logo-meaning" className="scroll-mt-24">
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
+          <div className="bg-white rounded-none border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-8">
 
             <div className="border-b border-[#E8DFD3] pb-4">
               <span className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider block">
@@ -428,7 +475,7 @@ export default function AboutPage() {
         {/* 9. SECTION 7: पद यात्रा संदर्भ (PAD YATRA ANCHOR)               */}
         {/* ============================================================ */}
         <section id="pad-yatra" className="scroll-mt-24">
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-4">
+          <div className="bg-white rounded-none border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-4">
             <span className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider block">
               OUTREACH & CAMPAIGNS
             </span>

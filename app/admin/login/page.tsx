@@ -9,8 +9,8 @@ export default async function AdminLoginPage() {
     <div className="min-h-[100dvh] flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm bg-white border border-[#E7D8C8] rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <div className="space-y-1">
-          <p className="text-xs font-bold uppercase tracking-widest text-[#B8893E]">Aggarwal Vaish Samaj Haryana</p>
-          <h1 className="font-editorial text-3xl font-bold text-[#2B201A]">Donations admin</h1>
+          <p className="text-xs font-bold uppercase tracking-widest text-[#7F160C]">Aggarwal Vaish Vikas Sangathan</p>
+          <h1 className="font-editorial text-3xl font-bold text-[#2B201A]">AVVS Admin</h1>
         </div>
         <LoginForm />
       </div>

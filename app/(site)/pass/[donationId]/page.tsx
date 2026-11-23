@@ -165,7 +165,7 @@ export default async function EventPassPage({
               <h1 className="font-editorial text-2xl sm:text-3xl font-bold tracking-wide">
                 AGGARWAL VAISH SAMAJ HARYANA
               </h1>
-              <p className="text-xs text-[#E7D8C8] font-serif mt-1">
+              <p className="text-xs text-[#E7D8C8] font-sans mt-1">
                 आश्रम सेवा, सत्संग एवं वार्षिक अधिवेशन डिजिटल भक्त पत्र
               </p>
             </div>
@@ -356,7 +356,7 @@ export default async function EventPassPage({
             <h1 className="font-editorial text-2xl sm:text-3xl font-bold tracking-wide">
               OFFICIAL EVENT ENTRY PASS
             </h1>
-            <p className="text-xs text-[#E7D8C8] font-serif mt-1">
+            <p className="text-xs text-[#E7D8C8] font-sans mt-1">
               सत्संग एवं कथा प्रवेश पत्र
             </p>
           </div>

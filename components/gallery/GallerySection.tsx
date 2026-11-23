@@ -216,22 +216,30 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         {/* ==================================================================== */}
         {/* 4 IMAGES STATIC GRID (Scroll & Carousel commented out)                */}
         {/* ==================================================================== */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {displayItems.map((item) => {
-            const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
+        {displayItems.length === 0 ? (
+          <div className="py-12 text-center text-gray-500 text-sm bg-white/60 rounded-2xl border border-dashed border-[#E8DFD3] max-w-xl mx-auto p-8">
+            <p className="font-medium text-[#1E1612]">
+              {lang === "hi" ? "जल्द ही नई तस्वीरें एवं वीडियो यहाँ जोड़े जाएँगे।" : "New photos and videos will be added here soon."}
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            {displayItems.map((item) => {
+              const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
 
-            return (
-              <div key={item.id} className="w-full">
-                <GalleryCarouselTile
-                  item={item}
-                  title={title}
-                  lang={lang}
-                  onOpen={(e) => handleOpenPhoto(item, e)}
-                />
-              </div>
-            );
-          })}
-        </div>
+              return (
+                <div key={item.id} className="w-full">
+                  <GalleryCarouselTile
+                    item={item}
+                    title={title}
+                    lang={lang}
+                    onOpen={(e) => handleOpenPhoto(item, e)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        )}
 
         {/* ==================================================================== */}
         {/* CAROUSEL PAGINATION DOTS (Commented out)                              */}

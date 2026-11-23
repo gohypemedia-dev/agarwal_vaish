@@ -79,82 +79,21 @@ export default function HomePage() {
     setHeroTouchEnd(null);
   };
 
-  const defaultEvents: EventItem[] = [
-    {
-      id: "ev-1",
-      slug: "vaish-yuva-leadership-conclave-2026",
-      title: "Vaish Yuva Leadership & Business Conclave",
-      titleHi: "वैश्य युवा नेतृत्व एवं व्यापार सम्मेलन",
-      summary: "Statewide youth convention fostering entrepreneurship, public leadership, and professional networking.",
-      summaryHi: "युवाओं में व्यापार, स्टार्टअप, नेतृत्व कौशल और सामाजिक सहभागिता को बढ़ावा देने हेतु राज्यस्तरीय युवा महासम्मेलन।",
-      description: "A transformative convention connecting emerging entrepreneurs and youth leaders with seasoned industry icons and community mentors to drive economic resilience and public representation.",
-      startDate: "2026-11-28T09:00:00Z",
-      endDate: "2026-11-28T16:00:00Z",
-      timeText: "9:30 AM – 4:30 PM IST",
-      location: "Auditorium, Hisar / Gurugram",
-      address: "AVVS Youth Convention Centre, Haryana",
-      contactPhone: "+91 90885 00061",
-      isPublished: true,
-    },
-    {
-      id: "ev-2",
-      slug: "agrasen-samajik-samrasta-samaroh-2026",
-      title: "Maharaja Agrasen Samajik Samrasta Samaroh",
-      titleHi: "महाराजा अग्रसेन सामाजिक समरसता समारोह",
-      summary: "Grand annual celebration honoring the life, ideals, and socio-economic philosophy of Maharaja Agrasen Ji.",
-      summaryHi: "महाराजा अग्रसेन जी के पावन आदर्शों, समाजवाद के सिद्धांत एवं जीवन दर्शन को समर्पित भव्य वार्षिक जयंती महोत्सव।",
-      description: "Join thousands of members across Haryana to celebrate the ideals of Maharaja Agrasen Ji. Featuring cultural processions (Shobha Yatra), community sammelan, honoring distinguished social workers, and grand mahaprasad.",
-      startDate: "2026-12-25T10:30:00Z",
-      endDate: "2026-12-25T17:00:00Z",
-      timeText: "10:00 AM – 5:00 PM IST",
-      location: "Bhiwani & District Centres across Haryana",
-      address: "Aggarwal Vaish Vikas Bhawan, Hansi Road, Bhiwani, Haryana - 127021",
-      contactPhone: "+91 90885 00061",
-      isPublished: true,
-    },
-    {
-      id: "ev-3",
-      slug: "mahila-samman-sashaktikaran-2027",
-      title: "State Mahila Sammelan & Pratibha Samman",
-      titleHi: "राज्यस्तरीय महिला सम्मेलन एवं प्रतिभा सम्मान",
-      summary: "Statewide gathering dedicated to empowering women entrepreneurs and felicitating young community achievers.",
-      summaryHi: "महिला उद्यमियों के सशक्तिकरण, बालिका शिक्षा संवर्धन और समाज की प्रतिभावान बेटियों का राज्यस्तरीय सम्मान समारोह।",
-      description: "A prestigious assembly celebrating exceptional women leaders, academic toppers, sports achievers, and grassroots social changemakers from all 22 districts of Haryana.",
-      startDate: "2027-01-24T05:00:00Z",
-      endDate: "2027-01-24T12:00:00Z",
-      timeText: "10:30 AM – 3:30 PM IST",
-      location: "State Central Hall, Bhiwani / Rohtak",
-      address: "Aggarwal Vaish Vikas Central Complex, Haryana",
-      contactPhone: "+91 90885 00061",
-      isPublished: true,
-    },
-  ];
-
-  // Frontend visibility toggle: Currently hidden on frontend per request;
-  // Backend API (/api/events), Prisma database, and Admin Panel (/admin/events) remain fully intact for future events.
-  const SHOW_UPCOMING_EVENTS = false;
-
-  const [events, setEvents] = useState<EventItem[]>(defaultEvents);
+  // Dynamic Upcoming Events: Controlled via Admin Panel (/admin/events) and Neon DB
+  // If active published events exist in the database, they will automatically display here.
+  const [events, setEvents] = useState<EventItem[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const [eventModalOpen, setEventModalOpen] = useState(false);
 
   useEffect(() => {
-    cachedFetch<{ events: EventItem[] }>("/api/events")
+    fetch("/api/events")
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
-        if (data?.events && Array.isArray(data.events) && data.events.length > 0) {
-          const legacyKeywords = ["bhagwat", "gurukul", "gopashtami", "sadhvi", "ashram", "vrindavan"];
-          const valid = data.events.filter((e) => {
-            const t = `${e.title || ""} ${e.titleHi || ""} ${e.location || ""}`.toLowerCase();
-            return !legacyKeywords.some((k) => t.includes(k));
-          });
-          if (valid.length > 0) {
-            setEvents(valid);
-          } else {
-            setEvents(defaultEvents);
-          }
+        if (data?.events && Array.isArray(data.events)) {
+          setEvents(data.events);
         }
       })
-      .catch(() => { });
+      .catch(() => {});
   }, []);
 
   const formatCardDate = (dateVal: string | Date) => {
@@ -226,7 +165,38 @@ export default function HomePage() {
     }
   };
 
-  // 1-Second Auto-Scroll for Panch Sankalp Carousel (Looping smoothly, pauses on interaction)
+  // Mouse drag-to-scroll support (for desktop click-and-drag & responsive mobile simulator)
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = sankalpCarouselRef.current;
+    if (!el) return;
+    isDraggingRef.current = true;
+    startXRef.current = e.pageX - el.offsetLeft;
+    scrollLeftRef.current = el.scrollLeft;
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const el = sankalpCarouselRef.current;
+    if (!el) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startXRef.current) * 1.3;
+    el.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+  };
+
+  const handleMouseLeave = () => {
+    isDraggingRef.current = false;
+  };
+
+  // Auto-Scroll for Panch Sankalp Carousel (Looping smoothly, pauses on interaction)
   useEffect(() => {
     const el = sankalpCarouselRef.current;
     if (!el) return;
@@ -243,7 +213,7 @@ export default function HomePage() {
       clearTimeout(resumeTimeout);
       resumeTimeout = setTimeout(() => {
         isInteracting = false;
-      }, 2000);
+      }, 5000);
     };
 
     el.addEventListener("touchstart", pauseInteraction, { passive: true });
@@ -252,7 +222,7 @@ export default function HomePage() {
     el.addEventListener("mouseleave", resumeInteraction);
 
     const autoScrollTimer = setInterval(() => {
-      if (isInteracting || !sankalpCarouselRef.current) return;
+      if (isInteracting || isDraggingRef.current || !sankalpCarouselRef.current) return;
       const carousel = sankalpCarouselRef.current;
       const step = carousel.clientWidth;
       const maxScroll = carousel.scrollWidth - carousel.clientWidth;
@@ -262,7 +232,7 @@ export default function HomePage() {
       } else {
         carousel.scrollBy({ left: step, behavior: "smooth" });
       }
-    }, 1500);
+    }, 4000);
 
     return () => {
       clearInterval(autoScrollTimer);
@@ -560,8 +530,17 @@ export default function HomePage() {
           {/* Cards Track: Horizontal Smooth Scrollable Carousel with Hidden Scrollbar */}
           <div
             ref={sankalpCarouselRef}
-            className="flex gap-4 sm:gap-7 overflow-x-auto pb-4 scroll-smooth scrollbar-none snap-x snap-mandatory touch-pan-x"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseLeave}
+            className="flex gap-4 sm:gap-7 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory cursor-grab active:cursor-grabbing"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+              WebkitOverflowScrolling: "touch",
+              touchAction: "pan-x pan-y",
+            }}
           >
             {sankalpItems.map((item) => (
               <div
@@ -613,10 +592,10 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Centered [ View All ] Button (Exact Reference Pic 1) */}
+          {/* Centered [ View All ] Button (Links to /panch-sankalp dedicated page) */}
           <div className="flex justify-center mt-6 sm:mt-12">
             <Link
-              href="#sankalp"
+              href="/panch-sankalp"
               className="inline-block px-7 sm:px-8 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all duration-200 hover:scale-105 active:scale-95"
             >
               View All
@@ -642,10 +621,9 @@ export default function HomePage() {
       </section>
 
       {/* ============================================================ */}
-      {/* 6. UPCOMING EVENTS & SAMMELANS (Backend Ready for Future)    */}
+      {/* 6. UPCOMING EVENTS & SAMMELANS (Dynamic from Neon DB & Admin Panel) */}
       {/* ============================================================ */}
-      {/* Hidden from frontend for now; backend API & admin panel remain fully intact to enable anytime */}
-      {SHOW_UPCOMING_EVENTS && events.length > 0 && (
+      {events.length > 0 && (
         <section id="events" className="py-12 sm:py-20 lg:py-24 bg-[#FFF9F2] border-b border-[#E8DFD3]">
           <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -725,7 +703,7 @@ export default function HomePage() {
       {/* ============================================================ */}
       {/* 8. EVENT MODAL                                               */}
       {/* ============================================================ */}
-      {SHOW_UPCOMING_EVENTS && (
+      {events.length > 0 && (
         <EventDetailsModal
           event={selectedEvent}
           isOpen={eventModalOpen}

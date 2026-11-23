@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Copy, CheckCheck } from "lucide-react";
+import { Copy, CheckCheck, CheckCircle2, Loader2, RotateCcw, AlertCircle } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useApp } from "@/context/AppContext";
 import { MEMBERSHIP_PLANS, formatINR } from "@/lib/donation-config";
@@ -20,6 +20,16 @@ export default function MembershipPage() {
   const { lang, openDonateModal } = useApp();
   const [planId, setPlanId] = useState<string>("patron");
   const [consent, setConsent] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [submitResult, setSubmitResult] = useState<{
+    registrationNo: string;
+    fullName: string;
+    planName: string;
+    amount: number;
+  } | null>(null);
+  const [copiedRegNo, setCopiedRegNo] = useState(false);
+
   const [formData, setFormData] = useState({
     fullName: "",
     guardianName: "",
@@ -156,8 +166,42 @@ export default function MembershipPage() {
     }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleCopyRegNo = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedRegNo(true);
+    setTimeout(() => setCopiedRegNo(false), 2000);
+  };
+
+  const handleResetForm = () => {
+    setSubmitResult(null);
+    setSubmitError(null);
+    setFormData({
+      fullName: "",
+      guardianName: "",
+      gender: "",
+      caste: "",
+      gotra: "",
+      email: "",
+      phone: "",
+      dob: "",
+      state: "Haryana",
+      district: "",
+      address: "",
+      wardNumber: "",
+      pincode: "",
+      occupation: "",
+      occupationDetails: "",
+      photoName: "",
+    });
+  };
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) {
+      alert(lang === "hi" ? "कृपया सहमति चेकबॉक्स चुनें।" : "Please accept terms & consent.");
+      return;
+    }
+
     const nameErr = validateName(formData.fullName);
     const emailErr = formData.email ? validateEmail(formData.email) : null;
     const phoneErr = validateMobile(formData.phone, true);
@@ -174,19 +218,49 @@ export default function MembershipPage() {
       return;
     }
 
-    const plan = MEMBERSHIP_PLANS.find((p) => p.id === planId) ?? MEMBERSHIP_PLANS[0];
-
-    // Scroll to the QR payment card smoothly
-    const qrSection = document.getElementById("payment-qr");
-    if (qrSection) {
-      qrSection.scrollIntoView({ behavior: "smooth" });
+    if (!formData.district) {
+      alert(lang === "hi" ? "कृपया जिला चुनें।" : "Please select your district.");
+      document.getElementById("mem-district")?.focus();
+      return;
+    }
+    if (!formData.address.trim()) {
+      alert(lang === "hi" ? "कृपया वर्तमान पता दर्ज करें।" : "Please enter your address.");
+      document.getElementById("mem-address")?.focus();
+      return;
     }
 
-    openDonateModal(plan.name, plan.price, true, {
-      name: sanitizeName(formData.fullName),
-      email: formData.email ? sanitizeEmail(formData.email) : undefined,
-      mobile: sanitizeMobile(formData.phone),
-    });
+    try {
+      setIsSubmitting(true);
+      setSubmitError(null);
+
+      const res = await fetch("/api/membership/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          planId,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit membership registration.");
+      }
+
+      setSubmitResult({
+        registrationNo: data.registrationNo,
+        fullName: data.data.fullName,
+        planName: data.data.planName,
+        amount: data.data.amount,
+      });
+
+      // Smooth scroll to card
+      window.scrollTo({ top: 160, behavior: "smooth" });
+    } catch (err: any) {
+      setSubmitError(err.message || "An error occurred while submitting.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -206,7 +280,106 @@ export default function MembershipPage() {
         <div className="page-container max-w-4xl">
           {/* Form Card (White Background) */}
           <div className="p-6 sm:p-10 bg-white border border-[#E8DFD3] rounded-[24px] shadow-sm">
-            <form onSubmit={handleFormSubmit} noValidate className="space-y-8">
+            {submitResult ? (
+              <div className="space-y-6 text-center animate-in fade-in duration-300">
+                {/* Success Icon */}
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 border-2 border-emerald-300 text-emerald-700 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                  <CheckCircle2 className="w-9 h-9 sm:w-11 sm:h-11" />
+                </div>
+
+                <div className="space-y-1">
+                  <span className="text-xs uppercase font-bold tracking-widest text-[#7F160C]">
+                    {lang === "hi" ? "अग्रवाल वैश्य विकास संगठन" : "Aggarwal Vaish Vikas Sangathan"}
+                  </span>
+                  <h2 className="font-editorial text-2xl sm:text-3xl font-bold text-[#1E293B]">
+                    {lang === "hi" ? "सदस्यता पंजीकरण सफलतापूर्वक दर्ज हुआ!" : "Membership Registration Successful!"}
+                  </h2>
+                  <p className="text-sm text-[#4B5563] max-w-lg mx-auto">
+                    {lang === "hi"
+                      ? "आपका सदस्यता आवेदन रिकॉर्ड में सुरक्षित कर लिया गया है। कृपया अपना संदर्भ नंबर नोट कर लें।"
+                      : "Your membership application has been safely recorded in our database. Please note your registration number."}
+                  </p>
+                </div>
+
+                {/* Registration Number Highlight Box */}
+                <div className="bg-[#FFF9F2] border-2 border-dashed border-[#7F160C]/40 rounded-2xl p-4 sm:p-6 max-w-md mx-auto">
+                  <p className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                    {lang === "hi" ? "आवेदन संदर्भ संख्या (Registration No)" : "Registration Reference Number"}
+                  </p>
+                  <div className="flex items-center justify-center gap-2 mt-1">
+                    <span className="font-mono text-2xl sm:text-3xl font-black text-[#7F160C] select-all">
+                      {submitResult.registrationNo}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyRegNo(submitResult.registrationNo)}
+                      className="p-1.5 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 cursor-pointer shadow-2xs transition-colors"
+                      title="Copy Registration Number"
+                    >
+                      {copiedRegNo ? (
+                        <CheckCheck className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <Copy className="w-4 h-4 text-gray-600" />
+                      )}
+                    </button>
+                  </div>
+                  {copiedRegNo && (
+                    <p className="text-[11px] text-emerald-600 font-bold mt-1">कॉपी हो गया! (Copied)</p>
+                  )}
+
+                  <div className="mt-4 pt-3 border-t border-[#E8DFD3] grid grid-cols-2 gap-2 text-left text-xs sm:text-sm">
+                    <div>
+                      <span className="text-gray-500 text-[11px] block">{lang === "hi" ? "आवेदक का नाम:" : "Applicant:"}</span>
+                      <span className="font-bold text-gray-800">{submitResult.fullName}</span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 text-[11px] block">{lang === "hi" ? "सदस्यता योजना:" : "Plan:"}</span>
+                      <span className="font-bold text-[#7F160C]">₹{submitResult.amount.toLocaleString("en-IN")}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Payment Step Reminder */}
+                <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 sm:p-5 max-w-lg mx-auto text-left text-xs sm:text-sm text-gray-800 space-y-2">
+                  <p className="font-bold text-amber-900 flex items-center gap-2">
+                    <span>अगला कदम (Next Steps for Payment):</span>
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    1. कृपया नीचे दिए गए QR कोड या UPI ID (<code className="font-mono font-bold text-[#7F160C]">aggarwalvaishvikassangathan@idbi</code>) पर <strong>₹{submitResult.amount.toLocaleString("en-IN")}</strong> का भुगतान करें।
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    2. भुगतान का स्क्रीनशॉट अपने आवेदन सं. (<strong>{submitResult.registrationNo}</strong>) के साथ संगठन कार्यालय हेल्पलाइन <strong>+91 90885 00061</strong> पर WhatsApp करें।
+                  </p>
+                  <p className="text-gray-700 leading-relaxed">
+                    3. सत्यापन के पश्चात आपकी डिजिटल सदस्यता व प्रमाणपत्र जारी कर दिया जाएगा।
+                  </p>
+                </div>
+
+                {/* Actions */}
+                <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/919088500061?text=${encodeURIComponent(
+                      `नमस्ते, मैंने अग्रवाल वैश्य विकास संगठन की सदस्यता के लिए पंजीकरण किया है।\n\nआवेदन सं.: ${submitResult.registrationNo}\nनाम: ${submitResult.fullName}\nयोजना: ${submitResult.planName}\nराशि: ₹${submitResult.amount}\n\nकृपया मेरा भुगतान स्क्रीनशॉट सत्यापित करें।`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition-all cursor-pointer"
+                  >
+                    <span>WhatsApp पर स्क्रीनशॉट भेजें</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={handleResetForm}
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold text-sm transition-all cursor-pointer"
+                  >
+                    <RotateCcw className="w-4 h-4" />
+                    <span>{lang === "hi" ? "नया पंजीकरण करें" : "Register Another"}</span>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleFormSubmit} noValidate className="space-y-8">
               {/* SECTION 1: PERSONAL DETAILS */}
               <div className="space-y-6">
                 <h3 className="text-xl sm:text-2xl font-bold text-[#7F160C]">
@@ -749,22 +922,38 @@ export default function MembershipPage() {
                       </span>
                     </label>
 
+                    {submitError && (
+                      <div className="mt-3 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm font-medium flex items-center gap-2">
+                        <AlertCircle className="w-4 h-4 shrink-0" />
+                        <span>{submitError}</span>
+                      </div>
+                    )}
+
                     {/* Submit Button (Exact replica of reference format: Left-aligned, compact) */}
                     <div className="mt-4 flex justify-start">
                       <button
                         type="submit"
-                        className="w-auto min-w-[150px] sm:min-w-[170px] py-2.5 px-8 sm:px-10 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm sm:text-base tracking-wide shadow-xs transition-colors cursor-pointer text-center"
+                        disabled={isSubmitting}
+                        className="w-auto min-w-[150px] sm:min-w-[170px] py-2.5 px-8 sm:px-10 rounded-lg bg-[#7F160C] hover:bg-[#69120A] disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold text-sm sm:text-base tracking-wide shadow-xs transition-colors cursor-pointer text-center inline-flex items-center justify-center gap-2"
                       >
-                        {lang === "hi" ? "सबमिट करें" : "Submit"}
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            <span>{lang === "hi" ? "सबमिट हो रहा है..." : "Submitting..."}</span>
+                          </>
+                        ) : (
+                          <span>{lang === "hi" ? "सबमिट करें" : "Submit"}</span>
+                        )}
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
             </form>
-          </div>
+          )}
         </div>
-      </section>
-    </div>
-  );
+      </div>
+    </section>
+  </div>
+);
 }

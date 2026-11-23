@@ -27,7 +27,7 @@ export default async function ProtectedAdminLayout({
                 href="/admin"
                 className="font-editorial text-base sm:text-xl font-bold text-[#2B201A] shrink-0 flex items-center gap-1 sm:gap-1.5"
               >
-                <span>AVS Haryana</span>
+                <span>Agarwal Vaish</span>
                 <span className="text-[#7F160C] text-[10px] sm:text-xs uppercase tracking-wider font-sans font-bold px-1.5 py-0.5 rounded bg-[#FBF2E7] border border-[#E7D8C8]">
                   Admin
                 </span>

@@ -17,19 +17,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>("about");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Close menus on route change
-  useEffect(() => {
-    setActiveDropdown(null);
-    setOpenMobileDropdown(null);
-    setMobileMenuOpen(false);
-  }, [pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -130,6 +123,39 @@ export default function Header() {
       ],
     },
   ];
+
+  // Close desktop dropdown and close mobile drawer on route change,
+  // but keep the current section open in the mobile menu (or remember the opened section)
+  useEffect(() => {
+    setActiveDropdown(null);
+    setMobileMenuOpen(false);
+
+    const activeSec = navSections.find((sec) => {
+      if (sec.href === pathname) return true;
+      return sec.subItems?.some((sub) => {
+        const cleanHref = sub.href.split("#")[0];
+        return cleanHref === pathname || (cleanHref !== "/" && pathname.startsWith(cleanHref));
+      });
+    });
+
+    if (activeSec) {
+      setOpenMobileDropdown(activeSec.id);
+    }
+  }, [pathname]);
+
+  const handleToggleMobileMenu = () => {
+    if (!mobileMenuOpen && !openMobileDropdown) {
+      const activeSec = navSections.find((sec) => {
+        if (sec.href === pathname) return true;
+        return sec.subItems?.some((sub) => {
+          const cleanHref = sub.href.split("#")[0];
+          return cleanHref === pathname || (cleanHref !== "/" && pathname.startsWith(cleanHref));
+        });
+      });
+      setOpenMobileDropdown(activeSec ? activeSec.id : "about");
+    }
+    setMobileMenuOpen((prev) => !prev);
+  };
 
   return (
     <>
@@ -273,7 +299,7 @@ export default function Header() {
               </Link>
 
               <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={handleToggleMobileMenu}
                 className="p-1.5 sm:p-2 text-[#2B201A] rounded-md hover:bg-gray-100 min-h-[44px] min-w-[44px] flex items-center justify-center cursor-pointer"
                 aria-label="Toggle Menu"
               >
@@ -307,7 +333,7 @@ export default function Header() {
                     />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-serif font-bold text-xs tracking-wider text-[#1E293B] uppercase leading-tight">
+                    <span className="font-sans font-bold text-xs tracking-wider text-[#1E293B] uppercase leading-tight">
                       AGGARWAL VAISH
                     </span>
                     <span className="text-[9.5px] font-bold text-[#7F160C] uppercase tracking-wider leading-tight">

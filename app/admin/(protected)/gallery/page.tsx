@@ -6,7 +6,7 @@ import GalleryManager, { AdminGalleryItem } from "@/components/admin/gallery/Gal
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Gallery Management | AVS Haryana Admin",
+  title: "Gallery Management | AVVS Haryana Admin",
 };
 
 export default async function AdminGalleryPage() {

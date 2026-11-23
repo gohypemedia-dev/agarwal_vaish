@@ -182,18 +182,10 @@ function AdminSectionPreloader({ targetPath }: { targetPath: string }) {
     );
   }
 
-  if (cleanPath.startsWith("/admin/orders")) {
-    return (
-      <div className="animate-in fade-in duration-150">
-        <TableSkeleton label="Loading book orders & shipments..." rows={8} stats={false} />
-      </div>
-    );
-  }
-
   if (cleanPath.startsWith("/admin/events")) {
     return (
       <div className="animate-in fade-in duration-150">
-        <CardGridSkeleton label="Loading events & spiritual discourses..." cards={6} />
+        <CardGridSkeleton label="Loading events & sammelans..." cards={6} />
       </div>
     );
   }

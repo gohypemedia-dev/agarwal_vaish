@@ -7,30 +7,28 @@ import HeadingDivider from "@/components/HeadingDivider";
 
 export default function PresidentMessagePage() {
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
+    <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
       {/* 1. PAGE HEADER */}
-      <section className="py-10 sm:py-14 bg-[#FFF9F2] border-b border-[#E8DFD3]">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-2">
-          <div className="text-xs sm:text-sm font-bold tracking-widest text-[#7F160C] uppercase mb-1">
-            PRESIDENT’S MESSAGE
-          </div>
+      <section className="pt-10 sm:pt-14 pb-4 sm:pb-6 bg-[#FFF9F2]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
-            अध्यक्ष का संदेश (President Message)
+            President Message
           </h1>
-          <HeadingDivider className="mt-3" />
+          <HeadingDivider className="mt-3.5" />
         </div>
       </section>
 
-      {/* 2. MESSAGE BODY SECTION (EXACT REFERENCE FORMAT) */}
-      <section className="py-10 sm:py-16 bg-[#FFFDF9]">
+      {/* 2. MESSAGE BODY SECTION (ROUNDED-NONE, CLEAN NEUTRAL BORDER, STICKY SCROLL) */}
+      <section className="py-4 sm:py-8 bg-[#FFF9F2]">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-8">
+          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-8">
             
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-              {/* Photo with Overlapping Bottom Badge */}
-              <div className="md:col-span-5 relative space-y-4">
-                <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden border border-[#E8DFD3] shadow-md bg-amber-50/30">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start relative">
+              
+              {/* Photo Column: STICKY ON DESKTOP until text ends and aligns */}
+              <div className="md:col-span-5 md:sticky md:top-28 md:self-start space-y-4">
+                <div className="relative w-full aspect-[4/5] rounded-none overflow-hidden border border-[#E8DFD3] shadow-md bg-amber-50/30">
                   <Image
                     src="/images/agarwal/founder-ram-pratap-gupta.jpg"
                     alt="श्री रामप्रताप गुप्ता - संस्थापक अध्यक्ष"
@@ -38,21 +36,21 @@ export default function PresidentMessagePage() {
                     className="object-cover object-top"
                     priority
                   />
-                  {/* Floating Badge at bottom */}
-                  <div className="absolute bottom-3 inset-x-3 bg-white/95 backdrop-blur-xs rounded-lg p-3 sm:p-4 shadow-lg border border-[#E8DFD3] text-center">
+                  {/* Floating Badge at bottom (rounded-none, clean neutral border) */}
+                  <div className="absolute bottom-3 inset-x-3 bg-white/95 backdrop-blur-xs rounded-none p-3 sm:p-4 shadow-lg border border-[#E8DFD3] text-center">
                     <h2 className="font-sans font-bold text-sm sm:text-base text-black uppercase tracking-wide">
                       RAM PRATAP GUPTA
                     </h2>
-                    <p className="text-[11px] sm:text-xs font-bold text-[#C27838] uppercase tracking-wider mt-0.5">
+                    <p className="text-[11px] sm:text-xs font-bold text-[#7F160C] uppercase tracking-wider mt-0.5">
                       FOUNDER PRESIDENT
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Message Content with Elegant Quote Mark */}
+              {/* Message Content: SCROLLS ALONGSIDE STICKY PHOTO */}
               <div className="md:col-span-7 space-y-5 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
-                <div className="text-3xl sm:text-4xl text-[#C27838] font-serif leading-none select-none">
+                <div className="text-3xl sm:text-4xl text-[#7F160C] font-sans font-bold leading-none select-none">
                   “
                 </div>
 

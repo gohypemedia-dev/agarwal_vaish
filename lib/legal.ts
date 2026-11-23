@@ -14,7 +14,7 @@ export const LEGAL = {
   instagramHandle: "avvsharyana",
   instagramHref: "https://www.instagram.com/avvsharyana/",
   facebookHandle: "avvsharyana",
-  facebookHref: "https://www.facebook.com/avvsharyana/",
+  facebookHref: "https://www.facebook.com/profile.php?id=61596429263536",
   lastUpdated: "20 November 2026",
 
   // Required by the Consumer Protection (E-Commerce) Rules, 2020.

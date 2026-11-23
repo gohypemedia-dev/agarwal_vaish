@@ -1,39 +1,44 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
+import HeadingDivider from "@/components/HeadingDivider";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function AgrohaDhamPage() {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const templeImages = [
     {
-      src: "/images/agarwal/agroha-temple-1.jpg",
-      alt: "अग्रोहा धाम मुख्य मंदिर प्रवेश द्वार",
-      caption: "अग्रोहा धाम त्रिकूट मंदिर मुख्य द्वार",
+      src: "/images/agroha/one.jpeg",
+      alt: "Agroha Dham 1",
     },
     {
-      src: "/images/agarwal/agroha-temple-2.jpg",
-      alt: "अग्रोहा धाम केंद्रीय मार्ग एवं परिसर",
-      caption: "अग्रोहा धाम भव्य परिसर एवं शक्ति सरोवर मार्ग",
+      src: "/images/agroha/two.jpeg",
+      alt: "Agroha Dham 2",
     },
     {
-      src: "/images/agarwal/agroha-temple-3.jpg",
-      alt: "अग्रोहा धाम श्वेत शिखर मंदिर",
-      caption: "अग्रोहा धाम श्वेत शिखर देवालय",
+      src: "/images/agroha/three.jpeg",
+      alt: "Agroha Dham 3",
+    },
+    {
+      src: "/images/agroha/four.jpeg",
+      alt: "Agroha Dham 4",
     },
   ];
 
-  const handlePrev = () => {
-    setActiveImageIndex((prev) => (prev === 0 ? templeImages.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setActiveImageIndex((prev) => (prev === templeImages.length - 1 ? 0 : prev + 1));
+  const handleScroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const step = scrollRef.current.clientWidth * 0.75;
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -step : step,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
+    <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
       {/* 1. TOP NEWS TICKER */}
       <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
         <div className="flex animate-marquee whitespace-nowrap items-center">
@@ -66,64 +71,69 @@ export default function AgrohaDhamPage() {
         </div>
       </div>
 
-      {/* 2. MAIN ABOUT AGROHA DHAM SECTION (EXACT REPLICA OF CLIENT REFERENCE) */}
-      <section className="py-8 sm:py-14">
-        <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-          
-          {/* Header & Underline Divider */}
-          <div className="text-center">
-            <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
-              About Agroha Dham
-            </h1>
-            <div className="flex items-center justify-center gap-1.5 my-3" aria-hidden="true">
-              <span className="w-12 sm:w-16 h-[2px] bg-[#7F160C] rounded-full" />
-              <span className="w-2 h-2 rounded-full bg-[#7F160C]" />
-              <span className="w-12 sm:w-16 h-[2px] bg-[#7F160C] rounded-full" />
-            </div>
-          </div>
+      {/* 2. MAIN ABOUT AGROHA DHAM SECTION */}
+      <section className="pt-10 sm:pt-14 pb-4 sm:pb-6 bg-[#FFF9F2]">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
+            About Agroha Dham
+          </h1>
+          <HeadingDivider className="mt-3.5" />
+        </div>
+      </section>
 
+      {/* 3. CONTENT SECTION */}
+      <section className="py-4 sm:py-8 bg-[#FFF9F2]">
+        <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Main Card Container */}
-          <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-8">
+          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-8">
             
-            {/* 3 Temple Photos Slider / Grid with Navigation Arrows */}
+            {/* Carousel / Image Gallery from Official Reference */}
             <div className="relative group select-none">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+              <div
+                ref={scrollRef}
+                className="flex gap-4 sm:gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none"
+                style={{
+                  scrollbarWidth: "none",
+                  msOverflowStyle: "none",
+                  WebkitOverflowScrolling: "touch",
+                }}
+              >
                 {templeImages.map((img, idx) => (
                   <div
                     key={idx}
-                    className="relative w-full aspect-[4/3] rounded-lg sm:rounded-xl overflow-hidden border border-[#E8DFD3] shadow-xs bg-amber-50/20"
+                    className="w-[85vw] max-w-[320px] sm:max-w-none sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] shrink-0 snap-start relative aspect-[4/3] rounded-lg overflow-hidden border border-[#E8DFD3] shadow-xs bg-amber-50/20"
                   >
                     <Image
                       src={img.src}
                       alt={img.alt}
                       fill
                       className="object-cover hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 33vw"
+                      sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   </div>
                 ))}
               </div>
 
-              {/* Prev / Next Subtle Chevrons (Matching Reference Screenshot) */}
+              {/* Navigation Chevrons */}
               <button
                 type="button"
-                onClick={handlePrev}
+                onClick={() => handleScroll("left")}
                 aria-label="Previous photo"
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center font-bold text-lg md:hidden transition-all cursor-pointer"
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
               >
-                ‹
+                <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
               </button>
               <button
                 type="button"
-                onClick={handleNext}
+                onClick={() => handleScroll("right")}
                 aria-label="Next photo"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center font-bold text-lg md:hidden transition-all cursor-pointer"
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
               >
-                ›
+                <ChevronRight className="w-5 h-5 stroke-[2.5]" />
               </button>
             </div>
 
-            {/* Complete Official Text (Exact DevTools Spec: text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90) */}
+            {/* Complete Official Text */}
             <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
               <p>
                 अग्रोहा वह जगह है जहाँ हमारे पूर्वजों का संबंध है। यहीं पर हमारे पूर्वज महाराजा अग्रसेन का शासन था। महाराजा अग्रसेन सूर्यवंश के क्षत्रिय थे। वे अयोध्या नरेश श्री राम के पुत्र कुश की वंश-परंपरा में 36वीं पीढ़ी के वंशज थे। ऐसा भी कहा जाता है कि महाभारत युद्ध के बाद उन्होंने अग्रोहा को अपनी राजधानी बनाया था। अग्रोहा के ऐतिहासिक अभिलेखों के अनुसार, उनके पिता ने महाभारत युद्ध में भाग लिया था। अग्रोहा तक्षशिला और मथुरा को जोड़ने वाले प्राचीन व्यापार मार्ग पर स्थित है। इसलिए इसमें कोई आश्चर्य की बात नहीं है कि सबसे लोकप्रिय और सफल व्यापारी समुदाय की जड़ें यहीं से जुड़ी हैं। 566 एकड़ में फैला अग्रोहा का यह प्राचीन टीला, जिसमें किले जैसी संरचना सहित ईंटों से बनी कई इमारतें हैं, तीसरी-चौथी शताब्दी ईसा पूर्व से लेकर लगभग 13वीं-14वीं शताब्दी ईस्वी तक के अवशेष समेटे हुए है। यह इतिहास का एक लंबा कालखंड है। खुदाई के दौरान यहाँ कुषाण और गुप्त काल के मिट्टी के बर्तन मिले थे।
@@ -139,7 +149,6 @@ export default function AgrohaDhamPage() {
             </div>
 
           </div>
-
         </div>
       </section>
     </div>

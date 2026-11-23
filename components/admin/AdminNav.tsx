@@ -21,31 +21,18 @@ export default function AdminNav() {
   // Active state tracks optimistic pending path immediately on click (0ms switch)
   const effectivePath = pendingPath ? pendingPath.split("?")[0] : pathname;
 
-  const isDonations =
-    effectivePath === "/admin" || effectivePath.startsWith("/admin/donations");
-  const isMembers = effectivePath.startsWith("/admin/members");
-  const isOrders = effectivePath.startsWith("/admin/orders");
+  const isMembers =
+    effectivePath === "/admin" || effectivePath.startsWith("/admin/members");
   const isEvents = effectivePath.startsWith("/admin/events");
   const isGallery = effectivePath.startsWith("/admin/gallery");
+  const isDonations = effectivePath.startsWith("/admin/donations");
 
   const links = [
-    {
-      href: "/admin",
-      label: "Donations",
-      active: isDonations,
-      icon: HeartHandshake,
-    },
     {
       href: "/admin/members",
       label: "Members",
       active: isMembers,
       icon: Users,
-    },
-    {
-      href: "/admin/orders",
-      label: "Book Orders",
-      active: isOrders,
-      icon: Package,
     },
     {
       href: "/admin/events",
@@ -58,6 +45,12 @@ export default function AdminNav() {
       label: "Gallery",
       active: isGallery,
       icon: Images,
+    },
+    {
+      href: "/admin/donations",
+      label: "Donations",
+      active: isDonations,
+      icon: HeartHandshake,
     },
   ];
 
