@@ -86,8 +86,7 @@ export default function HomePage() {
   const [eventModalOpen, setEventModalOpen] = useState(false);
 
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => (res.ok ? res.json() : null))
+    cachedFetch<{ events: EventItem[] }>("/api/events")
       .then((data) => {
         if (data?.events && Array.isArray(data.events)) {
           setEvents(data.events);

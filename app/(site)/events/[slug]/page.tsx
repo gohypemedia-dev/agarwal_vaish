@@ -5,7 +5,7 @@ import { Calendar, Clock, MapPin, Phone, Heart, ArrowLeft, ExternalLink } from "
 import { prisma } from "@/lib/server/prisma";
 import HeadingDivider from "@/components/HeadingDivider";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,

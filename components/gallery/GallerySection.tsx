@@ -119,21 +119,26 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   const [isHovered, setIsHovered] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Fetch live gallery items - keep 8 photos for carousel
+  // Fetch live gallery items ordered strictly by rank (displayOrder)
   useEffect(() => {
-    fetch("/api/gallery?v=avs-photos-v3")
+    fetch(`/api/gallery?t=${Date.now()}`, { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
+      .then((data: GalleryItem[]) => {
         if (Array.isArray(data) && data.length > 0) {
-          setItems(data.slice(0, 8));
+          const sorted = [...data].sort(
+            (a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999)
+          );
+          setItems(sorted);
         }
       })
       .catch((err) => console.warn("Could not fetch live gallery items:", err));
   }, []);
 
-  // Exactly 8 items for carousel showcase
+  // Exactly top 8 items sorted by displayOrder / rank for carousel showcase
   const displayItems = useMemo(() => {
-    return [...items].slice(0, 8);
+    return [...items]
+      .sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999))
+      .slice(0, 8);
   }, [items]);
 
   // Embla Carousel configuration: 4 visible slides on desktop, 1 slide scrolled at a time

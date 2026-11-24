@@ -2,7 +2,7 @@ import { prisma } from "@/lib/server/prisma";
 import EventsClientView from "@/components/events/EventsClientView";
 import type { EventItem } from "@/components/EventDetailsModal";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function EventsPage() {
   const all = await prisma.event.findMany({

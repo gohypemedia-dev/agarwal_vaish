@@ -50,8 +50,12 @@ export default function DonatePage() {
       setValidationError(lang === "hi" ? "कृपया एक मान्य ईमेल पता दर्ज करें" : "Please enter a valid email address");
       return;
     }
-    if (currentAmount < 1) {
-      setValidationError(lang === "hi" ? "न्यूनतम सहयोग राशि ₹1 है" : "Minimum contribution amount is ₹1");
+    if (currentAmount < 100) {
+      setValidationError(
+        lang === "hi"
+          ? "न्यूनतम सहयोग राशि ₹100 होनी चाहिए"
+          : "Minimum contribution amount is ₹100"
+      );
       return;
     }
 
@@ -201,7 +205,11 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                           }}
                           className="text-xs font-bold text-[#7F160C] hover:underline cursor-pointer flex items-center gap-1"
                         >
-                          <span>{lang === "hi" ? "+ अन्य राशि दर्ज करें (Custom Amount)" : "+ Enter Custom Amount"}</span>
+                          <span>
+                            {lang === "hi"
+                              ? "+ अन्य राशि दर्ज करें (न्यूनतम ₹100)"
+                              : "+ Enter Custom Amount (Min ₹100)"}
+                          </span>
                         </button>
                       ) : (
                         <div className="flex items-center gap-2 mt-2">
@@ -211,13 +219,13 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                             </span>
                             <input
                               type="number"
-                              min={1}
+                              min={100}
                               value={customAmount}
                               onChange={(e) => {
                                 setCustomAmount(e.target.value);
                                 setValidationError("");
                               }}
-                              placeholder={lang === "hi" ? "राशि दर्ज करें" : "Enter amount"}
+                              placeholder={lang === "hi" ? "राशि दर्ज करें (न्यूनतम ₹100)" : "Enter amount (min ₹100)"}
                               className="w-full pl-7 pr-3 py-2 bg-white rounded-xl border border-[#7F160C] text-sm font-bold text-black focus:outline-none focus:ring-1 focus:ring-[#7F160C]"
                               autoFocus
                             />

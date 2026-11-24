@@ -343,7 +343,9 @@ export default function GalleryManager({
         if (!res.ok) throw new Error(data.error || "Update failed");
 
         setItems((prev) =>
-          prev.map((i) => (i.id === editingItem.id ? data.item : i))
+          prev
+            .map((i) => (i.id === editingItem.id ? data.item : i))
+            .sort((a, b) => a.displayOrder - b.displayOrder)
         );
         showToast("Changes saved!");
       } else {
@@ -355,7 +357,9 @@ export default function GalleryManager({
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Creation failed");
 
-        setItems((prev) => [...prev, data.item]);
+        setItems((prev) =>
+          [...prev, data.item].sort((a, b) => a.displayOrder - b.displayOrder)
+        );
         showToast("Added to Gallery!");
       }
 
@@ -385,7 +389,7 @@ export default function GalleryManager({
     }
   };
 
-  // Move Order Up or Down
+  // Move Order Up or Down with clean consecutive ranks and backend sync
   const handleMoveOrder = async (item: AdminGalleryItem, direction: "up" | "down") => {
     const sorted = [...items].sort((a, b) => a.displayOrder - b.displayOrder);
     const index = sorted.findIndex((i) => i.id === item.id);
@@ -393,34 +397,39 @@ export default function GalleryManager({
 
     if (targetIndex < 0 || targetIndex >= sorted.length) return;
 
-    const targetItem = sorted[targetIndex];
-    const newCurrentOrder = targetItem.displayOrder;
-    const newTargetOrder = item.displayOrder;
+    // Move element to new target index
+    const reordered = [...sorted];
+    const [moved] = reordered.splice(index, 1);
+    reordered.splice(targetIndex, 0, moved);
+
+    // Reassign clean 1-based displayOrders
+    const updatedItems = reordered.map((it, idx) => ({
+      ...it,
+      displayOrder: idx + 1,
+    }));
 
     // Optimistic UI update
-    setItems((prev) =>
-      prev.map((i) => {
-        if (i.id === item.id) return { ...i, displayOrder: newCurrentOrder };
-        if (i.id === targetItem.id) return { ...i, displayOrder: newTargetOrder };
-        return i;
-      })
-    );
+    setItems(updatedItems);
 
     try {
-      await Promise.all([
-        fetch(`/api/admin/gallery/${item.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ displayOrder: newCurrentOrder }),
-        }),
-        fetch(`/api/admin/gallery/${targetItem.id}`, {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ displayOrder: newTargetOrder }),
-        }),
-      ]);
+      const payload = updatedItems.map((it) => ({
+        id: it.id,
+        displayOrder: it.displayOrder,
+      }));
+
+      const res = await fetch("/api/admin/gallery/reorder", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: payload }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save reorder");
+      }
+      showToast("Rank updated successfully!", "success");
     } catch {
-      showToast("Failed to reorder", "error");
+      showToast("Failed to reorder ranks", "error");
+      setItems(items);
     }
   };
 

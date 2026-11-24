@@ -17,7 +17,7 @@ import { useApp } from "@/context/AppContext";
 
 const PRESET_AMOUNTS = [499, 999, 1499, 2100, 5100, 11000];
 
-export default function DonateModal({ minAmount = 1 }: { minAmount?: number } = {}) {
+export default function DonateModal({ minAmount = 100 }: { minAmount?: number } = {}) {
   const { donateModal, closeDonateModal, lang, user } = useApp();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -104,7 +104,7 @@ export default function DonateModal({ minAmount = 1 }: { minAmount?: number } = 
     if (currentAmount < minAmount) {
       setValidationError(
         lang === "hi"
-          ? `न्यूनतम सहयोग राशि ₹${minAmount} है`
+          ? `न्यूनतम सहयोग राशि ₹${minAmount} होनी चाहिए`
           : `Minimum contribution amount is ₹${minAmount}`
       );
       return;
@@ -266,7 +266,11 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                       }}
                       className="text-xs font-bold text-[#7F160C] hover:underline cursor-pointer flex items-center gap-1"
                     >
-                      <span>{lang === "hi" ? "+ अन्य राशि दर्ज करें (Custom Amount)" : "+ Enter Custom Amount"}</span>
+                      <span>
+                        {lang === "hi"
+                          ? `+ अन्य राशि दर्ज करें (न्यूनतम ₹${minAmount})`
+                          : `+ Enter Custom Amount (Min ₹${minAmount})`}
+                      </span>
                     </button>
                   ) : (
                     <div className="flex items-center gap-2 mt-2">
@@ -282,7 +286,11 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                             setCustomAmount(e.target.value);
                             setValidationError("");
                           }}
-                          placeholder={lang === "hi" ? "राशि दर्ज करें" : "Enter amount"}
+                          placeholder={
+                            lang === "hi"
+                              ? `राशि दर्ज करें (न्यूनतम ₹${minAmount})`
+                              : `Enter amount (min ₹${minAmount})`
+                          }
                           className="w-full pl-7 pr-3 py-2 bg-white rounded-xl border border-[#7F160C] text-sm font-bold text-black focus:outline-none focus:ring-1 focus:ring-[#7F160C]"
                           autoFocus
                         />

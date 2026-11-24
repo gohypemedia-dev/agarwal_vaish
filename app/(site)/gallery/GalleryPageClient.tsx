@@ -183,6 +183,22 @@ const CURATED_CATEGORIES: CuratedCategory[] = [
 
 export default function GalleryPageClient({ initialItems }: { initialItems?: GalleryItem[] } = {}) {
   const { lang } = useApp();
+  const [items, setItems] = useState<GalleryItem[]>(
+    initialItems && initialItems.length > 0 ? initialItems : galleryData
+  );
+
+  // Sync with live database gallery items
+  React.useEffect(() => {
+    fetch(`/api/gallery?t=${Date.now()}`, { cache: "no-store" })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data: GalleryItem[]) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setItems(data);
+        }
+      })
+      .catch((err) => console.warn("Could not sync live gallery items:", err));
+  }, []);
+
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeMediaFilter, setActiveMediaFilter] = useState<MediaFilter>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -191,11 +207,9 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  const currentData = initialItems && initialItems.length > 0 ? initialItems : galleryData;
-
   // Sort and filter items using curated categories
   const filteredItems = useMemo(() => {
-    let list = [...currentData].sort((a, b) => a.displayOrder - b.displayOrder);
+    let list = [...items].sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999));
 
     // Filter by curated category
     if (selectedCategory !== "all") {
@@ -213,7 +227,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
     }
 
     return list;
-  }, [currentData, selectedCategory, activeMediaFilter]);
+  }, [items, selectedCategory, activeMediaFilter]);
 
   // Pagination calculation
   const totalItems = filteredItems.length;

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/server/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export async function GET() {
   try {
@@ -19,7 +19,7 @@ export async function GET() {
       { events },
       {
         headers: {
-          "Cache-Control": "no-store, no-cache, must-revalidate",
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
         },
       }
     );
