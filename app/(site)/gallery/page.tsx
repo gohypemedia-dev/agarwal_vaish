@@ -3,7 +3,7 @@ import { prisma } from "@/lib/server/prisma";
 import { galleryData, GalleryItem } from "@/data/gallery";
 import GalleryPageClient from "./GalleryPageClient";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "गैलरी एवं झलकियाँ | Aggarwal Vaish Samaj Haryana",

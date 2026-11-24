@@ -18,7 +18,6 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
-import { cachedFetch } from "@/lib/client-cache";
 import EventDetailsModal, { EventItem } from "@/components/EventDetailsModal";
 import GallerySection from "@/components/gallery/GallerySection";
 import CountUp from "@/components/CountUp";
@@ -86,7 +85,8 @@ export default function HomePage() {
   const [eventModalOpen, setEventModalOpen] = useState(false);
 
   useEffect(() => {
-    cachedFetch<{ events: EventItem[] }>("/api/events")
+    fetch("/api/events")
+      .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data?.events && Array.isArray(data.events)) {
           setEvents(data.events);
