@@ -9,6 +9,7 @@ const CACHE_HEADERS = {
 };
 
 export async function GET() {
+  let debugErr: string | null = null;
   try {
     const dbItems = await prisma.galleryItem.findMany({
       where: { isActive: true },
@@ -35,10 +36,14 @@ export async function GET() {
 
       return NextResponse.json(items, {
         status: 200,
-        headers: CACHE_HEADERS,
+        headers: {
+          ...CACHE_HEADERS,
+          "x-gallery-source": "database",
+        },
       });
     }
   } catch (error) {
+    debugErr = String(error);
     console.error("Error fetching live gallery in /api/gallery:", error);
   }
 
@@ -49,6 +54,10 @@ export async function GET() {
 
   return NextResponse.json(fallback, {
     status: 200,
-    headers: CACHE_HEADERS,
+    headers: {
+      ...CACHE_HEADERS,
+      "x-gallery-source": "fallback",
+      "x-gallery-error": debugErr ? encodeURIComponent(debugErr.slice(0, 150)) : "none",
+    },
   });
 }

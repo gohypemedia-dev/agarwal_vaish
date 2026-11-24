@@ -20,6 +20,20 @@ export interface GalleryItem {
 
 export const galleryData: GalleryItem[] = [
   {
+    "id": "avs-gal-15",
+    "type": "photo",
+    "title": "Education Support & Student Scholarship Conclave #15",
+    "titleHi": "शिक्षा सहयोग एवं छात्रवृत्ति वितरण समारोह #15",
+    "event": "Education Seva",
+    "eventHi": "शिक्षा सहयोग",
+    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-15.jpg",
+    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-15.jpg",
+    "localSrc": "/images/gallery/avs-gallery-15.jpg",
+    "alt": "शिक्षा सहयोग एवं छात्रवृत्ति वितरण समारोह #15 - अग्रवाल वैश्य विकास संगठन",
+    "displayOrder": 1,
+    "date": "2026-02-15"
+  },
+  {
     "id": "avs-gal-1",
     "type": "photo",
     "title": "Aggarwal Vaish Samaj Statewide Convention & Unity #1",
@@ -30,7 +44,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-01.jpg",
     "localSrc": "/images/gallery/avs-gallery-01.jpg",
     "alt": "अग्रवाल वैश्य समाज प्रांतीय सम्मेलन एवं एकता मंच #1 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 1,
+    "displayOrder": 2,
     "date": "2026-02-01"
   },
   {
@@ -44,22 +58,37 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-02.jpg",
     "localSrc": "/images/gallery/avs-gallery-02.jpg",
     "alt": "समाज गौरव प्रतिभा सम्मान एवं अभिनंदन समारोह #2 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 2,
+    "displayOrder": 3,
     "date": "2026-02-02"
   },
   {
-    "id": "avs-gal-3",
+    "id": "avs-gal-7",
     "type": "photo",
-    "title": "Maharaja Agrasen Jayanti & Cultural Procession #3",
-    "titleHi": "महाराजा अग्रसेन जयंती एवं भव्य शोभायात्रा #3",
-    "event": "Agrasen Jayanti",
-    "eventHi": "अग्रसेन जयंती",
-    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-03.jpg",
-    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-03.jpg",
-    "localSrc": "/images/gallery/avs-gallery-03.jpg",
-    "alt": "महाराजा अग्रसेन जयंती एवं भव्य शोभायात्रा #3 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 3,
-    "date": "2026-02-03"
+    "title": "Annapurna Food Seva & Ration Distribution Drive #7",
+    "titleHi": "अन्नपूर्णा सेवा एवं जरूरतमंद राशन वितरण अभियान #7",
+    "event": "Food Seva",
+    "eventHi": "अन्नपूर्णा सेवा",
+    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-07.jpg",
+    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-07.jpg",
+    "localSrc": "/images/gallery/avs-gallery-07.jpg",
+    "alt": "अन्नपूर्णा सेवा एवं जरूरतमंद राशन वितरण अभियान #7 - अग्रवाल वैश्य विकास संगठन",
+    "displayOrder": 4,
+    "date": "2026-02-07"
+  },
+  {
+    "id": "avs-gal-9",
+    "type": "photo",
+    "title": "Agroha Dham Pilgrimage & Grand Aarti Ceremony #9",
+    "titleHi": "अग्रोहा धाम तीर्थ दर्शन एवं भव्य आरती समारोह #9",
+    "event": "Agroha Dham",
+    "eventHi": "अग्रोहा धाम दर्शन",
+    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-09.jpg",
+    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-09.jpg",
+    "localSrc": "/images/gallery/avs-gallery-09.jpg",
+    "alt": "अग्रोहा धाम तीर्थ दर्शन एवं भव्य आरती समारोह #9 - अग्रवाल वैश्य विकास संगठन",
+    "displayOrder": 5,
+    "date": "2026-02-09",
+    "focalPoint": "center 56%"
   },
   {
     "id": "avs-gal-4",
@@ -72,7 +101,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-04.jpg",
     "localSrc": "/images/gallery/avs-gallery-04.jpg",
     "alt": "महिला स्वावलंबन एवं उद्यमिता प्रोत्साहन कार्यशाला #4 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 4,
+    "displayOrder": 6,
     "date": "2026-02-04"
   },
   {
@@ -86,36 +115,22 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-05.png",
     "localSrc": "/images/gallery/avs-gallery-05.png",
     "alt": "युवा नेतृत्व निर्माण एवं समाज सेवा संकल्प शिविर #5 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 5,
+    "displayOrder": 7,
     "date": "2026-02-05"
   },
   {
-    "id": "avs-gal-6",
+    "id": "avs-gal-3",
     "type": "photo",
-    "title": "Free Medical Health & Consultation Camp #6",
-    "titleHi": "निःशुल्क चिकित्सा एवं स्वास्थ्य परामर्श सेवा शिविर #6",
-    "event": "Health Seva",
-    "eventHi": "चिकित्सा सेवा",
-    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-06.jpg",
-    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-06.jpg",
-    "localSrc": "/images/gallery/avs-gallery-06.jpg",
-    "alt": "निःशुल्क चिकित्सा एवं स्वास्थ्य परामर्श सेवा शिविर #6 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 6,
-    "date": "2026-02-06"
-  },
-  {
-    "id": "avs-gal-7",
-    "type": "photo",
-    "title": "Annapurna Food Seva & Ration Distribution Drive #7",
-    "titleHi": "अन्नपूर्णा सेवा एवं जरूरतमंद राशन वितरण अभियान #7",
-    "event": "Food Seva",
-    "eventHi": "अन्नपूर्णा सेवा",
-    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-07.jpg",
-    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-07.jpg",
-    "localSrc": "/images/gallery/avs-gallery-07.jpg",
-    "alt": "अन्नपूर्णा सेवा एवं जरूरतमंद राशन वितरण अभियान #7 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 7,
-    "date": "2026-02-07"
+    "title": "Maharaja Agrasen Jayanti & Cultural Procession #3",
+    "titleHi": "महाराजा अग्रसेन जयंती एवं भव्य शोभायात्रा #3",
+    "event": "Agrasen Jayanti",
+    "eventHi": "अग्रसेन जयंती",
+    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-03.jpg",
+    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-03.jpg",
+    "localSrc": "/images/gallery/avs-gallery-03.jpg",
+    "alt": "महाराजा अग्रसेन जयंती एवं भव्य शोभायात्रा #3 - अग्रवाल वैश्य विकास संगठन",
+    "displayOrder": 8,
+    "date": "2026-02-03"
   },
   {
     "id": "avs-gal-8",
@@ -128,23 +143,22 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-08.jpg",
     "localSrc": "/images/gallery/avs-gallery-08.jpg",
     "alt": "अग्रवाल समाज जिला कार्यकारिणी बैठक एवं संगठन विस्तार #8 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 8,
+    "displayOrder": 9,
     "date": "2026-02-08"
   },
   {
-    "id": "avs-gal-9",
+    "id": "avs-gal-6",
     "type": "photo",
-    "title": "Agroha Dham Pilgrimage & Grand Aarti Ceremony #9",
-    "titleHi": "अग्रोहा धाम तीर्थ दर्शन एवं भव्य आरती समारोह #9",
-    "event": "Agroha Dham",
-    "eventHi": "अग्रोहा धाम दर्शन",
-    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-09.jpg",
-    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-09.jpg",
-    "localSrc": "/images/gallery/avs-gallery-09.jpg",
-    "alt": "अग्रोहा धाम तीर्थ दर्शन एवं भव्य आरती समारोह #9 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 9,
-    "date": "2026-02-09",
-    "focalPoint": "center 56%"
+    "title": "Free Medical Health & Consultation Camp #6",
+    "titleHi": "निःशुल्क चिकित्सा एवं स्वास्थ्य परामर्श सेवा शिविर #6",
+    "event": "Health Seva",
+    "eventHi": "चिकित्सा सेवा",
+    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-06.jpg",
+    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-06.jpg",
+    "localSrc": "/images/gallery/avs-gallery-06.jpg",
+    "alt": "निःशुल्क चिकित्सा एवं स्वास्थ्य परामर्श सेवा शिविर #6 - अग्रवाल वैश्य विकास संगठन",
+    "displayOrder": 10,
+    "date": "2026-02-06"
   },
   {
     "id": "avs-gal-10",
@@ -157,7 +171,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-10.jpg",
     "localSrc": "/images/gallery/avs-gallery-10.jpg",
     "alt": "रक्तदान महादान शिविर एवं जीवन रक्षा अभियान #10 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 10,
+    "displayOrder": 11,
     "date": "2026-02-10"
   },
   {
@@ -171,7 +185,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-11.jpg",
     "localSrc": "/images/gallery/avs-gallery-11.jpg",
     "alt": "पर्यावरण संरक्षण एवं वृक्षारोपण महाभियान #11 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 11,
+    "displayOrder": 12,
     "date": "2026-02-11"
   },
   {
@@ -185,7 +199,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-12.jpg",
     "localSrc": "/images/gallery/avs-gallery-12.jpg",
     "alt": "व्यापार एवं उद्योग संवर्धन परिसंवाद #12 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 12,
+    "displayOrder": 13,
     "date": "2026-02-12"
   },
   {
@@ -199,7 +213,7 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-13.jpg",
     "localSrc": "/images/gallery/avs-gallery-13.jpg",
     "alt": "वरिष्ठ समाजसेवी सम्मान एवं आशीर्वाद सम्मेलन #13 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 13,
+    "displayOrder": 14,
     "date": "2026-02-13"
   },
   {
@@ -213,22 +227,8 @@ export const galleryData: GalleryItem[] = [
     "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-14.jpg",
     "localSrc": "/images/gallery/avs-gallery-14.jpg",
     "alt": "सांस्कृतिक संध्या एवं भजन संकीर्तन महोत्सव #14 - अग्रवाल वैश्य विकास संगठन",
-    "displayOrder": 14,
-    "date": "2026-02-14"
-  },
-  {
-    "id": "avs-gal-15",
-    "type": "photo",
-    "title": "Education Support & Student Scholarship Conclave #15",
-    "titleHi": "शिक्षा सहयोग एवं छात्रवृत्ति वितरण समारोह #15",
-    "event": "Education Seva",
-    "eventHi": "शिक्षा सहयोग",
-    "src": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-15.jpg",
-    "thumbnail": "https://pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev/gallery/avs-gallery-15.jpg",
-    "localSrc": "/images/gallery/avs-gallery-15.jpg",
-    "alt": "शिक्षा सहयोग एवं छात्रवृत्ति वितरण समारोह #15 - अग्रवाल वैश्य विकास संगठन",
     "displayOrder": 15,
-    "date": "2026-02-15"
+    "date": "2026-02-14"
   },
   {
     "id": "avs-gal-16",
