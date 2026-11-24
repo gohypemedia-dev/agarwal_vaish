@@ -1,12 +1,46 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
+import useEmblaCarousel from "embla-carousel-react";
 import HeadingDivider from "@/components/HeadingDivider";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export default function AgrohaDhamPage() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+    align: "start",
+    slidesToScroll: 1,
+  });
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+  }, [emblaApi, onSelect]);
+
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (emblaApi) emblaApi.scrollTo(index);
+    },
+    [emblaApi]
+  );
 
   const templeImages = [
     {
@@ -26,16 +60,6 @@ export default function AgrohaDhamPage() {
       alt: "Agroha Dham 4",
     },
   ];
-
-  const handleScroll = (direction: "left" | "right") => {
-    if (scrollRef.current) {
-      const step = scrollRef.current.clientWidth * 0.75;
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -step : step,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
@@ -85,52 +109,64 @@ export default function AgrohaDhamPage() {
       <section className="py-4 sm:py-8 bg-[#FFF9F2]">
         <div className="max-w-[1180px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           {/* Main Card Container */}
-          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs p-6 sm:p-10 lg:p-12 space-y-8">
+          <div className="bg-white rounded-none border border-[#E8DFD3] shadow-xs p-4 sm:p-10 lg:p-12 space-y-8">
             
-            {/* Carousel / Image Gallery from Official Reference */}
+            {/* Carousel / Image Gallery with Embla Infinite Loop */}
             <div className="relative group select-none">
-              <div
-                ref={scrollRef}
-                className="flex gap-4 sm:gap-5 overflow-x-auto pb-2 snap-x snap-mandatory scrollbar-none"
-                style={{
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                  WebkitOverflowScrolling: "touch",
-                }}
-              >
-                {templeImages.map((img, idx) => (
-                  <div
-                    key={idx}
-                    className="w-[85vw] max-w-[320px] sm:max-w-none sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] shrink-0 snap-start relative aspect-[4/3] rounded-lg overflow-hidden border border-[#E8DFD3] shadow-xs bg-amber-50/20"
-                  >
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                  </div>
-                ))}
+              <div ref={emblaRef} className="overflow-hidden rounded-xl">
+                <div className="flex -ml-3 sm:-ml-4">
+                  {templeImages.map((img, idx) => (
+                    <div
+                      key={idx}
+                      className="min-w-0 pl-3 sm:pl-4 flex-[0_0_100%] sm:flex-[0_0_50%] lg:flex-[0_0_33.333%] shrink-0"
+                    >
+                      <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-[#E8DFD3] shadow-xs bg-amber-50/20">
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          fill
+                          className="object-cover hover:scale-105 transition-transform duration-500"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          priority={idx === 0}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* Navigation Chevrons */}
               <button
                 type="button"
-                onClick={() => handleScroll("left")}
+                onClick={scrollPrev}
                 aria-label="Previous photo"
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 z-10"
               >
                 <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
               </button>
               <button
                 type="button"
-                onClick={() => handleScroll("right")}
+                onClick={scrollNext}
                 aria-label="Next photo"
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/95 hover:bg-white text-[#7F160C] shadow-md border border-[#E8DFD3] flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 z-10"
               >
                 <ChevronRight className="w-5 h-5 stroke-[2.5]" />
               </button>
+
+              {/* Mobile pagination indicator dots */}
+              <div className="flex justify-center items-center gap-1.5 mt-3.5 sm:hidden">
+                {templeImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => scrollTo(idx)}
+                    aria-label={`Slide ${idx + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      selectedIndex === idx ? "w-6 bg-[#7F160C]" : "w-1.5 bg-[#E8DFD3]"
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Complete Official Text */}
