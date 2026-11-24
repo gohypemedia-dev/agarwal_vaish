@@ -63,7 +63,6 @@ export default function Header() {
         { label: "Ghatak", href: "/ghatak" },
         { label: "Our Inspiration", href: "/inspirations" },
         { label: "About Agroha Dham", href: "/agroha-dham" },
-        { label: "Pad Yatra", href: "/about#pad-yatra" },
       ],
     },
     {
@@ -413,16 +412,7 @@ export default function Header() {
                   SEARCH MEMBERS
                 </Link>
 
-                {/* 9. VAISH EXPRESS */}
-                <Link
-                  href="/gallery"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
-                >
-                  VAISH EXPRESS
-                </Link>
-
-                {/* 10. DONATE NOW */}
+                {/* 9. DONATE NOW */}
                 <button
                   type="button"
                   onClick={() => {

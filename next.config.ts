@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "pub-6c55b4a33c034944bc9030fd94d673db.r2.dev",
+        hostname: "pub-659514a4eb6748e39c2166cb4b7fee09.r2.dev",
       },
       {
         protocol: "https",

@@ -74,30 +74,40 @@ export default function AboutPage() {
   const fivePledges = [
     {
       num: "01",
+      titleHiLine1: "राजनीतिक",
+      titleHiLine2: "सशक्तिकरण",
       titleHi: "राजनीतिक सशक्तिकरण",
       titleEn: "Political Empowerment",
       desc: "To strengthen political representation and encourage active participation in decision-making for the community.",
     },
     {
       num: "02",
+      titleHiLine1: "नारी स्वावलंबन",
+      titleHiLine2: "एवं उद्यमिता",
       titleHi: "नारी स्वावलंबन एवं उद्यमिता",
       titleEn: "Women Empowerment & Entrepreneurship",
       desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
     },
     {
       num: "03",
+      titleHiLine1: "युवा नेतृत्व",
+      titleHiLine2: "निर्माण",
       titleHi: "युवा नेतृत्व निर्माण",
       titleEn: "Youth Leadership Development",
       desc: "To empower young generations with leadership skills, confidence and opportunities to shape the future.",
     },
     {
       num: "04",
+      titleHiLine1: "आर्थिक",
+      titleHiLine2: "आत्मनिर्भरता",
       titleHi: "आर्थिक आत्मनिर्भरता",
       titleEn: "Economic Self-Reliance",
       desc: "To encourage entrepreneurship, business growth, employment and financial independence within the community.",
     },
     {
       num: "05",
+      titleHiLine1: "संगठित",
+      titleHiLine2: "समाज",
       titleHi: "संगठित समाज",
       titleEn: "Organised Society",
       desc: "To unite the community through mutual cooperation, collective strength and a shared vision for progress.",
@@ -314,9 +324,13 @@ export default function AboutPage() {
                 className="w-[85vw] max-w-[320px] md:w-auto md:max-w-none shrink-0 snap-center rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none"
               >
                 {/* Top Solid Brand Swatch Section (#7F160C) */}
-                <div className="relative bg-[#7F160C] h-[130px] sm:h-[150px] flex items-center justify-center p-4 sm:p-6 text-center shadow-inner">
-                  <h3 className="font-sans text-lg md:text-xl font-medium text-white leading-tight drop-shadow-sm px-2">
-                    {pledge.titleHi}
+                <div className="relative bg-[#7F160C] h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
+                  <h3 
+                    className="font-sankalp-title text-[48px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
+                    style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800 }}
+                  >
+                    <span className="block">{pledge.titleHiLine1}</span>
+                    <span className="block mt-1 sm:mt-2">{pledge.titleHiLine2}</span>
                   </h3>
                 </div>
 
@@ -468,25 +482,6 @@ export default function AboutPage() {
               </div>
             </div>
 
-          </div>
-        </section>
-
-        {/* ============================================================ */}
-        {/* 9. SECTION 7: पद यात्रा संदर्भ (PAD YATRA ANCHOR)               */}
-        {/* ============================================================ */}
-        <section id="pad-yatra" className="scroll-mt-24">
-          <div className="bg-white rounded-none border border-[#E8DFD3] p-6 sm:p-10 lg:p-12 space-y-4">
-            <span className="text-xs sm:text-sm font-bold text-[#7F160C] uppercase tracking-wider block">
-              OUTREACH & CAMPAIGNS
-            </span>
-            <h2 className="font-sans text-lg md:text-xl font-medium text-black">
-              पद यात्रा (Pad Yatra)
-            </h2>
-            <div className="space-y-4 text-sm md:text-base font-medium leading-7 md:leading-8 text-black/90 text-justify font-sans">
-              <p>
-                अग्रवाल वैश्य विकास संगठन समाज के प्रत्येक व्यक्ति तक पहुँचने के लिए पद यात्राओं एवं जनसंपर्क अभियानों को एक सशक्त माध्यम मानता है। राजघाट से अग्रोहा धाम तक की ऐतिहासिक पद यात्राओं एवं जिला-स्तरीय संपर्क यात्राओं के माध्यम से संगठन ने जन-जन को एकता, राजनीतिक चेतना और आपसी भाईचारे का संदेश दिया है।
-              </p>
-            </div>
           </div>
         </section>
 

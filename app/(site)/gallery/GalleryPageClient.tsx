@@ -3,13 +3,10 @@
 import React, { useState, useMemo, useRef } from "react";
 import Image from "next/image";
 import {
-  Search,
   Play,
   ChevronLeft,
   ChevronRight,
   Maximize2,
-  Film,
-  Camera,
   Layers,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
@@ -30,6 +27,12 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const isVideo = item.type === "video";
+
+  const isItem9 =
+    item.id === "avs-gal-9" ||
+    item.src?.includes("avs-gallery-09") ||
+    item.thumbnail?.includes("avs-gallery-09");
+  const computedObjectPosition = isItem9 ? "center 56%" : item.focalPoint || "center 20%";
 
   const handleMouseEnter = () => {
     if (isVideo && videoRef.current) {
@@ -102,20 +105,13 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
           unoptimized={item.thumbnail.startsWith("http") && !item.thumbnail.includes("r2.dev") && !item.thumbnail.includes("youtube.com") && !item.thumbnail.includes("unsplash.com")}
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-106"
-          style={{ objectPosition: item.focalPoint || "center" }}
+          style={{ objectPosition: computedObjectPosition }}
         />
       )}
 
       {/* Top subtle badge indicating type */}
       <div className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/55 backdrop-blur-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
         <Maximize2 className="w-3.5 h-3.5" />
-      </div>
-
-      {/* Bottom Translucent Frosted Glass Title Banner (Matching avsharyana.com photo gallery exactly) */}
-      <div className="absolute bottom-0 inset-x-0 z-10 bg-black/65 backdrop-blur-xs py-2 sm:py-2.5 px-3 text-center border-t border-white/10 transition-colors duration-300 group-hover:bg-black/75">
-        <p className="font-sans font-semibold italic text-xs sm:text-sm text-white drop-shadow-sm truncate tracking-wide">
-          {title}
-        </p>
       </div>
     </div>
   );
@@ -130,52 +126,58 @@ interface CuratedCategory {
 
 const CURATED_CATEGORIES: CuratedCategory[] = [
   {
-    key: "spiritual-discourse",
-    labelEn: "Spiritual Discourse & Satsang",
-    labelHi: "कथा एवं पावन सत्संग",
+    key: "convention",
+    labelEn: "State Convention & Organisation",
+    labelHi: "प्रांतीय सम्मेलन एवं संगठन",
     match: (i) =>
-      /spiritual|satsang|gita|katha|aarti|darshan/i.test(i.event || "") ||
-      /spiritual|satsang|gita|katha|discourse|aarti/i.test(i.title || ""),
+      /convention|organisation|meeting|executive|सम्मेलन|संगठन|बैठक/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
   {
-    key: "community-seva",
-    labelEn: "Community & Annadanam Seva",
-    labelHi: "समाज सेवा एवं अन्नदान",
+    key: "talent-youth",
+    labelEn: "Youth & Talent Felicitation",
+    labelHi: "युवा एवं प्रतिभा सम्मान",
     match: (i) =>
-      /community|annadanam|healthcare|parivar|seva/i.test(i.event || "") ||
-      /community|annadanam|bhandara|healthcare|seva/i.test(i.title || ""),
+      /talent|youth|felicitation|scholarship|education|युवा|प्रतिभा|सम्मान|छात्रवृत्ति|शिक्षा/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
   {
-    key: "vedic-gurukul",
-    labelEn: "Vedic Gurukul & Sanskar",
-    labelHi: "गुरुकुल एवं बाल संस्कार",
+    key: "women-empowerment",
+    labelEn: "Women Empowerment",
+    labelHi: "महिला स्वावलंबन",
     match: (i) =>
-      /gurukul|vedic|culture|sanskar/i.test(i.event || "") ||
-      /gurukul|vedic|sanskar/i.test(i.title || ""),
+      /women|swavalamban|entrepreneurship|महिला|स्वावलंबन|उद्यमिता/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
   {
-    key: "bhakti-sankirtan",
-    labelEn: "Bhakti Sankirtan & Utsav",
-    labelHi: "भक्ति संकीर्तन एवं उत्सव",
+    key: "community-food-seva",
+    labelEn: "Community & Food Seva",
+    labelHi: "समाज सेवा एवं अन्नपूर्णा",
     match: (i) =>
-      /sankirtan|bhakti|harinaam|utsav/i.test(i.event || "") ||
-      /sankirtan|bhakti|harinaam/i.test(i.title || ""),
+      /food|annapurna|ration|charity|community|अन्नपूर्णा|राशन|सेवा|समाज/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
   {
-    key: "gau-farmer-seva",
-    labelEn: "Gau Seva & Farmer Welfare",
-    labelHi: "गौ सेवा एवं किसान कल्याण",
+    key: "health-blood",
+    labelEn: "Health & Blood Donation",
+    labelHi: "चिकित्सा एवं रक्तदान",
     match: (i) =>
-      /go seva|gau|farmer/i.test(i.event || "") ||
-      /gau|cow|farmer|kisan/i.test(i.title || ""),
+      /health|medical|blood|donation|camp|चिकित्सा|स्वास्थ्य|रक्तदान|शिविर/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
   {
-    key: "youth-women",
-    labelEn: "Youth & Women Empowerment",
-    labelHi: "महिला एवं युवा स्वावलंबन",
+    key: "agroha-heritage",
+    labelEn: "Agroha Dham & Heritage",
+    labelHi: "अग्रोहा धाम एवं सांस्कृतिक",
     match: (i) =>
-      /youth|women|guidance|empowerment/i.test(i.event || "") ||
-      /youth|women|swavalamban/i.test(i.title || ""),
+      /agroha|agrasen|jayanti|cultural|aarti|darshan|अग्रोहा|अग्रसेन|जयंती|सांस्कृतिक|आरती|दर्शन/i.test(
+        `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
+      ),
   },
 ];
 
@@ -290,91 +292,6 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
               ? "हमारे पावन आयोजनों, सत्संग, गुरुकुल शिक्षा एवं जनकल्याणकारी सेवा कार्यों की दिव्य झलकियाँ।"
               : "A glimpse into the cherished moments, celebrations, and milestones that reflect the spirit and unity of our community."}
           </p>
-        </div>
-
-        {/* ==================================================================== */}
-        {/* FILTER & SEARCH BAR (Matching avsharyana.com dropdown + search btn)  */}
-        {/* ==================================================================== */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 bg-white/70 p-4 sm:p-5 rounded-2xl border border-[#E7D8C8] shadow-xs">
-          {/* Left: Category Dropdown & Search Button */}
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full md:w-auto">
-            <div className="relative flex-1 sm:w-72 min-w-[220px]">
-              <select
-                value={selectedCategory}
-                onChange={(e) => {
-                  setSelectedCategory(e.target.value);
-                  setCurrentPage(1);
-                }}
-                className="w-full h-11 px-3.5 py-2 rounded-lg border border-[#E7D8C8] bg-white text-xs sm:text-sm font-medium text-[#1E1612] focus:border-[#7F160C] focus:outline-none shadow-2xs cursor-pointer"
-              >
-                <option value="all">
-                  {lang === "hi" ? "सभी श्रेणियां (All Categories)" : "Select Category / Title"}
-                </option>
-                {CURATED_CATEGORIES.map((cat) => (
-                  <option key={cat.key} value={cat.key}>
-                    {lang === "hi" ? cat.labelHi : cat.labelEn}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setCurrentPage(1)}
-              className="h-11 px-6 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-xs sm:text-sm tracking-wide shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-1.5 shrink-0"
-            >
-              <Search className="w-4 h-4" />
-              <span>{lang === "hi" ? "खोजें" : "Search"}</span>
-            </button>
-          </div>
-
-          {/* Right: Media Type Filter Tabs (All / Photos / Videos) */}
-          <div className="flex items-center gap-1 bg-[#FBF2E7] p-1 rounded-xl border border-[#E7D8C8]/80 w-full md:w-auto justify-center">
-            <button
-              type="button"
-              onClick={() => {
-                setActiveMediaFilter("all");
-                setCurrentPage(1);
-              }}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                activeMediaFilter === "all"
-                  ? "bg-[#7F160C] text-white shadow-xs"
-                  : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
-              }`}
-            >
-              {lang === "hi" ? "सभी" : "All"} ({currentData.length})
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveMediaFilter("photos");
-                setCurrentPage(1);
-              }}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeMediaFilter === "photos"
-                  ? "bg-[#7F160C] text-white shadow-xs"
-                  : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
-              }`}
-            >
-              <Camera className="w-3.5 h-3.5" />
-              <span>{lang === "hi" ? "तस्वीरें" : "Photos"}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setActiveMediaFilter("videos");
-                setCurrentPage(1);
-              }}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeMediaFilter === "videos"
-                  ? "bg-[#7F160C] text-white shadow-xs"
-                  : "text-[#5C4D43] hover:text-[#1E1612] hover:bg-white/60"
-              }`}
-            >
-              <Film className="w-3.5 h-3.5" />
-              <span>{lang === "hi" ? "वीडियो" : "Videos"}</span>
-            </button>
-          </div>
         </div>
 
         {/* ==================================================================== */}

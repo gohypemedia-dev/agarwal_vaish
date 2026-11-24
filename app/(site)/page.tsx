@@ -256,8 +256,8 @@ export default function HomePage() {
     },
     {
       id: "sankalp-2",
-      titleHiLine1: "नारी",
-      titleHiLine2: "स्वावलंबन",
+      titleHiLine1: "नारी स्वावलंबन",
+      titleHiLine2: "एवं उद्यमिता",
       titleHi: "नारी स्वावलंबन एवं उद्यमिता",
       titleEn: "Women Empowerment & Entrepreneurship",
       desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
@@ -550,10 +550,13 @@ export default function HomePage() {
                 {/* 100% Native Rendered Card Matching Exact Reference Formatting */}
                 <div className="h-full rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none min-h-[440px] sm:min-h-[480px]">
                   {/* Top Solid Brand Swatch Section (#7F160C) */}
-                  <div className="relative bg-[#7F160C] h-56 sm:h-64 md:h-72 min-h-[220px] sm:min-h-[250px] flex items-center justify-center p-3 sm:p-6 text-center shadow-inner overflow-hidden">
-                    <h3 className="font-sans font-black text-[38px] xs:text-[44px] sm:text-[48px] md:text-[52px] text-white leading-[1.12] sm:leading-[1.1] drop-shadow-md px-1 sm:px-3 tracking-normal text-center flex flex-col items-center justify-center">
+                  <div className="relative bg-[#7F160C] h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
+                    <h3 
+                      className="font-sankalp-title text-[48px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
+                      style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800 }}
+                    >
                       <span className="block">{item.titleHiLine1}</span>
-                      <span className="block mt-1 sm:mt-1.5">{item.titleHiLine2}</span>
+                      <span className="block mt-1 sm:mt-2">{item.titleHiLine2}</span>
                     </h3>
                   </div>
 

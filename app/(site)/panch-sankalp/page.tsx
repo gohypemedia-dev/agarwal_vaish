@@ -22,8 +22,8 @@ const sankalps = [
   {
     num: "02",
     id: "women-empowerment",
-    titleHiLine1: "नारी",
-    titleHiLine2: "स्वावलंबन",
+    titleHiLine1: "नारी स्वावलंबन",
+    titleHiLine2: "एवं उद्यमिता",
     titleHi: "नारी स्वावलंबन एवं उद्यमिता",
     titleEn: "Women Empowerment & Entrepreneurship",
     desc: "To promote women's independence, leadership, equal opportunities and entrepreneurship.",
@@ -136,10 +136,13 @@ export default function PanchSankalpPage() {
               className="w-[85vw] max-w-[320px] sm:w-auto sm:max-w-none shrink-0 snap-center rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E8DFD3] shadow-md hover:shadow-xl transition-all duration-300 bg-white flex flex-col justify-between select-none"
             >
               {/* Top Solid Brand Swatch (#7F160C) */}
-              <div className="relative bg-gradient-to-br from-[#7F160C] to-[#601109] h-[150px] sm:h-[170px] flex flex-col items-center justify-center p-4 sm:p-6 text-center shadow-inner">
-                <h3 className="font-sans text-2xl sm:text-3xl font-black text-white leading-tight drop-shadow-sm px-2">
+              <div className="relative bg-gradient-to-br from-[#7F160C] to-[#601109] h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex flex-col items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
+                <h3 
+                  className="font-sankalp-title text-[48px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
+                  style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800 }}
+                >
                   <span className="block">{pledge.titleHiLine1}</span>
-                  <span className="block">{pledge.titleHiLine2}</span>
+                  <span className="block mt-1 sm:mt-2">{pledge.titleHiLine2}</span>
                 </h3>
               </div>
 

@@ -54,7 +54,7 @@ export function sniffMedia(bytes: Uint8Array, fallbackExt?: string): { isVideo: 
 }
 
 // The origin the browser actually used for this request (e.g. http://localhost:3000 or
-// https://nano-bhagvate.vercel.app). Google OAuth must return to this same origin, because the
+// https://avsharyana.com). Google OAuth must return to this same origin, because the
 // state cookie was set there — so NEXT_PUBLIC_APP_URL is deliberately not used: a production
 // URL in a local .env would send a localhost login to the live site and fail with "Invalid OAuth state".
 export function getBaseUrl(request: Request): string {

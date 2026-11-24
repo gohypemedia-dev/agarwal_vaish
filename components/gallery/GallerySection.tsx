@@ -26,6 +26,12 @@ function GalleryCarouselTile({
   const [isPlaying, setIsPlaying] = useState(false);
   const isVideo = item.type === "video";
 
+  const isItem9 =
+    item.id === "avs-gal-9" ||
+    item.src?.includes("avs-gallery-09") ||
+    item.thumbnail?.includes("avs-gallery-09");
+  const computedObjectPosition = isItem9 ? "center 56%" : item.focalPoint || "center 20%";
+
   const handleMouseEnter = () => {
     if (isVideo && videoRef.current) {
       videoRef.current.muted = true;
@@ -94,7 +100,7 @@ function GalleryCarouselTile({
             unoptimized={item.thumbnail.startsWith("http") && !item.thumbnail.includes("r2.dev") && !item.thumbnail.includes("youtube.com") && !item.thumbnail.includes("unsplash.com")}
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 25vw"
             className="object-cover transition-transform duration-500 ease-out group-hover:scale-106"
-            style={{ objectPosition: item.focalPoint || "center" }}
+            style={{ objectPosition: computedObjectPosition }}
           />
           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/15 transition-colors duration-300 pointer-events-none" />
         </>
@@ -260,7 +266,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         {/* ==================================================================== */}
         <div className="text-center mt-8 sm:mt-10">
           <Link
-            href="#gallery"
+            href="/gallery"
             className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <span>{lang === "hi" ? "सभी देखें" : "View All"}</span>
