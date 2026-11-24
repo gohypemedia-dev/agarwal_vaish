@@ -95,12 +95,12 @@ export default function Header() {
     {
       id: "initiatives",
       label: "Initiatives",
-      href: "/initiatives",
+      href: "#",
       subItems: [
-        { label: "Matrimonial", href: "/initiatives" },
-        { label: "Job", href: "/initiatives" },
-        { label: "Business Exchange", href: "/initiatives" },
-        { label: "Blood Donation", href: "/initiatives" },
+        { label: "Matrimonial", href: "#" },
+        { label: "Job", href: "#" },
+        { label: "Business Exchange", href: "#" },
+        { label: "Blood Donation", href: "#" },
       ],
     },
     {
@@ -201,8 +201,10 @@ export default function Header() {
                 >
                   <Link
                     href={sec.href}
-                    onClick={() => {
-                      if (sec.href === pathname || (sec.href === "/about" && pathname === "/about")) {
+                    onClick={(e) => {
+                      if (sec.id === "initiatives" || sec.href === "#") {
+                        e.preventDefault();
+                      } else if (sec.href === pathname || (sec.href === "/about" && pathname === "/about")) {
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }
                       setActiveDropdown(activeDropdown === sec.id ? null : sec.id);
@@ -229,7 +231,11 @@ export default function Header() {
                           <Link
                             key={i}
                             href={sub.href}
-                            onClick={() => {
+                            onClick={(e) => {
+                              if (sec.id === "initiatives" || sub.href === "#") {
+                                e.preventDefault();
+                                return;
+                              }
                               if (sub.href === pathname || (sub.href.startsWith("/about") && pathname === "/about")) {
                                 window.scrollTo({ top: 0, behavior: "smooth" });
                               }
@@ -385,7 +391,11 @@ export default function Header() {
                             <Link
                               key={i}
                               href={sub.href}
-                              onClick={() => {
+                              onClick={(e) => {
+                                if (sec.id === "initiatives" || sub.href === "#") {
+                                  e.preventDefault();
+                                  return;
+                                }
                                 if (sub.href === pathname || (sub.href.startsWith("/about") && pathname === "/about")) {
                                   window.scrollTo({ top: 0, behavior: "smooth" });
                                 }

@@ -80,7 +80,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/initiatives" className="hover:text-[#7F160C] transition-colors">
+                <Link href="/#sankalp" className="hover:text-[#7F160C] transition-colors">
                   {lang === "hi" ? "पंच संकल्प" : "Panch Sankalp"}
                 </Link>
               </li>

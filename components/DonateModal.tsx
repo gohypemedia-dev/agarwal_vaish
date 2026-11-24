@@ -136,12 +136,12 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
       aria-labelledby="donate-title"
       className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in duration-200"
     >
-      <div className="bg-[#FAF5EE] rounded-2xl w-full max-w-lg border border-[#E8DFD3] shadow-2xl relative flex flex-col overflow-hidden my-6 animate-in zoom-in-95 duration-200 font-sans">
+      <div className="bg-white rounded-2xl w-full max-w-lg border border-[#E8DFD3] shadow-2xl relative flex flex-col overflow-hidden my-6 animate-in zoom-in-95 duration-200 font-sans">
         
         {/* ============================================================ */}
         {/* HEADER: Matching Reference Screenshot                        */}
         {/* ============================================================ */}
-        <div className="bg-[#FAF5EE] px-5 py-4 border-b border-[#E8DFD3] flex items-center justify-between gap-3 shrink-0">
+        <div className="bg-white px-5 py-4 border-b border-[#E8DFD3] flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
             <div className="w-10 h-10 shrink-0 rounded-full bg-[#7F160C]/10 flex items-center justify-center text-[#7F160C]">
               <Heart className="w-5 h-5 fill-current text-[#7F160C]" />
@@ -167,7 +167,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
         {/* ============================================================ */}
         {/* 3-STEP TABS: 1. DETAILS | 2. PAY | 3. CONFIRMED              */}
         {/* ============================================================ */}
-        <div className="bg-[#FAF5EE] border-b border-[#E8DFD3] px-5 pt-1">
+        <div className="bg-white border-b border-[#E8DFD3] px-5 pt-1">
           <div className="grid grid-cols-3 gap-2 text-center text-xs sm:text-[13px] font-bold tracking-wider">
             {/* Step 1 Tab */}
             <button
@@ -215,7 +215,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
         {/* ============================================================ */}
         {/* MODAL BODY                                                   */}
         {/* ============================================================ */}
-        <div className="p-5 sm:p-6 overflow-y-auto max-h-[75vh]">
+        <div className="p-5 sm:p-6 overflow-y-auto max-h-[75vh] bg-white">
           
           {/* ---------------------------------------------------------- */}
           {/* STEP 1: DETAILS (SELECT CONTRIBUTION AMOUNT + FORM)        */}
@@ -246,7 +246,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                         className={`py-3 px-2 rounded-xl text-center text-sm sm:text-base font-bold transition-all cursor-pointer border ${
                           isSelected
                             ? "bg-[#7F160C] text-white border-[#7F160C] shadow-sm"
-                            : "bg-[#FFF9F2] text-[#2B201A] border-[#E8DFD3] hover:border-[#7F160C] hover:bg-white"
+                            : "bg-white text-[#2B201A] border-[#E8DFD3] hover:border-[#7F160C] hover:bg-[#FFF9F2]"
                         }`}
                       >
                         ₹{amt.toLocaleString("en-IN")}
@@ -317,7 +317,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                       setValidationError("");
                     }}
                     placeholder="Your full name"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                   />
                 </div>
 
@@ -330,7 +330,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                     value={mobile}
                     onChange={(e) => setMobile(e.target.value)}
                     placeholder="+91"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                   />
                 </div>
               </div>
@@ -349,7 +349,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                     setValidationError("");
                   }}
                   placeholder="email@example.com"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                 />
                 <p className="text-[11px] text-gray-500 mt-1">
                   Your confirmation will be sent here after we verify the payment.

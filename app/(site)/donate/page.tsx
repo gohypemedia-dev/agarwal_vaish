@@ -72,14 +72,14 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
 कृपया मेरा भुगतान सत्यापित करें।`;
 
   return (
-    <div className="w-full bg-[#FFF9F2] text-[#2B201A] font-sans min-h-screen pb-16 sm:pb-24">
+    <div className="w-full bg-[#FFF9F2] text-[#2B201A] font-sans min-h-screen pb-16 sm:pb-24 selection:bg-[#7F160C] selection:text-white">
       {/* 1. PAGE HEADER */}
-      <section className="pt-10 sm:pt-14 pb-4 sm:pb-6 px-4 text-center">
-        <div className="max-w-3xl mx-auto space-y-3">
+      <section className="pt-8 sm:pt-12 pb-2 sm:pb-3 px-4 text-center bg-[#FFF9F2]">
+        <div className="max-w-3xl mx-auto space-y-2.5">
           <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[42px] text-[#7F160C] tracking-tight">
             {lang === "hi" ? "सहयोग राशि दान करें" : "Make a Contribution"}
           </h1>
-          <HeadingDivider className="mt-3.5" />
+          <HeadingDivider className="mt-2.5" />
           <p className="text-sm sm:text-base text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto px-2">
             {lang === "hi"
               ? "समाज कल्याण, शिक्षा, सांस्कृतिक पहल एवं सेवा कार्यों में अपना अमूल्य सहयोग दें। आपका प्रत्येक अंशदान एक बड़ा सकारात्मक प्रभाव डालने में सहायक है।"
@@ -89,12 +89,12 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
       </section>
 
       {/* 2. DONATION CARD (MATCHING REFERENCE SPEC) */}
-      <section className="px-4 mt-2 sm:mt-4">
+      <section className="px-4 pt-3 pb-12 sm:pb-16 bg-[#FFF9F2]">
         <div className="max-w-xl mx-auto">
-          <div className="bg-[#FAF5EE] border border-[#E8DFD3] rounded-2xl shadow-md overflow-hidden">
+          <div className="bg-white border border-[#E8DFD3] rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden">
             
             {/* Header */}
-            <div className="bg-[#FAF5EE] px-5 py-4 border-b border-[#E8DFD3] flex items-center justify-between gap-3">
+            <div className="bg-white px-5 sm:px-6 py-4 sm:py-5 border-b border-[#E8DFD3] flex items-center justify-between gap-3">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="w-10 h-10 shrink-0 rounded-full bg-[#7F160C]/10 flex items-center justify-center text-[#7F160C]">
                   <Heart className="w-5 h-5 fill-current text-[#7F160C]" />
@@ -111,7 +111,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
             </div>
 
             {/* 3-Step Tabs */}
-            <div className="bg-[#FAF5EE] border-b border-[#E8DFD3] px-5 pt-1">
+            <div className="bg-white border-b border-[#E8DFD3] px-5 sm:px-6 pt-1">
               <div className="grid grid-cols-3 gap-2 text-center text-xs sm:text-[13px] font-bold tracking-wider">
                 <button
                   type="button"
@@ -154,7 +154,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
             </div>
 
             {/* Body */}
-            <div className="p-5 sm:p-7">
+            <div className="p-5 sm:p-7 bg-white">
               
               {/* STEP 1: DETAILS */}
               {step === 1 && (
@@ -181,7 +181,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                             className={`py-3 px-2 rounded-xl text-center text-sm sm:text-base font-bold transition-all cursor-pointer border ${
                               isSelected
                                 ? "bg-[#7F160C] text-white border-[#7F160C] shadow-sm"
-                                : "bg-[#FFF9F2] text-[#2B201A] border-[#E8DFD3] hover:border-[#7F160C] hover:bg-white"
+                                : "bg-white text-[#2B201A] border-[#E8DFD3] hover:border-[#7F160C] hover:bg-[#FFF9F2]"
                             }`}
                           >
                             ₹{amt.toLocaleString("en-IN")}
@@ -252,7 +252,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                           setValidationError("");
                         }}
                         placeholder="Your full name"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                       />
                     </div>
 
@@ -265,7 +265,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                         value={mobile}
                         onChange={(e) => setMobile(e.target.value)}
                         placeholder="+91"
-                        className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                        className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                       />
                     </div>
                   </div>
@@ -284,7 +284,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                         setValidationError("");
                       }}
                       placeholder="email@example.com"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:bg-white transition-colors"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] focus:ring-1 focus:ring-[#7F160C] transition-colors"
                     />
                     <p className="text-[11px] text-gray-500 mt-1">
                       Your confirmation will be sent here after we verify the payment.
@@ -292,7 +292,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                   </div>
 
                   {/* Trust Box */}
-                  <div className="p-3 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] flex items-start gap-2.5 text-xs text-gray-700">
+                  <div className="p-3.5 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] flex items-start gap-2.5 text-xs text-gray-700">
                     <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                     <span>
                       You will pay directly to the Trust's UPI account using any UPI app. No card details are collected.
