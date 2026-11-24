@@ -152,7 +152,6 @@ export default function GalleryModal({
   if (!isOpen || !item) return null;
 
   const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
-  const event = lang === "hi" && item.eventHi ? item.eventHi : item.event;
   const parsedVideo = item.type === "video" ? parseVideoSource(item.src, item.videoProvider) : null;
   const hasMultiple = items.length > 1;
 
@@ -180,12 +179,6 @@ export default function GalleryModal({
               {currentIndex + 1} / {items.length}
             </span>
           </span>
-
-          {event && (
-            <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-[#7F160C]/20 border border-[#7F160C]/40 text-[#7F160C] text-xs font-bold uppercase tracking-wider">
-              {event}
-            </span>
-          )}
         </div>
 
         {/* Close Button (Min 44px for touch accessibility) */}
@@ -221,7 +214,7 @@ export default function GalleryModal({
               <img
                 src={item.src}
                 alt={item.alt}
-                className="max-w-full max-h-[64vh] sm:max-h-[72vh] object-contain rounded-xl shadow-2xl border border-white/10 transition-all duration-200"
+                className="max-w-full max-h-[76vh] sm:max-h-[84vh] object-contain rounded-xl shadow-2xl border border-white/10 transition-all duration-200"
               />
             </div>
           ) : (
@@ -293,35 +286,20 @@ export default function GalleryModal({
         )}
       </div>
 
-      {/* BOTTOM CAPTION BAR */}
-      <div className="w-full max-w-4xl mx-auto z-30 pt-2">
-        <div className="bg-black/60 backdrop-blur-md border border-white/15 rounded-xl px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-white text-center sm:text-left">
-          <div className="space-y-0.5 min-w-0">
-            {event && (
-              <p className="text-[11px] font-bold text-[#7F160C] uppercase tracking-wider truncate">
-                {event}
-                {item.date && <span className="text-white/60 font-normal"> • {item.date}</span>}
-              </p>
-            )}
-            <h3 className="font-sans text-base sm:text-lg font-semibold text-white/95 leading-tight line-clamp-2">
-              {title}
-            </h3>
-          </div>
-
-          {/* Action / External Link */}
-          {item.type === "video" && parsedVideo && (
-            <a
-              href={parsedVideo.externalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors shrink-0 min-h-[38px] border border-white/15"
-            >
-              <span>{lang === "hi" ? "मूल वीडियो" : "Watch Original"}</span>
-              <ExternalLink className="w-3.5 h-3.5 text-[#7F160C]" />
-            </a>
-          )}
+      {/* BOTTOM ACTION (Video only, if any) */}
+      {item.type === "video" && parsedVideo && (
+        <div className="w-full max-w-4xl mx-auto z-30 pt-2 flex justify-end">
+          <a
+            href={parsedVideo.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-xs font-semibold text-white transition-colors shrink-0 min-h-[38px] border border-white/15"
+          >
+            <span>{lang === "hi" ? "मूल वीडियो" : "Watch Original"}</span>
+            <ExternalLink className="w-3.5 h-3.5 text-[#7F160C]" />
+          </a>
         </div>
-      </div>
+      )}
     </div>
   );
 }

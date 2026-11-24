@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import useEmblaCarousel from "embla-carousel-react";
+import useEmblaCarousel from "embla-carousel-react";
 import { Play } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import { galleryData, GalleryItem } from "@/data/gallery";
@@ -116,27 +116,27 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
   );
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Fetch live gallery items
+  // Fetch live gallery items - keep 8 photos for carousel
   useEffect(() => {
     fetch("/api/gallery?v=avs-photos-v3")
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          setItems(data.slice(0, 4));
+          setItems(data.slice(0, 8));
         }
       })
       .catch((err) => console.warn("Could not fetch live gallery items:", err));
   }, []);
 
-  // Exactly 4 items for static showcase
+  // Exactly 8 items for carousel showcase
   const displayItems = useMemo(() => {
-    return [...items].slice(0, 4);
+    return [...items].slice(0, 8);
   }, [items]);
 
-  /* 
-  // Carousel and Autoplay commented out as requested
+  // Embla Carousel configuration: 4 visible slides on desktop, 1 slide scrolled at a time
   const [emblaRef, emblaApi] = useEmblaCarousel({
     loop: true,
     align: "start",
@@ -164,14 +164,14 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
     emblaApi.on("reInit", onSelect);
   }, [emblaApi, onSelect]);
 
+  // Auto scroll every 2 seconds (2000ms), paused on hover or when lightbox modal is open
   useEffect(() => {
-    if (!emblaApi) return;
+    if (!emblaApi || isHovered || isModalOpen) return;
     const interval = setInterval(() => {
       emblaApi.scrollNext();
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
-  }, [emblaApi]);
-  */
+  }, [emblaApi, isHovered, isModalOpen]);
 
   // Open photo/video in full lightbox
   const handleOpenPhoto = (item: GalleryItem, e: React.MouseEvent<HTMLElement>) => {
@@ -220,7 +220,7 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
         </div>
 
         {/* ==================================================================== */}
-        {/* 4 IMAGES STATIC GRID (Scroll & Carousel commented out)                */}
+        {/* 4 IMAGES VISIBLE CAROUSEL WITH 1-BY-1 AUTO SCROLL                    */}
         {/* ==================================================================== */}
         {displayItems.length === 0 ? (
           <div className="py-12 text-center text-gray-500 text-sm bg-white/60 rounded-2xl border border-dashed border-[#E8DFD3] max-w-xl mx-auto p-8">
@@ -229,42 +229,59 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-            {displayItems.map((item) => {
-              const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
+          <div
+            className="overflow-hidden"
+            ref={emblaRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <div className="flex -ml-3 sm:-ml-5">
+              {displayItems.map((item) => {
+                const title = lang === "hi" && item.titleHi ? item.titleHi : item.title;
 
-              return (
-                <div key={item.id} className="w-full">
-                  <GalleryCarouselTile
-                    item={item}
-                    title={title}
-                    lang={lang}
-                    onOpen={(e) => handleOpenPhoto(item, e)}
-                  />
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={item.id}
+                    className="flex-[0_0_100%] sm:flex-[0_0_50%] md:flex-[0_0_33.333%] lg:flex-[0_0_25%] min-w-0 pl-3 sm:pl-5"
+                  >
+                    <GalleryCarouselTile
+                      item={item}
+                      title={title}
+                      lang={lang}
+                      onOpen={(e) => handleOpenPhoto(item, e)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
 
         {/* ==================================================================== */}
-        {/* CAROUSEL PAGINATION DOTS (Commented out)                              */}
+        {/* CAROUSEL PAGINATION DOTS (Clickable indicators)                       */}
         {/* ==================================================================== */}
-        {/*
-        <div className="flex items-center justify-center gap-2 mt-8 sm:mt-9">
-          {displayItems.map((_, index) => (
-            <span
-              key={index}
-              className="w-2.5 h-2.5 rounded-full bg-[#1E1612]"
-            />
-          ))}
-        </div>
-        */}
+        {displayItems.length > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-7 sm:mt-8">
+            {displayItems.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                onClick={() => scrollTo(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  index === selectedIndex
+                    ? "bg-[#7F160C] scale-110 shadow-xs"
+                    : "bg-transparent border border-[#7F160C]/40 hover:border-[#7F160C] hover:bg-[#7F160C]/20"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
         {/* ==================================================================== */}
         {/* VIEW ALL BUTTON                                                      */}
         {/* ==================================================================== */}
-        <div className="text-center mt-8 sm:mt-10">
+        <div className="text-center mt-7 sm:mt-8">
           <Link
             href="/gallery"
             className="inline-flex items-center justify-center px-7 py-2.5 rounded-lg bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide shadow-md hover:shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer"
