@@ -107,17 +107,6 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
         />
       )}
 
-      {/* Top subtle badge indicating type or section */}
-      {item.section === "press-release" && (
-        <div className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-[#7F160C] text-white text-[10px] font-bold shadow-sm">
-          {lang === "hi" ? "प्रेस विज्ञप्ति" : "Press Release"}
-        </div>
-      )}
-      {item.section === "news-circulars" && (
-        <div className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-emerald-800 text-white text-[10px] font-bold shadow-sm">
-          {lang === "hi" ? "समाचार" : "News"}
-        </div>
-      )}
       <div className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/55 backdrop-blur-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
         <Maximize2 className="w-3.5 h-3.5" />
       </div>

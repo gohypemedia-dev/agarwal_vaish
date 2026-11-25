@@ -16,13 +16,16 @@ export default async function VideoGalleryPage() {
   let items: GalleryItem[] = [];
 
   try {
-    const dbItems = await prisma.galleryItem.findMany({
+    const rawDbItems = await prisma.galleryItem.findMany({
       where: {
         isActive: true,
-        OR: [{ section: "videos" }, { type: "VIDEO" }],
       },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
+
+    const dbItems = rawDbItems.filter(
+      (item: any) => item.section === "videos" || item.type === "VIDEO"
+    );
 
     if (dbItems.length > 0) {
       items = dbItems.map((item) => ({

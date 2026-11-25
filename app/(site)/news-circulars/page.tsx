@@ -16,17 +16,19 @@ export default async function NewsCircularsPage() {
   let items: GalleryItem[] = [];
 
   try {
-    const dbItems = await prisma.galleryItem.findMany({
+    const rawDbItems = await prisma.galleryItem.findMany({
       where: {
         isActive: true,
-        OR: [
-          { section: "news-circulars" },
-          { event: { contains: "circular", mode: "insensitive" } },
-          { event: { contains: "news", mode: "insensitive" } },
-        ],
       },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
+
+    const dbItems = rawDbItems.filter(
+      (item: any) =>
+        item.section === "news-circulars" ||
+        item.event?.toLowerCase().includes("circular") ||
+        item.event?.toLowerCase().includes("news")
+    );
 
     if (dbItems.length > 0) {
       items = dbItems.map((item) => ({

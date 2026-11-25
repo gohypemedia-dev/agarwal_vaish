@@ -16,10 +16,16 @@ export default async function PressReleasesPage() {
   let items: GalleryItem[] = [];
 
   try {
-    const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true, section: "press-release" },
+    const rawDbItems = await prisma.galleryItem.findMany({
+      where: { isActive: true },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
+
+    const dbItems = rawDbItems.filter(
+      (item: any) =>
+        item.section === "press-release" ||
+        item.event?.toLowerCase().includes("press")
+    );
 
     if (dbItems.length > 0) {
       items = dbItems.map((item) => ({

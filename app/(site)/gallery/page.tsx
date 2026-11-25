@@ -31,13 +31,17 @@ export default async function GalleryPage() {
   let items: GalleryItem[] = [];
 
   try {
-    const dbItems = await prisma.galleryItem.findMany({
+    const rawDbItems = await prisma.galleryItem.findMany({
       where: {
         isActive: true,
-        OR: [{ section: "photos" }, { section: "" }],
       },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
+
+    const dbItems = rawDbItems.filter(
+      (item: any) =>
+        item.section === "photos" || (!item.section && item.type === "PHOTO")
+    );
 
     if (dbItems.length > 0) {
       items = dbItems.map((item) => ({

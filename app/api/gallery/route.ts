@@ -14,13 +14,16 @@ export async function GET(request: Request) {
   const sectionFilter = searchParams.get("section")?.trim();
 
   try {
-    const dbItems = await prisma.galleryItem.findMany({
+    const rawDbItems = await prisma.galleryItem.findMany({
       where: {
         isActive: true,
-        ...(sectionFilter ? { section: sectionFilter } : {}),
       },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
+
+    const dbItems = sectionFilter
+      ? rawDbItems.filter((item: any) => item.section === sectionFilter)
+      : rawDbItems;
 
     if (dbItems && dbItems.length > 0) {
       const items = dbItems.map((item) => ({
