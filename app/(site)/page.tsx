@@ -545,7 +545,7 @@ export default function HomePage() {
                   {/* Top Solid Brand Swatch Section (#7F160C) */}
                   <div className="relative bg-[#7F160C] h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
                     <h3 
-                      className="font-sankalp-title text-[48px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
+                      className="font-sankalp-title text-[54px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
                       style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800 }}
                     >
                       <span className="block">{item.titleHiLine1}</span>
