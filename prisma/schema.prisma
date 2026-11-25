@@ -175,6 +175,7 @@ enum GalleryMediaType {
 model GalleryItem {
   id            String           @id @default(cuid())
   type          GalleryMediaType @default(PHOTO)
+  section       String           @default("photos")
   title         String
   titleHi       String?
   event         String?
@@ -192,6 +193,7 @@ model GalleryItem {
   updatedAt     DateTime         @updatedAt
 
   @@index([isActive, displayOrder])
+  @@index([section])
 }
 
 // Events shown on /events, /events/[slug] and the home page; managed from /admin/events.

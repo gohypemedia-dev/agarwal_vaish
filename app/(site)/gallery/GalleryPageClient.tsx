@@ -14,8 +14,6 @@ import { galleryData, GalleryItem } from "@/data/gallery";
 import GalleryModal from "@/components/gallery/GalleryModal";
 import HeadingDivider from "@/components/HeadingDivider";
 
-type MediaFilter = "all" | "photos" | "videos";
-
 interface GalleryCardProps {
   item: GalleryItem;
   title: string;
@@ -109,7 +107,17 @@ function GalleryCard({ item, title, onOpen, lang }: GalleryCardProps) {
         />
       )}
 
-      {/* Top subtle badge indicating type */}
+      {/* Top subtle badge indicating type or section */}
+      {item.section === "press-release" && (
+        <div className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-[#7F160C] text-white text-[10px] font-bold shadow-sm">
+          {lang === "hi" ? "प्रेस विज्ञप्ति" : "Press Release"}
+        </div>
+      )}
+      {item.section === "news-circulars" && (
+        <div className="absolute top-3 left-3 z-10 px-2 py-0.5 rounded-md bg-emerald-800 text-white text-[10px] font-bold shadow-sm">
+          {lang === "hi" ? "समाचार" : "News"}
+        </div>
+      )}
       <div className="absolute top-3 right-3 z-10 p-1.5 rounded-full bg-black/55 backdrop-blur-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
         <Maximize2 className="w-3.5 h-3.5" />
       </div>
@@ -139,14 +147,14 @@ const CURATED_CATEGORIES: CuratedCategory[] = [
     labelEn: "Youth & Talent Felicitation",
     labelHi: "युवा एवं प्रतिभा सम्मान",
     match: (i) =>
-      /talent|youth|felicitation|scholarship|education|युवा|प्रतिभा|सम्मान|छात्रवृत्ति|शिक्षा/i.test(
+      /talent|felicitation|youth|student|scholarship|सम्मान|प्रतिभा|छात्रवृत्ति|युवा/i.test(
         `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
       ),
   },
   {
     key: "women-empowerment",
     labelEn: "Women Empowerment",
-    labelHi: "महिला स्वावलंबन",
+    labelHi: "महिला सशक्तिकरण",
     match: (i) =>
       /women|swavalamban|entrepreneurship|महिला|स्वावलंबन|उद्यमिता/i.test(
         `${i.event || ""} ${i.eventHi || ""} ${i.title || ""} ${i.titleHi || ""}`
@@ -181,15 +189,37 @@ const CURATED_CATEGORIES: CuratedCategory[] = [
   },
 ];
 
-export default function GalleryPageClient({ initialItems }: { initialItems?: GalleryItem[] } = {}) {
+export interface GalleryPageClientProps {
+  initialItems?: GalleryItem[];
+  section?: "photos" | "videos" | "press-release" | "news-circulars" | "all";
+  headingEnPrefix?: string;
+  headingEnHighlight?: string;
+  headingHiPrefix?: string;
+  headingHiHighlight?: string;
+  subheadingEn?: string;
+  subheadingHi?: string;
+}
+
+export default function GalleryPageClient({
+  initialItems,
+  section = "photos",
+  headingEnPrefix = "Photo ",
+  headingEnHighlight = "Gallery",
+  headingHiPrefix = "फोटो ",
+  headingHiHighlight = "गैलरी",
+  subheadingEn = "A glimpse into the cherished moments, celebrations, and community initiatives of Aggarwal Vaish Samaj Haryana.",
+  subheadingHi = "अग्रवाल वैश्य समाज हरियाणा के आयोजनों, सम्मेलनों और समाज सेवा के यादगार पलों की खूबसूरत झलकियाँ।",
+}: GalleryPageClientProps = {}) {
   const { lang } = useApp();
+
   const [items, setItems] = useState<GalleryItem[]>(
     initialItems && initialItems.length > 0 ? initialItems : galleryData
   );
 
   // Sync with live database gallery items
   React.useEffect(() => {
-    fetch(`/api/gallery?t=${Date.now()}`, { cache: "no-store" })
+    const secQuery = section && section !== "all" ? `&section=${section}` : "";
+    fetch(`/api/gallery?t=${Date.now()}${secQuery}`, { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: GalleryItem[]) => {
         if (Array.isArray(data) && data.length > 0) {
@@ -197,21 +227,31 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
         }
       })
       .catch((err) => console.warn("Could not sync live gallery items:", err));
-  }, []);
+  }, [section]);
 
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [activeMediaFilter, setActiveMediaFilter] = useState<MediaFilter>("all");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(12);
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Sort and filter items using curated categories
+  // Filter items strictly by the chosen section (e.g. photos, videos, press-release, news-circulars)
   const filteredItems = useMemo(() => {
     let list = [...items].sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999));
 
-    // Filter by curated category
+    // Filter by Section
+    if (section === "photos") {
+      list = list.filter((i) => i.section === "photos" || (!i.section && i.type === "photo"));
+    } else if (section === "videos") {
+      list = list.filter((i) => i.section === "videos" || (!i.section && i.type === "video"));
+    } else if (section === "press-release") {
+      list = list.filter((i) => i.section === "press-release" || i.event?.toLowerCase().includes("press"));
+    } else if (section === "news-circulars") {
+      list = list.filter((i) => i.section === "news-circulars" || i.event?.toLowerCase().includes("circular") || i.event?.toLowerCase().includes("news"));
+    }
+
+    // Filter by curated category if applied
     if (selectedCategory !== "all") {
       const activeCat = CURATED_CATEGORIES.find((c) => c.key === selectedCategory);
       if (activeCat) {
@@ -219,15 +259,8 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
       }
     }
 
-    // Filter by media type
-    if (activeMediaFilter === "photos") {
-      list = list.filter((i) => i.type === "photo");
-    } else if (activeMediaFilter === "videos") {
-      list = list.filter((i) => i.type === "video");
-    }
-
     return list;
-  }, [items, selectedCategory, activeMediaFilter]);
+  }, [items, section, selectedCategory]);
 
   // Pagination calculation
   const totalItems = filteredItems.length;
@@ -266,7 +299,7 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
     setSelectedItem(filteredItems[nextIdx]);
   };
 
-  // Generate page numbers array (with ellipsis for large page counts)
+  // Generate page numbers array
   const getPageNumbers = () => {
     const pages: (number | string)[] = [];
     if (totalPages <= 7) {
@@ -289,27 +322,25 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
     <div className="w-full bg-[#FFF9F2] min-h-screen py-10 sm:py-16">
       <div className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* ==================================================================== */}
-        {/* TWO-TONE HEADER: Our Gallery (Matching avsharyana.com photo gallery) */}
+        {/* TWO-TONE HEADER (NO HORIZONTAL TAB BAR)                              */}
         {/* ==================================================================== */}
         <div className="space-y-2 text-center max-w-2xl mx-auto">
           <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
             <span className="text-[#1E1612]">
-              {lang === "hi" ? "हमारी " : "Our "}
+              {lang === "hi" ? headingHiPrefix : headingEnPrefix}
             </span>
             <span className="text-[#7F160C]">
-              {lang === "hi" ? "गैलरी" : "Gallery"}
+              {lang === "hi" ? headingHiHighlight : headingEnHighlight}
             </span>
           </h1>
           <HeadingDivider className="!py-1" />
           <p className="text-sm sm:text-base text-[#5C4D43] leading-relaxed font-sans">
-            {lang === "hi"
-              ? "हमारे पावन आयोजनों, सत्संग, गुरुकुल शिक्षा एवं जनकल्याणकारी सेवा कार्यों की दिव्य झलकियाँ।"
-              : "A glimpse into the cherished moments, celebrations, and milestones that reflect the spirit and unity of our community."}
+            {lang === "hi" ? subheadingHi : subheadingEn}
           </p>
         </div>
 
         {/* ==================================================================== */}
-        {/* 4-COLUMN LANDSCAPE PHOTO/VIDEO GRID (Matching avsharyana.com)        */}
+        {/* 4-COLUMN LANDSCAPE PHOTO/VIDEO GRID                                  */}
         {/* ==================================================================== */}
         {totalItems === 0 ? (
           <div className="text-center py-16 px-6 max-w-md mx-auto space-y-4">
@@ -318,24 +349,14 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
             </div>
             <div className="space-y-1.5">
               <h3 className="font-editorial text-xl font-bold text-[#1E1612]">
-                {lang === "hi" ? "कोई मीडिया उपलब्ध नहीं है" : "No Media Found"}
+                {lang === "hi" ? "कोई सामग्री उपलब्ध नहीं है" : "No Media Available"}
               </h3>
               <p className="text-xs sm:text-sm text-[#5C4D43] leading-relaxed">
                 {lang === "hi"
-                  ? "इस श्रेणी में अभी कोई फ़ोटो या वीडियो नहीं मिला।"
-                  : "There is currently no media available under this filter."}
+                  ? "इस अनुभाग में अभी कोई फ़ोटो या वीडियो अपलोड नहीं हुआ है। शीघ्र ही अपडेट किया जाएगा।"
+                  : "No media has been uploaded to this section yet. Updates will appear here soon."}
               </p>
             </div>
-            <button
-              onClick={() => {
-                setSelectedCategory("all");
-                setActiveMediaFilter("all");
-                setCurrentPage(1);
-              }}
-              className="px-6 py-2 rounded-lg bg-[#7F160C] text-white font-bold text-xs"
-            >
-              {lang === "hi" ? "सभी देखें" : "View All"}
-            </button>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-6 items-stretch">
@@ -361,91 +382,101 @@ export default function GalleryPageClient({ initialItems }: { initialItems?: Gal
         )}
 
         {/* ==================================================================== */}
-        {/* BOTTOM PAGINATION BAR: Total X items | < 1 2 3 ... 9 > | X / page    */}
+        {/* PAGINATION CONTROLS                                                  */}
         {/* ==================================================================== */}
-        {totalItems > 0 && (
-          <div className="pt-6 sm:pt-8 border-t border-[#E7D8C8] flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Total items counter */}
-            <p className="text-xs sm:text-sm font-semibold text-[#5C4D43]">
-              {lang === "hi"
-                ? `कुल ${totalItems} आइटम`
-                : `Total ${totalItems} items`}
-            </p>
+        {totalPages > 1 && (
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[#E7D8C8]/60">
+            <div className="text-xs sm:text-sm text-[#5C4D43]">
+              {lang === "hi" ? (
+                <>
+                  कुल <span className="font-semibold text-[#1E1612]">{totalItems}</span> में से{" "}
+                  <span className="font-semibold text-[#1E1612]">
+                    {(safeCurrentPage - 1) * pageSize + 1}
+                  </span>{" "}
+                  -{" "}
+                  <span className="font-semibold text-[#1E1612]">
+                    {Math.min(safeCurrentPage * pageSize, totalItems)}
+                  </span>{" "}
+                  प्रदर्शित
+                </>
+              ) : (
+                <>
+                  Showing{" "}
+                  <span className="font-semibold text-[#1E1612]">
+                    {(safeCurrentPage - 1) * pageSize + 1}
+                  </span>{" "}
+                  to{" "}
+                  <span className="font-semibold text-[#1E1612]">
+                    {Math.min(safeCurrentPage * pageSize, totalItems)}
+                  </span>{" "}
+                  of <span className="font-semibold text-[#1E1612]">{totalItems}</span> items
+                </>
+              )}
+            </div>
 
-            {/* Numeric page navigation buttons */}
             <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 disabled={safeCurrentPage === 1}
-                aria-label="Previous Page"
-                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#7F160C] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
+                aria-label={lang === "hi" ? "पिछला पृष्ठ" : "Previous page"}
+                className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-[#E7D8C8] bg-white text-[#1E1612] hover:bg-[#FAF6F0] hover:border-[#7F160C] disabled:opacity-40 disabled:hover:bg-white disabled:hover:border-[#E7D8C8] disabled:cursor-not-allowed transition-all shadow-xs"
               >
                 <ChevronLeft className="w-4 h-4" />
+                <span className="hidden sm:inline">
+                  {lang === "hi" ? "पिछला" : "Prev"}
+                </span>
               </button>
 
-              {getPageNumbers().map((p, idx) => {
-                if (typeof p === "string") {
+              <div className="flex items-center gap-1">
+                {getPageNumbers().map((pageNum, idx) => {
+                  if (pageNum === "...") {
+                    return (
+                      <span
+                        key={`ellipsis-${idx}`}
+                        className="w-8 h-8 flex items-center justify-center text-xs text-[#5C4D43]"
+                      >
+                        …
+                      </span>
+                    );
+                  }
+                  const isCurrent = pageNum === safeCurrentPage;
                   return (
-                    <span
-                      key={`ellipsis-${idx}`}
-                      className="w-8 h-8 flex items-center justify-center text-xs text-[#8C6B3E] font-bold select-none"
+                    <button
+                      key={`page-${pageNum}`}
+                      type="button"
+                      onClick={() => setCurrentPage(Number(pageNum))}
+                      aria-current={isCurrent ? "page" : undefined}
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl text-xs sm:text-sm font-bold transition-all ${
+                        isCurrent
+                          ? "bg-[#7F160C] text-white shadow-xs"
+                          : "bg-white text-[#1E1612] border border-[#E7D8C8] hover:bg-[#FAF6F0] hover:border-[#7F160C]"
+                      }`}
                     >
-                      ...
-                    </span>
+                      {pageNum}
+                    </button>
                   );
-                }
-
-                const isActive = p === safeCurrentPage;
-                return (
-                  <button
-                    key={p}
-                    type="button"
-                    onClick={() => setCurrentPage(p)}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`w-8 h-8 rounded-md font-bold text-xs flex items-center justify-center transition-all cursor-pointer ${
-                      isActive
-                        ? "bg-[#7F160C] text-white shadow-xs"
-                        : "bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#7F160C]"
-                    }`}
-                  >
-                    {p}
-                  </button>
-                );
-              })}
+                })}
+              </div>
 
               <button
                 type="button"
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                 disabled={safeCurrentPage === totalPages}
-                aria-label="Next Page"
-                className="w-8 h-8 rounded-md bg-white border border-[#E7D8C8] text-[#1E1612] hover:bg-[#FFF5EA] hover:border-[#7F160C] disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer text-xs"
+                aria-label={lang === "hi" ? "अगला पृष्ठ" : "Next page"}
+                className="inline-flex items-center gap-1 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-[#E7D8C8] bg-white text-[#1E1612] hover:bg-[#FAF6F0] hover:border-[#7F160C] disabled:opacity-40 disabled:hover:bg-white disabled:hover:border-[#E7D8C8] disabled:cursor-not-allowed transition-all shadow-xs"
               >
+                <span className="hidden sm:inline">
+                  {lang === "hi" ? "अगला" : "Next"}
+                </span>
                 <ChevronRight className="w-4 h-4" />
               </button>
-            </div>
-
-            {/* Items per page selector */}
-            <div className="flex items-center gap-2">
-              <select
-                value={pageSize}
-                onChange={(e) => {
-                  setPageSize(Number(e.target.value));
-                  setCurrentPage(1);
-                }}
-                className="px-3 py-1.5 rounded-md border border-[#E7D8C8] bg-white text-xs font-semibold text-[#1E1612] focus:border-[#7F160C] focus:outline-none cursor-pointer"
-              >
-                <option value="12">12 / page</option>
-                <option value="16">16 / page</option>
-                <option value="24">24 / page</option>
-                <option value="32">32 / page</option>
-              </select>
             </div>
           </div>
         )}
       </div>
 
-      {/* LIGHTBOX MODAL */}
+      {/* FULLSCREEN LIGHTBOX MODAL */}
       <GalleryModal
         isOpen={isModalOpen}
         item={selectedItem}

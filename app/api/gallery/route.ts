@@ -8,11 +8,17 @@ const CACHE_HEADERS = {
   "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   let debugErr: string | null = null;
+  const { searchParams } = new URL(request.url);
+  const sectionFilter = searchParams.get("section")?.trim();
+
   try {
     const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true },
+      where: {
+        isActive: true,
+        ...(sectionFilter ? { section: sectionFilter } : {}),
+      },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
 
@@ -20,6 +26,7 @@ export async function GET() {
       const items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
+        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -48,9 +55,13 @@ export async function GET() {
   }
 
   // Fallback to static galleryData if database query fails or is empty
-  const fallback = [...galleryData].sort(
+  let fallback = [...galleryData].sort(
     (a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999)
   );
+
+  if (sectionFilter) {
+    fallback = fallback.filter((i) => i.section === sectionFilter);
+  }
 
   return NextResponse.json(fallback, {
     status: 200,

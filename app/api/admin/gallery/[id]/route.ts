@@ -7,6 +7,7 @@ import { deletePublicFileFromR2 } from "@/lib/server/r2";
 
 const updateSchema = z.object({
   type: z.enum(["PHOTO", "VIDEO", "photo", "video"]).optional().transform((v) => v ? v.toUpperCase() as "PHOTO" | "VIDEO" : undefined),
+  section: z.string().trim().max(50).optional(),
   title: z.string().trim().min(1, "Title is required").max(200).optional(),
   titleHi: z.string().trim().max(200).optional().nullable(),
   event: z.string().trim().max(100).optional().nullable(),
@@ -40,73 +41,100 @@ export async function PUT(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const admin = await requireAdminApi(request);
-  if (admin instanceof Response) return admin;
+  try {
+    const admin = await requireAdminApi(request);
+    if (admin instanceof Response) return admin;
 
-  const { id } = await params;
-  const body = await request.json().catch(() => null);
-  const parsed = updateSchema.safeParse(body);
-  if (!parsed.success) {
-    const message = parsed.error.issues.map((i) => i.message).join(", ");
-    return jsonError(message, 400);
+    const { id } = await params;
+    const body = await request.json().catch(() => null);
+    const parsed = updateSchema.safeParse(body);
+    if (!parsed.success) {
+      const message = parsed.error.issues.map((i) => i.message).join(", ");
+      return jsonError(message, 400);
+    }
+
+    const existing = await prisma.galleryItem.findUnique({ where: { id } });
+    if (!existing) return jsonError("Gallery item not found.", 404);
+
+    const data = parsed.data;
+
+    const updated = await prisma.galleryItem.update({
+      where: { id },
+      data: {
+        ...(data.type !== undefined ? { type: data.type } : {}),
+        ...(data.section !== undefined ? { section: data.section } : {}),
+        ...(data.title !== undefined ? { title: data.title } : {}),
+        ...(data.titleHi !== undefined ? { titleHi: data.titleHi } : {}),
+        ...(data.event !== undefined ? { event: data.event } : {}),
+        ...(data.eventHi !== undefined ? { eventHi: data.eventHi } : {}),
+        ...(data.src !== undefined ? { src: data.src } : {}),
+        ...(data.thumbnail !== undefined ? { thumbnail: data.thumbnail } : {}),
+        ...(data.alt !== undefined ? { alt: data.alt } : {}),
+        ...(data.videoProvider !== undefined ? { videoProvider: data.videoProvider } : {}),
+        ...(data.focalPoint !== undefined ? { focalPoint: data.focalPoint } : {}),
+        ...(data.aspectRatio !== undefined ? { aspectRatio: data.aspectRatio } : {}),
+        ...(data.displayOrder !== undefined ? { displayOrder: data.displayOrder } : {}),
+        ...(data.date !== undefined ? { date: data.date } : {}),
+        ...(data.isActive !== undefined ? { isActive: data.isActive } : {}),
+      },
+    });
+
+    // Revalidate frontend
+    try {
+      revalidatePath("/gallery");
+      revalidatePath("/gallery/videos");
+      revalidatePath("/press-releases");
+      revalidatePath("/news-circulars");
+      revalidatePath("/");
+    } catch (e) {
+      console.warn("Revalidation notice:", e);
+    }
+
+    return Response.json({ success: true, item: updated });
+  } catch (error) {
+    console.error("[GALLERY_PUT_ERROR]", error);
+    const msg = error instanceof Error ? error.message : "Failed to update gallery item";
+    return jsonError(msg, 500);
   }
-
-  const existing = await prisma.galleryItem.findUnique({ where: { id } });
-  if (!existing) return jsonError("Gallery item not found.", 404);
-
-  const data = parsed.data;
-
-  const updated = await prisma.galleryItem.update({
-    where: { id },
-    data: {
-      ...(data.type !== undefined ? { type: data.type } : {}),
-      ...(data.title !== undefined ? { title: data.title } : {}),
-      ...(data.titleHi !== undefined ? { titleHi: data.titleHi } : {}),
-      ...(data.event !== undefined ? { event: data.event } : {}),
-      ...(data.eventHi !== undefined ? { eventHi: data.eventHi } : {}),
-      ...(data.src !== undefined ? { src: data.src } : {}),
-      ...(data.thumbnail !== undefined ? { thumbnail: data.thumbnail } : {}),
-      ...(data.alt !== undefined ? { alt: data.alt } : {}),
-      ...(data.videoProvider !== undefined ? { videoProvider: data.videoProvider } : {}),
-      ...(data.focalPoint !== undefined ? { focalPoint: data.focalPoint } : {}),
-      ...(data.aspectRatio !== undefined ? { aspectRatio: data.aspectRatio } : {}),
-      ...(data.displayOrder !== undefined ? { displayOrder: data.displayOrder } : {}),
-      ...(data.date !== undefined ? { date: data.date } : {}),
-      ...(data.isActive !== undefined ? { isActive: data.isActive } : {}),
-    },
-  });
-
-  // Revalidate frontend
-  revalidatePath("/gallery");
-  revalidatePath("/");
-
-  return Response.json({ success: true, item: updated });
 }
 
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const admin = await requireAdminApi(request);
-  if (admin instanceof Response) return admin;
+  try {
+    const admin = await requireAdminApi(request);
+    if (admin instanceof Response) return admin;
 
-  const { id } = await params;
-  const existing = await prisma.galleryItem.findUnique({ where: { id } });
-  if (!existing) return jsonError("Gallery item not found.", 404);
+    const { id } = await params;
+    const existing = await prisma.galleryItem.findUnique({ where: { id } });
+    if (!existing) return jsonError("Gallery item not found.", 404);
 
-  // If the asset is hosted on R2, optionally attempt cleanup
-  if (existing.src.includes(".r2.dev/")) {
-    await deletePublicFileFromR2(existing.src).catch(() => {});
+    // If the asset is hosted on R2, optionally attempt cleanup
+    if (existing.src.includes(".r2.dev/")) {
+      await deletePublicFileFromR2(existing.src).catch(() => {});
+    }
+    if (existing.thumbnail.includes(".r2.dev/") && existing.thumbnail !== existing.src) {
+      await deletePublicFileFromR2(existing.thumbnail).catch(() => {});
+    }
+
+    await prisma.galleryItem.delete({ where: { id } });
+
+    // Revalidate frontend
+    try {
+      revalidatePath("/gallery");
+      revalidatePath("/gallery/videos");
+      revalidatePath("/press-releases");
+      revalidatePath("/news-circulars");
+      revalidatePath("/");
+    } catch (e) {
+      console.warn("Revalidation notice:", e);
+    }
+
+    return Response.json({ success: true, message: "Gallery item deleted successfully." });
+  } catch (error) {
+    console.error("[GALLERY_DELETE_ERROR]", error);
+    const msg = error instanceof Error ? error.message : "Failed to delete gallery item";
+    return jsonError(msg, 500);
   }
-  if (existing.thumbnail.includes(".r2.dev/") && existing.thumbnail !== existing.src) {
-    await deletePublicFileFromR2(existing.thumbnail).catch(() => {});
-  }
-
-  await prisma.galleryItem.delete({ where: { id } });
-
-  // Revalidate frontend
-  revalidatePath("/gallery");
-  revalidatePath("/");
-
-  return Response.json({ success: true, message: "Gallery item deleted successfully." });
 }

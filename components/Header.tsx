@@ -85,11 +85,11 @@ export default function Header() {
       href: "/gallery",
       subItems: [
         { label: "Photo Gallery", href: "/gallery" },
-        { label: "Video Gallery", href: "/gallery" },
-        { label: "Press Releases", href: "/gallery" },
-        { label: "News & Circulars", href: "/gallery" },
-        { label: "Blogs", href: "/gallery" },
-        { label: "Downloads", href: "/gallery" },
+        { label: "Video Gallery", href: "/gallery/videos" },
+        { label: "Press Releases", href: "/press-releases" },
+        { label: "News & Circulars", href: "/news-circulars" },
+        { label: "Blogs", href: "/blogs" },
+        { label: "Downloads", href: "/downloads" },
       ],
     },
     {

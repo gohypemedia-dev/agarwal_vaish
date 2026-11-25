@@ -3,6 +3,7 @@ export type VideoProvider = "youtube" | "vimeo" | "mp4";
 export interface GalleryItem {
   id: string;
   type: "photo" | "video";
+  section?: "photos" | "videos" | "press-release" | "news-circulars" | string;
   title: string;
   titleHi?: string;
   event?: string;

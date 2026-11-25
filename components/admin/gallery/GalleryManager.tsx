@@ -23,11 +23,14 @@ import {
   Link as LinkIcon,
   CloudUpload,
   RefreshCw,
+  Newspaper,
+  FileText,
 } from "lucide-react";
 
 export interface AdminGalleryItem {
   id: string;
   type: "PHOTO" | "VIDEO";
+  section?: "photos" | "videos" | "press-release" | "news-circulars" | string;
   title: string;
   titleHi?: string | null;
   event?: string | null;
@@ -52,14 +55,17 @@ interface GalleryManagerProps {
 }
 
 const CATEGORIES = [
-  { en: "Gurukul Initiative", hi: "गुरुकुल पहल" },
-  { en: "Spiritual Discourse", hi: "सत्संग एवं कथा" },
+  { en: "State Convention", hi: "प्रांतीय सम्मेलन" },
+  { en: "Education Seva", hi: "शिक्षा सहयोग" },
+  { en: "Talent Felicitation", hi: "प्रतिभा सम्मान" },
+  { en: "Press Release", hi: "प्रेस विज्ञप्ति" },
+  { en: "News & Circulars", hi: "समाचार एवं परिपत्र" },
+  { en: "Youth Wing", hi: "युवा प्रकोष्ठ" },
+  { en: "Mahila Wing", hi: "महिला प्रकोष्ठ" },
+  { en: "Agroha Dham", hi: "अग्रोहा धाम" },
+  { en: "Community Seva", hi: "समाज सेवा" },
   { en: "Farmer Welfare", hi: "कृषि कल्याण" },
-  { en: "Healthcare Seva", hi: "स्वास्थ्य सेवा" },
-  { en: "Women Empowerment", hi: "महिला सशक्तिकरण" },
-  { en: "Spiritual Utsav", hi: "आध्यात्मिक उत्सव" },
-  { en: "Trust Parivar", hi: "ट्रस्ट परिवार" },
-  { en: "Annadanam Seva", hi: "अन्नदान सेवा" },
+  { en: "Gurukul Initiative", hi: "गुरुकुल पहल" },
 ];
 
 export default function GalleryManager({
@@ -68,7 +74,7 @@ export default function GalleryManager({
   r2PublicUrl,
 }: GalleryManagerProps) {
   const [items, setItems] = useState<AdminGalleryItem[]>(initialItems);
-  const [activeTab, setActiveTab] = useState<"all" | "PHOTO" | "VIDEO">("all");
+  const [activeTab, setActiveTab] = useState<"all" | "photos" | "videos" | "press-release" | "news-circulars">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<AdminGalleryItem | null>(null);
@@ -88,10 +94,11 @@ export default function GalleryManager({
   // Form State
   const [formData, setFormData] = useState({
     type: "PHOTO" as "PHOTO" | "VIDEO",
+    section: "photos" as "photos" | "videos" | "press-release" | "news-circulars",
     title: "",
     titleHi: "",
-    event: "Gurukul Initiative",
-    eventHi: "गुरुकुल पहल",
+    event: "State Convention",
+    eventHi: "प्रांतीय सम्मेलन",
     src: "",
     thumbnail: "",
     alt: "",
@@ -106,17 +113,39 @@ export default function GalleryManager({
     setTimeout(() => setToast(null), 3500);
   };
 
+  // Tab counts
+  const counts = useMemo(() => {
+    return {
+      all: items.length,
+      photos: items.filter((i) => i.section === "photos" || (!i.section && i.type === "PHOTO")).length,
+      videos: items.filter((i) => i.section === "videos" || (!i.section && i.type === "VIDEO")).length,
+      press: items.filter((i) => i.section === "press-release" || i.event?.toLowerCase().includes("press")).length,
+      news: items.filter((i) => i.section === "news-circulars" || i.event?.toLowerCase().includes("circular") || i.event?.toLowerCase().includes("news")).length,
+    };
+  }, [items]);
+
   // Filtered Items
   const filteredItems = useMemo(() => {
     return items
       .filter((item) => {
-        if (activeTab !== "all" && item.type !== activeTab) return false;
+        const itemSec = item.section || (item.type === "VIDEO" ? "videos" : "photos");
+        if (activeTab === "photos") {
+          if (itemSec !== "photos" && (item.type !== "PHOTO" || item.section)) return false;
+        } else if (activeTab === "videos") {
+          if (itemSec !== "videos" && (item.type !== "VIDEO" || item.section)) return false;
+        } else if (activeTab === "press-release") {
+          if (item.section !== "press-release" && !item.event?.toLowerCase().includes("press")) return false;
+        } else if (activeTab === "news-circulars") {
+          if (item.section !== "news-circulars" && !item.event?.toLowerCase().includes("circular") && !item.event?.toLowerCase().includes("news")) return false;
+        }
+
         if (!searchQuery.trim()) return true;
         const q = searchQuery.toLowerCase();
         return (
           item.title.toLowerCase().includes(q) ||
           (item.titleHi && item.titleHi.toLowerCase().includes(q)) ||
-          (item.event && item.event.toLowerCase().includes(q))
+          (item.event && item.event.toLowerCase().includes(q)) ||
+          (item.section && item.section.toLowerCase().includes(q))
         );
       })
       .sort((a, b) => a.displayOrder - b.displayOrder);
@@ -128,12 +157,15 @@ export default function GalleryManager({
     setEditingItem(null);
     setShowMoreFields(false);
     setSourceMode("upload");
+    const initialSec = activeTab === "all" ? "photos" : activeTab;
+    const isVid = initialSec === "videos";
     setFormData({
-      type: "PHOTO",
+      type: isVid ? "VIDEO" : "PHOTO",
+      section: initialSec,
       title: "",
       titleHi: "",
-      event: "Gurukul Initiative",
-      eventHi: "गुरुकुल पहल",
+      event: initialSec === "press-release" ? "Press Release" : initialSec === "news-circulars" ? "News & Circulars" : "State Convention",
+      eventHi: initialSec === "press-release" ? "प्रेस विज्ञप्ति" : initialSec === "news-circulars" ? "समाचार एवं परिपत्र" : "प्रांतीय सम्मेलन",
       src: "",
       thumbnail: "",
       alt: "",
@@ -157,11 +189,14 @@ export default function GalleryManager({
 
     setSourceMode(isLinkMode ? "link" : "upload");
 
+    const itemSec = (item.section || (item.type === "VIDEO" ? "videos" : "photos")) as "photos" | "videos" | "press-release" | "news-circulars";
+
     setFormData({
       type: item.type,
+      section: itemSec,
       title: item.title,
       titleHi: item.titleHi || "",
-      event: item.event || "Gurukul Initiative",
+      event: item.event || "State Convention",
       eventHi: item.eventHi || "",
       src: item.src,
       thumbnail: item.thumbnail,
@@ -319,6 +354,7 @@ export default function GalleryManager({
     try {
       const payload = {
         type: formData.type,
+        section: formData.section,
         title: formData.title,
         titleHi: formData.titleHi || null,
         event: formData.event || null,
@@ -339,8 +375,8 @@ export default function GalleryManager({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Update failed");
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || `Update failed (${res.status})`);
 
         setItems((prev) =>
           prev
@@ -354,8 +390,8 @@ export default function GalleryManager({
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Creation failed");
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || `Creation failed (${res.status})`);
 
         setItems((prev) =>
           [...prev, data.item].sort((a, b) => a.displayOrder - b.displayOrder)
@@ -497,43 +533,65 @@ export default function GalleryManager({
       </div>
 
       {/* FILTER BUTTONS & SEARCH */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <div className="inline-flex p-1 bg-white rounded-xl border border-[#E7D8C8] self-start">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+        <div className="flex p-1 bg-white rounded-xl border border-[#E7D8C8] overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveTab("all")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
               activeTab === "all"
                 ? "bg-[#2B201A] text-white shadow-xs"
                 : "text-[#2B201A]/70 hover:text-[#2B201A]"
             }`}
           >
-            All ({items.length})
+            All ({counts.all})
           </button>
           <button
-            onClick={() => setActiveTab("PHOTO")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-              activeTab === "PHOTO"
+            onClick={() => setActiveTab("photos")}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
+              activeTab === "photos"
                 ? "bg-[#2B201A] text-white shadow-xs"
                 : "text-[#2B201A]/70 hover:text-[#2B201A]"
             }`}
           >
             <ImageIcon className="w-3.5 h-3.5 text-[#B8893E]" />
-            <span>Photos ({items.filter((i) => i.type === "PHOTO").length})</span>
+            <span>Photos ({counts.photos})</span>
           </button>
           <button
-            onClick={() => setActiveTab("VIDEO")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-              activeTab === "VIDEO"
+            onClick={() => setActiveTab("videos")}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
+              activeTab === "videos"
                 ? "bg-[#2B201A] text-white shadow-xs"
                 : "text-[#2B201A]/70 hover:text-[#2B201A]"
             }`}
           >
             <Film className="w-3.5 h-3.5 text-[#7F160C]" />
-            <span>Videos ({items.filter((i) => i.type === "VIDEO").length})</span>
+            <span>Videos ({counts.videos})</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("press-release")}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
+              activeTab === "press-release"
+                ? "bg-[#7F160C] text-white shadow-xs"
+                : "text-[#2B201A]/70 hover:text-[#7F160C]"
+            }`}
+          >
+            <Newspaper className="w-3.5 h-3.5" />
+            <span>Press Releases ({counts.press})</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("news-circulars")}
+            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${
+              activeTab === "news-circulars"
+                ? "bg-[#2B201A] text-white shadow-xs"
+                : "text-[#2B201A]/70 hover:text-emerald-700"
+            }`}
+          >
+            <FileText className="w-3.5 h-3.5 text-emerald-600" />
+            <span>News & Circulars ({counts.news})</span>
           </button>
         </div>
 
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full lg:w-64">
           <Search className="w-4 h-4 text-[#2B201A]/40 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
@@ -616,11 +674,24 @@ export default function GalleryManager({
 
                   {/* Card Content */}
                   <div className="p-4 space-y-1.5">
-                    {item.event && (
-                      <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-[#B8893E]">
-                        {item.event}
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md border ${
+                        item.section === "press-release"
+                          ? "bg-blue-50 text-blue-700 border-blue-200"
+                          : item.section === "news-circulars"
+                          ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                          : item.section === "videos" || isVideo
+                          ? "bg-red-50 text-[#7F160C] border-red-200"
+                          : "bg-amber-50 text-[#B8893E] border-amber-200"
+                      }`}>
+                        {item.section === "press-release" ? "Press Release" : item.section === "news-circulars" ? "News & Circular" : isVideo ? "Video" : "Photo"}
                       </span>
-                    )}
+                      {item.event && (
+                        <span className="text-[10px] font-semibold text-[#2B201A]/60 truncate max-w-[170px]">
+                          {item.event}
+                        </span>
+                      )}
+                    </div>
 
                     <h3 className="font-editorial text-base font-bold text-[#2B201A] line-clamp-1">
                       {item.title}
@@ -687,10 +758,122 @@ export default function GalleryManager({
             {/* Modal Form */}
             <form onSubmit={handleSave} className="p-5 space-y-4 max-h-[82vh] overflow-y-auto">
               
+              {/* 1. SECTION DESTINATION SELECTOR */}
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#2B201A]/70 mb-1.5">
+                  1. Publish To / कहाँ जोड़ना है (Destination Section) *
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((p) => ({
+                        ...p,
+                        section: "photos",
+                        type: "PHOTO",
+                        event: p.event === "Press Release" || p.event === "News & Circulars" ? "State Convention" : p.event,
+                        eventHi: p.eventHi === "प्रेस विज्ञप्ति" || p.eventHi === "समाचार एवं परिपत्र" ? "प्रांतीय सम्मेलन" : p.eventHi,
+                      }));
+                    }}
+                    className={`p-2.5 rounded-xl border text-left flex flex-col gap-0.5 transition-all cursor-pointer ${
+                      formData.section === "photos"
+                        ? "bg-[#2B201A] text-white border-[#2B201A] shadow-xs"
+                        : "bg-white text-[#2B201A] border-[#E7D8C8] hover:bg-[#FAF6F0]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <ImageIcon className={`w-3.5 h-3.5 ${formData.section === "photos" ? "text-[#E7D8C8]" : "text-[#B8893E]"}`} />
+                      <span className="text-xs font-bold">Photo Gallery</span>
+                    </div>
+                    <span className={`text-[10px] ${formData.section === "photos" ? "text-white/70" : "text-[#2B201A]/60"}`}>
+                      फोटो गैलरी
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((p) => ({
+                        ...p,
+                        section: "videos",
+                        type: "VIDEO",
+                        event: p.event === "Press Release" || p.event === "News & Circulars" ? "State Convention" : p.event,
+                        eventHi: p.eventHi === "प्रेस विज्ञप्ति" || p.eventHi === "समाचार एवं परिपत्र" ? "प्रांतीय सम्मेलन" : p.eventHi,
+                      }));
+                    }}
+                    className={`p-2.5 rounded-xl border text-left flex flex-col gap-0.5 transition-all cursor-pointer ${
+                      formData.section === "videos"
+                        ? "bg-[#2B201A] text-white border-[#2B201A] shadow-xs"
+                        : "bg-white text-[#2B201A] border-[#E7D8C8] hover:bg-[#FAF6F0]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <Film className={`w-3.5 h-3.5 ${formData.section === "videos" ? "text-[#E7D8C8]" : "text-[#7F160C]"}`} />
+                      <span className="text-xs font-bold">Video Gallery</span>
+                    </div>
+                    <span className={`text-[10px] ${formData.section === "videos" ? "text-white/70" : "text-[#2B201A]/60"}`}>
+                      वीडियो गैलरी
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((p) => ({
+                        ...p,
+                        section: "press-release",
+                        type: "PHOTO",
+                        event: "Press Release",
+                        eventHi: "प्रेस विज्ञप्ति",
+                      }));
+                    }}
+                    className={`p-2.5 rounded-xl border text-left flex flex-col gap-0.5 transition-all cursor-pointer ${
+                      formData.section === "press-release"
+                        ? "bg-[#7F160C] text-white border-[#7F160C] shadow-xs"
+                        : "bg-white text-[#2B201A] border-[#E7D8C8] hover:bg-[#FAF6F0]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <Newspaper className={`w-3.5 h-3.5 ${formData.section === "press-release" ? "text-white" : "text-[#7F160C]"}`} />
+                      <span className="text-xs font-bold">Press Releases</span>
+                    </div>
+                    <span className={`text-[10px] ${formData.section === "press-release" ? "text-white/80" : "text-[#2B201A]/60"}`}>
+                      प्रेस विज्ञप्ति
+                    </span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((p) => ({
+                        ...p,
+                        section: "news-circulars",
+                        type: "PHOTO",
+                        event: "News & Circulars",
+                        eventHi: "समाचार एवं परिपत्र",
+                      }));
+                    }}
+                    className={`p-2.5 rounded-xl border text-left flex flex-col gap-0.5 transition-all cursor-pointer ${
+                      formData.section === "news-circulars"
+                        ? "bg-[#2B201A] text-white border-[#2B201A] shadow-xs"
+                        : "bg-white text-[#2B201A] border-[#E7D8C8] hover:bg-[#FAF6F0]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <FileText className={`w-3.5 h-3.5 ${formData.section === "news-circulars" ? "text-[#E7D8C8]" : "text-emerald-700"}`} />
+                      <span className="text-xs font-bold">News & Circulars</span>
+                    </div>
+                    <span className={`text-[10px] ${formData.section === "news-circulars" ? "text-white/70" : "text-[#2B201A]/60"}`}>
+                      समाचार एवं परिपत्र
+                    </span>
+                  </button>
+                </div>
+              </div>
+
               {/* Media Type Switcher: Photo or Video */}
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-[#2B201A]/70 mb-1.5">
-                  1. Select Media Type
+                  2. Select Media Type
                 </label>
                 <div className="flex p-1 bg-[#FAF6F0] rounded-xl border border-[#E7D8C8]">
                   <button
@@ -727,7 +910,7 @@ export default function GalleryManager({
               {/* Source Mode: Upload to R2 vs Use External Link */}
               <div>
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-[#2B201A]/70 mb-1.5">
-                  2. Choose Source Option
+                  3. Choose Source Option
                 </label>
                 <div className="grid grid-cols-2 gap-2">
                   <button

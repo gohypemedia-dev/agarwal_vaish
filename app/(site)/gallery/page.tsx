@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { prisma } from "@/lib/server/prisma";
 import { galleryData, GalleryItem } from "@/data/gallery";
 import GalleryPageClient from "./GalleryPageClient";
@@ -39,6 +40,7 @@ export default async function GalleryPage() {
       items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
+        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -58,5 +60,9 @@ export default async function GalleryPage() {
     items = galleryData;
   }
 
-  return <GalleryPageClient initialItems={items} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#FFF9F2]" />}>
+      <GalleryPageClient initialItems={items} />
+    </Suspense>
+  );
 }

@@ -19,6 +19,7 @@ export default async function AdminGalleryPage() {
   const formattedItems: AdminGalleryItem[] = rawItems.map((item) => ({
     id: item.id,
     type: item.type === "PHOTO" ? "PHOTO" : "VIDEO",
+    section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
     title: item.title,
     titleHi: item.titleHi,
     event: item.event,
