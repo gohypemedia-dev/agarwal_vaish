@@ -3,8 +3,12 @@ import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 function createClient() {
+  const connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    console.error("CRITICAL: DATABASE_URL is not set in environment variables!");
+  }
   const adapter = new PrismaPg({
-    connectionString: process.env.DATABASE_URL,
+    connectionString,
     max: 5,
     // Prisma stores DateTime as UTC; make the session agree so DB defaults and raw SQL do too.
     options: "-c TimeZone=UTC",

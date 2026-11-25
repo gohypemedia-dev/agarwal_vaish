@@ -92,11 +92,13 @@ export async function requireAdminApi(request: Request): Promise<Admin | Respons
 export function sameOrigin(request: Request) {
   if (request.method === "GET" || request.method === "HEAD") return true;
   const origin = request.headers.get("origin");
-  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
-  if (!origin || !host) return false;
+  const rawHost = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  if (!origin || !rawHost) return false;
+  const host = rawHost.split(",")[0].trim();
   try {
     const originHost = new URL(origin).host;
     if (originHost === host) return true;
+    if (originHost.endsWith(".vercel.app") && host.endsWith(".vercel.app")) return true;
     if (process.env.NODE_ENV !== "production") {
       const isLocal = (h: string) => h.startsWith("localhost:") || h.startsWith("127.0.0.1:") || h === "localhost" || h === "127.0.0.1";
       if (isLocal(originHost) && isLocal(host)) return true;
