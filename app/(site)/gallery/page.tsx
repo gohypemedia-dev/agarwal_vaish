@@ -28,11 +28,14 @@ export const metadata: Metadata = {
 };
 
 export default async function GalleryPage() {
-  let items: GalleryItem[] = galleryData;
+  let items: GalleryItem[] = [];
 
   try {
     const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true },
+      where: {
+        isActive: true,
+        OR: [{ section: "photos" }, { section: "" }],
+      },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
 
@@ -40,7 +43,7 @@ export default async function GalleryPage() {
       items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
-        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
+        section: item.section || "photos",
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -54,10 +57,12 @@ export default async function GalleryPage() {
         displayOrder: item.displayOrder,
         date: item.date ?? undefined,
       }));
+    } else {
+      items = galleryData.filter((i) => i.type === "photo" && i.section !== "press-release");
     }
   } catch (error) {
     console.error("Error fetching gallery items for site:", error);
-    items = galleryData;
+    items = galleryData.filter((i) => i.type === "photo" && i.section !== "press-release");
   }
 
   return (

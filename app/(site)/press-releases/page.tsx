@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function PressReleasesPage() {
-  let items: GalleryItem[] = galleryData;
+  let items: GalleryItem[] = [];
 
   try {
     const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true },
+      where: { isActive: true, section: "press-release" },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
 
@@ -25,7 +25,7 @@ export default async function PressReleasesPage() {
       items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
-        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
+        section: item.section || "press-release",
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -39,10 +39,16 @@ export default async function PressReleasesPage() {
         displayOrder: item.displayOrder,
         date: item.date ?? undefined,
       }));
+    } else {
+      items = galleryData.filter(
+        (i) => i.section === "press-release" || i.event?.toLowerCase().includes("press")
+      );
     }
   } catch (error) {
     console.error("Error fetching press releases:", error);
-    items = galleryData;
+    items = galleryData.filter(
+      (i) => i.section === "press-release" || i.event?.toLowerCase().includes("press")
+    );
   }
 
   return (

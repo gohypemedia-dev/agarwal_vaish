@@ -13,11 +13,14 @@ export const metadata: Metadata = {
 };
 
 export default async function VideoGalleryPage() {
-  let items: GalleryItem[] = galleryData;
+  let items: GalleryItem[] = [];
 
   try {
     const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true },
+      where: {
+        isActive: true,
+        OR: [{ section: "videos" }, { type: "VIDEO" }],
+      },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
 
@@ -25,7 +28,7 @@ export default async function VideoGalleryPage() {
       items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
-        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
+        section: item.section || "videos",
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -39,10 +42,12 @@ export default async function VideoGalleryPage() {
         displayOrder: item.displayOrder,
         date: item.date ?? undefined,
       }));
+    } else {
+      items = galleryData.filter((i) => i.type === "video" || i.section === "videos");
     }
   } catch (error) {
     console.error("Error fetching video gallery:", error);
-    items = galleryData;
+    items = galleryData.filter((i) => i.type === "video" || i.section === "videos");
   }
 
   return (

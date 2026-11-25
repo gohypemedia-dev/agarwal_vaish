@@ -13,11 +13,18 @@ export const metadata: Metadata = {
 };
 
 export default async function NewsCircularsPage() {
-  let items: GalleryItem[] = galleryData;
+  let items: GalleryItem[] = [];
 
   try {
     const dbItems = await prisma.galleryItem.findMany({
-      where: { isActive: true },
+      where: {
+        isActive: true,
+        OR: [
+          { section: "news-circulars" },
+          { event: { contains: "circular", mode: "insensitive" } },
+          { event: { contains: "news", mode: "insensitive" } },
+        ],
+      },
       orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
     });
 
@@ -25,7 +32,7 @@ export default async function NewsCircularsPage() {
       items = dbItems.map((item) => ({
         id: item.id,
         type: item.type === "PHOTO" ? "photo" : "video",
-        section: item.section || (item.type === "PHOTO" ? "photos" : "videos"),
+        section: item.section || "news-circulars",
         title: item.title,
         titleHi: item.titleHi ?? undefined,
         event: item.event ?? undefined,
@@ -39,10 +46,22 @@ export default async function NewsCircularsPage() {
         displayOrder: item.displayOrder,
         date: item.date ?? undefined,
       }));
+    } else {
+      items = galleryData.filter(
+        (i) =>
+          i.section === "news-circulars" ||
+          i.event?.toLowerCase().includes("circular") ||
+          i.event?.toLowerCase().includes("news")
+      );
     }
   } catch (error) {
     console.error("Error fetching news circulars:", error);
-    items = galleryData;
+    items = galleryData.filter(
+      (i) =>
+        i.section === "news-circulars" ||
+        i.event?.toLowerCase().includes("circular") ||
+        i.event?.toLowerCase().includes("news")
+    );
   }
 
   return (
