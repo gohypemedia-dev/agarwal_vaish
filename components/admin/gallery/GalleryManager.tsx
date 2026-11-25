@@ -74,7 +74,7 @@ export default function GalleryManager({
   r2PublicUrl,
 }: GalleryManagerProps) {
   const [items, setItems] = useState<AdminGalleryItem[]>(initialItems);
-  const [activeTab, setActiveTab] = useState<"all" | "photos" | "videos" | "press-release" | "news-circulars">("all");
+  const [activeTab, setActiveTab] = useState<"photos" | "videos" | "press-release" | "news-circulars">("photos");
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<AdminGalleryItem | null>(null);
@@ -116,7 +116,6 @@ export default function GalleryManager({
   // Tab counts
   const counts = useMemo(() => {
     return {
-      all: items.length,
       photos: items.filter((i) => i.section === "photos" || (!i.section && i.type === "PHOTO")).length,
       videos: items.filter((i) => i.section === "videos" || (!i.section && i.type === "VIDEO")).length,
       press: items.filter((i) => i.section === "press-release" || i.event?.toLowerCase().includes("press")).length,
@@ -153,12 +152,16 @@ export default function GalleryManager({
 
   // Open Modal to Add
   const handleOpenAdd = () => {
-    const nextOrder = items.length > 0 ? Math.max(...items.map((i) => i.displayOrder)) + 1 : 1;
+    const initialSec = activeTab;
+    const isVid = initialSec === "videos";
+    const sectionItems = items.filter(
+      (i) => (i.section || (i.type === "VIDEO" ? "videos" : "photos")) === initialSec
+    );
+    const nextOrder = sectionItems.length > 0 ? Math.max(...sectionItems.map((i) => i.displayOrder)) + 1 : 1;
+
     setEditingItem(null);
     setShowMoreFields(false);
     setSourceMode("upload");
-    const initialSec = activeTab === "all" ? "photos" : activeTab;
-    const isVid = initialSec === "videos";
     setFormData({
       type: isVid ? "VIDEO" : "PHOTO",
       section: initialSec,
@@ -174,6 +177,7 @@ export default function GalleryManager({
       displayOrder: nextOrder,
       date: new Date().toLocaleDateString("en-US", { month: "long", year: "numeric" }),
     });
+    setUploadError(null);
     setIsModalOpen(true);
   };
 
@@ -425,30 +429,35 @@ export default function GalleryManager({
     }
   };
 
-  // Move Order Up or Down with clean consecutive ranks and backend sync
+  // Move Order Up or Down with clean consecutive ranks and backend sync (per section)
   const handleMoveOrder = async (item: AdminGalleryItem, direction: "up" | "down") => {
-    const sorted = [...items].sort((a, b) => a.displayOrder - b.displayOrder);
-    const index = sorted.findIndex((i) => i.id === item.id);
+    // Reorder strictly within the current section's items so other sections don't conflict
+    const currentSectionList = [...filteredItems];
+    const index = currentSectionList.findIndex((i) => i.id === item.id);
     const targetIndex = direction === "up" ? index - 1 : index + 1;
 
-    if (targetIndex < 0 || targetIndex >= sorted.length) return;
+    if (targetIndex < 0 || targetIndex >= currentSectionList.length) return;
 
-    // Move element to new target index
-    const reordered = [...sorted];
-    const [moved] = reordered.splice(index, 1);
-    reordered.splice(targetIndex, 0, moved);
+    // Move element to new target index within this section
+    const reorderedSection = [...currentSectionList];
+    const [moved] = reorderedSection.splice(index, 1);
+    reorderedSection.splice(targetIndex, 0, moved);
 
-    // Reassign clean 1-based displayOrders
-    const updatedItems = reordered.map((it, idx) => ({
+    // Reassign clean 1-based displayOrders for this section
+    const updatedSectionItems = reorderedSection.map((it, idx) => ({
       ...it,
       displayOrder: idx + 1,
     }));
+
+    // Update state merging updatedSectionItems into items
+    const updatedMap = new Map(updatedSectionItems.map((it) => [it.id, it]));
+    const updatedItems = items.map((it) => updatedMap.get(it.id) || it);
 
     // Optimistic UI update
     setItems(updatedItems);
 
     try {
-      const payload = updatedItems.map((it) => ({
+      const payload = updatedSectionItems.map((it) => ({
         id: it.id,
         displayOrder: it.displayOrder,
       }));
@@ -507,7 +516,7 @@ export default function GalleryManager({
             </span>
           </div>
           <p className="text-xs sm:text-sm text-[#2B201A]/65">
-            {items.length} media items on the Aggarwal Vaish Samaj website.
+            {items.length} media items on the Aggarwal Vaish Vikas Sangathan website.
           </p>
         </div>
 
@@ -535,16 +544,6 @@ export default function GalleryManager({
       {/* FILTER BUTTONS & SEARCH */}
       <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
         <div className="flex p-1 bg-white rounded-xl border border-[#E7D8C8] overflow-x-auto max-w-full">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer whitespace-nowrap shrink-0 ${
-              activeTab === "all"
-                ? "bg-[#2B201A] text-white shadow-xs"
-                : "text-[#2B201A]/70 hover:text-[#2B201A]"
-            }`}
-          >
-            All ({counts.all})
-          </button>
           <button
             onClick={() => setActiveTab("photos")}
             className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shrink-0 ${

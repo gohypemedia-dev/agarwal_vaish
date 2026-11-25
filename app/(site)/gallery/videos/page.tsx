@@ -7,9 +7,9 @@ import GalleryPageClient from "../GalleryPageClient";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "वीडियो गैलरी | Video Gallery - Aggarwal Vaish Samaj Haryana",
+  title: "वीडियो गैलरी | Video Gallery - Aggarwal Vaish Vikas Sangathan",
   description:
-    "अग्रवाल वैश्य समाज (AVS Haryana) के प्रांतीय सम्मेलनों, समाज सेवा एवं सांस्कृतिक कार्यक्रमों के विशेष वीडियो।",
+    "अग्रवाल वैश्य विकास संगठन के प्रांतीय सम्मेलनों, समाज सेवा एवं सांस्कृतिक कार्यक्रमों के विशेष वीडियो।",
 };
 
 export default async function VideoGalleryPage() {

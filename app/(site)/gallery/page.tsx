@@ -7,21 +7,21 @@ import GalleryPageClient from "./GalleryPageClient";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "गैलरी एवं झलकियाँ | Aggarwal Vaish Samaj Haryana",
+  title: "गैलरी एवं झलकियाँ | Aggarwal Vaish Vikas Sangathan",
   description:
-    "अग्रवाल वैश्य समाज (AVS Haryana) के आयोजनों, सम्मेलनों, युवा व महिला प्रकोष्ठ गतिविधियों और यादगार पलों की खूबसूरत झलकियाँ।",
+    "अग्रवाल वैश्य विकास संगठन के आयोजनों, सम्मेलनों, युवा व महिला प्रकोष्ठ गतिविधियों और यादगार पलों की खूबसूरत झलकियाँ।",
   openGraph: {
-    title: "हमारी झलकियाँ | Photos & Videos Gallery - Aggarwal Vaish Samaj Haryana",
+    title: "हमारी झलकियाँ | Photos & Videos Gallery - Aggarwal Vaish Vikas Sangathan",
     description:
-      "हमारे आयोजनों, सम्मेलनों और समाज सेवा के यादगार पलों की खूबसूरत झलकियाँ। AVS Haryana Gallery.",
-    url: "https://avsharyana.com/gallery",
-    siteName: "Aggarwal Vaish Samaj Haryana",
+      "हमारे आयोजनों, सम्मेलनों और समाज सेवा के यादगार पलों की खूबसूरत झलकियाँ।",
+    url: "https://avvs.org/gallery",
+    siteName: "Aggarwal Vaish Vikas Sangathan",
     images: [
       {
         url: "/images/agarwal/banner-square.jpg",
         width: 1200,
         height: 630,
-        alt: "Aggarwal Vaish Samaj Haryana Gallery",
+        alt: "Aggarwal Vaish Vikas Sangathan Gallery",
       },
     ],
   },

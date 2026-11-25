@@ -196,8 +196,8 @@ export default function GalleryPageClient({
   headingEnHighlight = "Gallery",
   headingHiPrefix = "फोटो ",
   headingHiHighlight = "गैलरी",
-  subheadingEn = "A glimpse into the cherished moments, celebrations, and community initiatives of Aggarwal Vaish Samaj Haryana.",
-  subheadingHi = "अग्रवाल वैश्य समाज हरियाणा के आयोजनों, सम्मेलनों और समाज सेवा के यादगार पलों की खूबसूरत झलकियाँ।",
+  subheadingEn = "A glimpse into the cherished moments, celebrations, and community initiatives of Aggarwal Vaish Vikas Sangathan.",
+  subheadingHi = "अग्रवाल वैश्य विकास संगठन के आयोजनों, सम्मेलनों और समाज सेवा के यादगार पलों की खूबसूरत झलकियाँ।",
 }: GalleryPageClientProps = {}) {
   const { lang } = useApp();
 

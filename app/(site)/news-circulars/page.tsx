@@ -7,9 +7,9 @@ import GalleryPageClient from "../gallery/GalleryPageClient";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "समाचार एवं परिपत्र | News & Circulars - Aggarwal Vaish Samaj Haryana",
+  title: "समाचार एवं परिपत्र | News & Circulars - Aggarwal Vaish Vikas Sangathan",
   description:
-    "अग्रवाल वैश्य समाज (AVS Haryana) प्रदेश कार्यालय द्वारा जारी आधिकारिक परिपत्र, संगठनात्मक घोषणाएँ एवं ताजा समाचार।",
+    "अग्रवाल वैश्य विकास संगठन प्रदेश कार्यालय द्वारा जारी आधिकारिक परिपत्र, संगठनात्मक घोषणाएँ एवं ताजा समाचार।",
 };
 
 export default async function NewsCircularsPage() {

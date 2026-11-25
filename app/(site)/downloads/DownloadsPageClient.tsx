@@ -177,10 +177,10 @@ export default function DownloadsPageClient() {
         {/* ==================================================================== */}
         <div className="space-y-2 text-center max-w-3xl mx-auto">
           <h1 className="font-editorial text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-            <span className="text-[#B8893E]">
+            <span className="text-[#1E1612]">
               {lang === "hi" ? "डाउनलोड " : "Download "}
             </span>
-            <span className="text-[#1E1612]">
+            <span className="text-[#7F160C]">
               {lang === "hi" ? "संसाधन एवं प्रपत्र" : "Resources"}
             </span>
           </h1>

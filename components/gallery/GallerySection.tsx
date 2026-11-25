@@ -111,21 +111,30 @@ function GalleryCarouselTile({
 
 export default function GallerySection({ initialItems }: { initialItems?: GalleryItem[] }) {
   const { lang } = useApp();
-  const [items, setItems] = useState<GalleryItem[]>(
-    initialItems && initialItems.length > 0 ? initialItems : galleryData
-  );
+  const [items, setItems] = useState<GalleryItem[]>(() => {
+    const base = initialItems && initialItems.length > 0 ? initialItems : galleryData;
+    return base.filter(
+      (i) => (i.section === "photos" || (!i.section && i.type === "photo")) && i.section !== "press-release" && !i.event?.toLowerCase().includes("press")
+    );
+  });
   const [selectedItem, setSelectedItem] = useState<GalleryItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
 
-  // Fetch live gallery items ordered strictly by rank (displayOrder)
+  // Fetch live photo gallery items ordered strictly by rank (displayOrder)
   useEffect(() => {
-    fetch(`/api/gallery?t=${Date.now()}`, { cache: "no-store" })
+    fetch(`/api/gallery?section=photos&t=${Date.now()}`, { cache: "no-store" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data: GalleryItem[]) => {
         if (Array.isArray(data) && data.length > 0) {
-          const sorted = [...data].sort(
+          const photoOnly = data.filter(
+            (i) =>
+              (i.section === "photos" || (!i.section && i.type === "photo")) &&
+              i.section !== "press-release" &&
+              !i.event?.toLowerCase().includes("press")
+          );
+          const sorted = [...photoOnly].sort(
             (a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999)
           );
           setItems(sorted);
@@ -134,9 +143,15 @@ export default function GallerySection({ initialItems }: { initialItems?: Galler
       .catch((err) => console.warn("Could not fetch live gallery items:", err));
   }, []);
 
-  // Exactly top 8 items sorted by displayOrder / rank for carousel showcase
+  // Exactly top 8 photo items sorted by displayOrder / rank for carousel showcase
   const displayItems = useMemo(() => {
     return [...items]
+      .filter(
+        (i) =>
+          (i.section === "photos" || (!i.section && i.type === "photo")) &&
+          i.section !== "press-release" &&
+          !i.event?.toLowerCase().includes("press")
+      )
       .sort((a, b) => (a.displayOrder ?? 9999) - (b.displayOrder ?? 9999))
       .slice(0, 8);
   }, [items]);
