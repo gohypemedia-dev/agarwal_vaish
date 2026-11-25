@@ -312,12 +312,6 @@ export default function HomePage() {
                 <span>वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।</span>
               </div>
 
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVS" fill className="object-contain" />
-                </span>
-                <span>अग्रवाल वैश्य विकास संगठन हरियाणा • समाज को जगाना है, राजनीति में लाना है</span>
-              </div>
 
               <div className="inline-flex items-center gap-3">
                 <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
