@@ -92,7 +92,15 @@ export async function POST(request: Request) {
     }
   }
 
-  // Fallback: save into public/images/gallery/
+  // On Vercel / Production: local filesystem is read-only, so R2 is required
+  if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+    return jsonError(
+      "Cloudflare R2 credentials are missing on Vercel. Please add R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET, and R2_PUBLIC_URL to Vercel Environment Variables.",
+      400
+    );
+  }
+
+  // Fallback in local development: save into public/
   try {
     const uploadDir = path.resolve(process.cwd(), `public/${subfolder}`);
     await mkdir(uploadDir, { recursive: true });
@@ -109,7 +117,7 @@ export async function POST(request: Request) {
     });
   } catch (err: unknown) {
     console.error("Local upload fallback error:", err);
-    return jsonError("Failed to save media locally.", 500);
+    return jsonError("Failed to save media locally. Please configure Cloudflare R2 credentials.", 500);
   }
 }
 

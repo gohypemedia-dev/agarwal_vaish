@@ -239,7 +239,7 @@ export default function GalleryManager({
         method: "POST",
         body,
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Upload failed");
 
       if (isVideoFile || data.isVideo) {
@@ -955,12 +955,26 @@ export default function GalleryManager({
                     )}
                   </div>
 
-                  {/* IN-MODAL ALERT FOR ERRORS (>10MB) */}
+                  {!r2Configured && (
+                    <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs">
+                      <p className="font-bold flex items-center gap-1.5">
+                        <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+                        Cloudflare R2 Not Configured on Server
+                      </p>
+                      <p className="text-[11px] text-amber-700 mt-1">
+                        Please add Cloudflare R2 environment variables (<code className="font-mono">R2_ACCOUNT_ID</code>, etc.) in your Vercel Dashboard to enable direct uploads.
+                      </p>
+                    </div>
+                  )}
+
+                  {/* IN-MODAL ALERT FOR ERRORS */}
                   {uploadError && (
                     <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-semibold flex items-start gap-2.5 animate-in fade-in">
                       <AlertCircle className="w-4 h-4 shrink-0 text-red-600 mt-0.5" />
                       <div className="flex-1">
-                        <p className="font-bold">Video Upload Restricted (Max 10MB)</p>
+                        <p className="font-bold">
+                          {uploadError.toLowerCase().includes("video") ? "Video Upload Limit (Max 10MB)" : "Upload Notice"}
+                        </p>
                         <p className="text-[11px] text-red-600 mt-0.5">{uploadError}</p>
                       </div>
                       <button
