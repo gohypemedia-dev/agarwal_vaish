@@ -70,10 +70,10 @@ export async function POST(req: Request) {
     // 3. Search Donations made by this phone or email
     const donationConditions: any[] = [];
     if (cleanPhone.length >= 10) {
-      donationConditions.push({ donorPhone: { contains: cleanPhone } });
+      donationConditions.push({ donorMobile: { contains: cleanPhone } });
     }
     if (registration?.phone) {
-      donationConditions.push({ donorPhone: { contains: registration.phone.slice(-10) } });
+      donationConditions.push({ donorMobile: { contains: registration.phone.slice(-10) } });
     }
     if (isEmail) {
       donationConditions.push({ donorEmail: { equals: identifier.toLowerCase(), mode: "insensitive" } });
@@ -89,6 +89,7 @@ export async function POST(req: Request) {
           take: 50,
           select: {
             id: true,
+            donationId: true,
             donorName: true,
             amountPaise: true,
             type: true,
@@ -198,7 +199,8 @@ export async function POST(req: Request) {
         createdAt: registration?.createdAt || memberRecord?.createdAt || donations[0]?.createdAt,
       },
       donations: donations.map((d) => ({
-        id: d.id,
+        id: d.donationId || d.id,
+        donationId: d.donationId || d.id,
         donorName: d.donorName,
         amount: d.amountPaise / 100,
         type: d.type,
