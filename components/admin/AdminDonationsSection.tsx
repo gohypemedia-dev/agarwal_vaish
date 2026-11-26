@@ -97,7 +97,7 @@ export default function AdminDonationsSection({
       if (pg && pg > 1) p.set("page", String(pg));
 
       const qs = p.toString();
-      return qs ? `/admin?${qs}` : "/admin";
+      return qs ? `/admin/donations?${qs}` : "/admin/donations";
     },
     [effectiveType, effectiveStatus, currentQuery]
   );

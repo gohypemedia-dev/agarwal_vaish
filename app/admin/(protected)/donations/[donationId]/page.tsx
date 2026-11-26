@@ -65,7 +65,7 @@ export default async function DonationDetailPage({ params }: { params: Promise<{
   return (
     <div className="space-y-6">
       <AutoRefresh />
-      <Link href="/admin" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B201A]/70 hover:text-[#7F160C]">
+      <Link href="/admin/donations" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#2B201A]/70 hover:text-[#7F160C]">
         <ArrowLeft className="w-4 h-4" /> All donations
       </Link>
 

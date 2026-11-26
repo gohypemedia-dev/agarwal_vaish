@@ -206,6 +206,14 @@ function AdminSectionPreloader({ targetPath }: { targetPath: string }) {
     );
   }
 
+  if (cleanPath === "/admin/donations" || cleanPath.startsWith("/admin/donations")) {
+    return (
+      <div className="animate-in fade-in duration-150">
+        <TableSkeleton label="Loading donations and contributions..." rows={8} stats={true} />
+      </div>
+    );
+  }
+
   return (
     <div className="animate-in fade-in duration-150">
       <TableSkeleton label="Loading section data..." rows={6} />
