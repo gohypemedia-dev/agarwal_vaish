@@ -7,7 +7,10 @@ import { jsonError } from "@/lib/server/http";
 import { prisma } from "@/lib/server/prisma";
 import { clientIp, rateLimit, tooManyRequests } from "@/lib/server/rate-limit";
 
-const schema = z.object({ submitToken: z.string().min(20).max(100) });
+const schema = z.object({
+  submitToken: z.string().min(20).max(100),
+  utr: z.string().optional(),
+});
 
 export const maxDuration = 30;
 
@@ -36,11 +39,13 @@ export async function POST(request: Request, { params }: { params: Promise<{ don
   const token = approvalToken({ donationId, submitTokenHash: donation.submitTokenHash });
   const tokenHash = sha256(token);
   // Conditional update: tapping twice changes nothing the second time.
+  const cleanUtr = body.data.utr?.trim() || null;
   const updated = await prisma.donation.updateMany({
     where: { donationId, status: "PENDING_PAYMENT" },
     data: {
       status: "PENDING_VERIFICATION",
       proofSubmittedAt: new Date(),
+      ...(cleanUtr ? { utr: cleanUtr } : {}),
       ...(donation.approvalTokenHash !== tokenHash ? { approvalTokenHash: tokenHash } : {}),
     },
   });
@@ -48,8 +53,12 @@ export async function POST(request: Request, { params }: { params: Promise<{ don
   if (updated.count === 1) {
     const approveUrl = approvalLink(request, token);
     after(async () => {
-      const fresh = await prisma.donation.findUniqueOrThrow({ where: { donationId } });
-      await sendApprovalRequestEmail(fresh, approveUrl);
+      try {
+        const fresh = await prisma.donation.findUniqueOrThrow({ where: { donationId } });
+        await sendApprovalRequestEmail(fresh, approveUrl);
+      } catch (err) {
+        console.error("[donations] Failed to send approval request email on paid:", err);
+      }
     });
   }
 

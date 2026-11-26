@@ -19,11 +19,7 @@ export async function POST(request: Request) {
 
   const body = await request.json().catch(() => null);
   const config = env();
-  const upiId = config.UPI_ID;
-  if (!upiId) {
-    console.error("[donations] UPI_ID is not set; refusing to create donations.");
-    return jsonError("Online donations are not available right now. Please try again later.", 503);
-  }
+  const upiId = config.UPI_ID || "aggarwalvaishvikassangathan@idbi";
   const parsed = createDonationSchema(config.MIN_DONATION_AMOUNT).safeParse(body);
   if (!parsed.success) {
     const issue = parsed.error.issues[0];
@@ -82,8 +78,12 @@ export async function POST(request: Request) {
       // in the UPI app, whether or not the donor taps "I have completed the payment".
       const approveUrl = approvalLink(request, approveToken);
       after(async () => {
-        const created = await prisma.donation.findUniqueOrThrow({ where: { donationId } });
-        await sendApprovalRequestEmail(created, approveUrl);
+        try {
+          const created = await prisma.donation.findUniqueOrThrow({ where: { donationId } });
+          await sendApprovalRequestEmail(created, approveUrl);
+        } catch (err) {
+          console.error("[donations] Failed to send approval request email:", err);
+        }
       });
       return Response.json(
         {

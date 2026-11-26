@@ -11,6 +11,7 @@ import {
   ShieldCheck,
   ArrowLeft,
   CheckCircle2,
+  Loader2,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import HeadingDivider from "@/components/HeadingDivider";
@@ -32,6 +33,11 @@ export default function DonatePage() {
   const [copiedUpi, setCopiedUpi] = useState(false);
   const [validationError, setValidationError] = useState("");
 
+  const [donationId, setDonationId] = useState<string>("");
+  const [submitToken, setSubmitToken] = useState<string>("");
+  const [serverQrData, setServerQrData] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
   const currentAmount = isCustom ? Number(customAmount) || 0 : selectedAmount;
 
   const handleCopyUpi = () => {
@@ -40,7 +46,7 @@ export default function DonatePage() {
     setTimeout(() => setCopiedUpi(false), 2000);
   };
 
-  const handleContinueToPayment = (e: React.FormEvent) => {
+  const handleContinueToPayment = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
       setValidationError(lang === "hi" ? "कृपया अपना पूरा नाम दर्ज करें" : "Please enter your full name");
@@ -60,7 +66,60 @@ export default function DonatePage() {
     }
 
     setValidationError("");
-    setStep(2);
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch("/api/donations", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName.trim(),
+          email: email.trim(),
+          mobile: mobile.trim() || undefined,
+          amount: currentAmount,
+          program: "General Donation",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to initiate donation");
+      }
+
+      setDonationId(data.donationId || "");
+      setSubmitToken(data.submitToken || "");
+      if (data.qrData) setServerQrData(data.qrData);
+      setStep(2);
+    } catch (err: any) {
+      console.error("[donation] Failed to create donation intent:", err);
+      // Still proceed to step 2 so donor can scan UPI QR
+      setStep(2);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCompletePayment = async () => {
+    setIsSubmitting(true);
+    setValidationError("");
+
+    try {
+      if (donationId && submitToken) {
+        await fetch(`/api/donations/${donationId}/paid`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            submitToken,
+            utr: utr.trim() || undefined,
+          }),
+        });
+      }
+    } catch (err: any) {
+      console.error("[donation] Failed to mark donation as paid:", err);
+    } finally {
+      setIsSubmitting(false);
+      setStep(3);
+    }
   };
 
   const upiQrString = `upi://pay?pa=aggarwalvaishvikassangathan@idbi&pn=AGGARWAL%20VAISH%20VIKAS%20SANGATHAN&am=${currentAmount}&cu=INR`;
@@ -316,9 +375,14 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                   {/* Action Button */}
                   <button
                     type="submit"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 uppercase"
+                    disabled={isSubmitting}
+                    className="w-full py-3.5 px-4 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 uppercase disabled:opacity-60"
                   >
-                    CONTINUE TO PAYMENT • ₹{currentAmount.toLocaleString("en-IN")}
+                    {isSubmitting ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <span>CONTINUE TO PAYMENT • ₹{currentAmount.toLocaleString("en-IN")}</span>
+                    )}
                   </button>
                 </form>
               )}
@@ -369,7 +433,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
 
                       <div className="p-2 bg-white rounded-xl border border-gray-200 shadow-2xs relative">
                         <QRCodeSVG
-                          value={upiQrString}
+                          value={serverQrData || upiQrString}
                           size={180}
                           level="H"
                           imageSettings={{
@@ -447,11 +511,18 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                   <div className="space-y-2.5 pt-1">
                     <button
                       type="button"
-                      onClick={() => setStep(3)}
-                      className="w-full py-3.5 px-4 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 uppercase"
+                      disabled={isSubmitting}
+                      onClick={handleCompletePayment}
+                      className="w-full py-3.5 px-4 rounded-xl bg-[#7F160C] hover:bg-[#69120A] text-white font-bold text-sm tracking-wide transition-all shadow-md hover:shadow-lg active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 uppercase disabled:opacity-60"
                     >
-                      <CheckCheck className="w-4 h-4" />
-                      <span>I HAVE COMPLETED PAYMENT</span>
+                      {isSubmitting ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <>
+                          <CheckCheck className="w-4 h-4" />
+                          <span>I HAVE COMPLETED PAYMENT</span>
+                        </>
+                      )}
                     </button>
 
                     <div className="flex items-center gap-2">
@@ -498,6 +569,12 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                   </div>
 
                   <div className="p-4 rounded-xl bg-[#FFF9F2] border border-[#E8DFD3] text-left text-xs sm:text-sm space-y-2">
+                    {donationId && (
+                      <div className="flex justify-between border-b border-[#E8DFD3] pb-1.5">
+                        <span className="text-gray-500 font-medium">Donation ID:</span>
+                        <span className="font-mono font-bold text-[#7F160C]">{donationId}</span>
+                      </div>
+                    )}
                     <div className="flex justify-between border-b border-[#E8DFD3] pb-1.5">
                       <span className="text-gray-500 font-medium">Donor Name:</span>
                       <span className="font-bold text-gray-900">{fullName}</span>
