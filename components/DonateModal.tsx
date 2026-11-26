@@ -101,7 +101,10 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
     setTimeout(() => setCopiedUpi(false), 2000);
   };
 
-  const handleContinueToPayment = async (e: React.FormEvent) => {
+  const programTitle =
+    donateModal.program || (lang === "hi" ? "सहयोग राशि दान" : "Contribution / Donation");
+
+  const handleContinueToPayment = (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName.trim()) {
       setValidationError(lang === "hi" ? "कृपया अपना पूरा नाम दर्ज करें" : "Please enter your full name");
@@ -121,36 +124,7 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
     }
 
     setValidationError("");
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch("/api/donations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: fullName.trim(),
-          email: email.trim(),
-          mobile: mobile.trim() || undefined,
-          amount: currentAmount,
-          program: programTitle,
-        }),
-      });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to initiate donation");
-      }
-
-      setDonationId(data.donationId || "");
-      setSubmitToken(data.submitToken || "");
-      if (data.qrData) setServerQrData(data.qrData);
-      setStep(2);
-    } catch (err: any) {
-      console.error("[donation] Failed to create donation intent:", err);
-      setStep(2);
-    } finally {
-      setIsSubmitting(false);
-    }
+    setStep(2);
   };
 
   const handleCompletePayment = async () => {
@@ -158,26 +132,30 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
     setValidationError("");
 
     try {
-      if (donationId && submitToken) {
-        await fetch(`/api/donations/${donationId}/paid`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            submitToken,
-            utr: utr.trim() || undefined,
-          }),
-        });
+      const res = await fetch("/api/donations/record", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: fullName.trim(),
+          email: email.trim(),
+          mobile: mobile.trim() || undefined,
+          amount: currentAmount,
+          utr: utr.trim() || undefined,
+          program: programTitle,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.donationId) {
+        setDonationId(data.donationId);
       }
     } catch (err: any) {
-      console.error("[donation] Failed to mark donation as paid:", err);
+      console.error("[donation] Failed to record donation:", err);
     } finally {
       setIsSubmitting(false);
       setStep(3);
     }
   };
-
-  const programTitle =
-    donateModal.program || (lang === "hi" ? "सहयोग राशि दान" : "Contribution / Donation");
 
   const upiQrString = `upi://pay?pa=aggarwalvaishvikassangathan@idbi&pn=AGGARWAL%20VAISH%20VIKAS%20SANGATHAN&am=${currentAmount}&cu=INR`;
 
@@ -581,6 +559,12 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                   maxLength={18}
                   value={utr}
                   onChange={(e) => setUtr(e.target.value.replace(/[^a-zA-Z0-9]/g, ""))}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      handleCompletePayment();
+                    }
+                  }}
                   placeholder="e.g. 432109876543"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-white border border-[#E8DFD3] text-sm text-[#1E293B] placeholder-gray-400 focus:outline-none focus:border-[#7F160C] transition-colors font-mono"
                 />

@@ -12,8 +12,8 @@ const schema = z
     DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
 
     // Optional so admin tools keep working before it is set; new donations are refused until then.
-    UPI_ID: optional.pipe(z.string().regex(/^[\w.-]+@[\w.-]+$/, "UPI_ID must look like name@bank").optional()),
-    UPI_NAME: z.string().min(1).max(50),
+    UPI_ID: optional.pipe(z.string().regex(/^[\w.-]+@[\w.-]+$/, "UPI_ID must look like name@bank").optional()).default("aggarwalvaishvikassangathan@idbi"),
+    UPI_NAME: z.string().min(1).max(50).default("Aggarwal Vaish Vikas Sangathan"),
     // Merchant category code from the bank's own QR (mc=...). Leave empty for a personal UPI ID.
     UPI_MCC: optional.pipe(z.string().regex(/^\d{4}$/, "UPI_MCC must be 4 digits").optional()),
     // Shown under the UPI ID on the payment card, e.g. "Current account • 0330".
