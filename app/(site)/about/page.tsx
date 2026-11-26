@@ -323,8 +323,8 @@ export default function AboutPage() {
                 key={pledge.num}
                 className="w-[85vw] max-w-[320px] md:w-auto md:max-w-none shrink-0 snap-center rounded-2xl sm:rounded-3xl overflow-hidden border border-amber-100/80 shadow-md bg-white flex flex-col justify-between select-none"
               >
-                {/* Top Solid Brand Swatch Section (#7F160C) */}
-                <div className="relative bg-[#7F160C] h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
+                {/* Top Solid Brand Swatch Section (#7F160C to #FFAE07 Gradient) */}
+                <div className="relative bg-sankalp-gradient h-60 sm:h-68 md:h-76 min-h-[240px] sm:min-h-[270px] flex items-center justify-center p-3 sm:p-5 text-center shadow-inner overflow-hidden">
                   <h3 
                     className="font-sankalp-title text-[54px] text-white leading-[1.08] drop-shadow-md px-1 sm:px-2 tracking-tight text-center flex flex-col items-center justify-center"
                     style={{ fontFamily: "'Mukta', sans-serif", fontWeight: 800 }}

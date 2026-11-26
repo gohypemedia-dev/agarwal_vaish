@@ -569,3 +569,8 @@
     font-weight: 800 !important;
     letter-spacing: -0.01em;
   }
+
+  /* Panch Sankalp Premium Maroon & Golden Amber (#FFAE07) Gradient */
+  .bg-sankalp-gradient {
+    background: linear-gradient(135deg, #5E0F07 0%, #7F160C 35%, #B23512 72%, #FFAE07 100%);
+  }
