@@ -7,7 +7,7 @@ const memberSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters").max(100),
   email: z.string().trim().email("Invalid email").optional().nullable().or(z.literal("")),
   phone: z.string().trim().max(30).optional().nullable().or(z.literal("")),
-  tier: z.enum(["FREE", "BASIC", "SILVER", "GOLD", "PLATINUM"]).default("BASIC"),
+  tier: z.enum(["PATRON", "CO_PATRON", "ACTIVE", "FREE", "BASIC", "SILVER", "GOLD", "PLATINUM"]).default("ACTIVE"),
   status: z.enum(["ACTIVE", "INACTIVE", "EXPIRED"]).default("ACTIVE"),
   role: z.string().trim().max(100).optional().nullable(),
   address: z.string().trim().max(300).optional().nullable(),

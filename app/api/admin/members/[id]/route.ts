@@ -10,7 +10,7 @@ const updateMemberSchema = z.object({
   name: z.string().trim().min(2).max(100).optional(),
   email: z.string().trim().email("Invalid email").optional().nullable().or(z.literal("")),
   phone: z.string().trim().max(30).optional().nullable().or(z.literal("")),
-  tier: z.enum(["FREE", "BASIC", "SILVER", "GOLD", "PLATINUM"]).optional(),
+  tier: z.enum(["PATRON", "CO_PATRON", "ACTIVE", "FREE", "BASIC", "SILVER", "GOLD", "PLATINUM"]).optional(),
   status: z.enum(["ACTIVE", "INACTIVE", "EXPIRED"]).optional(),
   role: z.string().trim().max(100).optional().nullable(),
   address: z.string().trim().max(300).optional().nullable(),

@@ -254,16 +254,25 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* 3. RIGHT: Search Members Button */}
-            <div className="flex items-center gap-2 xl:gap-3 shrink-0">
+            {/* 3. RIGHT: Search Members & Account Button */}
+            <div className="flex items-center gap-2 xl:gap-2.5 shrink-0">
               <Link
                 href="/advance-search"
                 onClick={() => setActiveDropdown(null)}
-                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
+                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-3.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
               >
                 <Search className="w-3.5 h-3.5 xl:w-4 xl:h-4 stroke-[2.2]" />
                 <span className="hidden xl:inline">Search Members</span>
                 <span className="xl:hidden">Search</span>
+              </Link>
+
+              <Link
+                href="/account"
+                onClick={() => setActiveDropdown(null)}
+                className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-4 rounded-lg bg-[#7F160C] text-white hover:bg-[#69120A] transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
+              >
+                <User className="w-3.5 h-3.5 xl:w-4 xl:h-4" />
+                <span>Account</span>
               </Link>
             </div>
 
@@ -295,12 +304,20 @@ export default function Header() {
             {/* Mobile Right Controls */}
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <Link
+                href="/account"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#7F160C] text-white hover:bg-[#69120A] transition-all text-xs font-semibold shadow-xs"
+                aria-label="Account"
+              >
+                <User className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Account</span>
+              </Link>
+
+              <Link
                 href="/advance-search"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
+                className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
                 aria-label="Search Members"
               >
                 <Search className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Search</span>
               </Link>
 
               <button
@@ -413,7 +430,16 @@ export default function Header() {
                   );
                 })}
 
-                {/* 8. SEARCH MEMBERS */}
+                {/* 8. ACCOUNT & SEARCH MEMBERS */}
+                <Link
+                  href="/account"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 text-[13px] font-bold text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                >
+                  <User className="w-4 h-4" />
+                  <span>MEMBER ACCOUNT</span>
+                </Link>
+
                 <Link
                   href="/advance-search"
                   onClick={() => setMobileMenuOpen(false)}

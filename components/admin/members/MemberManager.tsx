@@ -35,7 +35,14 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 
-export type MembershipTier = "FREE" | "BASIC" | "SILVER" | "GOLD" | "PLATINUM";
+export type MembershipTier = "PATRON" | "CO_PATRON" | "ACTIVE" | "FREE" | "BASIC" | "SILVER" | "GOLD" | "PLATINUM";
+
+export const normalizeTier = (tier?: string | null): "PATRON" | "CO_PATRON" | "ACTIVE" => {
+  const t = (tier || "").toUpperCase();
+  if (t === "PATRON" || t === "PLATINUM") return "PATRON";
+  if (t === "CO_PATRON" || t === "CO-PATRON" || t === "GOLD" || t === "SILVER") return "CO_PATRON";
+  return "ACTIVE";
+};
 
 export interface AdminMemberItem {
   id: string;
@@ -148,36 +155,59 @@ export interface MemberDetailsData {
   };
 }
 
-const TIER_ORDER: MembershipTier[] = ["BASIC", "SILVER", "GOLD", "PLATINUM"];
+const TIER_ORDER: MembershipTier[] = ["ACTIVE", "CO_PATRON", "PATRON"];
 
 const TIER_CONFIG: Record<
-  MembershipTier,
-  { label: string; badgeCls: string; color: string }
+  string,
+  { label: string; badgeCls: string; color: string; price: string }
 > = {
-  FREE: {
-    label: "Free / Registered",
-    badgeCls: "bg-stone-100 text-stone-700 border-stone-300 font-medium",
-    color: "#6B7280",
+  PATRON: {
+    label: "Patron Member",
+    badgeCls: "bg-purple-50 text-[#7F160C] border-[#7F160C]/40 font-black shadow-xs",
+    color: "#7F160C",
+    price: "₹1,00,000 (₹1L)",
+  },
+  CO_PATRON: {
+    label: "Co-Patron Member",
+    badgeCls: "bg-amber-50 text-[#B8893E] border-[#B8893E]/40 font-bold",
+    color: "#B8893E",
+    price: "₹21,000 (₹21k)",
+  },
+  ACTIVE: {
+    label: "Active Member",
+    badgeCls: "bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold",
+    color: "#059669",
+    price: "₹100",
   },
   BASIC: {
-    label: "Basic Member",
-    badgeCls: "bg-orange-50 text-[#B4531A] border-[#B4531A]/30 font-medium",
-    color: "#B4531A",
+    label: "Active Member",
+    badgeCls: "bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold",
+    color: "#059669",
+    price: "₹100",
   },
   SILVER: {
-    label: "Silver Member",
-    badgeCls: "bg-slate-100 text-[#475569] border-[#475569]/30 font-medium",
-    color: "#5F6B7D",
+    label: "Co-Patron Member",
+    badgeCls: "bg-amber-50 text-[#B8893E] border-[#B8893E]/40 font-bold",
+    color: "#B8893E",
+    price: "₹21,000",
   },
   GOLD: {
-    label: "Gold Member",
-    badgeCls: "bg-amber-50 text-[#A8721C] border-[#A8721C]/40 font-bold",
-    color: "#A8721C",
+    label: "Co-Patron Member",
+    badgeCls: "bg-amber-50 text-[#B8893E] border-[#B8893E]/40 font-bold",
+    color: "#B8893E",
+    price: "₹21,000",
   },
   PLATINUM: {
-    label: "Platinum Patron",
-    badgeCls: "bg-purple-50 text-[#6B21A8] border-[#6B21A8]/40 font-bold shadow-xs",
-    color: "#6B21A8",
+    label: "Patron Member",
+    badgeCls: "bg-purple-50 text-[#7F160C] border-[#7F160C]/40 font-black shadow-xs",
+    color: "#7F160C",
+    price: "₹1,00,000",
+  },
+  FREE: {
+    label: "Active Member",
+    badgeCls: "bg-stone-100 text-stone-700 border-stone-300 font-medium",
+    color: "#6B7280",
+    price: "₹100",
   },
 };
 
@@ -250,7 +280,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
     name: "",
     email: "",
     phone: "",
-    tier: "BASIC" as MembershipTier,
+    tier: "ACTIVE" as MembershipTier,
     status: "ACTIVE" as "ACTIVE" | "INACTIVE" | "EXPIRED",
     role: "Devotee Member",
     city: "",
@@ -263,7 +293,7 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
       name: "",
       email: "",
       phone: "",
-      tier: "BASIC",
+      tier: "ACTIVE",
       status: "ACTIVE",
       role: "Devotee Member",
       city: "",
@@ -418,7 +448,8 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
 
   // Filtered members list
   const filteredMembers = members.filter((member) => {
-    const matchesTier = tierFilter === "ALL" || member.tier === tierFilter;
+    const matchesTier =
+      tierFilter === "ALL" || normalizeTier(member.tier) === tierFilter;
     const q = searchQuery.toLowerCase().trim();
     const matchesSearch =
       !q ||
@@ -431,13 +462,12 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
     return matchesTier && matchesSearch;
   });
 
-  // Tier counts
+  // Tier counts matching exact 3 categories: Patron (₹1L), Co-Patron (₹21k), Active (₹100)
   const countByTier = {
     ALL: members.length,
-    BASIC: members.filter((m) => m.tier === "BASIC").length,
-    SILVER: members.filter((m) => m.tier === "SILVER").length,
-    GOLD: members.filter((m) => m.tier === "GOLD").length,
-    PLATINUM: members.filter((m) => m.tier === "PLATINUM").length,
+    PATRON: members.filter((m) => normalizeTier(m.tier) === "PATRON").length,
+    CO_PATRON: members.filter((m) => normalizeTier(m.tier) === "CO_PATRON").length,
+    ACTIVE: members.filter((m) => normalizeTier(m.tier) === "ACTIVE").length,
   };
 
   return (
@@ -467,42 +497,33 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
         </button>
       </div>
 
-      {/* Tier Summary Stat Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-4">
-        <div className="bg-white p-4 rounded-xl border border-[#E7D8C8] shadow-xs">
+      {/* Tier Summary Stat Cards (Exact 3 categories matching Pic 1) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <div className="bg-[#FFF9F2] p-4 rounded-xl border border-[#E8DFD3] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#B4531A] uppercase tracking-wider">Basic</span>
-            <Shield className="w-4 h-4 text-[#B4531A]" />
+            <span className="text-xs font-bold text-[#7F160C] uppercase tracking-wider">Patron (₹1L)</span>
+            <Crown className="w-4 h-4 text-[#7F160C]" />
           </div>
-          <p className="text-2xl font-black text-[#2B201A] mt-2">{countByTier.BASIC}</p>
-          <p className="text-[11px] text-[#2B201A]/60 mt-0.5">₹1,100 / yr tier</p>
+          <p className="text-2xl font-black text-[#7F160C] mt-2">{countByTier.PATRON}</p>
+          <p className="text-[11px] text-[#7F160C]/70 mt-0.5">Lifetime Patron (₹1,00,000)</p>
         </div>
 
-        <div className="bg-white p-4 rounded-xl border border-[#E7D8C8] shadow-xs">
+        <div className="bg-[#FFF9F2] p-4 rounded-xl border border-[#E8DFD3] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#475569] uppercase tracking-wider">Silver</span>
-            <Award className="w-4 h-4 text-[#475569]" />
+            <span className="text-xs font-bold text-[#7F160C] uppercase tracking-wider">Co-Patron (₹21k)</span>
+            <Award className="w-4 h-4 text-[#7F160C]" />
           </div>
-          <p className="text-2xl font-black text-[#2B201A] mt-2">{countByTier.SILVER}</p>
-          <p className="text-[11px] text-[#2B201A]/60 mt-0.5">₹5,100 / yr tier</p>
+          <p className="text-2xl font-black text-[#7F160C] mt-2">{countByTier.CO_PATRON}</p>
+          <p className="text-[11px] text-[#7F160C]/70 mt-0.5">Executive Co-Patron (₹21,000)</p>
         </div>
 
-        <div className="bg-white p-4 rounded-xl border border-[#E7D8C8] shadow-xs">
+        <div className="bg-[#FFF9F2] p-4 rounded-xl border border-[#E8DFD3] shadow-xs">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#A8721C] uppercase tracking-wider">Gold</span>
-            <Medal className="w-4 h-4 text-[#A8721C]" />
+            <span className="text-xs font-bold text-[#7F160C] uppercase tracking-wider">Active (₹100)</span>
+            <Shield className="w-4 h-4 text-[#7F160C]" />
           </div>
-          <p className="text-2xl font-black text-[#2B201A] mt-2">{countByTier.GOLD}</p>
-          <p className="text-[11px] text-[#2B201A]/60 mt-0.5">₹11,000 / yr tier</p>
-        </div>
-
-        <div className="bg-white p-4 rounded-xl border border-[#E7D8C8] shadow-xs">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-[#6B21A8] uppercase tracking-wider">Platinum</span>
-            <Crown className="w-4 h-4 text-[#6B21A8]" />
-          </div>
-          <p className="text-2xl font-black text-[#2B201A] mt-2">{countByTier.PLATINUM}</p>
-          <p className="text-[11px] text-[#2B201A]/60 mt-0.5">Lifetime Patron tier</p>
+          <p className="text-2xl font-black text-[#7F160C] mt-2">{countByTier.ACTIVE}</p>
+          <p className="text-[11px] text-[#7F160C]/70 mt-0.5">Active Community Member (₹100)</p>
         </div>
       </div>
 
@@ -522,17 +543,23 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
 
         {/* Tier Filter Tabs */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth pb-1 sm:pb-0">
-          {(["ALL", "BASIC", "SILVER", "GOLD", "PLATINUM"] as const).map((t) => (
+          {(["ALL", "PATRON", "CO_PATRON", "ACTIVE"] as const).map((t) => (
             <button
               key={t}
               onClick={() => setTierFilter(t)}
               className={`px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shrink-0 cursor-pointer ${
                 tierFilter === t
-                  ? "bg-[#2B201A] text-white"
+                  ? "bg-[#7F160C] text-white shadow-xs"
                   : "bg-[#FAF6F0] text-[#2B201A]/70 hover:bg-[#FBF2E7] hover:text-[#2B201A]"
               }`}
             >
-              {t === "ALL" ? `All (${members.length})` : t}
+              {t === "ALL"
+                ? `All (${members.length})`
+                : t === "PATRON"
+                ? `Patron (${countByTier.PATRON})`
+                : t === "CO_PATRON"
+                ? `Co-Patron (${countByTier.CO_PATRON})`
+                : `Active (${countByTier.ACTIVE})`}
             </button>
           ))}
         </div>
@@ -559,7 +586,8 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
               </thead>
               <tbody className="divide-y divide-[#E7D8C8]/60">
                 {filteredMembers.map((member) => {
-                  const currTierIdx = TIER_ORDER.indexOf(member.tier);
+                  const normalizedMemberTier = normalizeTier(member.tier);
+                  const currTierIdx = TIER_ORDER.indexOf(normalizedMemberTier);
                   const canUpgrade = currTierIdx < TIER_ORDER.length - 1;
                   const canDowngrade = currTierIdx > 0;
                   const nextTier = canUpgrade ? TIER_ORDER[currTierIdx + 1] : null;
@@ -649,20 +677,19 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                         <div className="inline-flex items-center gap-2">
                           {/* Styled Tier Selector Dropdown */}
                           <select
-                            value={member.tier}
+                            value={normalizeTier(member.tier)}
                             onChange={(e) =>
                               handleTierChange(member, e.target.value as MembershipTier)
                             }
                             disabled={isLoading}
                             className={`text-xs font-bold rounded-lg border px-2.5 py-1.5 cursor-pointer focus:outline-none transition-colors shadow-2xs ${
-                              TIER_CONFIG[member.tier].badgeCls
+                              TIER_CONFIG[member.tier]?.badgeCls || TIER_CONFIG.ACTIVE.badgeCls
                             }`}
                             title="Directly select membership tier"
                           >
-                            <option value="BASIC">Basic Member</option>
-                            <option value="SILVER">Silver Member</option>
-                            <option value="GOLD">Gold Member</option>
-                            <option value="PLATINUM">Platinum Patron</option>
+                            <option value="PATRON">Patron Member (₹1L)</option>
+                            <option value="CO_PATRON">Co-Patron Member (₹21k)</option>
+                            <option value="ACTIVE">Active Member (₹100)</option>
                           </select>
 
                           {/* Quick Upgrade & Downgrade icon buttons */}
@@ -820,16 +847,15 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     Membership Tier *
                   </label>
                   <select
-                    value={formData.tier}
+                    value={normalizeTier(formData.tier)}
                     onChange={(e) =>
                       setFormData({ ...formData, tier: e.target.value as MembershipTier })
                     }
                     className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   >
-                    <option value="BASIC">Basic (₹1,100 / yr)</option>
-                    <option value="SILVER">Silver (₹5,100 / yr)</option>
-                    <option value="GOLD">Gold (₹11,000 / yr)</option>
-                    <option value="PLATINUM">Platinum (Lifetime Patron)</option>
+                    <option value="PATRON">Patron Member (₹1L / ₹1,00,000)</option>
+                    <option value="CO_PATRON">Co-Patron Member (₹21k / ₹21,000)</option>
+                    <option value="ACTIVE">Active Member (₹100)</option>
                   </select>
                 </div>
                 <div>
@@ -952,16 +978,15 @@ export default function MemberManager({ initialMembers }: MemberManagerProps) {
                     Membership Tier
                   </label>
                   <select
-                    value={formData.tier}
+                    value={normalizeTier(formData.tier)}
                     onChange={(e) =>
                       setFormData({ ...formData, tier: e.target.value as MembershipTier })
                     }
                     className="w-full px-3 py-2 text-sm rounded-lg bg-[#FAF6F0] border border-[#E7D8C8] focus:outline-none focus:border-[#7F160C]"
                   >
-                    <option value="BASIC">Basic (₹1,100 / yr)</option>
-                    <option value="SILVER">Silver (₹5,100 / yr)</option>
-                    <option value="GOLD">Gold (₹11,000 / yr)</option>
-                    <option value="PLATINUM">Platinum (Lifetime Patron)</option>
+                    <option value="PATRON">Patron Member (₹1L / ₹1,00,000)</option>
+                    <option value="CO_PATRON">Co-Patron Member (₹21k / ₹21,000)</option>
+                    <option value="ACTIVE">Active Member (₹100)</option>
                   </select>
                 </div>
                 <div>
