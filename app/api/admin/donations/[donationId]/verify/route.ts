@@ -30,12 +30,10 @@ export async function POST(request: Request, { params }: { params: Promise<{ don
 
   const donation = await prisma.donation.findUniqueOrThrow({ where: { donationId } });
 
-  // If this was a membership purchase, automatically sync to Member table!
-  if (donation.type === "MEMBERSHIP") {
-    await syncDonationToMember(donation).catch((err) => {
-      console.warn("Failed to sync membership to Member table:", err);
-    });
-  }
+  // Automatically sync to Member table so account is created/activated immediately
+  await syncDonationToMember(donation).catch((err) => {
+    console.warn("Failed to sync donation to Member table:", err);
+  });
 
   const email = await sendConfirmationEmail(donation);
   await sendApprovedNoticeEmail(await prisma.donation.findUniqueOrThrow({ where: { donationId } }), `${admin.name} (dashboard)`);

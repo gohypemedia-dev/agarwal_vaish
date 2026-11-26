@@ -17,9 +17,27 @@ export async function POST(req: Request) {
     }
 
     const digitsOnly = identifier.replace(/\D/g, "");
-    const cleanPhone = digitsOnly.length >= 10 ? digitsOnly.slice(-10) : digitsOnly;
-    const isEmail = identifier.includes("@");
+    let cleanPhone = digitsOnly.length >= 10 ? digitsOnly.slice(-10) : digitsOnly;
+    let isEmail = identifier.includes("@");
     const isRegNo = identifier.toUpperCase().startsWith("AVVS");
+    const isDonationId = identifier.toUpperCase().startsWith("DON-");
+
+    // 0. If search looks like a donation ID, look up the donation first to find associated phone/email
+    let directDonation = null;
+    if (isDonationId || identifier.length >= 8) {
+      directDonation = await prisma.donation.findFirst({
+        where: { donationId: { equals: identifier, mode: "insensitive" } },
+      });
+      if (directDonation) {
+        if (!cleanPhone && directDonation.donorMobile) {
+          const dDigits = directDonation.donorMobile.replace(/\D/g, "");
+          cleanPhone = dDigits.length >= 10 ? dDigits.slice(-10) : dDigits;
+        }
+        if (!isEmail && directDonation.donorEmail) {
+          isEmail = true;
+        }
+      }
+    }
 
     // 1. Search in MembershipRegistration
     const regConditions: any[] = [];
@@ -28,7 +46,7 @@ export async function POST(req: Request) {
       regConditions.push({ registrationNo: { equals: identifier, mode: "insensitive" } });
     }
     if (isEmail) {
-      regConditions.push({ email: { equals: identifier.toLowerCase(), mode: "insensitive" } });
+      regConditions.push({ email: { equals: (directDonation?.donorEmail || identifier).toLowerCase(), mode: "insensitive" } });
     }
     if (cleanPhone.length >= 10) {
       regConditions.push({ phone: { contains: cleanPhone } });
@@ -54,7 +72,7 @@ export async function POST(req: Request) {
       memberConditions.push({ phone: { contains: cleanPhone } });
     }
     if (isEmail) {
-      memberConditions.push({ email: { equals: identifier.toLowerCase(), mode: "insensitive" } });
+      memberConditions.push({ email: { equals: (directDonation?.donorEmail || identifier).toLowerCase(), mode: "insensitive" } });
     }
     if (registration?.phone) {
       memberConditions.push({ phone: { contains: registration.phone.slice(-10) } });
@@ -67,8 +85,11 @@ export async function POST(req: Request) {
         })
       : null;
 
-    // 3. Search Donations made by this phone or email
+    // 3. Search Donations made by this phone, email, or donation ID
     const donationConditions: any[] = [];
+    if (directDonation || isDonationId) {
+      donationConditions.push({ donationId: { equals: identifier, mode: "insensitive" } });
+    }
     if (cleanPhone.length >= 10) {
       donationConditions.push({ donorMobile: { contains: cleanPhone } });
     }
@@ -76,7 +97,7 @@ export async function POST(req: Request) {
       donationConditions.push({ donorMobile: { contains: registration.phone.slice(-10) } });
     }
     if (isEmail) {
-      donationConditions.push({ donorEmail: { equals: identifier.toLowerCase(), mode: "insensitive" } });
+      donationConditions.push({ donorEmail: { equals: (directDonation?.donorEmail || identifier).toLowerCase(), mode: "insensitive" } });
     }
     if (registration?.email) {
       donationConditions.push({ donorEmail: { equals: registration.email.toLowerCase(), mode: "insensitive" } });
@@ -155,16 +176,21 @@ export async function POST(req: Request) {
       }
     } else if (donations.length > 0) {
       // Devotee / donor profile
-      status = "DONOR";
       isVerified = donations.some((d) => d.status === "VERIFIED");
-      planName = "Supporter / Devotee";
+      status = isVerified ? "VERIFIED" : "PENDING_VERIFICATION";
+      planName = "Devotee / Donor (दानदाता)";
+      planId = "active";
       tier = "ACTIVE";
+      amount = donations[0]?.amountPaise ? donations[0].amountPaise / 100 : 0;
     }
 
     const fullName = registration?.fullName || memberRecord?.name || donations[0]?.donorName || "Devotee";
-    const phone = registration?.phone || memberRecord?.phone || cleanPhone;
-    const email = registration?.email || memberRecord?.email || (isEmail ? identifier : null);
-    const regNo = registration?.registrationNo || (memberRecord?.role?.match(/AVVS-[A-Z0-9-]+/)?.[0]) || "AVVS-MEMBER";
+    const phone = registration?.phone || memberRecord?.phone || cleanPhone || "";
+    const email = registration?.email || memberRecord?.email || (isEmail ? (directDonation?.donorEmail || identifier) : null);
+    const regNo =
+      registration?.registrationNo ||
+      (memberRecord?.role?.match(/AVVS-[A-Z0-9-]+/)?.[0]) ||
+      (donations[0]?.donationId ? donations[0].donationId : "AVVS-MEMBER");
 
     return NextResponse.json({
       success: true,

@@ -64,24 +64,14 @@ export default async function AdminDonationsPage({
   // Cached event titles for fast differentiation of event registrations
   const eventTitles = await getCachedEventTitles();
 
-  // The stats and status counts follow the Donations / Memberships / Events filter.
-  let typeWhere: Prisma.DonationWhereInput = {};
-  if (type === "EVENT") {
-    typeWhere = {
-      type: "DONATION",
-      program: { in: eventTitles },
-    };
-  } else if (type === "DONATION") {
-    typeWhere = {
-      type: "DONATION",
-      OR: [
-        { program: null },
-        { program: { notIn: eventTitles } },
-      ],
-    };
-  } else if (type === "MEMBERSHIP") {
-    typeWhere = { type: "MEMBERSHIP" };
-  }
+  // Strictly filter for Donations only (Memberships and Events have their own dedicated sections in navbar)
+  const typeWhere: Prisma.DonationWhereInput = {
+    type: "DONATION",
+    OR: [
+      { program: null },
+      { program: { notIn: eventTitles } },
+    ],
+  };
 
   const where: Prisma.DonationWhereInput = {
     ...typeWhere,
@@ -125,25 +115,14 @@ export default async function AdminDonationsPage({
   const sum = (s: DonationStatus) => byStatus(s)?._sum.amountPaise ?? 0;
   const count = (s: DonationStatus) => byStatus(s)?._count._all ?? 0;
 
-  // Only proof-submitted and verified donations count; QR-only intents are excluded.
-  const noun =
-    type === "MEMBERSHIP"
-      ? "memberships"
-      : type === "EVENT"
-      ? "event passes"
-      : "donations";
+  const noun = "donations";
 
   const stats = [
-    { label: `Total ${noun}`, value: rupeesFromPaise(sum("VERIFIED") + sum("PENDING_VERIFICATION")), note: "Verified + pending verification" },
-    { label: `Verified ${noun}`, value: rupeesFromPaise(sum("VERIFIED")), note: `${count("VERIFIED")} ${noun}` },
+    { label: "Total Donations", value: rupeesFromPaise(sum("VERIFIED") + sum("PENDING_VERIFICATION")), note: "Verified + pending verification" },
+    { label: "Verified Donations", value: rupeesFromPaise(sum("VERIFIED")), note: `${count("VERIFIED")} donations` },
     { label: "Pending verification", value: rupeesFromPaise(sum("PENDING_VERIFICATION")), note: `${count("PENDING_VERIFICATION")} to review`, highlight: count("PENDING_VERIFICATION") > 0 },
     {
-      label:
-        type === "MEMBERSHIP"
-          ? "Verified members"
-          : type === "EVENT"
-          ? "Verified attendees"
-          : "Verified donors",
+      label: "Verified donors",
       value: donorCount.toLocaleString("en-IN"),
       note: "Unique email addresses",
     },

@@ -100,6 +100,45 @@ export async function PATCH(req: Request) {
       },
     });
 
+    if (status === "VERIFIED") {
+      try {
+        const cleanPhone = updated.phone.replace(/\D/g, "");
+        const existingMember = await prisma.member.findFirst({
+          where: {
+            OR: [
+              ...(cleanPhone.length >= 10 ? [{ phone: { contains: cleanPhone.slice(-10) } }] : []),
+              ...(updated.email ? [{ email: { equals: updated.email.toLowerCase(), mode: "insensitive" as const } }] : []),
+            ],
+          },
+        });
+
+        if (existingMember) {
+          await prisma.member.update({
+            where: { id: existingMember.id },
+            data: { status: "ACTIVE" },
+          });
+        } else {
+          await prisma.member.create({
+            data: {
+              name: updated.fullName,
+              phone: updated.phone,
+              email: updated.email || null,
+              status: "ACTIVE",
+              tier: updated.planId === "patron" ? "PLATINUM" : updated.planId === "co_patron" ? "GOLD" : "BASIC",
+              role: `${updated.planName.split(" ")[0]} Member (${updated.registrationNo})`,
+              city: updated.district,
+              state: updated.state,
+              address: updated.address,
+              pincode: updated.pincode,
+              photoUrl: updated.photoUrl,
+            },
+          });
+        }
+      } catch (syncErr) {
+        console.warn("[admin/memberships] Error syncing member to Member table:", syncErr);
+      }
+    }
+
     return NextResponse.json({ success: true, item: updated });
   } catch (error: any) {
     console.error("Admin memberships PATCH error:", error);

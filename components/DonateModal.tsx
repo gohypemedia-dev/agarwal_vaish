@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { QRCodeSVG } from "qrcode.react";
 import {
   X,
@@ -13,12 +14,16 @@ import {
   ArrowLeft,
   CheckCircle2,
   Loader2,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
+import { saveAccountSession } from "@/lib/client/account-session";
 
 const PRESET_AMOUNTS = [499, 999, 1499, 2100, 5100, 11000];
 
 export default function DonateModal({ minAmount = 100 }: { minAmount?: number } = {}) {
+  const router = useRouter();
   const { donateModal, closeDonateModal, lang, user } = useApp();
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -37,6 +42,8 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
   const [submitToken, setSubmitToken] = useState<string>("");
   const [serverQrData, setServerQrData] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isLiveVerified, setIsLiveVerified] = useState(false);
+  const [redirectCountdown, setRedirectCountdown] = useState<number | null>(null);
 
   // Sync state whenever modal opens or props change
   useEffect(() => {
@@ -48,6 +55,8 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
       setSubmitToken("");
       setServerQrData("");
       setIsSubmitting(false);
+      setIsLiveVerified(false);
+      setRedirectCountdown(null);
 
       // Prefill user if logged in or passed via prefill
       if (donateModal.prefill?.name) {
@@ -90,6 +99,47 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
       }
     }
   }, [donateModal.isOpen, donateModal.amount, donateModal.prefill, user]);
+
+  // Live polling for verification
+  useEffect(() => {
+    if (step !== 3 || !donationId || isLiveVerified) return;
+
+    let isMounted = true;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/donations/${encodeURIComponent(donationId)}/status`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.isVerified && isMounted) {
+          setIsLiveVerified(true);
+          const primaryId = mobile.trim() || data.donationId || email.trim();
+          saveAccountSession(primaryId);
+          setRedirectCountdown(3);
+        }
+      } catch (err) {
+        // Silently retry
+      }
+    }, 2500);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [step, donationId, isLiveVerified, mobile, email]);
+
+  // Handle countdown auto-redirect to /account
+  useEffect(() => {
+    if (redirectCountdown === null) return;
+    if (redirectCountdown <= 0) {
+      closeDonateModal();
+      router.push("/account");
+      return;
+    }
+    const timer = setTimeout(() => {
+      setRedirectCountdown((prev) => (prev !== null ? prev - 1 : null));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [redirectCountdown, router, closeDonateModal]);
 
   if (!donateModal.isOpen) return null;
 
@@ -148,6 +198,8 @@ export default function DonateModal({ minAmount = 100 }: { minAmount?: number } 
       const data = await res.json();
       if (res.ok && data.donationId) {
         setDonationId(data.donationId);
+        const primaryId = mobile.trim() || data.donationId || email.trim();
+        saveAccountSession(primaryId);
       }
     } catch (err: any) {
       console.error("[donation] Failed to record donation:", err);
@@ -672,14 +724,68 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
                 </div>
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 text-left">
-                {lang === "hi"
-                  ? "कृपया त्वरित सत्यापन के लिए अपने UPI भुगतान का स्क्रीनशॉट कार्यालय प्रभारी संदीप जी को WhatsApp पर भेजें।"
-                  : "For instant verification, please share your payment screenshot on WhatsApp with our office coordinator."}
-              </div>
+              {/* Real-time Verification Status Box */}
+              {isLiveVerified ? (
+                <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 border-2 border-emerald-400 text-left space-y-3 shadow-md animate-in fade-in duration-300">
+                  <div className="flex items-center gap-2.5 text-emerald-800">
+                    <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse shrink-0" />
+                    <div>
+                      <h4 className="font-bold text-sm sm:text-base text-emerald-900">
+                        {lang === "hi" ? "भुगतान सत्यापित हो गया है!" : "Payment Verified by Admin!"}
+                      </h4>
+                      <p className="text-xs text-emerald-700">
+                        {lang === "hi"
+                          ? "आपका खाता सक्रिय है। आपको आपके सदस्य खाते पर भेजा जा रहा है..."
+                          : "Your account is activated! Redirecting to your account..."}
+                      </p>
+                    </div>
+                  </div>
+                  {redirectCountdown !== null && (
+                    <div className="flex items-center justify-between text-xs text-emerald-800 font-semibold bg-white/70 px-3 py-1.5 rounded-lg border border-emerald-200">
+                      <span>{lang === "hi" ? "स्वतः रीडायरेक्ट:" : "Auto-redirecting:"}</span>
+                      <span className="font-mono font-bold text-emerald-900">{redirectCountdown}s</span>
+                    </div>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeDonateModal();
+                      router.push("/account");
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#7F160C] hover:bg-[#68120A] text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+                  >
+                    <span>{lang === "hi" ? "सदस्य खाता एवं प्रमाणपत्र देखें" : "Go to My Account & Certificate"}</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              ) : (
+                <div className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-300 text-left text-xs sm:text-sm text-amber-900">
+                  <div className="flex items-center gap-2 font-bold">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                    </span>
+                    <span>{lang === "hi" ? "एडमिन सत्यापन की प्रतीक्षा है..." : "Awaiting Admin Verification..."}</span>
+                  </div>
+                </div>
+              )}
 
               {/* Action Buttons */}
               <div className="space-y-2 pt-1">
+                {!isLiveVerified && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      closeDonateModal();
+                      router.push("/account");
+                    }}
+                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#7F160C]/10 hover:bg-[#7F160C]/20 text-[#7F160C] font-bold text-xs transition-colors cursor-pointer"
+                  >
+                    <span>{lang === "hi" ? "सदस्य खाता देखें (Go to Account)" : "Go to My Account"}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </button>
+                )}
+
                 <a
                   href={`https://wa.me/919017336118?text=${encodeURIComponent(whatsappMessage)}`}
                   target="_blank"

@@ -1,12 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Copy, CheckCheck, CheckCircle2, Loader2, RotateCcw, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  Copy,
+  CheckCheck,
+  CheckCircle2,
+  Loader2,
+  RotateCcw,
+  AlertCircle,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useApp } from "@/context/AppContext";
 import { MEMBERSHIP_PLANS, formatINR } from "@/lib/donation-config";
 import HeadingDivider from "@/components/HeadingDivider";
+import { saveAccountSession } from "@/lib/client/account-session";
 import {
   sanitizeEmail,
   sanitizeMobile,
@@ -17,6 +29,7 @@ import {
 } from "@/lib/validation/donation";
 
 export default function MembershipPage() {
+  const router = useRouter();
   const { lang, openDonateModal } = useApp();
   const [planId, setPlanId] = useState<string>("patron");
   const [consent, setConsent] = useState(true);
@@ -29,6 +42,49 @@ export default function MembershipPage() {
     amount: number;
   } | null>(null);
   const [copiedRegNo, setCopiedRegNo] = useState(false);
+  const [isCompressingPhoto, setIsCompressingPhoto] = useState(false);
+  const [isLiveVerified, setIsLiveVerified] = useState(false);
+  const [redirectCountdown, setRedirectCountdown] = useState<number | null>(null);
+
+  // Live polling: automatically detects when admin approves this membership registration
+  useEffect(() => {
+    if (!submitResult?.registrationNo || isLiveVerified) return;
+
+    let isMounted = true;
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`/api/membership/status?regNo=${encodeURIComponent(submitResult.registrationNo)}`);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.isVerified && isMounted) {
+          setIsLiveVerified(true);
+          const primaryId = data.phone || data.registrationNo || data.email;
+          saveAccountSession(primaryId);
+          setRedirectCountdown(3);
+        }
+      } catch (err) {
+        // Silently retry
+      }
+    }, 2500);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [submitResult?.registrationNo, isLiveVerified]);
+
+  // Handle countdown auto-redirect to /account
+  useEffect(() => {
+    if (redirectCountdown === null) return;
+    if (redirectCountdown <= 0) {
+      router.push("/account");
+      return;
+    }
+    const timer = setTimeout(() => {
+      setRedirectCountdown((prev) => (prev !== null ? prev - 1 : null));
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [redirectCountdown, router]);
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -47,6 +103,7 @@ export default function MembershipPage() {
     occupation: "",
     occupationDetails: "",
     photoName: "",
+    photoUrl: "",
   });
   const [copiedUpi, setCopiedUpi] = useState(false);
 
@@ -175,6 +232,8 @@ export default function MembershipPage() {
   const handleResetForm = () => {
     setSubmitResult(null);
     setSubmitError(null);
+    setIsLiveVerified(false);
+    setRedirectCountdown(null);
     setFormData({
       fullName: "",
       guardianName: "",
@@ -192,6 +251,7 @@ export default function MembershipPage() {
       occupation: "",
       occupationDetails: "",
       photoName: "",
+      photoUrl: "",
     });
   };
 
@@ -246,6 +306,10 @@ export default function MembershipPage() {
       if (!res.ok) {
         throw new Error(data.error || "Failed to submit membership registration.");
       }
+
+      // Save 2-day session for seamless account access
+      const primaryId = formData.phone.trim() || data.registrationNo || formData.email.trim();
+      saveAccountSession(primaryId);
 
       setSubmitResult({
         registrationNo: data.registrationNo,
@@ -339,6 +403,48 @@ export default function MembershipPage() {
                   </div>
                 </div>
 
+                {/* Real-time Verification Status Box */}
+                {isLiveVerified ? (
+                  <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 border-2 border-emerald-400 text-left space-y-3 shadow-md animate-in fade-in duration-300 max-w-lg mx-auto">
+                    <div className="flex items-center gap-2.5 text-emerald-800">
+                      <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-sm sm:text-base text-emerald-900">
+                          {lang === "hi" ? "सदस्यता सफलतापूर्वक सत्यापित हो गई!" : "Membership Verified by Admin!"}
+                        </h4>
+                        <p className="text-xs text-emerald-700">
+                          {lang === "hi"
+                            ? "आपका डिजिटल पहचान पत्र व खाता सक्रिय है। आपको सदस्य खाते पर भेजा जा रहा है..."
+                            : "Your Digital ID and member account are activated! Redirecting to your account..."}
+                        </p>
+                      </div>
+                    </div>
+                    {redirectCountdown !== null && (
+                      <div className="flex items-center justify-between text-xs text-emerald-800 font-semibold bg-white/70 px-3 py-1.5 rounded-lg border border-emerald-200">
+                        <span>{lang === "hi" ? "स्वतः रीडायरेक्ट:" : "Auto-redirecting:"}</span>
+                        <span className="font-mono font-bold text-emerald-900">{redirectCountdown}s</span>
+                      </div>
+                    )}
+                    <Link
+                      href="/account"
+                      className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-[#7F160C] hover:bg-[#68120A] text-white font-bold text-sm shadow-md transition-all cursor-pointer"
+                    >
+                      <span>{lang === "hi" ? "डिजिटल पहचान पत्र एवं खाता देखें" : "View Digital ID & Member Account"}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="p-3.5 rounded-xl bg-amber-50/90 border border-amber-300 text-left text-xs sm:text-sm text-amber-900 max-w-lg mx-auto">
+                    <div className="flex items-center gap-2 font-bold">
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
+                      </span>
+                      <span>{lang === "hi" ? "व्यवस्थापक सत्यापन की प्रतीक्षा है..." : "Awaiting Admin Verification..."}</span>
+                    </div>
+                  </div>
+                )}
+
                 {/* Payment Step Reminder */}
                 <div className="bg-amber-50/70 border border-amber-200 rounded-xl p-4 sm:p-5 max-w-lg mx-auto text-left text-xs sm:text-sm text-gray-800 space-y-2">
                   <p className="font-bold text-amber-900 flex items-center gap-2">
@@ -357,6 +463,16 @@ export default function MembershipPage() {
 
                 {/* Actions */}
                 <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+                  {!isLiveVerified && (
+                    <Link
+                      href="/account"
+                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#7F160C]/10 hover:bg-[#7F160C]/20 text-[#7F160C] font-bold text-sm transition-all cursor-pointer"
+                    >
+                      <span>{lang === "hi" ? "सदस्य खाता देखें" : "View Member Account"}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  )}
+
                   <a
                     href={`https://wa.me/919088500061?text=${encodeURIComponent(
                       `नमस्ते, मैंने अग्रवाल वैश्य विकास संगठन की सदस्यता के लिए पंजीकरण किया है।\n\nआवेदन सं.: ${submitResult.registrationNo}\nनाम: ${submitResult.fullName}\nयोजना: ${submitResult.planName}\nराशि: ₹${submitResult.amount}\n\nकृपया मेरा भुगतान स्क्रीनशॉट सत्यापित करें।`
@@ -391,21 +507,75 @@ export default function MembershipPage() {
                   <label className="block text-[16px] font-bold text-[#1F1712] mb-2">
                     {lang === "hi" ? "फोटो" : "Photo"}
                   </label>
-                  <div className="border border-dashed border-[#7F160C] rounded-lg px-3.5 py-2.5 bg-white inline-flex items-center gap-3">
-                    <label className="inline-flex items-center px-4 py-2 rounded border border-[#D1D5DB] bg-[#F9FAFB] hover:bg-[#F3F4F6] text-[16px] font-semibold text-[#1F1712] cursor-pointer transition-colors">
-                      <span>Choose File</span>
+                  <div className="border border-dashed border-[#7F160C] rounded-xl p-3 bg-[#FFFDF9] flex flex-wrap items-center gap-3">
+                    {formData.photoUrl && (
+                      <div className="w-14 h-14 rounded-lg overflow-hidden border-2 border-[#7F160C] shrink-0 shadow-xs">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={formData.photoUrl}
+                          alt="Member Photo Preview"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <label className="inline-flex items-center px-4 py-2 rounded-lg border border-[#D1D5DB] bg-[#F9FAFB] hover:bg-[#F3F4F6] text-sm font-semibold text-[#1F1712] cursor-pointer transition-colors shadow-xs">
+                      <span>{isCompressingPhoto ? "Processing..." : "Choose File"}</span>
                       <input
                         type="file"
                         accept="image/*"
                         className="hidden"
-                        onChange={(e) => {
+                        disabled={isCompressingPhoto}
+                        onChange={async (e) => {
                           if (e.target.files && e.target.files[0]) {
-                            setFormData({ ...formData, photoName: e.target.files[0].name });
+                            const file = e.target.files[0];
+                            try {
+                              setIsCompressingPhoto(true);
+                              const reader = new FileReader();
+                              reader.onload = () => {
+                                const img = new window.Image();
+                                img.onload = () => {
+                                  const maxDim = 500;
+                                  let w = img.width;
+                                  let h = img.height;
+                                  if (w > h) {
+                                    if (w > maxDim) {
+                                      h = Math.round((h * maxDim) / w);
+                                      w = maxDim;
+                                    }
+                                  } else {
+                                    if (h > maxDim) {
+                                      w = Math.round((w * maxDim) / h);
+                                      h = maxDim;
+                                    }
+                                  }
+                                  const canvas = document.createElement("canvas");
+                                  canvas.width = w;
+                                  canvas.height = h;
+                                  const ctx = canvas.getContext("2d");
+                                  if (ctx) {
+                                    ctx.drawImage(img, 0, 0, w, h);
+                                    const dataUrl = canvas.toDataURL("image/jpeg", 0.85);
+                                    setFormData((prev) => ({
+                                      ...prev,
+                                      photoName: file.name,
+                                      photoUrl: dataUrl,
+                                    }));
+                                  }
+                                  setIsCompressingPhoto(false);
+                                };
+                                img.src = reader.result as string;
+                              };
+                              reader.readAsDataURL(file);
+                            } catch (err) {
+                              console.error("Error reading photo:", err);
+                              setFormData((prev) => ({ ...prev, photoName: file.name }));
+                              setIsCompressingPhoto(false);
+                            }
                           }
                         }}
                       />
                     </label>
-                    <span className="text-[16px] text-[#6B7280]">
+                    <span className="text-xs sm:text-sm text-[#6B7280] truncate max-w-xs">
                       {formData.photoName || "No file chosen"}
                     </span>
                   </div>

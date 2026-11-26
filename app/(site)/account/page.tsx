@@ -20,8 +20,14 @@ import {
   Download,
   AlertCircle,
   ArrowRight,
+  Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
+import {
+  getAccountSession,
+  saveAccountSession,
+  clearAccountSession,
+} from "@/lib/client/account-session";
 
 interface MemberData {
   id: string;
@@ -125,7 +131,7 @@ export default function AccountPage() {
         setMember(data.member);
         setDonations(data.donations || []);
         setIsVerified(Boolean(data.isVerified));
-        localStorage.setItem("avvs_member_identifier", q);
+        saveAccountSession(q);
         if (!isAuto) toast.success(`Welcome, ${data.member.fullName}!`);
       } else {
         setMember(null);
@@ -145,9 +151,9 @@ export default function AccountPage() {
     }
   }, []);
 
-  // Check LocalStorage on initial load
+  // Check 2-day session / cookie on initial load
   useEffect(() => {
-    const saved = localStorage.getItem("avvs_member_identifier");
+    const saved = getAccountSession();
     if (saved) {
       setIdentifierInput(saved);
       handleLookup(saved, true);
@@ -158,7 +164,7 @@ export default function AccountPage() {
 
   // Switch / Exit Account
   const handleSwitchAccount = () => {
-    localStorage.removeItem("avvs_member_identifier");
+    clearAccountSession();
     setMember(null);
     setDonations([]);
     setNotFoundMessage(null);
@@ -324,6 +330,7 @@ export default function AccountPage() {
                       );
                     })()}
                   </div>
+
                   {isVerified && (
                     <div
                       className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center shadow-md border-2 border-white"

@@ -182,59 +182,10 @@ export default function AdminDonationsSection({
     }, 0);
   };
 
-  const allTypes = [{ value: null, label: "Everything" }, ...TYPES];
-
   return (
     <section className="space-y-4">
       {/* ------------------------------------------------------------- */}
-      {/* ROW 1: TYPE FILTER PILLS (Everything, Donations, Memberships, Events) */}
-      {/* ------------------------------------------------------------- */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-        <nav
-          className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 sm:pb-0"
-          aria-label="Filter by type"
-        >
-          {allTypes.map((t) => {
-            const isMatch = t.value === null ? !effectiveType : effectiveType === t.value;
-            const isTargetPending =
-              pendingType !== undefined &&
-              (t.value === null ? pendingType === null : pendingType === t.value);
-
-            return (
-              <button
-                key={t.label}
-                type="button"
-                onClick={() => handleTypeSelect(t.value)}
-                onMouseEnter={() => {
-                  router.prefetch(buildHref({ type: t.value, page: 1 }));
-                }}
-                className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold border shrink-0 whitespace-nowrap transition-all cursor-pointer ${
-                  isMatch
-                    ? "bg-[#7F160C] text-white border-[#7F160C] shadow-xs"
-                    : "bg-white border-[#E7D8C8] text-[#2B201A]/75 hover:border-[#7F160C]/50 hover:bg-[#FAF3EA]/40"
-                }`}
-              >
-                {/* Loader appears instantly on click */}
-                {isTargetPending && (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-white shrink-0" />
-                )}
-                <span>{t.label}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        <Link
-          href="/admin/members"
-          className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#FAF3EA] hover:bg-[#7F160C] text-[#7F160C] hover:text-white border border-[#7F160C]/30 hover:border-[#7F160C] text-xs font-bold transition-all shadow-xs w-full sm:w-auto text-center cursor-pointer"
-        >
-          <Users className="w-3.5 h-3.5 shrink-0" />
-          <span>Manage Members (Upgrade / Downgrade Tiers & Remove) →</span>
-        </Link>
-      </div>
-
-      {/* ------------------------------------------------------------- */}
-      {/* ROW 2: STATUS FILTER PILLS & SEARCH BAR */}
+      {/* STATUS FILTER PILLS & SEARCH BAR */}
       {/* ------------------------------------------------------------- */}
       <div className="flex flex-col lg:flex-row lg:items-center gap-3 lg:justify-between">
         {/* Status Pills */}

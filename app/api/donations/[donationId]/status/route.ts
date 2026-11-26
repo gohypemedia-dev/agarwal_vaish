@@ -14,6 +14,53 @@ const schema = z.object({ submitToken: z.string().min(20).max(100) });
 // Gives the background inbox check time to finish on serverless hosts.
 export const maxDuration = 30;
 
+export const dynamic = "force-dynamic";
+
+// GET endpoint polled by the frontend confirmation page to detect real-time admin verification.
+export async function GET(request: Request, { params }: { params: Promise<{ donationId: string }> }) {
+  const { donationId } = await params;
+  if (!donationIdSchema.safeParse(donationId).success) return jsonError("Donation not found.", 404);
+
+  const donation = await prisma.donation.findUnique({
+    where: { donationId },
+    select: {
+      donationId: true,
+      status: true,
+      donorName: true,
+      donorEmail: true,
+      donorMobile: true,
+      amountPaise: true,
+      type: true,
+      program: true,
+      verifiedAt: true,
+    },
+  });
+
+  if (!donation) return jsonError("Donation not found.", 404);
+
+  const isVerified = donation.status === "VERIFIED";
+
+  return Response.json(
+    {
+      success: true,
+      donationId: donation.donationId,
+      status: donation.status,
+      isVerified,
+      donorName: donation.donorName,
+      donorEmail: donation.donorEmail,
+      donorMobile: donation.donorMobile,
+      amount: donation.amountPaise / 100,
+      verifiedAt: donation.verifiedAt,
+      ...(isVerified
+        ? (await donationCategory(donation as any)).kind === "event"
+          ? { passUrl: `/pass/${donation.donationId}?k=${certificateKey(donation as any)}` }
+          : { certificateUrl: `/certificate/${donation.donationId}?k=${certificateKey(donation as any)}` }
+        : {}),
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
+}
+
 // Polled by the donor's payment screen. While the donation awaits payment or approval it
 // also triggers a (throttled) check of the bank-alert inbox.
 export async function POST(request: Request, { params }: { params: Promise<{ donationId: string }> }) {
