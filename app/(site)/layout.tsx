@@ -6,13 +6,11 @@ import DonateModal from "@/components/DonateModal";
 import AuthModal from "@/components/AuthModal";
 import { publicDonationConfig } from "@/lib/server/env";
 import SmoothScrollProvider from "@/components/animation/SmoothScrollProvider";
-import Preloader from "@/components/animation/Preloader";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const { minAmount } = publicDonationConfig();
   return (
     <SmoothScrollProvider>
-      <Preloader />
       <Header />
       <main className="flex-1 w-full pt-[72px] sm:pt-[78px] lg:pt-[80px] xl:pt-[92px]">{children}</main>
       <Footer />
