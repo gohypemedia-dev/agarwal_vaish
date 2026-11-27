@@ -4,6 +4,7 @@ import FloatingSideDock from "@/components/FloatingSideDock";
 import CartDrawer from "@/components/CartDrawer";
 import DonateModal from "@/components/DonateModal";
 import AuthModal from "@/components/AuthModal";
+import SearchModal from "@/components/SearchModal";
 import { publicDonationConfig } from "@/lib/server/env";
 import SmoothScrollProvider from "@/components/animation/SmoothScrollProvider";
 
@@ -18,6 +19,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       <CartDrawer />
       <DonateModal minAmount={minAmount} />
       <AuthModal />
+      <SearchModal />
     </SmoothScrollProvider>
   );
 }

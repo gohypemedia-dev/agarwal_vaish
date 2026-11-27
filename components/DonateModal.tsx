@@ -14,7 +14,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   Loader2,
-  Sparkles,
   ArrowRight,
 } from "lucide-react";
 import { useApp } from "@/context/AppContext";
@@ -728,7 +727,7 @@ ${utr ? `- UTR / Ref No: ${utr}` : ""}
               {isLiveVerified ? (
                 <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 border-2 border-emerald-400 text-left space-y-3 shadow-md animate-in fade-in duration-300">
                   <div className="flex items-center gap-2.5 text-emerald-800">
-                    <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse shrink-0" />
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                     <div>
                       <h4 className="font-bold text-sm sm:text-base text-emerald-900">
                         {lang === "hi" ? "भुगतान सत्यापित हो गया है!" : "Payment Verified by Admin!"}

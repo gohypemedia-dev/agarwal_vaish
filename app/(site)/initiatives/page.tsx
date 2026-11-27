@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Sparkles, HeartHandshake, Briefcase, Users, Heart } from "lucide-react";
+import { HeartHandshake, Briefcase, Users, Heart } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 import HeadingDivider from "@/components/HeadingDivider";
 
@@ -62,7 +62,7 @@ export default function InitiativesPage() {
           {/* Notice Box */}
           <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-dashed border-[#E8DFD3] p-10 sm:p-14 text-center space-y-4 shadow-sm">
             <div className="w-16 h-16 rounded-full bg-[#7F160C]/10 text-[#7F160C] flex items-center justify-center mx-auto border border-[#7F160C]/20">
-              <Sparkles className="w-8 h-8" />
+              <HeartHandshake className="w-8 h-8" />
             </div>
             <div className="space-y-2">
               <h2 className="font-sans font-bold text-xl sm:text-2xl text-gray-900">

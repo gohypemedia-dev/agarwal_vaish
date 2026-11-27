@@ -11,7 +11,6 @@ import {
   Loader2,
   RotateCcw,
   AlertCircle,
-  Sparkles,
   ArrowRight,
 } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
@@ -407,7 +406,7 @@ export default function MembershipPage() {
                 {isLiveVerified ? (
                   <div className="p-4 rounded-2xl bg-gradient-to-br from-emerald-50 to-emerald-100/70 border-2 border-emerald-400 text-left space-y-3 shadow-md animate-in fade-in duration-300 max-w-lg mx-auto">
                     <div className="flex items-center gap-2.5 text-emerald-800">
-                      <Sparkles className="w-5 h-5 text-emerald-600 animate-pulse shrink-0" />
+                      <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                       <div>
                         <h4 className="font-bold text-sm sm:text-base text-emerald-900">
                           {lang === "hi" ? "सदस्यता सफलतापूर्वक सत्यापित हो गई!" : "Membership Verified by Admin!"}

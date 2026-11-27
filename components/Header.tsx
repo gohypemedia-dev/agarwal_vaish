@@ -12,7 +12,7 @@ import { useSmoothScroll } from "@/components/animation/SmoothScrollProvider";
 export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
-  const { lang, setLang, user, openAuthModal, openDonateModal } = useApp();
+  const { lang, setLang, user, openAuthModal, openDonateModal, openSearch } = useApp();
   const { lenis } = useSmoothScroll();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -254,17 +254,20 @@ export default function Header() {
               ))}
             </nav>
 
-            {/* 3. RIGHT: Search Members & Account Button */}
+            {/* 3. RIGHT: Search & Account Button */}
             <div className="flex items-center gap-2 xl:gap-2.5 shrink-0">
-              <Link
-                href="/advance-search"
-                onClick={() => setActiveDropdown(null)}
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveDropdown(null);
+                  openSearch();
+                }}
                 className="flex items-center gap-1.5 xl:gap-2 h-9 xl:h-10 px-3 xl:px-3.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs xl:text-sm font-semibold tracking-wide shrink-0 shadow-xs cursor-pointer whitespace-nowrap"
+                title="Search / खोजें"
               >
                 <Search className="w-3.5 h-3.5 xl:w-4 xl:h-4 stroke-[2.2]" />
-                <span className="hidden xl:inline">Search Members</span>
-                <span className="xl:hidden">Search</span>
-              </Link>
+                <span>Search</span>
+              </button>
 
               <Link
                 href="/account"
@@ -312,13 +315,14 @@ export default function Header() {
                 <span className="hidden sm:inline">Account</span>
               </Link>
 
-              <Link
-                href="/advance-search"
-                className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold"
-                aria-label="Search Members"
+              <button
+                type="button"
+                onClick={openSearch}
+                className="flex items-center gap-1.5 px-2 py-1.5 sm:px-2.5 sm:py-1.5 rounded-lg border border-[#7F160C] text-[#7F160C] hover:bg-[#7F160C] hover:text-white transition-all text-xs font-semibold cursor-pointer"
+                aria-label="Search"
               >
                 <Search className="w-3.5 h-3.5" />
-              </Link>
+              </button>
 
               <button
                 onClick={handleToggleMobileMenu}
@@ -440,13 +444,17 @@ export default function Header() {
                   <span>MEMBER ACCOUNT</span>
                 </Link>
 
-                <Link
-                  href="/advance-search"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer"
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    openSearch();
+                  }}
+                  className="flex items-center gap-2 py-2 text-[13px] font-bold text-[#1E293B] hover:text-[#7F160C] uppercase tracking-wider transition-colors cursor-pointer w-full text-left"
                 >
-                  SEARCH MEMBERS
-                </Link>
+                  <Search className="w-4 h-4 text-[#7F160C]" />
+                  <span>SEARCH / खोजें</span>
+                </button>
 
                 {/* 9. DONATE NOW */}
                 <button

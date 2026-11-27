@@ -77,6 +77,10 @@ interface AppContextType {
     customAmounts?: number[]
   ) => void;
   closeDonateModal: () => void;
+  // Search Modal
+  isSearchOpen: boolean;
+  openSearch: () => void;
+  closeSearch: () => void;
   // User Auth
   user: UserProfile | null;
   isLoadingUser: boolean;
@@ -95,6 +99,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [donateModal, setDonateModal] = useState<DonateModalState>({ isOpen: false });
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const openSearch = useCallback(() => setIsSearchOpen(true), []);
+  const closeSearch = useCallback(() => setIsSearchOpen(false), []);
 
   // Synchronize document lang and lang-hi class on html element
   useEffect(() => {
@@ -271,6 +279,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         donateModal,
         openDonateModal,
         closeDonateModal,
+        isSearchOpen,
+        openSearch,
+        closeSearch,
         user,
         isLoadingUser,
         refreshUser,
