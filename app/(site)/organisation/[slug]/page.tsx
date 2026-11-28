@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Users, Shield, Award, MapPin, CheckCircle2, ArrowRight } from "lucide-react";
+import { Users, Shield, MapPin } from "lucide-react";
 import HeadingDivider from "@/components/HeadingDivider";
 
 interface WingInfo {
@@ -9,7 +9,13 @@ interface WingInfo {
   titleHi: string;
   desc: string;
   mandate: string;
-  members: { name: string; role: string; district: string; image?: string }[];
+  members: {
+    name: string;
+    role: string;
+    district?: string;
+    image?: string;
+    imageClassName?: string;
+  }[];
 }
 
 const WINGS_DATA: Record<string, WingInfo> = {
@@ -20,10 +26,112 @@ const WINGS_DATA: Record<string, WingInfo> = {
     mandate: "समस्त सांगठनिक कार्यों, आधिकारिक विज्ञप्तियों और नीतिगत निर्णयों का संचालन।",
     members: [
       {
-        name: "श्री रामप्रताप गुप्ता",
-        role: "संस्थापक अध्यक्ष",
-        district: "कैथल / हरियाणा",
-        image: "/images/agarwal/founder-ram-pratap-gupta.jpg",
+        name: "रामप्रताप गुप्ता",
+        role: "प्रदेश अध्यक्ष",
+        image: "/images/president-cell/ram-pratap-gupta.jpeg",
+        imageClassName: "scale-[1.28] origin-[50%_12%]",
+      },
+      {
+        name: "विकास गर्ग",
+        role: "प्रदेश महासचिव",
+        image: "/images/president-cell/vikas-garg.jpeg",
+        imageClassName: "scale-[1.28] origin-[50%_8%]",
+      },
+      {
+        name: "हिमांशु गोयल",
+        role: "प्रदेश कोषाध्यक्ष",
+        image: "/images/president-cell/himanshu-goyal.jpeg",
+        imageClassName: "scale-[1.55] origin-[50%_20%]",
+      },
+      {
+        name: "बलराम गुप्ता",
+        role: "प्रदेश वरिष्ठ उपाध्यक्ष",
+        image: "/images/president-cell/balram-gupta.jpeg",
+        imageClassName: "scale-[1.05] origin-top",
+      },
+      {
+        name: "अरुण गुप्ता",
+        role: "प्रदेश उपाध्यक्ष",
+        image: "/images/president-cell/arun-gupta.jpeg",
+        imageClassName: "scale-[1.02] origin-top",
+      },
+      {
+        name: "रवि गर्ग बधवानियां",
+        role: "प्रदेश उपाध्यक्ष",
+        image: "/images/president-cell/ravi-garg-badhwaniya.jpeg",
+        imageClassName: "scale-[1.08] origin-top translate-y-1",
+      },
+      {
+        name: "राजीव गुप्ता",
+        role: "प्रदेश उपाध्यक्ष",
+        image: "/images/president-cell/rajeev-gupta.jpeg",
+        imageClassName: "scale-[1.05] origin-top",
+      },
+      {
+        name: "राजेश जैन",
+        role: "प्रदेश उपाध्यक्ष",
+        image: "/images/president-cell/rajesh-jain.jpeg",
+        imageClassName: "scale-[1.26] origin-[50%_4%]",
+      },
+      {
+        name: "वेदप्रकाश गर्ग",
+        role: "प्रदेश उपाध्यक्ष",
+        image: "/images/president-cell/vedprakash-garg.jpeg",
+        imageClassName: "scale-[1.45] origin-[50%_8%]",
+      },
+      {
+        name: "मुकेश बंसल",
+        role: "प्रदेश सचिव",
+        image: "/images/president-cell/mukesh-bansal.jpeg",
+        imageClassName: "scale-[1.18] origin-top translate-y-1",
+      },
+      {
+        name: "तरुण अग्रवाल",
+        role: "प्रदेश संगठन सचिव",
+        image: "/images/president-cell/tarun-aggarwal.jpeg",
+        imageClassName: "scale-[1.26] origin-[50%_12%]",
+      },
+      {
+        name: "निकुंज गर्ग",
+        role: "प्रदेश संगठन सचिव",
+        image: "/images/president-cell/nikunj-garg.jpeg",
+        imageClassName: "scale-[1.15] origin-[50%_10%]",
+      },
+      {
+        name: "पुनीत बंसल",
+        role: "प्रदेश संगठन सचिव",
+        image: "/images/president-cell/puneet-bansal.jpeg",
+        imageClassName: "scale-[1.12] origin-top translate-y-1",
+      },
+      {
+        name: "विकास बंसल",
+        role: "प्रदेश संगठन सचिव",
+        image: "/images/president-cell/vikas-bansal.jpeg",
+        imageClassName: "scale-[1.26] origin-[50%_12%]",
+      },
+      {
+        name: "तरसेम बंसल",
+        role: "प्रदेश संयुक्त सचिव",
+        image: "/images/president-cell/tarsem-bansal.jpeg",
+        imageClassName: "scale-[1.05] origin-top",
+      },
+      {
+        name: "मुकेश सिंगला",
+        role: "प्रदेश प्रचार सचिव",
+        image: "/images/president-cell/mukesh-singla.jpeg",
+        imageClassName: "scale-[1.18] origin-top translate-y-1.5",
+      },
+      {
+        name: "धर्मवीर अग्रवाल (केमिस्ट)",
+        role: "प्रदेश प्रवक्ता",
+        image: "/images/president-cell/dharmveer-aggarwal.jpeg",
+        imageClassName: "scale-[1.05] origin-top",
+      },
+      {
+        name: "मोहनलाल गुप्ता",
+        role: "प्रदेश कार्यालय सचिव",
+        image: "/images/president-cell/mohanlal-gupta.jpeg",
+        imageClassName: "scale-[1.28] origin-[50%_8%]",
       },
     ],
   },
@@ -83,53 +191,82 @@ export default async function OrganisationPage({
   const { slug } = await params;
   const wing = WINGS_DATA[slug] || WINGS_DATA["president-cell"];
 
+  const isPresidentCell = slug === "president-cell";
+
   return (
-    <div className="w-full bg-[#FFFDF9] text-[#1F1712] font-sans selection:bg-[#7F160C] selection:text-white">
+    <div
+      className={`w-full ${
+        isPresidentCell ? "bg-[#FFF9F2]" : "bg-[#FFFDF9]"
+      } text-[#1F1712] font-sans selection:bg-[#7F160C] selection:text-white`}
+    >
       {/* 1. PAGE HEADER */}
-      <section className="py-10 sm:py-14 bg-[#FFF9F2] border-b border-[#E8DFD3]">
+      <section
+        className={
+          isPresidentCell
+            ? "pt-8 sm:pt-10 pb-4 sm:pb-6 bg-[#FFF9F2]"
+            : "py-10 sm:py-14 bg-[#FFF9F2] border-b border-[#E8DFD3]"
+        }
+      >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-[46px] text-[#7F160C] tracking-tight">
             {wing.title}
           </h1>
           <HeadingDivider className="mt-3" />
-          <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-widest mt-2">
-            {wing.titleHi} • सांगठनिक इकाई
-          </p>
+          {!isPresidentCell && (
+            <p className="text-xs sm:text-sm font-semibold text-gray-600 uppercase tracking-widest mt-2">
+              {wing.titleHi} • सांगठनिक इकाई
+            </p>
+          )}
         </div>
       </section>
 
       {/* 2. OVERVIEW & MANDATE */}
-      <section className="py-10 sm:py-16 bg-[#FFFDF9]">
-        <div className="max-w-[1300px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-          
-          <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-[#7F160C]/25 shadow-xl p-6 sm:p-10 space-y-5">
-            <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#7F160C]/10 text-[#7F160C] text-xs font-bold uppercase tracking-wider">
-              इकाई परिचय एवं कार्यक्षेत्र
-            </span>
-            <h2 className="font-sans font-black text-2xl sm:text-3xl text-gray-900 leading-snug">
-              {wing.titleHi}
-            </h2>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal">
-              {wing.desc}
-            </p>
-            <div className="p-4 bg-[#FFF9F2] rounded-xl border border-[#7F160C]/20 flex items-start gap-3">
-              <Shield className="w-5 h-5 text-[#7F160C] shrink-0 mt-0.5" />
-              <p className="text-sm text-gray-800">
-                <strong>मुख्य दायित्व:</strong> {wing.mandate}
+      <section
+        className={
+          isPresidentCell
+            ? "pt-2 sm:pt-4 pb-12 sm:pb-16 bg-[#FFF9F2]"
+            : "py-10 sm:py-16 bg-[#FFFDF9]"
+        }
+      >
+        <div
+          className={`${
+            isPresidentCell
+              ? "max-w-[1380px] px-4 sm:px-6 lg:px-10"
+              : "max-w-[1300px] px-4 sm:px-6 lg:px-8"
+          } mx-auto space-y-10`}
+        >
+          {!isPresidentCell && (
+            <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-[#7F160C]/25 shadow-xl p-6 sm:p-10 space-y-5">
+              <span className="inline-block px-3.5 py-1.5 rounded-full bg-[#7F160C]/10 text-[#7F160C] text-xs font-bold uppercase tracking-wider">
+                इकाई परिचय एवं कार्यक्षेत्र
+              </span>
+              <h2 className="font-sans font-black text-2xl sm:text-3xl text-gray-900 leading-snug">
+                {wing.titleHi}
+              </h2>
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal">
+                {wing.desc}
               </p>
+              <div className="p-4 bg-[#FFF9F2] rounded-xl border border-[#7F160C]/20 flex items-start gap-3">
+                <Shield className="w-5 h-5 text-[#7F160C] shrink-0 mt-0.5" />
+                <p className="text-sm text-gray-800">
+                  <strong>मुख्य दायित्व:</strong> {wing.mandate}
+                </p>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 3. KEY MEMBERS & OFFICE BEARERS */}
           <div className="space-y-6">
-            <div className="flex items-center justify-between border-b border-gray-200 pb-3 flex-wrap gap-2">
-              <h3 className="font-sans font-bold text-xl sm:text-2xl text-gray-900">
-                प्रमुख पदाधिकारी एवं सदस्यगण
-              </h3>
-              <span className="text-xs font-bold text-[#7F160C] uppercase tracking-wider bg-[#FFF9F2] px-3 py-1 rounded-full border border-[#7F160C]/20">
-                {wing.members.length > 0 ? "सक्रिय कार्यकारिणी सूची" : "प्रतीक्षित सूची"}
-              </span>
-            </div>
+            {!isPresidentCell && (
+              <div className="flex items-center justify-between border-b border-gray-200 pb-3 flex-wrap gap-2">
+                <h3 className="font-sans font-bold text-xl sm:text-2xl text-gray-900">
+                  प्रमुख पदाधिकारी एवं सदस्यगण
+                </h3>
+                <span className="text-xs font-bold text-[#7F160C] uppercase tracking-wider bg-[#FFF9F2] px-3 py-1 rounded-full border border-[#7F160C]/20">
+                  {wing.members.length > 0 ? "सक्रिय कार्यकारिणी सूची" : "प्रतीक्षित सूची"}
+                </span>
+              </div>
+            )}
 
             {wing.members.length === 0 ? (
               <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-dashed border-[#E8DFD3] p-10 sm:p-14 text-center space-y-4 shadow-sm">
@@ -149,6 +286,37 @@ export default async function OrganisationPage({
                   <span>विवरण प्रक्रियाधीन है</span>
                 </div>
               </div>
+            ) : isPresidentCell ? (
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-5 gap-y-6 sm:gap-7 lg:gap-x-9 xl:gap-x-11 lg:gap-y-9">
+                {wing.members.map((m, idx) => (
+                  <div
+                    key={idx}
+                    className="min-w-0 bg-white rounded-xl px-3 pt-5 pb-8 sm:px-5 sm:py-6 shadow-[0_2px_12px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] transition-shadow flex flex-col items-center text-center"
+                  >
+                    {m.image ? (
+                      <div className="relative w-[122px] h-[122px] sm:w-36 sm:h-36 lg:w-[144px] lg:h-[144px] xl:w-[156px] xl:h-[156px] rounded-full overflow-hidden bg-white mb-4 shrink-0">
+                        <Image
+                          src={m.image}
+                          alt={m.name}
+                          fill
+                          sizes="(max-width: 640px) 128px, 160px"
+                          className={`object-cover object-top ${m.imageClassName ?? ""}`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-[122px] h-[122px] sm:w-36 sm:h-36 lg:w-[144px] lg:h-[144px] xl:w-[156px] xl:h-[156px] rounded-full bg-[#7F160C]/10 text-[#7F160C] font-bold flex items-center justify-center text-xl mb-4 shrink-0">
+                        {m.name.charAt(0) || "वै"}
+                      </div>
+                    )}
+                    <h4 className="font-sans font-bold text-[15px] sm:text-base lg:text-[17px] text-[#111827] leading-snug">
+                      {m.name}
+                    </h4>
+                    <p className="text-[12.5px] sm:text-[13.5px] font-normal text-[#4B5563] mt-1">
+                      {m.role}
+                    </p>
+                  </div>
+                ))}
+              </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {wing.members.map((m, idx) => (
@@ -163,12 +331,12 @@ export default async function OrganisationPage({
                             src={m.image}
                             alt={m.name}
                             fill
-                            className="object-cover"
+                            className="object-cover object-top"
                           />
                         </div>
                       ) : (
                         <div className="w-16 h-16 rounded-full bg-[#7F160C]/10 text-[#7F160C] font-bold flex items-center justify-center text-sm border border-[#7F160C]/20 shrink-0">
-                          {m.name.charAt(3) || "वै"}
+                          {m.name.charAt(0) || "वै"}
                         </div>
                       )}
                       <div>
@@ -181,25 +349,15 @@ export default async function OrganisationPage({
                       </div>
                     </div>
 
-                    <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-                      <span className="flex items-center gap-1.5">
-                        <MapPin className="w-3.5 h-3.5 text-[#7F160C]" />
-                        <span>{m.district}</span>
-                      </span>
-                      <span className="text-[10px] font-bold uppercase text-green-700 bg-green-50 px-2.5 py-0.5 rounded-md border border-green-200">
-                        अधिकृत
-                      </span>
-                    </div>
-
-                    {slug === "president-cell" && (
-                      <div className="pt-2">
-                        <Link
-                          href="/president"
-                          className="inline-flex items-center gap-1.5 text-xs font-bold text-[#7F160C] hover:text-[#9A1B0E] hover:underline transition-colors"
-                        >
-                          <span>संस्थापक अध्यक्ष का संपूर्ण परिचय देखें</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
-                        </Link>
+                    {m.district && (
+                      <div className="pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="w-3.5 h-3.5 text-[#7F160C]" />
+                          <span>{m.district}</span>
+                        </span>
+                        <span className="text-[10px] font-bold uppercase text-green-700 bg-green-50 px-2.5 py-0.5 rounded-md border border-green-200">
+                          अधिकृत
+                        </span>
                       </div>
                     )}
                   </div>
@@ -209,26 +367,28 @@ export default async function OrganisationPage({
           </div>
 
           {/* 4. OTHER WINGS QUICK LINKS */}
-          <div className="p-6 sm:p-8 bg-[#FFF9F2] rounded-2xl border border-[#7F160C]/20 space-y-4">
-            <h4 className="font-sans font-bold text-base text-[#7F160C] uppercase tracking-wider">
-              अन्य सांगठनिक प्रकोष्ठ देखें:
-            </h4>
-            <div className="flex flex-wrap gap-2.5">
-              {Object.entries(WINGS_DATA).map(([key, data]) => (
-                <Link
-                  key={key}
-                  href={`/organisation/${key}`}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
-                    key === slug
-                      ? "bg-[#7F160C] text-white shadow-xs"
-                      : "bg-white text-gray-800 border border-gray-200 hover:border-[#7F160C] hover:text-[#7F160C]"
-                  }`}
-                >
-                  {data.title}
-                </Link>
-              ))}
+          {!isPresidentCell && (
+            <div className="p-6 sm:p-8 bg-[#FFF9F2] rounded-2xl border border-[#7F160C]/20 space-y-4">
+              <h4 className="font-sans font-bold text-base text-[#7F160C] uppercase tracking-wider">
+                अन्य सांगठनिक प्रकोष्ठ देखें:
+              </h4>
+              <div className="flex flex-wrap gap-2.5">
+                {Object.entries(WINGS_DATA).map(([key, data]) => (
+                  <Link
+                    key={key}
+                    href={`/organisation/${key}`}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                      key === slug
+                        ? "bg-[#7F160C] text-white shadow-xs"
+                        : "bg-white text-gray-800 border border-gray-200 hover:border-[#7F160C] hover:text-[#7F160C]"
+                    }`}
+                  >
+                    {data.title}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
         </div>
       </section>

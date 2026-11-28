@@ -10,49 +10,6 @@ export default function PresidentPage() {
     <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
       {/* ============================================================ */}
-      {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
-      {/* ============================================================ */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>श्री रामप्रताप गुप्ता — संस्थापक अध्यक्ष, अग्रवाल वैश्य विकास संगठन</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>व्यक्ति की पहचान उसके पद से नहीं, बल्कि समाज के लिए किए गए उसके कार्यों से होती है</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>10,000+ नए सदस्य जोड़कर बने ‘मोदी मित्र’ • अग्रवाल युवा सभा में 1,600 महिलाओं को जोड़ने का कीर्तिमान</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संगठन • नेतृत्व • स्वावलंबन • विकास</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================ */}
       {/* 2. PAGE HEADER: ABOUT PRESIDENT (OUR BRAND COLOR #7F160C)    */}
       {/* ============================================================ */}
       <section className="pt-10 sm:pt-14 pb-2 sm:pb-4 bg-[#FFF9F2]">

@@ -118,49 +118,6 @@ export default function AboutPage() {
     <div className="w-full bg-[#FFF9F2] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
       {/* ============================================================ */}
-      {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
-      {/* ============================================================ */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संगठन • नेतृत्व • स्वावलंबन • विकास — एकता हमारी शक्ति, विकास हमारा संकल्प</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>1 नवंबर 2026 : ऐतिहासिक नगरी कैथल से अग्रवाल वैश्य विकास संगठन की स्थापना</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संस्थापक अध्यक्ष श्री रामप्रताप गुप्ता के नेतृत्व में संगठित एवं सशक्त समाज</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================ */}
       {/* 2. HERO HEADER: OUR IDENTITY                                 */}
       {/* ============================================================ */}
       <section className="pt-10 sm:pt-14 pb-2 sm:pb-3 bg-[#FFF9F2]">

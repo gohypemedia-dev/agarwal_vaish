@@ -62,42 +62,6 @@ export default function PanchSankalpPage() {
     <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
 
       {/* ============================================================ */}
-      {/* 1. TOP NEWS TICKER (BRAND MAROON #7F160C)                    */}
-      {/* ============================================================ */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>अग्रवाल वैश्य विकास संगठन — पंच संकल्प (Panch Sankalp)</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संगठन से शक्ति, नेतृत्व से पहचान, स्वावलंबन से विकास</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>राजनीतिक सशक्तिकरण • नारी स्वावलंबन • युवा नेतृत्व • आर्थिक आत्मनिर्भरता • संगठित समाज</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================ */}
       {/* 2. PAGE HEADER (EXACT PIC 2 REFERENCE FORMAT)                */}
       {/* ============================================================ */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-14">

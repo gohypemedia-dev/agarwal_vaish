@@ -295,43 +295,6 @@ export default function HomePage() {
     <div className="w-full bg-[#FFFDF9] text-[#1F1712] font-sans selection:bg-[#7F160C] selection:text-white">
 
       {/* ============================================================ */}
-      {/* 1. TOP NEWS TICKER (EXACT REFERENCE SCREENSHOT 1)           */}
-      {/* ============================================================ */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVS" fill className="object-contain" />
-                </span>
-                <span>वैश्य समाज का एक ही नारा, राजनीति में हो प्रतिनिधित्व हमारा।</span>
-              </div>
-
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVS" fill className="object-contain" />
-                </span>
-                <span>अग्रवाल वैश्य विकास संगठन के पंच संकल्प: राजनीतिक सशक्तिकरण, नारी स्वावलंबन एवं उद्यमिता, युवा नेतृत्व निर्माण, आर्थिक आत्मनिर्भरता, संगठित समाज</span>
-              </div>
-
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVS" fill className="object-contain" />
-                </span>
-                <span>हमारा लक्ष्य केवल समाज को संगठित करना नहीं, बल्कि उसे नेतृत्व, सामर्थ्य और स्वाभिमान के शिखर तक पहुंचाना है।</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* ============================================================ */}
       {/* 2. HERO SECTION: 100% FULL-WIDTH 2-SLIDE CAROUSEL (UNCUT HD) */}
       {/* ============================================================ */}
       <section

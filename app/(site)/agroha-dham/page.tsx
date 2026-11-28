@@ -63,38 +63,6 @@ export default function AgrohaDhamPage() {
 
   return (
     <div className="w-full min-h-screen bg-[#FFF9F2] text-[#2B201A] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
-      {/* 1. TOP NEWS TICKER */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>अग्रवाल वैश्य विकास संगठन — अग्रोहा धाम पावन तीर्थ दर्शन</span>
-              </div>
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>महाराजा अग्रसेन की राजधानी अग्रोहा — वैश्य समाज का सर्वोच्च आस्था केंद्र</span>
-              </div>
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संगठन • नेतृत्व • स्वावलंबन • विकास</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* 2. MAIN ABOUT AGROHA DHAM SECTION */}
       <section className="pt-10 sm:pt-14 pb-4 sm:pb-6 bg-[#FFF9F2]">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">

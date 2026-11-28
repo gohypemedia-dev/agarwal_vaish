@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 
 export default function GhatakPage() {
   // Complete 356 Vaishya Ghatak Table (7 Columns, matching reference screenshot exactly)
@@ -61,38 +60,6 @@ export default function GhatakPage() {
 
   return (
     <div className="w-full bg-[#FFFDF9] text-[#000000] font-sans selection:bg-[#7F160C] selection:text-white pb-20 sm:pb-28">
-      {/* 1. TOP NEWS TICKER */}
-      <div className="w-full bg-[#7F160C] text-white py-2 sm:py-2.5 overflow-hidden select-none relative z-30 shadow-sm border-b border-[#69120A]">
-        <div className="flex animate-marquee whitespace-nowrap items-center">
-          {[1, 2].map((set) => (
-            <div
-              key={`ticker-set-${set}`}
-              className="flex items-center shrink-0 gap-8 sm:gap-12 px-4 text-xs sm:text-sm font-semibold tracking-wide"
-              aria-hidden={set > 1 ? "true" : undefined}
-            >
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>अग्रवाल वैश्य विकास संगठन — 356 वैश्य घटक एकता एवं समग्र विकास</span>
-              </div>
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>घटकों के भेद मिटाएं, एक होकर वैश्य समाज को सशक्त बनाएं</span>
-              </div>
-              <div className="inline-flex items-center gap-3">
-                <span className="w-5 h-5 rounded-full overflow-hidden bg-white shrink-0 relative p-0.5">
-                  <Image src="/images/agarwal/logo.png" alt="AVVS" fill className="object-contain" />
-                </span>
-                <span>संगठन • नेतृत्व • स्वावलंबन • विकास</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* 2. MAIN 356 VAISH GHATAK SECTION (EXACT CLEAN TABLE FORMAT FROM CLIENT REFERENCE) */}
       <section className="py-8 sm:py-12">
         <div className="max-w-[1240px] mx-auto px-3 sm:px-6 lg:px-8 space-y-6">

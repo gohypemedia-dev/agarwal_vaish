@@ -7,13 +7,17 @@ import AuthModal from "@/components/AuthModal";
 import SearchModal from "@/components/SearchModal";
 import { publicDonationConfig } from "@/lib/server/env";
 import SmoothScrollProvider from "@/components/animation/SmoothScrollProvider";
+import TopNewsTicker from "@/components/TopNewsTicker";
 
 export default function SiteLayout({ children }: { children: React.ReactNode }) {
   const { minAmount } = publicDonationConfig();
   return (
     <SmoothScrollProvider>
       <Header />
-      <main className="flex-1 w-full pt-[72px] sm:pt-[78px] lg:pt-[80px] xl:pt-[92px]">{children}</main>
+      <main className="flex-1 w-full pt-[72px] sm:pt-[78px] lg:pt-[80px] xl:pt-[92px]">
+        <TopNewsTicker />
+        {children}
+      </main>
       <Footer />
       <FloatingSideDock />
       <CartDrawer />
